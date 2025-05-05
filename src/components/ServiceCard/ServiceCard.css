@@ -1,0 +1,69 @@
+.service-card {
+  height: 250px /* 카드 높이 */;
+  display: flex;
+  flex-direction: column;
+  width: 18%; /* 5개 x 18% = 90% + gap 여유 */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+.service-card-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.service-card-content {
+  border-top: #ddd solid 1px;
+  padding: 10px;
+}
+
+.service-card-title {
+  font-size: 14px;
+  margin: 0 0 8px 0;
+}
+
+.service-card-description {
+  font-size: 10px;
+  color: #666;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 최대 3줄까지 표시 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* --- 반응형 추가 (모바일 대응) --- */
+@media (max-width: 600px) {
+  .service-card {
+    width: 90%;
+    margin: 0 auto;
+    min-height: unset;
+  }
+
+  .service-card-image {
+    height: 120px;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .service-card-description {
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

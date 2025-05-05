@@ -19,19 +19,13 @@ body {
   height: 100vh;
 }
 
-.content {
-  flex: 1;
-  padding: 16px;
-  background-color: #f9f9f9;
-}
-
 .top-section {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 20px;
-  margin-top: 16px;
-  height: 400px;
+  margin-top: 10px;
+  height: 420px;
 }
 
 .event-banner-section {
@@ -42,4 +36,18 @@ body {
 .login-form-section {
   flex: 1;
   overflow-y: auto;
+}
+
+.middle-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 350px;
+  gap: 20px;
+  padding: 10px;
+  margin-top: 10px;
+  flex-wrap: nowrap; /* 한 줄에 고정 */
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
