@@ -38,7 +38,7 @@ body {
   overflow-y: auto;
 }
 
-.middle-section {
+.service-card-section {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;

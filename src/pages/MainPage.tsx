@@ -18,7 +18,7 @@ const MainPage: React.FC = () => {
         </div>
       </div>
 
-      <main className="middle-section">
+      <main className="service-card-section">
         <ServiceCard
           imageUrl="/img1.jpg"
           serviceName="나의 이력서 관리"
