@@ -1,0 +1,45 @@
+/* global.css */
+
+html,
+body {
+  min-height: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 100px;
+  margin-right: 100px;
+  padding: 0;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+/* 전체 레이아웃 */
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content {
+  flex: 1;
+  padding: 16px;
+  background-color: #f9f9f9;
+}
+
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 16px;
+  height: 400px;
+}
+
+.event-banner-section {
+  flex: 2;
+  overflow-y: auto;
+}
+
+.login-form-section {
+  flex: 1;
+  overflow-y: auto;
+}

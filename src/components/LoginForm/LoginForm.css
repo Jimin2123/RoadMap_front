@@ -1,0 +1,105 @@
+/* 로그인 폼 컨테이너 */
+.login-form-container {
+  width: 100%;
+  max-width: 400px; /* 부모 영역을 넘지 않도록 고정된 최대 너비 설정 */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  margin: 0 auto; /* 중앙 정렬 */
+  height: 100%;
+}
+
+/* 로그인 제목 스타일 */
+.login-title {
+  text-align: center;
+  margin-bottom: 20px; /* 폰트 크기에 맞는 마진 조정 */
+  font-size: 20px; /* 폰트 크기 적당하게 조정 */
+  font-weight: bold; /* 강조를 위한 굵게 */
+}
+
+/* 입력 필드 */
+.login-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; /* 여백 포함 */
+}
+
+/* 로그인 버튼 */
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s; /* 부드러운 색상 변화 효과 */
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
+/* 로그인 링크 */
+.login-links {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.login-links a {
+  margin: 0 6px;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.login-divider {
+  text-align: center;
+  margin: 24px 0 16px;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.sns-login-buttons-horizontal {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.sns-icon-button {
+  width: 40px;
+  height: 40px;
+  padding: 6px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.sns-icon-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 각 서비스별 색상 배경 */
+.sns-icon-button.kakao {
+  background-color: #fee500;
+}
+.sns-icon-button.google {
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.sns-icon-button.naver {
+  background-color: #1ec800;
+}

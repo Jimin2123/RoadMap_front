@@ -1,0 +1,33 @@
+.event-banner {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.event-banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.event-banner-text {
+  position: absolute;
+  top: 20%;
+  left: 40px;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.event-banner-text h2 {
+  font-size: 28px;
+  margin: 0 0 8px;
+}
+
+.event-banner-text p {
+  font-size: 16px;
+  margin: 0;
+}
