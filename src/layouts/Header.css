@@ -1,0 +1,84 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative; /* 메뉴가 헤더 아래에 오도록 위치 설정 */
+}
+
+/* 왼쪽 부분 (햄버거 버튼과 지도 아이콘, 타이틀) */
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 15px; /* 햄버거 버튼과 다른 아이콘들 간 간격 */
+}
+
+/* 지도 아이콘과 타이틀 */
+.icon {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.logo-job {
+  color: #007bff;
+}
+
+/* 오른쪽 아이콘 */
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+/* 드롭다운 메뉴 스타일 */
+.dropdown {
+  position: absolute;
+  top: 100%; /* 헤더 바로 아래에 위치하도록 */
+  left: 0; /* 왼쪽에 표시되도록 */
+  width: 300px; /* 드롭다운의 가로 크기 */
+  background-color: #333;
+  color: white;
+  display: none; /* 기본적으로 숨김 */
+  transition: all 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.dropdown.open {
+  display: block; /* 열리면 보이도록 */
+}
+
+.dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown li {
+  padding: 10px;
+  border-bottom: 1px solid #444;
+}
+
+.dropdown a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+}
+
+.dropdown a:hover {
+  background-color: #555;
+  padding-left: 10px;
+}

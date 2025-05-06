@@ -1,0 +1,60 @@
+.footer {
+  background-color: #f8f9fa;
+  padding: 20px 120px; /* 여백을 적절히 줄일 수 있음 */
+  font-size: 14px;
+  color: #444;
+  border-top: 1px solid #ddd;
+  text-align: left;
+  margin-top: auto; /* footer가 아래로 고정되도록 */
+}
+
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.footer-icon {
+  margin-right: 6px;
+}
+
+.footer-title {
+  display: flex;
+  align-items: center;
+}
+
+.footer-gilla {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.footer-job {
+  font-size: 20px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.footer-support {
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 14px;
+  font-weight: normal;
+  color: #666;
+}
+
+.footer-links {
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: #666;
+  display: flex;
+  gap: 8px;
+}
+
+.footer-info p {
+  margin: 2px 0;
+  font-size: 12px;
+  color: #888;
+}
