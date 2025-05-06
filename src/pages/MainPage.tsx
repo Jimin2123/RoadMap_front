@@ -1,8 +1,9 @@
 import Header from '../layouts/Header';
 import Footer from '../layouts/Footer';
 import EventBanner from '../components/EventBanner/EventBanner';
-import LoginForm from '../components/LoginForm/LoginForm';
+// import LoginForm from '../components/LoginForm/LoginForm';
 import ServiceCard from '../components/ServiceCard/ServiceCard';
+import LoginSuccess from '../components/LoginSuccess/LoginSuccess';
 
 const MainPage: React.FC = () => {
   return (
@@ -14,7 +15,8 @@ const MainPage: React.FC = () => {
           <EventBanner />
         </div>
         <div className="login-form-section">
-          <LoginForm />
+          {/* <LoginForm /> */}
+          <LoginSuccess />
         </div>
       </div>
 
