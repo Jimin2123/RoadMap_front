@@ -29,12 +29,11 @@
 }
 
 .service-card-title {
-  font-size: 14px;
+  font-size: 16px;
   margin: 0 0 8px 0;
 }
 
 .service-card-description {
-  font-size: 10px;
   color: #666;
   margin-bottom: 20px;
   display: -webkit-box;
