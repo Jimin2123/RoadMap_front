@@ -1,13 +1,14 @@
 .service-card {
-  height: 250px /* 카드 높이 */;
+  width: 200px; /* 카드 너비 */
+  height: 250px; /* 카드 높이 */
   display: flex;
   flex-direction: column;
-  width: 18%; /* 5개 x 18% = 90% + gap 여유 */
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .service-card:hover {

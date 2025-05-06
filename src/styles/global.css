@@ -59,14 +59,13 @@ body {
 
 .service-card-section {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  height: 350px;
-  gap: 20px;
-  padding: 10px;
-  margin-top: 10px;
-  flex-wrap: nowrap; /* 한 줄에 고정 */
+  justify-content: center; /* 가운데 정렬 */
+  align-items: center; /* 세로 가운데 정렬 */
+  flex-wrap: nowrap; /* 줄 바꿈 방지 */
+  gap: 40px;
   border: 1px solid #ddd;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  height: 300px;
+  box-sizing: border-box;
 }
