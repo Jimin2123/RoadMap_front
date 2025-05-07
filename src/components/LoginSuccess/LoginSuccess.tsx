@@ -30,15 +30,17 @@ const LoginSuccess: React.FC = () => {
           </div>
 
           <p className="skills-label">보유중인 스킬셋</p>
-          <div className="skill-tags">
-            {skills.slice(0, 5).map((skill, index) => (
-              <span className="tag" key={index}>
-                {skill}
-              </span>
-            ))}
+          <div className="skill-tags-wrapper">
+            <div className="skill-tags">
+              {skills.map((skill, index) => (
+                <span className="tag" key={index}>
+                  {skill}
+                </span>
+              ))}
+            </div>
           </div>
 
-          <div className="certificate-slider-container">
+          <div className="certificate-slider-wrapper">
             <div className="certificate-slider">
               {certifications.map((cert, index) => (
                 <div className="certificate-card" key={index}>

@@ -64,12 +64,35 @@
   font-size: 12px;
 }
 /* 스킬 태그 */
+.skill-tags-wrapper {
+  position: relative;
+}
+
 .skill-tags {
   display: flex;
   gap: 4px;
-  overflow: hidden;
+  overflow-x: auto;
   white-space: nowrap;
   margin: 4px 0;
+  padding-right: 20px; /* fade 영역 확보 */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.skill-tags::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Fade 효과 */
+.skill-tags-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(to left, white, rgba(255, 255, 255, 0));
+  pointer-events: none;
 }
 
 .tag {
@@ -80,23 +103,40 @@
   color: #94b9f3;
 }
 
-/* 자격증 슬라이더 */
-.certificate-slider-container {
+/* 슬라이더 전체 wrapper */
+.certificate-slider-wrapper {
+  position: relative;
   width: 100%;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
+/* 슬라이더 내부 스크롤 영역 */
 .certificate-slider {
   display: flex;
-  max-width: 100%; /* 💡 이 줄이 중요! */
   gap: 12px;
+  padding-right: 20px; /* fade 영역 확보 */
   overflow-x: auto;
   scroll-behavior: smooth;
   padding-top: 10px;
   padding-bottom: 6px;
-  /* 스크롤바 숨기기 */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE & Edge */
+}
+
+.certificate-slider::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* 우측 fade */
+.certificate-slider-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(to left, white, rgba(255, 255, 255, 0));
+  pointer-events: none;
 }
 
 .certificate-slider::-webkit-scrollbar {
