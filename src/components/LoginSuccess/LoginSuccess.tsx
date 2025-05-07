@@ -1,15 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './LoginSuccess.css';
+import axios from 'axios';
 
-const skills = ['JAVA', 'Git', '노력', 'RDBMS', 'Spring Boot', 'Vue'];
-const certifications = [
-  { name: '정보처리기사', type: '국가공인' },
-  { name: '토익 800+', type: '공인민간' },
-  { name: 'SQLD', type: '국가공인' },
-  { name: '컴활 1급', type: '국가공인' },
-];
+interface ProfileResponse {
+  educationLevel: string;
+  desiredJob: string;
+  major: string;
+  skills: string[];
+  certificates: string[];
+  ncsCodes: string[];
+}
+interface MemberResponse {
+  id: number;
+  name: string;
+  phoneNumber: string;
+  profileResponse: ProfileResponse;
+}
 
 const LoginSuccess: React.FC = () => {
+  const [member, setMember] = useState<MemberResponse | null>(null);
+
+  useEffect(() => {
+    const fetchMember = async () => {
+      try {
+        const response = await axios.get<MemberResponse>('/api/member/1');
+        setMember(response.data);
+      } catch (error) {
+        console.error('회원 정보를 불러오는 중 오류 발생:', error);
+      }
+    };
+
+    fetchMember();
+  }, []);
+
   return (
     <div className="login-form-container">
       {/* 상단 영역 */}
@@ -22,7 +45,7 @@ const LoginSuccess: React.FC = () => {
         {/* 오른쪽: 이름, 태그, 자격증 */}
         <div className="profile-info-section">
           <div className="profile-header">
-            <h2 className="username">정지민님</h2>
+            <h2 className="username">{member?.name}</h2>
             <div className="icon-buttons">
               <button>⚙️</button>
               <button>🔄</button>
@@ -32,7 +55,7 @@ const LoginSuccess: React.FC = () => {
           <p className="skills-label">보유중인 스킬셋</p>
           <div className="skill-tags-wrapper">
             <div className="skill-tags">
-              {skills.map((skill, index) => (
+              {member?.profileResponse.skills.map((skill, index) => (
                 <span className="tag" key={index}>
                   {skill}
                 </span>
@@ -42,11 +65,11 @@ const LoginSuccess: React.FC = () => {
 
           <div className="certificate-slider-wrapper">
             <div className="certificate-slider">
-              {certifications.map((cert, index) => (
+              {member?.profileResponse.certificates.map((cert, index) => (
                 <div className="certificate-card" key={index}>
                   <div className="certificate-icon">🎓</div>
-                  <h4>{cert.name}</h4>
-                  <p>{cert.type}</p>
+                  <h4>{cert}</h4>
+                  <p>유형 미정</p>
                 </div>
               ))}
             </div>
@@ -58,10 +81,10 @@ const LoginSuccess: React.FC = () => {
       <div className="policy-box">
         <h3>청년 지원 정책 안내 리스트</h3>
         <ul>
-          <li>● 청년 도약 프로젝트 안내</li>
-          <li>● 국가 기술 자격 지원 제도</li>
-          <li>● 구직활동 지원금 신청</li>
-          <li>● 청년 맞춤형 일자리 매칭</li>
+          <li>청년 도약 프로젝트 안내</li>
+          <li>국가 기술 자격 지원 제도</li>
+          <li>구직활동 지원금 신청</li>
+          <li>청년 맞춤형 일자리 매칭</li>
         </ul>
       </div>
     </div>

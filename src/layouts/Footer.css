@@ -5,7 +5,7 @@
   color: #444;
   border-top: 1px solid #ddd;
   text-align: left;
-  margin-top: auto; /* footer가 아래로 고정되도록 */
+  margin-top: 20px; /* footer가 아래로 고정되도록 */
 }
 
 .footer-top {

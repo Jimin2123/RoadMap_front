@@ -4,7 +4,7 @@ import './JobPostingSection.css';
 
 const JobPostingSection: React.FC = () => {
   const jobPostings = [
-    { imageUrl: '/avatar.jpg', category: 'IT', company: '삼성전자', companyLogoUrl: '/avatar.jpg' },
+    { imageUrl: '/test.svg', category: 'IT', company: '삼성전자', companyLogoUrl: '/company-logo.svg' },
     { imageUrl: '/avatar.jpg', category: '금융', company: '카카오뱅크', companyLogoUrl: '/avatar.jpg' },
     { imageUrl: '/avatar.jpg', category: '인터넷', company: '네이버', companyLogoUrl: '/avatar.jpg' },
     { imageUrl: '/avatar.jpg', category: '커머스', company: '쿠팡', companyLogoUrl: '/avatar.jpg' },

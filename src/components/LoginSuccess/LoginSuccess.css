@@ -26,7 +26,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 0;
+  min-width: 140px; /* 최소 너비 설정 */
 }
 
 .profile-info-section {
@@ -38,7 +38,7 @@
 
 /* 프로필 이미지 */
 .avatar {
-  width: 120px;
+  width: 140px;
   height: 180px;
   overflow: hidden;
   border-radius: 12px;
