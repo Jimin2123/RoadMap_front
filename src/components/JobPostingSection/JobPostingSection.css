@@ -1,0 +1,15 @@
+.job-posting {
+  border-radius: 12px;
+}
+
+.job-posting h2 {
+  font-size: 18px;
+}
+
+.job-card-container {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}

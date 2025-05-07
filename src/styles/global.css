@@ -68,4 +68,17 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   height: 300px;
   box-sizing: border-box;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.job-posting-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
 }
