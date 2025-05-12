@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaMapMarkedAlt, FaUniversity } from 'react-icons/fa';
+import { FaMapMarkedAlt } from 'react-icons/fa';
 import './Footer.css';
 
 const Footer: React.FC = () => {
@@ -12,8 +12,10 @@ const Footer: React.FC = () => {
           <span className="footer-gilla">길라</span>
           <span className="footer-job">JOB</span>
           <span className="footer-support">SUPPORT BY</span>
+          <span>
+            <img src="/icons/shingu-logo.svg" alt="대학교로고" />
+          </span>
         </span>
-        <FaUniversity className="footer-icon" />
       </div>
 
       {/* 두 번째 줄 */}

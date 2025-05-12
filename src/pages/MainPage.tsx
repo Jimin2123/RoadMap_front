@@ -5,6 +5,7 @@ import EventBanner from '../components/EventBanner/EventBanner';
 import ServiceCard from '../components/ServiceCard/ServiceCard';
 import LoginSuccess from '../components/LoginSuccess/LoginSuccess';
 import JobPostingSection from '../components/JobPostingSection/JobPostingSection';
+import '../styles/MainPage.css';
 
 const MainPage: React.FC = () => {
   return (

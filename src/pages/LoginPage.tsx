@@ -1,5 +1,6 @@
 // src/pages/LoginPage.tsx
 import Header from '../layouts/Header';
+import '../styles/LoginPage.css';
 
 import LoginForm from '../components/LoginForm/LoginForm';
 

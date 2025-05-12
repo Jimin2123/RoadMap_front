@@ -191,8 +191,20 @@
 }
 
 .policy-box li {
+  list-style: none;
   position: relative;
   margin: 8px 0;
   font-size: 12px;
-  color: #333;
+  color: black; /* 텍스트 색상 */
+  padding-left: 20px; /* 텍스트와 점 사이 간격 조정 */
+}
+
+.policy-box li::before {
+  content: '\2022'; /* 원 모양 점 (유니코드 기호) */
+  font-size: 16px; /* 점 크기 */
+  color: #94b9f3; /* 점 색상 */
+  position: absolute;
+  left: 0; /* 점을 왼쪽에 배치 */
+  top: 50%; /* 점을 세로 가운데로 맞춤 */
+  transform: translateY(-50%); /* 점을 정확히 중앙에 맞추기 위한 조정 */
 }
