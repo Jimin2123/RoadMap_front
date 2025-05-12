@@ -1,5 +1,6 @@
 .job-card {
   width: 200px;
+  height: 180px;
   border: 1px solid #ddd;
   border-radius: 10px;
   overflow: hidden;
