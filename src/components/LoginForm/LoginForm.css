@@ -112,6 +112,15 @@
   margin-top: 12px;
 }
 
+/* 로그인 폼의 페이지에 따른 스타일 */
+.login-form-login-page .sns-login-buttons-horizontal {
+  display: flex;
+  justify-content: center; /* 버튼들을 중앙 정렬 */
+  gap: 12px;
+  margin-top: 50px;
+  height: 100%; /* 부모 컨테이너 크기 맞추기 */
+}
+
 .sns-icon-button {
   width: 48px;
   height: 48px;
