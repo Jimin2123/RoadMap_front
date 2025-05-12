@@ -2,9 +2,13 @@
 import React from 'react';
 import './LoginForm.css';
 
-const LoginForm: React.FC = () => {
+interface LoginFormProps {
+  className?: string;
+}
+
+const LoginForm: React.FC<LoginFormProps> = ({ className }) => {
   return (
-    <div className="login-form-container">
+    <div className={`login-form-container ${className}`}>
       <span className="login-title">
         길라<span className="logo-job">JOB</span>
       </span>

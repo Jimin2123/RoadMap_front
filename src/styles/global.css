@@ -28,7 +28,16 @@ body {
   box-sizing: border-box;
   font-size: 13px;
 }
+/* Link 스타일 */
+a {
+  text-decoration: none; /* 기본 밑줄 제거 */
+  color: inherit; /* 부모 색상으로 설정 */
+}
 
+/* Link의 active 상태 */
+a.active {
+  color: inherit; /* 필요에 따라 색상 설정 가능 */
+}
 /* 전체 레이아웃 */
 .layout {
   max-width: 1280px;
@@ -81,4 +90,13 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
+}
+
+.login-page-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 65px); /* 헤더 높이 고려해서 계산 */
+  padding: 0 1rem;
 }

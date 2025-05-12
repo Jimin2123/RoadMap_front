@@ -21,3 +21,11 @@ This project follows a well-organized folder structure to maintain scalability a
 ```
 
 Each folder serves a specific purpose to enhance maintainability and scalability in the project. Keeping a modular approach helps in better organization and easier debugging.
+
+## License Notice
+
+This project uses icons from [Material Icons](https://fonts.google.com/icons), which are licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
+© Google LLC
+
+일부 아이콘은 [Font Awesome](https://fontawesome.com)에서 제공되었습니다.

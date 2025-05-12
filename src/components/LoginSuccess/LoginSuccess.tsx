@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './LoginSuccess.css';
 import axios from 'axios';
+import { MdSettings, MdLogout } from 'react-icons/md';
 
 interface ProfileResponse {
   educationLevel: string;
@@ -47,8 +48,12 @@ const LoginSuccess: React.FC = () => {
           <div className="profile-header">
             <h2 className="username">{member?.name}</h2>
             <div className="icon-buttons">
-              <button>⚙️</button>
-              <button>🔄</button>
+              <button>
+                <MdSettings size={20} color="#333" />
+              </button>
+              <button>
+                <MdLogout size={20} color="#333" />
+              </button>
             </div>
           </div>
 

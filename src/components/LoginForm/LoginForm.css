@@ -1,14 +1,22 @@
 /* 로그인 폼 컨테이너 */
 .login-form-container {
   width: 100%;
-  padding: 20px;
+  padding: 10px;
   border: 1px solid #ddd;
   border-radius: 12px;
   background-color: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
   margin: 0 auto; /* 중앙 정렬 */
+}
+
+.login-form-main-page {
   height: 400px;
+}
+
+.login-form-login-page {
+  height: auto;
+  min-height: 500px;
 }
 
 /* 로그인 제목 스타일 */

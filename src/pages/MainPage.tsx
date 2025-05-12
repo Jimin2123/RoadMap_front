@@ -16,7 +16,7 @@ const MainPage: React.FC = () => {
           <EventBanner />
         </div>
         <div className="login-form-section">
-          {/* <LoginForm /> */}
+          {/* <LoginForm className="login-form-main-page" /> */}
           <LoginSuccess />
         </div>
       </div>
