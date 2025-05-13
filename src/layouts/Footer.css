@@ -1,6 +1,6 @@
 .footer {
   background-color: #f8f9fa;
-  padding: 20px 120px; /* 여백을 적절히 줄일 수 있음 */
+  padding: 20px 80px; /* 여백을 적절히 줄일 수 있음 */
   font-size: 14px;
   color: #444;
   border-top: 1px solid #ddd;
@@ -47,7 +47,7 @@
 
 .footer-links {
   margin-bottom: 12px;
-  font-size: 12px;
+  font-size: 13px;
   color: #666;
   display: flex;
   gap: 8px;
@@ -55,6 +55,17 @@
 
 .footer-info p {
   margin: 2px 0;
-  font-size: 12px;
+  font-size: 13px;
   color: #888;
+}
+
+.saramin {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 14px;
+}
+
+.saramin a {
+  color: #007bff;
+  text-decoration: none;
 }
