@@ -89,10 +89,18 @@ const LoginSuccess: React.FC = () => {
       <div className="policy-box">
         <h3>청년 지원 정책 안내 리스트</h3>
         <ul>
-          <li>청년 도약 프로젝트 안내</li>
-          <li>국가 기술 자격 지원 제도</li>
-          <li>구직활동 지원금 신청</li>
-          <li>청년 맞춤형 일자리 매칭</li>
+          <li>
+            <a href="">청년 도약 프로젝트 안내</a>
+          </li>
+          <li>
+            <a href="">국가 기술 자격 지원 제도</a>
+          </li>
+          <li>
+            <a href="">구직활동 지원금 신청</a>
+          </li>
+          <li>
+            <a href="">청년 맞춤형 일자리 매칭</a>
+          </li>
         </ul>
       </div>
     </div>

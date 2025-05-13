@@ -3,6 +3,7 @@ import Header from '../layouts/Header';
 import '../styles/LoginPage.css';
 
 import LoginForm from '../components/LoginForm/LoginForm';
+import Footer from '../layouts/Footer';
 
 const LoginPage: React.FC = () => {
   return (
@@ -12,6 +13,8 @@ const LoginPage: React.FC = () => {
       <div className="login-page-section">
         <LoginForm className="login-form-login-page" />
       </div>
+
+      <Footer />
     </div>
   );
 };
