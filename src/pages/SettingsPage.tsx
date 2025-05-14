@@ -1,5 +1,11 @@
-import React, { useState } from 'react';
-import './SettingsPage.css';
+import { useState } from 'react';
+import Header from '../layouts/Header';
+import Footer from '../layouts/Footer';
+import { Inquiry } from '../types/Inquiry';
+import ProfileSettings from '../components/settings/ProfileSettings';
+import InquiryForm from '../components/settings/InquiryForm';
+import InquiryHistory from '../components/settings/InquiryHistory';
+import '../styles/SettingsPage.css';
 import {
   UserIcon,
   SettingIcon,
@@ -10,72 +16,97 @@ import {
 
 const SettingsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState('profile');
+  const [inquiryList, setInquiryList] = useState<Inquiry[]>([]);
+
+  const handleInquirySubmit = (inquiry: Inquiry) => {
+    setInquiryList(prev => [...prev, inquiry]);
+    setActiveTab('inquiryHistory');
+  };
+
+  const handleViewHistory = () => {
+    setActiveTab('inquiryHistory');
+  };
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'profile':
+        return <ProfileSettings />;
+      case 'inquiryWrite':
+        return <InquiryForm onSubmit={handleInquirySubmit} onViewHistory={handleViewHistory} />;
+      case 'inquiryHistory':
+        return (
+          <InquiryHistory
+            list={inquiryList}
+            onBack={() => setActiveTab('inquiryWrite')}
+          />
+        );
+      case 'account':
+      case 'notifications':
+      case 'password':
+      case 'delete':
+        return <div style={{ color: '#888' }}>해당 기능은 추후 추가될 예정입니다.</div>;
+      default:
+        return null;
+    }
+  };
 
   return (
-    <div className="settings-container">
-      <div className="settings-sidebar">
-        <p style={{ fontSize: '26px' }}>설정</p>
-        <ul>
-          <li
-            className={activeTab === 'profile' ? 'active' : ''}
-            onClick={() => setActiveTab('profile')}
-          >
-            <span className="icon"><UserIcon /></span>
-            <span>프로필 설정</span>
-          </li>
-          <li
-            className={activeTab === 'account' ? 'active' : ''}
-            onClick={() => setActiveTab('account')}
-          >
-            <span className="icon"><SettingIcon /></span>
-            <span>계정 설정</span>
-          </li>
-          <li
-            className={activeTab === 'notification' ? 'active' : ''}
-            onClick={() => setActiveTab('notification')}
-          >
-            <span className="icon"><NotificationIcon /></span>
-            <span>알림</span>
-          </li>
-          <li
-            className={activeTab === 'password' ? 'active' : ''}
-            onClick={() => setActiveTab('password')}
-          >
-            <span className="icon"><MessageIcon /></span>
-            <span>비밀번호 변경</span>
-          </li>
-          <li
-            className={activeTab === 'delete' ? 'active' : ''}
-            onClick={() => setActiveTab('delete')}
-          >
-            <span className="icon"><WarningIcon /></span>
-            <span>탈퇴하기</span>
-          </li>
-        </ul>
-      </div>
+    <div className="layout">
+      <Header />
+      <main className="settings-container">
+        <aside className="settings-sidebar">
+          <h2>설정</h2>
+          <ul>
+            <li
+              className={activeTab === 'profile' ? 'active' : ''}
+              onClick={() => setActiveTab('profile')}
+            >
+              <span className="icon"><UserIcon /></span>
+              <span>프로필 설정</span>
+            </li>
+            <li
+              className={activeTab === 'account' ? 'active' : ''}
+              onClick={() => setActiveTab('account')}
+            >
+              <span className="icon"><SettingIcon /></span>
+              <span>계정 설정</span>
+            </li>
+            <li
+              className={activeTab === 'notifications' ? 'active' : ''}
+              onClick={() => setActiveTab('notifications')}
+            >
+              <span className="icon"><NotificationIcon /></span>
+              <span>알림</span>
+            </li>
+            <li
+              className={activeTab === 'inquiryWrite' ? 'active' : ''}
+              onClick={() => setActiveTab('inquiryWrite')}
+            >
+              <span className="icon"><MessageIcon /></span>
+              <span>문의 작성</span>
+            </li>
+            {/* <li
+              className={activeTab === 'inquiryHistory' ? 'active' : ''}
+              onClick={() => setActiveTab('inquiryHistory')}
+            >
+              <span className="icon"><MessageIcon /></span>
+              <span>문의 내역</span>
+            </li> */}
+            <li
+              className={activeTab === 'delete' ? 'active' : ''}
+              onClick={() => setActiveTab('delete')}
+            >
+              <span className="icon"><WarningIcon /></span>
+              <span>탈퇴하기</span>
+            </li>
+          </ul>
+        </aside>
 
-      <div className="settings-content">
-        <div className="profile-header">
-          <h2>프로필 설정</h2>
-          <button className="close-button">✕</button>
-        </div>
-
-        <div className="profile-info">
-          <div className="profile-image">
-            <img src="/default-avatar.png" alt="프로필" />
-            <button className="upload-btn">📷 이미지 업로드</button>
-          </div>
-          <div className="profile-fields">
-            <div><b>이름</b> 정지민 ✏️</div>
-            <div><b>이메일</b> ddong1759@nabver.com ✏️</div>
-            <div><b>전화번호</b> 01022745989 ✏️</div>
-            <div><b>생년월일</b> 2002/03/19 ✏️</div>
-            <div><b>주소</b> 경기도 성남시 중원구 돈촌대로 1202 ✏️</div>
-          </div>
-        </div>
-
-        <button className="save-button">저장하기</button>
-      </div>
+        <section className="settings-content">
+          {renderContent()}
+        </section>
+      </main>
+      <Footer />
     </div>
   );
 };

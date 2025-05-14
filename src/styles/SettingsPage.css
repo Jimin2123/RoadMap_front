@@ -100,3 +100,96 @@
   color: #007bff;
   font-weight: bold;
 }
+
+.settings-page-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.settings-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.settings-container {
+  display: flex;
+  padding: 2rem;
+  min-height: 600px;
+}
+
+.settings-sidebar {
+  width: 200px;
+  border-right: 1px solid #ddd;
+  padding-right: 1.5rem;
+}
+
+.settings-sidebar h2 {
+  margin-bottom: 1rem;
+}
+
+.settings-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.settings-sidebar li {
+  padding: 0.5rem 0;
+  cursor: pointer;
+  color: #333;
+}
+
+.settings-sidebar li.active {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.settings-sidebar li.disabled {
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.settings-content {
+  flex: 1;
+  padding-left: 2rem;
+}
+.inquiry-form {
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+.inquiry-form .form-group {
+  margin-bottom: 20px;
+}
+
+.inquiry-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.inquiry-form input[type="text"],
+.inquiry-form select,
+.inquiry-form textarea,
+.inquiry-form input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.inquiry-form textarea {
+  resize: vertical;
+}
+
+.save-button {
+  background-color: #003c84;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
