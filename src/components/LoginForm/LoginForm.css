@@ -17,6 +17,8 @@
 .login-form-login-page {
   height: auto;
   min-height: 500px;
+  padding: 0;
+  margin-top: 20px;
 }
 
 /* 로그인 제목 스타일 */

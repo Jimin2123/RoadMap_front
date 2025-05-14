@@ -17,6 +17,7 @@
 
 .job-card.dummy {
   visibility: hidden;
+  pointer-events: none;
 }
 
 .pagination {
