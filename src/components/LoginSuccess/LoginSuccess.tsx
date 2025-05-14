@@ -77,7 +77,7 @@ const LoginSuccess: React.FC = () => {
                 <div className="certificate-card" key={index}>
                   <div className="certificate-icon">🎓</div>
                   <h4>{cert}</h4>
-                  <p>유형 미정</p>
+                  <p>국가 공인</p>
                 </div>
               ))}
             </div>
