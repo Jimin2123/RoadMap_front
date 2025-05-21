@@ -1,3 +1,106 @@
+.settings-container {
+  display: flex;
+  height: 100vh;
+  font-family: sans-serif;
+}
+
+.settings-sidebar {
+  width: 200px;
+  background-color: #ffffff;
+  border-right: 1px solid #d2d2d2;
+  padding: 20px;
+}
+
+.settings-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.settings-sidebar li {
+  margin-bottom: 12px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.settings-sidebar li.active {
+  background-color: #a5cbff;
+  color: white;
+}
+
+.settings-content {
+  flex-grow: 1;
+  padding: 40px;
+  background-color: #fff;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-info {
+  display: flex;
+  margin-top: 30px;
+}
+
+.profile-image {
+  margin-right: 40px;
+  text-align: center;
+}
+
+.profile-image img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.upload-btn {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.profile-fields div {
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.save-button {
+  margin-top: 30px;
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.settings-sidebar li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.settings-sidebar li:hover {
+  background-color: #f0f4ff;
+}
+
+.settings-sidebar li.active {
+  background-color: #e6f0ff;
+  color: #007bff;
+  font-weight: bold;
+}
+
 .settings-page-section {
   max-width: 800px;
   margin: 0 auto;
@@ -50,4 +153,43 @@
 .settings-content {
   flex: 1;
   padding-left: 2rem;
+}
+.inquiry-form {
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+.inquiry-form .form-group {
+  margin-bottom: 20px;
+}
+
+.inquiry-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.inquiry-form input[type='text'],
+.inquiry-form select,
+.inquiry-form textarea,
+.inquiry-form input[type='file'] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.inquiry-form textarea {
+  resize: vertical;
+}
+
+.save-button {
+  background-color: #003c84;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
 }

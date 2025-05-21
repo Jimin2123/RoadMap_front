@@ -1,0 +1,29 @@
+/* InquiryHistory.css */
+.inquiry-history {
+  padding: 30px;
+  max-width: 700px;
+  margin: auto;
+}
+
+.inquiry-history .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inquiry-item {
+  margin-bottom: 24px;
+}
+
+.inquiry-item strong {
+  font-size: 18px;
+}
+
+.inquiry-item p {
+  margin: 8px 0;
+}
+
+.back-button {
+  color: #0066cc;
+  text-decoration: none;
+}

@@ -1,7 +1,7 @@
 // components/DropdownMenuCard.tsx
 import React from 'react';
 import './DropdownMenuCard.css';
-import { FaHome, FaBullhorn, FaBriefcase, FaQuestionCircle, FaSignInAlt } from 'react-icons/fa';
+import { FaHome, FaBullhorn, FaBriefcase, FaQuestionCircle, FaSignInAlt, FaCog } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 interface Props {
@@ -14,6 +14,7 @@ const menuItems = [
   { icon: <FaBullhorn />, label: '공지사항', description: '새로운 소식을 확인하세요', path: '/notices' },
   { icon: <FaBriefcase />, label: '채용정보', description: '채용공고를 확인해보세요', path: '/jobs' },
   { icon: <FaQuestionCircle />, label: '고객센터', description: '문의사항을 해결해드립니다', path: '/support' },
+  { icon: <FaCog />, label: '설정', description: '앱 환경을 설정하세요', path: '/settings' }, // ✅ 설정 추가
 ];
 
 const DropdownMenuCard: React.FC<Props> = ({ isOpen }) => {

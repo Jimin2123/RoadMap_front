@@ -1,0 +1,58 @@
+.inquiry-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.view-history {
+  color: #0056d6;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.input-subject,
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.file-box {
+  display: flex;
+  align-items: center;
+  border: 1px dashed #bbb;
+  height: 80px;
+  border-radius: 12px;
+  justify-content: center;
+  font-size: 32px;
+  color: #777;
+  cursor: pointer;
+}
+
+input[type='file'] {
+  display: none;
+}
+
+.submit-button {
+  width: 200px;
+  background-color: #002b70;
+  color: white;
+  border: none;
+  padding: 12px 0;
+  border-radius: 30px;
+  font-size: 18px;
+  margin: 0 auto;
+  display: block;
+  cursor: pointer;
+}
