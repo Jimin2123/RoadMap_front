@@ -1,9 +1,9 @@
 import Header from '../layouts/Header';
 import Footer from '../layouts/Footer';
 import EventBanner from '../components/EventBanner/EventBanner';
-// import LoginForm from '../components/LoginForm/LoginForm';
+import LoginForm from '../components/LoginForm/LoginForm';
 import ServiceCard from '../components/ServiceCard/ServiceCard';
-import LoginSuccess from '../components/LoginSuccess/LoginSuccess';
+// import LoginSuccess from '../components/LoginSuccess/LoginSuccess';
 import JobPostingSection from '../components/JobPostingSection/JobPostingSection';
 import '../styles/MainPage.css';
 
@@ -17,8 +17,8 @@ const MainPage: React.FC = () => {
           <EventBanner />
         </div>
         <div className="login-form-section">
-          {/* <LoginForm className="login-form-main-page" /> */}
-          <LoginSuccess />
+          <LoginForm className="login-form-main-page" />
+          {/* <LoginSuccess /> */}
         </div>
       </div>
 

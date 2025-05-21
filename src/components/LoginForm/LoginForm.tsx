@@ -1,5 +1,5 @@
-// components/LoginForm.tsx
 import React from 'react';
+import { Link } from 'react-router-dom'; // 추가
 import './LoginForm.css';
 
 interface LoginFormProps {
@@ -24,7 +24,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ className }) => {
         <span>|</span>
         <a href="#">비밀번호 찾기</a>
         <span>|</span>
-        <a href="#">회원가입</a>
+        <Link to="/signup">회원가입</Link> {/* 이 부분만 수정 */}
       </div>
 
       <div className="login-divider">간편 로그인</div>
