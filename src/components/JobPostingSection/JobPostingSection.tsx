@@ -141,7 +141,7 @@ const JobPostingSection: React.FC = () => {
     },
   ];
 
-  const itemsPerPage = 9; // 한 페이지에 보여줄 항목 수
+  const itemsPerPage = 12; // 한 페이지에 보여줄 항목 수
   const visiblePageCount = 3; // 하단에 보여질 페이지 번호 개수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 관리
   const paginationRef = useRef<HTMLDivElement>(null); // 페이지 이동 시 스크롤 위치 조절을 위한 ref
