@@ -20,7 +20,7 @@ This project follows a well-organized folder structure to maintain scalability a
  ├── 📂 utils        # Utility functions and helpers
 ```
 
-Each folder serves a specific purpose to enhance maintainability and scalability in the project. Keeping a modular approach helps in better organization and easier debugging..
+Each folder serves a specific purpose to enhance maintainability and scalability in the project. Keeping a modular approach helps in better organization and easier debugging.
 
 ## License Notice
 
