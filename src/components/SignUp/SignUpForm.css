@@ -51,6 +51,7 @@
 
 .phone-row {
   display: flex;
+  
   gap: 8px;
 }
 
@@ -119,4 +120,15 @@
 
 .submit-button:hover {
   background-color: #0056b3;
+}
+
+.input-error {
+  border: 1px solid red !important;
+}
+
+.error-text {
+  color: red;
+  font-size: 13px;
+  margin-top: -8px;
+  margin-bottom: 8px;
 }
