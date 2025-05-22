@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import MainPage from '../pages/MainPage';
 import LoginPage from '../pages/LoginPage';
 import SettingsPage from '../pages/SettingsPage';
-import SignUpForm from '../components/SignUp/SignUpform'; 
+import SignUpForm from '../components/SignUp/SignUpForm'; 
 
 
 const AppRoutes = () => {
