@@ -5,6 +5,7 @@ import SettingsPage from '../pages/SettingsPage';
 import SignUpForm from '../components/SignUp/SignUpForm'; 
 
 
+
 const AppRoutes = () => {
   return (
     <Routes>
@@ -12,6 +13,7 @@ const AppRoutes = () => {
       <Route path="/login" element={<LoginPage />} /> {/* 로그인 경로 추가 */}
       <Route path="/settings" element={<SettingsPage />} /> {/* 설정 페이지 경로 추가 */}
       <Route path="/signup" element={<SignUpForm />} /> {/* 회원가입페이지 */}
+  
       {/* <Route path="/other" element={<OtherComponent />} /> */}
     </Routes>
   );

@@ -1,0 +1,44 @@
+.notification-wrapper {
+  padding: 2rem;
+  flex: 1;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.notification-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.manage-link {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.master-checkbox {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.notification-section {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1rem;
+}
+
+.notification-section ul {
+  list-style: none;
+  padding-left: 1rem;
+  color: #444;
+}
+
+.notification-section li {
+  margin: 0.4rem 0;
+}

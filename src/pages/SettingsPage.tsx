@@ -7,6 +7,8 @@ import InquiryForm from '../components/settings/InquiryForm';
 import InquiryHistory from '../components/settings/InquiryHistory';
 import '../styles/SettingsPage.css';
 import { UserIcon, SettingIcon, NotificationIcon, MessageIcon, WarningIcon } from '../components/SettingIcons';
+import NotificationSettings from '../components/settings/NotificationSettings';
+import AccountSettings from '../components/settings/AccountSettings';
 
 const SettingsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState('profile');
@@ -30,7 +32,9 @@ const SettingsPage: React.FC = () => {
       case 'inquiryHistory':
         return <InquiryHistory list={inquiryList} onBack={() => setActiveTab('inquiryWrite')} />;
       case 'account':
+        return <AccountSettings />;
       case 'notifications':
+        return <NotificationSettings />;
       case 'password':
       case 'delete':
         return <div style={{ color: '#888' }}>해당 기능은 추후 추가될 예정입니다.</div>;
@@ -47,40 +51,27 @@ const SettingsPage: React.FC = () => {
           <h2>설정</h2>
           <ul>
             <li className={activeTab === 'profile' ? 'active' : ''} onClick={() => setActiveTab('profile')}>
-              <span className="icon">
-                <UserIcon />
-              </span>
+              <span className="icon"><UserIcon /></span>
               <span>프로필 설정</span>
             </li>
             <li className={activeTab === 'account' ? 'active' : ''} onClick={() => setActiveTab('account')}>
-              <span className="icon">
-                <SettingIcon />
-              </span>
+              <span className="icon"><SettingIcon /></span>
               <span>계정 설정</span>
             </li>
             <li className={activeTab === 'notifications' ? 'active' : ''} onClick={() => setActiveTab('notifications')}>
-              <span className="icon">
-                <NotificationIcon />
-              </span>
+              <span className="icon"><NotificationIcon /></span>
               <span>알림</span>
             </li>
             <li className={activeTab === 'inquiryWrite' ? 'active' : ''} onClick={() => setActiveTab('inquiryWrite')}>
-              <span className="icon">
-                <MessageIcon />
-              </span>
+              <span className="icon"><MessageIcon /></span>
               <span>문의 작성</span>
             </li>
-            {/* <li
-              className={activeTab === 'inquiryHistory' ? 'active' : ''}
-              onClick={() => setActiveTab('inquiryHistory')}
-            >
+            {/* <li className={activeTab === 'inquiryHistory' ? 'active' : ''} onClick={() => setActiveTab('inquiryHistory')}>
               <span className="icon"><MessageIcon /></span>
               <span>문의 내역</span>
             </li> */}
             <li className={activeTab === 'delete' ? 'active' : ''} onClick={() => setActiveTab('delete')}>
-              <span className="icon">
-                <WarningIcon />
-              </span>
+              <span className="icon"><WarningIcon /></span>
               <span>탈퇴하기</span>
             </li>
           </ul>
