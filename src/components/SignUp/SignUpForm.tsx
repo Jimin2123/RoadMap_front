@@ -19,10 +19,16 @@ const SignUpForm: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
 
-    const newValue =
-      name === 'phone'
-        ? value.replace(/[^0-9]/g, '') // 휴대폰은 숫자만
-        : value;
+    let newValue;
+    if (name === 'birth') {
+      // 숫자만 필터링 + 최대 8자리
+      newValue = value.replace(/[^0-9]/g, '').slice(0, 8);
+    } else if (name === 'phone') {
+      // 숫자만 필터링 (길이 제한 없음)
+      newValue = value.replace(/[^0-9]/g, '').slice(0, 11);
+    } else {
+      newValue = value;
+    }
 
     setForm({ ...form, [name]: newValue });
 
@@ -79,7 +85,7 @@ const SignUpForm: React.FC = () => {
 
   return (
     <div className="signup-form-wrapper">
-      <h2 className="signup-title">길라JOB 회원가입</h2>
+      <h2 className="signup-title">회원가입</h2>
       <form onSubmit={handleSubmit} className="signup-form">
         <input name="id" placeholder="아이디" value={form.id} onChange={handleChange} className={inputClass('id')} />
         {errors.id && <p className="error-text">{errors.id}</p>}
