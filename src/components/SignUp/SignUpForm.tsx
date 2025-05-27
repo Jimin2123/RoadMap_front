@@ -17,18 +17,18 @@ const SignUpForm: React.FC = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-  const { name, value } = e.target;
+    const { name, value } = e.target;
 
-  const newValue = name === 'phone'
-    ? value.replace(/[^0-9]/g, '') // 휴대폰은 숫자만
-    : value;
+    const newValue =
+      name === 'phone'
+        ? value.replace(/[^0-9]/g, '') // 휴대폰은 숫자만
+        : value;
 
-  setForm({ ...form, [name]: newValue });
+    setForm({ ...form, [name]: newValue });
 
-  const errorMsg = validateField(name, newValue);
-  setErrors((prev) => ({ ...prev, [name]: errorMsg }));
-};
-
+    const errorMsg = validateField(name, newValue);
+    setErrors((prev) => ({ ...prev, [name]: errorMsg }));
+  };
 
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
@@ -44,26 +44,25 @@ const SignUpForm: React.FC = () => {
   };
 
   const validateField = (name: string, value: string): string => {
-  switch (name) {
-    case 'id':
-      return value.trim() ? '' : '아이디는 필수입니다';
-    case 'password':
-      return /^.{8,16}$/.test(value) ? '' : '비밀번호는 8~16자여야 합니다';
-    case 'name':
-      return value.trim() ? '' : '이름은 필수입니다';
-    case 'birth':
-      return /^\d{8}$/.test(value) ? '' : '생년월일은 8자리 숫자여야 합니다';
-    case 'email':
-      return /^[\w.-]+@[\w.-]+\.\w+$/.test(value) ? '' : '이메일 형식이 아닙니다';
-    case 'phone':
-      return /^\d{10,11}$/.test(value) ? '' : '숫자만 10~11자리 입력';
-    case 'carrier':
-      return value ? '' : '통신사 선택 필수';
-    default:
-      return '';
-  }
-};
-
+    switch (name) {
+      case 'id':
+        return value.trim() ? '' : '아이디는 필수입니다';
+      case 'password':
+        return /^.{8,16}$/.test(value) ? '' : '비밀번호는 8~16자여야 합니다';
+      case 'name':
+        return value.trim() ? '' : '이름은 필수입니다';
+      case 'birth':
+        return /^\d{8}$/.test(value) ? '' : '생년월일은 8자리 숫자여야 합니다';
+      case 'email':
+        return /^[\w.-]+@[\w.-]+\.\w+$/.test(value) ? '' : '이메일 형식이 아닙니다';
+      case 'phone':
+        return /^\d{10,11}$/.test(value) ? '' : '숫자만 10~11자리 입력';
+      case 'carrier':
+        return value ? '' : '통신사 선택 필수';
+      default:
+        return '';
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,8 +75,7 @@ const SignUpForm: React.FC = () => {
     }
   };
 
-  const inputClass = (field: string) =>
-    errors[field] ? 'input-error' : '';
+  const inputClass = (field: string) => (errors[field] ? 'input-error' : '');
 
   return (
     <div className="signup-form-wrapper">
@@ -86,21 +84,50 @@ const SignUpForm: React.FC = () => {
         <input name="id" placeholder="아이디" value={form.id} onChange={handleChange} className={inputClass('id')} />
         {errors.id && <p className="error-text">{errors.id}</p>}
 
-        <input name="password" placeholder="비밀번호(8~16자의 영문,숫자,특수기호)" value={form.password} onChange={handleChange} type="password" className={inputClass('password')} />
+        <input
+          name="password"
+          placeholder="비밀번호(8~16자의 영문,숫자,특수기호)"
+          value={form.password}
+          onChange={handleChange}
+          type="password"
+          className={inputClass('password')}
+        />
         {errors.password && <p className="error-text">{errors.password}</p>}
 
-        <input name="name" placeholder="이름(실명)" value={form.name} onChange={handleChange} className={inputClass('name')} />
+        <input
+          name="name"
+          placeholder="이름(실명)"
+          value={form.name}
+          onChange={handleChange}
+          className={inputClass('name')}
+        />
         {errors.name && <p className="error-text">{errors.name}</p>}
 
         <div className="birth-gender-row">
-          <input name="birth" placeholder="생년월일 (ex 20020319)" value={form.birth} onChange={handleChange} className={inputClass('birth')} />
-          <label><input type="radio" name="gender" value="남자" onChange={handleChange} /> 남자</label>
-          <label><input type="radio" name="gender" value="여자" onChange={handleChange} /> 여자</label>
+          <input
+            name="birth"
+            placeholder="생년월일 (ex 20020319)"
+            value={form.birth}
+            onChange={handleChange}
+            className={inputClass('birth')}
+          />
+          <label>
+            <input type="radio" name="gender" value="남자" onChange={handleChange} /> 남자
+          </label>
+          <label>
+            <input type="radio" name="gender" value="여자" onChange={handleChange} /> 여자
+          </label>
         </div>
         {errors.birth && <p className="error-text">{errors.birth}</p>}
         {errors.gender && <p className="error-text">{errors.gender}</p>}
 
-        <input name="email" placeholder="ex)email@job.co.kr" value={form.email} onChange={handleChange} className={inputClass('email')} />
+        <input
+          name="email"
+          placeholder="ex)email@job.co.kr"
+          value={form.email}
+          onChange={handleChange}
+          className={inputClass('email')}
+        />
         {errors.email && <p className="error-text">{errors.email}</p>}
 
         <div className="phone-row">
@@ -110,7 +137,13 @@ const SignUpForm: React.FC = () => {
             <option value="KT">KT</option>
             <option value="LGU+">LGU+</option>
           </select>
-          <input name="phone" placeholder="휴대폰 번호" value={form.phone} onChange={handleChange} className={inputClass('phone')} />
+          <input
+            name="phone"
+            placeholder="휴대폰 번호"
+            value={form.phone}
+            onChange={handleChange}
+            className={inputClass('phone')}
+          />
           <button type="button">인증요청</button>
         </div>
         {errors.carrier && <p className="error-text">{errors.carrier}</p>}
@@ -125,7 +158,9 @@ const SignUpForm: React.FC = () => {
           <p>필수약관 동의 내용...</p>
         </div>
 
-        <button type="submit" className="submit-button">회원가입</button>
+        <button type="submit" className="submit-button">
+          회원가입
+        </button>
       </form>
     </div>
   );
