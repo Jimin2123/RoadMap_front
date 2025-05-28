@@ -1,32 +1,33 @@
 .profile-settings-container {
-  display: flex;
-  gap: 2rem;
   padding: 2rem;
-  flex-wrap: wrap;
 }
 
 .profile-settings-title {
   font-size: 1.8rem;
   font-weight: bold;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   width: 100%;
   text-align: left;
 }
 
+.profile-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
 .left-section {
+  flex: 0 0 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 40%;
-  min-width: 180px;
-  justify-content: center;
 }
 
 .profile-image-wrapper {
   width: 140px;
-  height: 180px;
+  height: 140px;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 50%;
   background-color: #f4f4f4;
   display: flex;
   justify-content: center;
@@ -34,9 +35,12 @@
 }
 
 .profile-image {
-  width: 100%;
+  width: 120%;
   height: 100%;
   object-fit: cover;
+  object-position: left center;
+  display: block;
+  transform: translateX(15%); /* 강제로 오른쪽에 넣음 나중에 수정 필요 */
 }
 
 .change-image-btn {
@@ -49,10 +53,9 @@
 
 .right-section {
   flex: 1;
+  min-width: 260px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  width: 55%;
 }
 
 .form-group {
@@ -76,7 +79,7 @@
 }
 
 .save-btn {
-  padding: 1rem 2rem;
+  padding: 1rem;
   border: none;
   background-color: #007bff;
   color: white;
