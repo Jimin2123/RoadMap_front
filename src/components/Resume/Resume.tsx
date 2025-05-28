@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './ResumePage.css';
+import './Resume.css';
 
-const ResumePage: React.FC = () => {
+const Resume: React.FC = () => {
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -64,4 +64,4 @@ const ResumePage: React.FC = () => {
   );
 };
 
-export default ResumePage;
+export default Resume;

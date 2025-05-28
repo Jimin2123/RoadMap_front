@@ -28,7 +28,7 @@ const MainPage: React.FC = () => {
             imageUrl="/icons/service1.svg"
             serviceName="나의 이력서 관리"
             serviceDescription="자신의 포트폴리오를 작성하거나 수정할 수 있습니다."
-            link="#"
+            link="/resume"
           />
           <ServiceCard
             imageUrl="/icons/service2.svg"

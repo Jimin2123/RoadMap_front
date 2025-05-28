@@ -3,8 +3,8 @@ import MainPage from '../pages/MainPage';
 import LoginPage from '../pages/LoginPage';
 import SettingsPage from '../pages/SettingsPage';
 import SignUpForm from '../components/SignUp/SignUpForm';
-import ResumePage from '../components/Resume/ResumePage';
 import TariningCoursePage from '../pages/TrainingCoursePage';
+import ResumePage from '../pages/ResumePage';
 
 const AppRoutes = () => {
   return (
