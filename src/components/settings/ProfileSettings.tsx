@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import './ProfileSetting.css';
+import AddressSearch from '../Features/AddressSearch';
 
 const ProfileSettings: React.FC = () => {
-  const [previewUrl, setPreviewUrl] = useState<string>(''); // 프로필 이미지 미리보기
+  const [previewUrl, setPreviewUrl] = useState<string>(''); // 프로필 이미지
   const [nickname, setNickname] = useState<string>(''); // 닉네임
   const [email, setEmail] = useState<string>(''); // 이메일
+  const [address, setAddress] = useState<string>(''); // 주소
+  const [detailAddress, setDetailAddress] = useState<string>(''); // 상세주소
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -17,47 +20,86 @@ const ProfileSettings: React.FC = () => {
     }
   };
 
+  const handleAddressSelect = (selectedAddress: string) => {
+    setAddress(selectedAddress);
+  };
+
   const handleSave = () => {
-    // 저장 로직을 여기에 추가
-    console.log('프로필 정보 저장:', { nickname, email });
+    console.log('프로필 정보 저장:', {
+      nickname,
+      email,
+      address,
+      detailAddress,
+    });
   };
 
   return (
     <div className="profile-settings-container">
       <h2 className="profile-settings-title">프로필 설정</h2>
 
-      <div className="left-section">
-        <div className="profile-image-wrapper">
-          <img
-            src={previewUrl || '/defaultProfileImage.svg'} // 기본 이미지 경로
-            alt="프로필 미리보기"
-            className="profile-image"
+      <div className="profile-sections">
+        <div className="left-section">
+          <div className="profile-image-wrapper">
+            <img src={previewUrl || '/defaultProfileImage.svg'} alt="프로필 미리보기" className="profile-image" />
+          </div>
+          <label htmlFor="profileImageInput" className="change-image-btn">
+            이미지 변경
+          </label>
+          <input
+            id="profileImageInput"
+            type="file"
+            accept="image/*"
+            style={{ display: 'none' }}
+            onChange={handleImageChange}
           />
         </div>
-        <label htmlFor="profileImageInput" className="change-image-btn">
-          이미지 변경
-        </label>
-        <input
-          id="profileImageInput"
-          type="file"
-          accept="image/*"
-          style={{ display: 'none' }}
-          onChange={handleImageChange}
-        />
-      </div>
 
-      <div className="right-section">
-        <div className="form-group">
-          <label>닉네임</label>
-          <input type="text" value={nickname} placeholder="닉네임 입력" onChange={(e) => setNickname(e.target.value)} />
+        <div className="right-section">
+          <div className="form-group">
+            <label>닉네임</label>
+            <input
+              type="text"
+              value={nickname}
+              placeholder="닉네임 입력"
+              onChange={(e) => setNickname(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>이메일</label>
+            <input type="email" value={email} placeholder="이메일 입력" onChange={(e) => setEmail(e.target.value)} />
+          </div>
+
+          <div className="form-group">
+            <label>주소</label>
+            <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
+              <input
+                type="text"
+                value={address}
+                placeholder="도로명 주소를 입력하세요"
+                readOnly
+                style={{ flex: 1, paddingRight: '36px' }}
+              />
+              <div style={{ position: 'absolute', right: '8px' }}>
+                <AddressSearch onAddressSelect={handleAddressSelect} />
+              </div>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label>상세 주소</label>
+            <input
+              type="text"
+              value={detailAddress}
+              placeholder="상세 주소 (예: 아파트, 동·호수 등)"
+              onChange={(e) => setDetailAddress(e.target.value)}
+            />
+          </div>
+
+          <button className="save-btn" onClick={handleSave}>
+            저장하기
+          </button>
         </div>
-        <div className="form-group">
-          <label>이메일</label>
-          <input type="email" value={email} placeholder="이메일 입력" onChange={(e) => setEmail(e.target.value)} />
-        </div>
-        <button className="save-btn" onClick={handleSave}>
-          저장하기
-        </button>
       </div>
     </div>
   );
