@@ -3,7 +3,7 @@ import MainPage from '../pages/MainPage';
 import LoginPage from '../pages/LoginPage';
 import SettingsPage from '../pages/SettingsPage';
 import SignUpForm from '../components/SignUp/SignUpForm';
-
+import ResumePage from '../components/Resume/ResumePage';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -11,6 +11,7 @@ const AppRoutes = () => {
       <Route path="/login" element={<LoginPage />} /> {/* 로그인 경로 추가 */}
       <Route path="/settings" element={<SettingsPage />} /> {/* 설정 페이지 경로 추가 */}
       <Route path="/signup" element={<SignUpForm />} /> {/* 회원가입페이지 */}
+      <Route path="/resume" element={<ResumePage />} /> {/* 이력서 페이지 경로 */}
       {/* <Route path="/other" element={<OtherComponent />} /> */}
     </Routes>
   );
