@@ -22,12 +22,7 @@ const AccountSettings: React.FC = () => {
 
       <div className="form-group">
         <label>이메일 </label>
-        <input
-          type="email"
-          placeholder="example@email.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <input type="email" placeholder="example@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
       </div>
 
       <div className="form-group">
@@ -60,7 +55,9 @@ const AccountSettings: React.FC = () => {
         />
       </div>
 
-      <button className="save-btn" onClick={handleSave}>저장하기</button>
+      <button className="save-btn" onClick={handleSave}>
+        저장하기
+      </button>
     </div>
   );
 };

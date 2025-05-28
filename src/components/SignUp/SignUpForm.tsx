@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './SignUpForm.css';
+import AddressSearch from '../Features/AddressSearch';
 
 const SignUpForm: React.FC = () => {
   const [form, setForm] = useState({
@@ -12,6 +13,7 @@ const SignUpForm: React.FC = () => {
     carrier: '',
     phone: '',
     code: '',
+    address: '', // 주소 필드 추가
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -21,10 +23,8 @@ const SignUpForm: React.FC = () => {
 
     let newValue;
     if (name === 'birth') {
-      // 숫자만 필터링 + 최대 8자리
       newValue = value.replace(/[^0-9]/g, '').slice(0, 8);
     } else if (name === 'phone') {
-      // 숫자만 필터링 (길이 제한 없음)
       newValue = value.replace(/[^0-9]/g, '').slice(0, 11);
     } else {
       newValue = value;
@@ -34,6 +34,10 @@ const SignUpForm: React.FC = () => {
 
     const errorMsg = validateField(name, newValue);
     setErrors((prev) => ({ ...prev, [name]: errorMsg }));
+  };
+
+  const handleAddressSelect = (selectedAddress: string) => {
+    setForm((prev) => ({ ...prev, address: selectedAddress }));
   };
 
   const validate = () => {
@@ -46,6 +50,7 @@ const SignUpForm: React.FC = () => {
     if (!/^[\w.-]+@[\w.-]+\.\w+$/.test(form.email)) newErrors.email = '유효한 이메일을 입력하세요';
     if (!form.carrier) newErrors.carrier = '통신사를 선택하세요';
     if (!/^\d{10,11}$/.test(form.phone)) newErrors.phone = '휴대폰 번호는 숫자만 10~11자리 입력하세요';
+    if (!form.address) newErrors.address = '주소를 입력하세요';
     return newErrors;
   };
 
@@ -65,6 +70,8 @@ const SignUpForm: React.FC = () => {
         return /^\d{10,11}$/.test(value) ? '' : '숫자만 10~11자리 입력';
       case 'carrier':
         return value ? '' : '통신사 선택 필수';
+      case 'address':
+        return value ? '' : '주소는 필수입니다';
       default:
         return '';
     }
@@ -135,6 +142,17 @@ const SignUpForm: React.FC = () => {
           className={inputClass('email')}
         />
         {errors.email && <p className="error-text">{errors.email}</p>}
+
+        {/* ✅ 주소 검색 필드 */}
+        <input
+          name="address"
+          placeholder="주소 (도로명)"
+          value={form.address}
+          readOnly
+          className={inputClass('address')}
+        />
+        <AddressSearch onAddressSelect={handleAddressSelect} />
+        {errors.address && <p className="error-text">{errors.address}</p>}
 
         <div className="phone-row">
           <select name="carrier" value={form.carrier} onChange={handleChange} className={inputClass('carrier')}>
