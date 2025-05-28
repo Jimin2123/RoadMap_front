@@ -13,11 +13,7 @@ const NotificationSettings: React.FC = () => {
     },
     {
       title: '교육 신청',
-      items: [
-        '~~교육 신청',
-        'AWS자격증 시험 공고',
-        '~~ 암튼 부족한거 채우는거',
-      ],
+      items: ['~~교육 신청', 'AWS자격증 시험 공고', '~~ 암튼 부족한거 채우는거'],
     },
   ];
 
@@ -27,7 +23,9 @@ const NotificationSettings: React.FC = () => {
         <h2>알림</h2>
         <div className="notification-controls">
           <span className="icon">🔕</span>
-          <a href="#" className="manage-link">관리</a>
+          <a href="#" className="manage-link">
+            관리
+          </a>
           <input type="checkbox" className="master-checkbox" />
         </div>
       </div>
@@ -35,7 +33,9 @@ const NotificationSettings: React.FC = () => {
       {data.map((section, i) => (
         <div key={i} className="notification-section">
           <ul>
-            <li><strong>• {section.title}</strong></li>
+            <li>
+              <strong>• {section.title}</strong>
+            </li>
             {section.items.map((item, j) => (
               <li key={j}>• {item}</li>
             ))}

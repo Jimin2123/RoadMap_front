@@ -46,7 +46,6 @@
 }
 
 .profile-image {
-  margin-right: 40px;
   text-align: center;
 }
 
@@ -156,7 +155,6 @@
 }
 .inquiry-form {
   max-width: 600px;
-  margin-top: 20px;
 }
 
 .inquiry-form .form-group {

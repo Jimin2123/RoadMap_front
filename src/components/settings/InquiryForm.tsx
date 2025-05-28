@@ -41,7 +41,9 @@ const InquiryForm = ({ onSubmit, onViewHistory }: Props) => {
 
       <div className="form-group category">
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="분류" disabled>분류</option>
+          <option value="분류" disabled>
+            분류
+          </option>
           <option value="일반">일반</option>
           <option value="버그 신고">버그 신고</option>
           <option value="기능 요청">기능 요청</option>
@@ -62,17 +64,17 @@ const InquiryForm = ({ onSubmit, onViewHistory }: Props) => {
       <div className="form-group">
         <label>첨부파일 등록/삭제</label>
         <div className="file-box">
-          <label htmlFor="file-upload" className="file-label">+</label>
-          <input
-            id="file-upload"
-            type="file"
-            onChange={(e) => setFile(e.target.files?.[0] || null)}
-          />
+          <label htmlFor="file-upload" className="file-label">
+            +
+          </label>
+          <input id="file-upload" type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
         </div>
         {file && <p className="filename">📎 {file.name}</p>}
       </div>
 
-      <button type="submit" className="submit-button">저장하기</button>
+      <button type="submit" className="submit-button">
+        저장하기
+      </button>
     </form>
   );
 };
