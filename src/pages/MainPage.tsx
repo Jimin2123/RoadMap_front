@@ -28,26 +28,31 @@ const MainPage: React.FC = () => {
             imageUrl="/icons/service1.svg"
             serviceName="나의 이력서 관리"
             serviceDescription="자신의 포트폴리오를 작성하거나 수정할 수 있습니다."
+            link="#"
           />
           <ServiceCard
             imageUrl="/icons/service2.svg"
             serviceName="나의 취직 정보"
             serviceDescription="현재 진행중인 채용정보를 확인할 수 있습니다."
+            link="#"
           />
           <ServiceCard
             imageUrl="/icons/service3.svg"
             serviceName="나의 역량 진단"
             serviceDescription="사용자의 희망 직무와 비교해 부족한 역량을 보완할 수 있는 방법을 제공합니다."
+            link="#"
           />
           <ServiceCard
             imageUrl="/icons/service4.svg"
             serviceName="나의 청년 지원정책"
             serviceDescription="현재 진행중인 청년 지원정책 리스트를 볼 수 있습니다."
+            link="/training"
           />
           <ServiceCard
             imageUrl="/icons/service5.svg"
             serviceName="나의 관심기업 리스트"
             serviceDescription="사용자가 등록해둔 관심 기업 리스트를 보여줍니다."
+            link="#"
           />
         </div>
         <div className="job-posting-section">
