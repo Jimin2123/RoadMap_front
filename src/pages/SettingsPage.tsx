@@ -51,19 +51,27 @@ const SettingsPage: React.FC = () => {
           <h2>설정</h2>
           <ul>
             <li className={activeTab === 'profile' ? 'active' : ''} onClick={() => setActiveTab('profile')}>
-              <span className="icon"><UserIcon /></span>
+              <span className="icon">
+                <UserIcon />
+              </span>
               <span>프로필 설정</span>
             </li>
             <li className={activeTab === 'account' ? 'active' : ''} onClick={() => setActiveTab('account')}>
-              <span className="icon"><SettingIcon /></span>
+              <span className="icon">
+                <SettingIcon />
+              </span>
               <span>계정 설정</span>
             </li>
             <li className={activeTab === 'notifications' ? 'active' : ''} onClick={() => setActiveTab('notifications')}>
-              <span className="icon"><NotificationIcon /></span>
+              <span className="icon">
+                <NotificationIcon />
+              </span>
               <span>알림</span>
             </li>
             <li className={activeTab === 'inquiryWrite' ? 'active' : ''} onClick={() => setActiveTab('inquiryWrite')}>
-              <span className="icon"><MessageIcon /></span>
+              <span className="icon">
+                <MessageIcon />
+              </span>
               <span>문의 작성</span>
             </li>
             {/* <li className={activeTab === 'inquiryHistory' ? 'active' : ''} onClick={() => setActiveTab('inquiryHistory')}>
@@ -71,7 +79,9 @@ const SettingsPage: React.FC = () => {
               <span>문의 내역</span>
             </li> */}
             <li className={activeTab === 'delete' ? 'active' : ''} onClick={() => setActiveTab('delete')}>
-              <span className="icon"><WarningIcon /></span>
+              <span className="icon">
+                <WarningIcon />
+              </span>
               <span>탈퇴하기</span>
             </li>
           </ul>

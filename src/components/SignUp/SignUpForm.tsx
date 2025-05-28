@@ -14,6 +14,7 @@ const SignUpForm: React.FC = () => {
     phone: '',
     code: '',
     address: '',
+    detailAddress: '', // ✅ 상세 주소 필드 추가
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -158,6 +159,15 @@ const SignUpForm: React.FC = () => {
           </div>
         </div>
         {errors.address && <p className="error-text">{errors.address}</p>}
+
+        {/* ✅ 상세 주소 입력 */}
+        <input
+          name="detailAddress"
+          placeholder="상세 주소 (예: 아파트, 동·호수 등)"
+          value={form.detailAddress}
+          onChange={handleChange}
+          className={inputClass('detailAddress')}
+        />
 
         <div className="phone-row">
           <select name="carrier" value={form.carrier} onChange={handleChange} className={inputClass('carrier')}>
