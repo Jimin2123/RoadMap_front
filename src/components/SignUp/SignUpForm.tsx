@@ -13,7 +13,7 @@ const SignUpForm: React.FC = () => {
     carrier: '',
     phone: '',
     code: '',
-    address: '', // 주소 필드 추가
+    address: '',
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -143,15 +143,20 @@ const SignUpForm: React.FC = () => {
         />
         {errors.email && <p className="error-text">{errors.email}</p>}
 
-        {/* ✅ 주소 검색 필드 */}
-        <input
-          name="address"
-          placeholder="주소 (도로명)"
-          value={form.address}
-          readOnly
-          className={inputClass('address')}
-        />
-        <AddressSearch onAddressSelect={handleAddressSelect} />
+        {/* ✅ 주소 입력 필드 + 아이콘 버튼 */}
+        <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
+          <input
+            name="address"
+            placeholder="도로명 주소를 입력해 주세요"
+            value={form.address}
+            readOnly
+            className={inputClass('address')}
+            style={{ flex: 1, paddingRight: '36px' }}
+          />
+          <div style={{ position: 'absolute', right: '12px' }}>
+            <AddressSearch onAddressSelect={handleAddressSelect} />
+          </div>
+        </div>
         {errors.address && <p className="error-text">{errors.address}</p>}
 
         <div className="phone-row">

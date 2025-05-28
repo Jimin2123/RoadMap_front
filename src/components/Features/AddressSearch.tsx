@@ -1,4 +1,5 @@
 import React from 'react';
+import SearchIcon from '../SettingIcons/SearchIcon';
 
 declare global {
   interface Window {
@@ -16,7 +17,7 @@ interface DaumPostcodeData {
   bname: string;
   buildingName: string;
   zonecode: string;
-  [key: string]: unknown; // 필요 시 확장 가능
+  [key: string]: unknown;
 }
 
 interface Props {
@@ -33,8 +34,18 @@ const AddressSearch: React.FC<Props> = ({ onAddressSelect }) => {
   };
 
   return (
-    <button type="button" onClick={openPostcode}>
-      주소 검색
+    <button
+      type="button"
+      onClick={openPostcode}
+      aria-label="주소 검색"
+      style={{
+        background: 'transparent',
+        border: 'none',
+        cursor: 'pointer',
+        padding: 0,
+      }}
+    >
+      <SearchIcon />
     </button>
   );
 };
