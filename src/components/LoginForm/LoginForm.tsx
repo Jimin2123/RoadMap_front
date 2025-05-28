@@ -14,8 +14,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ className }) => {
       </span>
 
       <form className="login-form" onSubmit={(e) => e.preventDefault()}>
-        <input type="text" placeholder="아이디" className="login-input" />
-        <input type="password" placeholder="비밀번호" className="login-input" />
+        <input type="email" placeholder="이메일" className="login-input" required />
+        <input type="password" placeholder="비밀번호" className="login-input" required />
         <button className="login-button">로그인</button>
       </form>
 

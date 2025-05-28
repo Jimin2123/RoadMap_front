@@ -24,8 +24,8 @@
 }
 
 .profile-image-wrapper {
-  width: 140px;
-  height: 140px;
+  width: 200px;
+  height: 200px;
   overflow: hidden;
   border-radius: 50%;
   background-color: #f4f4f4;
@@ -35,12 +35,11 @@
 }
 
 .profile-image {
-  width: 120%;
   height: 100%;
   object-fit: cover;
   object-position: left center;
   display: block;
-  transform: translateX(15%); /* 강제로 오른쪽에 넣음 나중에 수정 필요 */
+  /* transform: translateX(15%);  */
 }
 
 .change-image-btn {
