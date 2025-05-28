@@ -1,0 +1,30 @@
+export interface TrainingCourseItem {
+  eiEmplCnt3Gt10: string;
+  eiEmplRate6: string;
+  eiEmplCnt3: string;
+  eiEmplRate3: string;
+  title: string;
+  realMan: string;
+  telNo: string;
+  stdgScor: string;
+  traStartDate: string;
+  grade: string;
+  ncsCd: string;
+  regCourseMan: string;
+  trprDegr: string;
+  address: string;
+  traEndDate: string;
+  subTitle: string;
+  instCd: string;
+  trngAreaCd: string;
+  trprId: string;
+  yardMan: string;
+  courseMan: string;
+  trainTarget: string;
+  trainTargetCd: string;
+  trainstCstId: string;
+  contents: string;
+  subTitleLink: string;
+  titleLink: string;
+  titleIcon: string;
+}
