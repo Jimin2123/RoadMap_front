@@ -10,6 +10,10 @@
   margin-bottom: 2rem;
 }
 
+.notification-header h2 {
+  font-size: 1.8rem;
+}
+
 .notification-controls {
   display: flex;
   align-items: center;

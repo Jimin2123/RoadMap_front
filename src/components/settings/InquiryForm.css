@@ -1,13 +1,17 @@
 .inquiry-form {
   max-width: 600px;
-  margin: 0 auto;
-  padding: 24px;
+  /* margin: 0 auto; */
+  padding: 26px;
 }
 
 .form-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.form-header h2 {
+  font-size: 1.8rem;
 }
 
 .view-history {
