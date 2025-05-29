@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './SignUpForm.css';
 import AddressSearch from '../Features/AddressSearch';
+import ClearAddressIcon from '../SettingIcons/ClearAddressIcon';
 
 const SignUpForm: React.FC = () => {
   const [form, setForm] = useState({
@@ -14,7 +15,7 @@ const SignUpForm: React.FC = () => {
     phone: '',
     code: '',
     address: '',
-    detailAddress: '', // ✅ 상세 주소 필드 추가
+    detailAddress: '',
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -39,6 +40,10 @@ const SignUpForm: React.FC = () => {
 
   const handleAddressSelect = (selectedAddress: string) => {
     setForm((prev) => ({ ...prev, address: selectedAddress }));
+  };
+
+  const handleClearAddress = () => {
+    setForm((prev) => ({ ...prev, address: '' }));
   };
 
   const validate = () => {
@@ -144,7 +149,6 @@ const SignUpForm: React.FC = () => {
         />
         {errors.email && <p className="error-text">{errors.email}</p>}
 
-        {/* ✅ 주소 입력 필드 + 아이콘 버튼 */}
         <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
           <input
             name="address"
@@ -152,15 +156,32 @@ const SignUpForm: React.FC = () => {
             value={form.address}
             readOnly
             className={inputClass('address')}
-            style={{ flex: 1, paddingRight: '36px' }}
+            style={{ flex: 1, paddingRight: '60px' }}
           />
-          <div style={{ position: 'absolute', right: '12px' }}>
+          {form.address && (
+            <button
+              type="button"
+              onClick={handleClearAddress}
+              aria-label="주소 지우기"
+              style={{
+                position: 'absolute',
+                right: '50px',
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 0,
+                scale: '0.9',
+              }}
+            >
+              <ClearAddressIcon />
+            </button>
+          )}
+          <div style={{ position: 'absolute', right: '8px' }}>
             <AddressSearch onAddressSelect={handleAddressSelect} />
           </div>
         </div>
         {errors.address && <p className="error-text">{errors.address}</p>}
 
-        {/* ✅ 상세 주소 입력 */}
         <input
           name="detailAddress"
           placeholder="상세 주소 (예: 아파트, 동·호수 등)"
