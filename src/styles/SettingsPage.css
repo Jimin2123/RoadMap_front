@@ -31,6 +31,7 @@
 .settings-content {
   flex-grow: 1;
   padding: 40px;
+  overflow: auto;
   background-color: #fff;
 }
 

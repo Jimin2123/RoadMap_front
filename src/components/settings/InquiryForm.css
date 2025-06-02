@@ -1,5 +1,6 @@
 .inquiry-form {
   max-width: 600px;
+  height: auto;
   /* margin: 0 auto; */
   padding: 26px;
 }
