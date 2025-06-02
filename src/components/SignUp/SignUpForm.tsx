@@ -2,20 +2,21 @@ import React, { useState } from 'react';
 import './SignUpForm.css';
 import AddressSearch from '../Features/AddressSearch';
 import ClearAddressIcon from '../SettingIcons/ClearAddressIcon';
+import axios from 'axios';
 
 const SignUpForm: React.FC = () => {
   const [form, setForm] = useState({
-    id: '',
-    password: '',
+    loginRequest: {
+      email: '',
+      password: '',
+    },
     name: '',
-    birth: '',
-    gender: '',
-    email: '',
-    carrier: '',
-    phone: '',
-    code: '',
-    address: '',
-    detailAddress: '',
+    birthDate: '',
+    phoneNumber: '',
+    addressRequest: {
+      address: '',
+      addressDetail: '',
+    },
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -24,73 +25,160 @@ const SignUpForm: React.FC = () => {
     const { name, value } = e.target;
 
     let newValue;
-    if (name === 'birth') {
+    if (name === 'birthDate') {
       newValue = value.replace(/[^0-9]/g, '').slice(0, 8);
-    } else if (name === 'phone') {
+    } else if (name === 'phoneNumber') {
       newValue = value.replace(/[^0-9]/g, '').slice(0, 11);
     } else {
       newValue = value;
     }
 
-    setForm({ ...form, [name]: newValue });
+    // 중첩된 name 처리
+    if (name.startsWith('loginRequest.')) {
+      const field = name.split('.')[1]; // 'email' 또는 'password'
+      setForm((prev) => ({
+        ...prev,
+        loginRequest: {
+          ...prev.loginRequest,
+          [field]: newValue,
+        },
+      }));
+    } else if (name.startsWith('addressRequest.')) {
+      const field = name.split('.')[1];
+      setForm((prev) => ({
+        ...prev,
+        addressRequest: {
+          ...prev.addressRequest,
+          [field]: newValue,
+        },
+      }));
+    } else {
+      // 일반 필드
+      setForm((prev) => ({
+        ...prev,
+        [name]: newValue,
+      }));
+    }
 
     const errorMsg = validateField(name, newValue);
     setErrors((prev) => ({ ...prev, [name]: errorMsg }));
   };
 
+  const handleBirthDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawValue = e.target.value.replace(/\D/g, ''); // 숫자만 추출
+    let formattedValue = rawValue;
+
+    if (rawValue.length === 8) {
+      formattedValue = `${rawValue.slice(0, 4)}-${rawValue.slice(4, 6)}-${rawValue.slice(6)}`;
+    }
+
+    setForm((prev) => ({
+      ...prev,
+      birthDate: formattedValue,
+    }));
+  };
+
   const handleAddressSelect = (selectedAddress: string) => {
-    setForm((prev) => ({ ...prev, address: selectedAddress }));
+    setForm((prev) => ({
+      ...prev,
+      addressRequest: {
+        ...prev.addressRequest,
+        address: selectedAddress,
+      },
+    }));
   };
 
   const handleClearAddress = () => {
-    setForm((prev) => ({ ...prev, address: '' }));
+    setForm((prev) => ({
+      ...prev,
+      addressRequest: {
+        ...prev.addressRequest,
+        address: '',
+      },
+    }));
   };
 
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
-    if (!form.id) newErrors.id = '아이디를 입력하세요';
-    if (!/^.{8,16}$/.test(form.password)) newErrors.password = '비밀번호는 8~16자여야 합니다';
+
+    if (!form.loginRequest.password || !/^.{8,16}$/.test(form.loginRequest.password)) {
+      newErrors.password = '비밀번호는 8~16자여야 합니다';
+    }
     if (!form.name) newErrors.name = '이름을 입력하세요';
-    if (!/^\d{8}$/.test(form.birth)) newErrors.birth = '생년월일은 8자리 숫자여야 합니다 (예: 20020319)';
-    if (!form.gender) newErrors.gender = '성별을 선택하세요';
-    if (!/^[\w.-]+@[\w.-]+\.\w+$/.test(form.email)) newErrors.email = '유효한 이메일을 입력하세요';
-    if (!form.carrier) newErrors.carrier = '통신사를 선택하세요';
-    if (!/^\d{10,11}$/.test(form.phone)) newErrors.phone = '휴대폰 번호는 숫자만 10~11자리 입력하세요';
-    if (!form.address) newErrors.address = '주소를 입력하세요';
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(form.birthDate)) {
+      newErrors.birthDate = '생년월일은 YYYY-MM-DD 형식이어야 합니다 (예: 2000-03-19)';
+    }
+
+    if (!form.loginRequest.email.trim()) {
+      newErrors.email = '아이디(이메일)를 입력하세요';
+    } else if (!/^[\w.-]+@[\w.-]+\.\w+$/.test(form.loginRequest.email)) {
+      newErrors.email = '유효한 이메일 형식이 아닙니다';
+    }
+    if (!/^\d{10,11}$/.test(form.phoneNumber)) newErrors.phoneNumber = '휴대폰 번호는 숫자만 10~11자리 입력하세요';
+    if (!form.addressRequest.address) newErrors.address = '주소를 입력하세요';
+
     return newErrors;
   };
 
+  // validateField 함수도 email 부분 수정
   const validateField = (name: string, value: string): string => {
     switch (name) {
-      case 'id':
-        return value.trim() ? '' : '아이디는 필수입니다';
-      case 'password':
+      case 'loginRequest.password':
         return /^.{8,16}$/.test(value) ? '' : '비밀번호는 8~16자여야 합니다';
       case 'name':
         return value.trim() ? '' : '이름은 필수입니다';
-      case 'birth':
+      case 'birthDate':
         return /^\d{8}$/.test(value) ? '' : '생년월일은 8자리 숫자여야 합니다';
-      case 'email':
-        return /^[\w.-]+@[\w.-]+\.\w+$/.test(value) ? '' : '이메일 형식이 아닙니다';
-      case 'phone':
+      case 'loginRequest.email':
+        if (!value.trim()) return '아이디(이메일)를 입력하세요';
+        return /^[\w.-]+@[\w.-]+\.\w+$/.test(value) ? '' : '유효한 이메일 형식이 아닙니다';
+      case 'phoneNumber':
         return /^\d{10,11}$/.test(value) ? '' : '숫자만 10~11자리 입력';
-      case 'carrier':
-        return value ? '' : '통신사 선택 필수';
-      case 'address':
+      case 'addressRequest.address':
         return value ? '' : '주소는 필수입니다';
       default:
         return '';
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors = validate();
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      console.log(form);
-      alert('회원가입 성공!');
+      try {
+        const response = await axios.post('/api/v1/member', form, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        console.log('회원가입 성공 응답:', response.data);
+        alert('회원가입 성공!');
+        setForm({
+          loginRequest: {
+            email: '',
+            password: '',
+          },
+          name: '',
+          birthDate: '',
+          phoneNumber: '',
+          addressRequest: {
+            address: '',
+            addressDetail: '',
+          },
+        });
+        setErrors({});
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          // axios 에러인 경우
+          alert('회원가입 실패: ' + (error.response?.data?.message || '알 수 없는 오류'));
+        } else {
+          // axios 에러가 아닌 경우 (네트워크 등)
+          alert('서버와 통신 중 오류가 발생했습니다.');
+        }
+        console.error(error);
+      }
     }
   };
 
@@ -100,65 +188,58 @@ const SignUpForm: React.FC = () => {
     <div className="signup-form-wrapper">
       <h2 className="signup-title">회원가입</h2>
       <form onSubmit={handleSubmit} className="signup-form">
-        <input name="id" placeholder="아이디" value={form.id} onChange={handleChange} className={inputClass('id')} />
-        {errors.id && <p className="error-text">{errors.id}</p>}
-
+        {/* 1️⃣ 이메일 (아이디) */}
         <input
-          name="password"
-          placeholder="비밀번호(8~16자의 영문,숫자,특수기호)"
-          value={form.password}
+          name="loginRequest.email"
+          placeholder="ex)email@job.co.kr"
+          value={form.loginRequest.email}
           onChange={handleChange}
-          type="password"
-          className={inputClass('password')}
+          className={inputClass('loginRequest.email')}
         />
-        {errors.password && <p className="error-text">{errors.password}</p>}
+        {/* {errors.email && <p className="error-text">{errors.email}</p>} */}
+        {errors['loginRequest.email'] && <p className="error-text">{errors['loginRequest.email']}</p>}
 
+        {/* 2️⃣ 비밀번호 */}
+        <input
+          name="loginRequest.password"
+          placeholder="비밀번호"
+          value={form.loginRequest.password}
+          type="password"
+          onChange={handleChange}
+          className={inputClass('loginRequest.password')}
+        />
+        {errors['loginRequest.password'] && <p className="error-text">{errors['loginRequest.password']}</p>}
+
+        {/* 3️⃣ 이름 */}
         <input
           name="name"
-          placeholder="이름(실명)"
+          placeholder="이름"
           value={form.name}
           onChange={handleChange}
           className={inputClass('name')}
         />
         {errors.name && <p className="error-text">{errors.name}</p>}
 
-        <div className="birth-gender-row">
-          <input
-            name="birth"
-            placeholder="생년월일 (ex 20020319)"
-            value={form.birth}
-            onChange={handleChange}
-            className={inputClass('birth')}
-          />
-          <label>
-            <input type="radio" name="gender" value="남자" onChange={handleChange} /> 남자
-          </label>
-          <label>
-            <input type="radio" name="gender" value="여자" onChange={handleChange} /> 여자
-          </label>
-        </div>
-        {errors.birth && <p className="error-text">{errors.birth}</p>}
-        {errors.gender && <p className="error-text">{errors.gender}</p>}
-
+        {/* 4️⃣ 생년월일 */}
         <input
-          name="email"
-          placeholder="ex)email@job.co.kr"
-          value={form.email}
-          onChange={handleChange}
-          className={inputClass('email')}
+          name="birthDate"
+          placeholder="생년월일 (YYYYMMDD)"
+          value={form.birthDate}
+          onChange={handleBirthDateChange}
+          className={inputClass('birth')}
         />
-        {errors.email && <p className="error-text">{errors.email}</p>}
+        {errors.birthDate && <p className="error-text">{errors.birthDate}</p>}
 
         <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
           <input
-            name="address"
+            name="addressRequest.address"
             placeholder="도로명 주소를 입력해 주세요"
-            value={form.address}
+            value={form.addressRequest.address}
             readOnly
             className={inputClass('address')}
             style={{ flex: 1, paddingRight: '60px' }}
           />
-          {form.address && (
+          {form.addressRequest.address && (
             <button
               type="button"
               onClick={handleClearAddress}
@@ -180,39 +261,26 @@ const SignUpForm: React.FC = () => {
             <AddressSearch onAddressSelect={handleAddressSelect} />
           </div>
         </div>
-        {errors.address && <p className="error-text">{errors.address}</p>}
+        {errors['addressRequest.address'] && <p className="error-text">{errors['addressRequest.address']}</p>}
 
         <input
-          name="detailAddress"
+          name="addressRequest.addressDetail"
           placeholder="상세 주소 (예: 아파트, 동·호수 등)"
-          value={form.detailAddress}
+          value={form.addressRequest.addressDetail}
           onChange={handleChange}
-          className={inputClass('detailAddress')}
+          className={inputClass('addressRequest.addressDetail')}
         />
 
         <div className="phone-row">
-          <select name="carrier" value={form.carrier} onChange={handleChange} className={inputClass('carrier')}>
-            <option value="">통신사</option>
-            <option value="SKT">SKT</option>
-            <option value="KT">KT</option>
-            <option value="LGU+">LGU+</option>
-          </select>
           <input
-            name="phone"
+            name="phoneNumber"
             placeholder="휴대폰 번호"
-            value={form.phone}
+            value={form.phoneNumber}
             onChange={handleChange}
-            className={inputClass('phone')}
+            className={inputClass('phoneNumber')}
           />
-          <button type="button">인증요청</button>
         </div>
-        {errors.carrier && <p className="error-text">{errors.carrier}</p>}
-        {errors.phone && <p className="error-text">{errors.phone}</p>}
-
-        <div className="auth-code-row">
-          <input name="code" placeholder="인증번호 입력" value={form.code} onChange={handleChange} />
-          <button type="button">재전송</button>
-        </div>
+        {errors.phoneNumber && <p className="error-text">{errors.phoneNumber}</p>}
 
         <div className="terms-box">
           <p>필수약관 동의 내용...</p>
