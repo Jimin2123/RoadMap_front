@@ -1,0 +1,60 @@
+.job-posting {
+  border-radius: 12px;
+}
+
+.job-posting h2 {
+  font-size: 18px;
+}
+
+.job-card-container {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  /* min-height: 990px; */
+}
+
+.job-card.dummy {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.page-btn {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 18px; /* 둥글게 */
+  background-color: #f5f6f7;
+  color: #333;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.page-btn:hover:not(:disabled) {
+  background-color: #e2e6ea;
+}
+
+.page-btn.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: 600;
+}
+
+.page-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}

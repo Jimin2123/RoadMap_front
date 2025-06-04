@@ -28,7 +28,16 @@ body {
   box-sizing: border-box;
   font-size: 13px;
 }
+/* Link 스타일 */
+a {
+  text-decoration: none; /* 기본 밑줄 제거 */
+  color: inherit; /* 부모 색상으로 설정 */
+}
 
+/* Link의 active 상태 */
+a.active {
+  color: inherit; /* 필요에 따라 색상 설정 가능 */
+}
 /* 전체 레이아웃 */
 .layout {
   max-width: 1280px;
@@ -36,36 +45,4 @@ body {
   flex-direction: column;
   margin: 0 auto;
   height: 100vh;
-}
-
-.top-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 20px;
-  margin-top: 10px;
-  height: 420px;
-}
-
-.event-banner-section {
-  flex: 2;
-  overflow-y: auto;
-}
-
-.login-form-section {
-  flex: 1;
-  overflow-y: auto;
-}
-
-.service-card-section {
-  display: flex;
-  justify-content: center; /* 가운데 정렬 */
-  align-items: center; /* 세로 가운데 정렬 */
-  flex-wrap: nowrap; /* 줄 바꿈 방지 */
-  gap: 40px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  height: 300px;
-  box-sizing: border-box;
 }
