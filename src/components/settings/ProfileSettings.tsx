@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './ProfileSetting.css';
 import AddressSearch from '../Features/AddressSearch';
+import ClearAddressIcon from '../SettingIcons/ClearAddressIcon';
 
 const ProfileSettings: React.FC = () => {
   const [previewUrl, setPreviewUrl] = useState<string>(''); // 프로필 이미지
@@ -22,6 +23,10 @@ const ProfileSettings: React.FC = () => {
 
   const handleAddressSelect = (selectedAddress: string) => {
     setAddress(selectedAddress);
+  };
+
+  const handleClearAddress = () => {
+    setAddress('');
   };
 
   const handleSave = () => {
@@ -78,8 +83,25 @@ const ProfileSettings: React.FC = () => {
                 value={address}
                 placeholder="도로명 주소를 입력하세요"
                 readOnly
-                style={{ flex: 1, paddingRight: '36px' }}
+                style={{ flex: 1, paddingRight: '60px' }}
               />
+              {address && (
+                <button
+                  type="button"
+                  onClick={handleClearAddress}
+                  aria-label="주소 지우기"
+                  style={{
+                    position: 'absolute',
+                    right: '40px',
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: 0,
+                  }}
+                >
+                  <ClearAddressIcon />
+                </button>
+              )}
               <div style={{ position: 'absolute', right: '8px' }}>
                 <AddressSearch onAddressSelect={handleAddressSelect} />
               </div>
