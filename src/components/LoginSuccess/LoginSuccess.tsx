@@ -8,9 +8,8 @@ interface ProfileResponse {
   educationLevel: string;
   desiredJob: string;
   major: string;
-  skills: string[];
-  certificates: string[];
-  ncsCodes: string[];
+  skills?: string[];
+  certificates?: string[];
 }
 interface MemberResponse {
   id: number;
@@ -25,7 +24,13 @@ const LoginSuccess: React.FC = () => {
   useEffect(() => {
     const fetchMember = async () => {
       try {
-        const response = await axios.get<MemberResponse>('/api/member/1');
+        const memberId = localStorage.getItem('memberId'); // localStorage에서 꺼내기
+        if (!memberId) {
+          console.error('회원 ID가 없습니다. 로그인 후 다시 시도해 주세요.');
+          return;
+        }
+        const response = await axios.get<MemberResponse>(`/api/v1/member/${memberId}`);
+        console.log('회원 정보:', response.data);
         setMember(response.data);
       } catch (error) {
         console.error('회원 정보를 불러오는 중 오류 발생:', error);
@@ -59,28 +64,32 @@ const LoginSuccess: React.FC = () => {
               </button>
             </div>
           </div>
-
+          {/* 스킬셋 자격증 입력 안되어있으면 입력하러가기 등 링크 추가 */}
           <p className="skills-label">보유중인 스킬셋</p>
           <div className="skill-tags-wrapper">
-            <div className="skill-tags">
-              {member?.profileResponse.skills.map((skill, index) => (
-                <span className="tag" key={index}>
-                  {skill}
-                </span>
-              ))}
-            </div>
+            {member && member.profileResponse && member.profileResponse.skills && (
+              <div className="skill-tags">
+                {member?.profileResponse.skills.map((skill, index) => (
+                  <span className="tag" key={index}>
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="certificate-slider-wrapper">
-            <div className="certificate-slider">
-              {member?.profileResponse.certificates.map((cert, index) => (
-                <div className="certificate-card" key={index}>
-                  <div className="certificate-icon">🎓</div>
-                  <h4>{cert}</h4>
-                  <p>국가 공인</p>
-                </div>
-              ))}
-            </div>
+            {member && member.profileResponse && member.profileResponse.certificates && (
+              <div className="certificate-slider">
+                {member?.profileResponse.certificates.map((cert, index) => (
+                  <div className="certificate-card" key={index}>
+                    <div className="certificate-icon">🎓</div>
+                    <h4>{cert}</h4>
+                    <p>국가 공인</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
