@@ -9,6 +9,7 @@ import '../styles/SettingsPage.css';
 import { UserIcon, SettingIcon, NotificationIcon, MessageIcon, WarningIcon } from '../components/SettingIcons';
 import NotificationSettings from '../components/settings/NotificationSettings';
 import AccountSettings from '../components/settings/AccountSettings';
+import WithdrawAccount from '../components/settings/WithdrawAccount';
 
 const SettingsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState('profile');
@@ -37,7 +38,7 @@ const SettingsPage: React.FC = () => {
         return <NotificationSettings />;
       case 'password':
       case 'delete':
-        return <div style={{ color: '#888' }}>해당 기능은 추후 추가될 예정입니다.</div>;
+        return <WithdrawAccount />;
       default:
         return null;
     }
