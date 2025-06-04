@@ -17,18 +17,20 @@ interface DaumPostcodeData {
   bname: string;
   buildingName: string;
   zonecode: string;
+  sigungu: string;
+  jibunAddress: string;
   [key: string]: unknown;
 }
 
 interface Props {
-  onAddressSelect: (address: string) => void;
+  onAddressSelect: (address: DaumPostcodeData) => void;
 }
 
 const AddressSearch: React.FC<Props> = ({ onAddressSelect }) => {
   const openPostcode = () => {
     new window.daum.Postcode({
       oncomplete: (data: DaumPostcodeData) => {
-        onAddressSelect(data.address);
+        onAddressSelect(data);
       },
     }).open();
   };
@@ -51,3 +53,4 @@ const AddressSearch: React.FC<Props> = ({ onAddressSelect }) => {
 };
 
 export default AddressSearch;
+export type { DaumPostcodeData };

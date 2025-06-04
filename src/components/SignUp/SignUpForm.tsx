@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './SignUpForm.css';
 import AddressSearch from '../Features/AddressSearch';
 import ClearAddressIcon from '../SettingIcons/ClearAddressIcon';
+import type { DaumPostcodeData } from '../Features/AddressSearch'; // 경로 맞게 import!
 import axios from 'axios';
 
 const SignUpForm: React.FC = () => {
@@ -16,6 +17,9 @@ const SignUpForm: React.FC = () => {
     addressRequest: {
       address: '',
       addressDetail: '',
+      addressJibun: '',
+      regionCity: '',
+      zoncode: '',
     },
   });
 
@@ -78,15 +82,28 @@ const SignUpForm: React.FC = () => {
     }));
   };
 
-  const handleAddressSelect = (selectedAddress: string) => {
+  const handleAddressSelect = (data: DaumPostcodeData) => {
     setForm((prev) => ({
       ...prev,
       addressRequest: {
         ...prev.addressRequest,
-        address: selectedAddress,
+        address: data.address,
+        addressJibun: data.jibunAddress,
+        regionCity: data.sigungu,
+        zoncode: data.zonecode,
       },
     }));
   };
+
+  // const handleAddressSelect = (selectedAddress: string) => {
+  //   setForm((prev) => ({
+  //     ...prev,
+  //     addressRequest: {
+  //       ...prev.addressRequest,
+  //       address: selectedAddress,
+  //     },
+  //   }));
+  // };
 
   const handleClearAddress = () => {
     setForm((prev) => ({
@@ -166,6 +183,9 @@ const SignUpForm: React.FC = () => {
           addressRequest: {
             address: '',
             addressDetail: '',
+            addressJibun: '',
+            regionCity: '',
+            zoncode: '',
           },
         });
         setErrors({});
@@ -239,6 +259,9 @@ const SignUpForm: React.FC = () => {
             className={inputClass('address')}
             style={{ flex: 1, paddingRight: '60px' }}
           />
+          <input type="hidden" name="addressRequest.addressJibun" value={form.addressRequest.addressJibun} readOnly />
+          <input type="hidden" name="addressRequest.regionCity" value={form.addressRequest.regionCity} readOnly />
+          <input type="hidden" name="addressRequest.zoncode" value={form.addressRequest.zoncode} readOnly />
           {form.addressRequest.address && (
             <button
               type="button"
