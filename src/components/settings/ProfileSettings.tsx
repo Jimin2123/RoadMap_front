@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './ProfileSetting.css';
-import AddressSearch from '../Features/AddressSearch';
+import AddressSearch, { DaumPostcodeData } from '../Features/AddressSearch';
 import ClearAddressIcon from '../SettingIcons/ClearAddressIcon';
 
 const ProfileSettings: React.FC = () => {
@@ -21,8 +21,8 @@ const ProfileSettings: React.FC = () => {
     }
   };
 
-  const handleAddressSelect = (selectedAddress: string) => {
-    setAddress(selectedAddress);
+  const handleAddressSelect = (selectedAddress: DaumPostcodeData) => {
+    setAddress(selectedAddress.address); // or use the appropriate property for the address string
   };
 
   const handleClearAddress = () => {
