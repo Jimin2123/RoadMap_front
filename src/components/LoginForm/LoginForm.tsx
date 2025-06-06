@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './LoginForm.css';
 import { useAppDispatch } from '../../store/hooks';
-import { login } from '../../store/slices/authSlice';
+import { login } from '../../hooks/useAuth';
 
 interface LoginFormProps {
   className?: string;
