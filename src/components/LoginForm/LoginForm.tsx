@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './LoginForm.css';
 import { useAppDispatch } from '../../store/hooks';
 import { login } from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginFormProps {
   className?: string;
@@ -10,6 +11,8 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ className, onLoginSuccess }) => {
+  const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,6 +24,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, onLoginSuccess }) => {
     setLoading(true);
     try {
       await dispatch(login({ email, password })).unwrap();
+
+      navigate('/');
       if (onLoginSuccess) onLoginSuccess();
     } catch (error) {
       console.error('로그인 실패:', error);
