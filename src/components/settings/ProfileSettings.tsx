@@ -74,6 +74,14 @@ const ProfileSettings: React.FC = () => {
             <label>이메일</label>
             <input type="email" value={email} placeholder="이메일 입력" onChange={(e) => setEmail(e.target.value)} />
           </div>
+          <div className="form-group">
+            <label>전화번호</label>
+            <input
+              type="tel"
+              placeholder="전화번호 입력 (예: 010-1234-5678)"
+              onChange={(e) => console.log('전화번호:', e.target.value)}
+            />
+          </div>
 
           <div className="form-group">
             <label>주소</label>
