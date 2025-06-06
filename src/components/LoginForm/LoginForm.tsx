@@ -54,7 +54,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, onLoginSuccess }) => {
           onChange={(e) => setPassword(e.target.value)}
           disabled={loading}
         />
-        <button type="submit" className="login-button">
+        <button type="submit" className="login-button" disabled={loading}>
           {loading ? '로그인 중...' : '로그인'}
         </button>
       </form>

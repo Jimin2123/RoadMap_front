@@ -22,5 +22,9 @@ export const initializeAuthService = async (): Promise<string | null> => {
     return response;
   }
 
-  return null;
+  throw new Error('No access token found');
+};
+
+export const logoutService = async (): Promise<void> => {
+  await axiosInstance.post('/api/v1/auth/logout');
 };

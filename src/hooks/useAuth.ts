@@ -1,8 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { LoginRequestDTO } from '../types/interfaces/request/LoginRequest';
-import { initializeAuthService, loginService, refreshTokenService } from '../services/authService';
+import { initializeAuthService, loginService, logoutService, refreshTokenService } from '../services/authService';
 import { AxiosError } from 'axios';
-import { logout } from '../store/slices/authSlice';
 
 export const login = createAsyncThunk('auth/login', async (credentials: LoginRequestDTO, thunkAPI) => {
   try {
@@ -21,7 +20,7 @@ export const refreshAccessToken = createAsyncThunk('auth/refresh', async (_, thu
     return await refreshTokenService();
   } catch (err) {
     const error = err as AxiosError<{ message: string }>;
-    thunkAPI.dispatch(logout());
+    thunkAPI.dispatch(logoutThunk());
 
     if (error.response && error.response.data) {
       return thunkAPI.rejectWithValue(error.response.data.message);
@@ -35,11 +34,23 @@ export const initializeAuth = createAsyncThunk('auth/initialize', async (_, thun
     return await initializeAuthService();
   } catch (err) {
     const error = err as AxiosError<{ message: string }>;
-    thunkAPI.dispatch(logout());
+    thunkAPI.dispatch(logoutThunk());
 
     if (error.response && error.response.data) {
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
     return thunkAPI.rejectWithValue('Initialization failed');
+  }
+});
+
+export const logoutThunk = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  try {
+    await logoutService();
+  } catch (err) {
+    const error = err as AxiosError<{ message: string }>;
+
+    if (error.response && error.response.data) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
   }
 });
