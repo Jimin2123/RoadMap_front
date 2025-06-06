@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import './LoginForm.css';
+import { useAppDispatch } from '../../store/hooks';
+import { login } from '../../store/slices/authSlice';
 
 interface LoginFormProps {
   className?: string;
@@ -9,28 +10,22 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ className, onLoginSuccess }) => {
+  const dispatch = useAppDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    setLoading(true);
     try {
-      const response = await axios.post('/api/auth/login', { email, password });
-      console.log('로그인 성공:', response.data);
-
-      if (response.data.memberId) {
-        localStorage.setItem('memberId', response.data.memberId.toString());
-      }
-
-      // 토큰 저장 (예)
-      // localStorage.setItem('token', response.data.token);
-
-      // MainPage에게 알림
+      await dispatch(login({ email, password })).unwrap();
       if (onLoginSuccess) onLoginSuccess();
     } catch (error) {
       console.error('로그인 실패:', error);
-      alert('이메일 또는 비밀번호를 다시 확인해 주세요.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -48,6 +43,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, onLoginSuccess }) => {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          disabled={loading}
         />
         <input
           type="password"
@@ -56,9 +52,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, onLoginSuccess }) => {
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          disabled={loading}
         />
         <button type="submit" className="login-button">
-          로그인
+          {loading ? '로그인 중...' : '로그인'}
         </button>
       </form>
 
