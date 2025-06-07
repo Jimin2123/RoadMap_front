@@ -8,12 +8,13 @@ import { useAppDispatch } from '../../store/hooks';
 import { signUp } from '../../hooks/userUser';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../hooks/useAuth';
+import { MemberRequest } from '../../types/interfaces/request/MemberRequest';
 
 const SignUpForm: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<MemberRequest>({
     loginRequest: {
       email: '',
       password: '',

@@ -211,3 +211,26 @@
   top: 50%; /* 점을 세로 가운데로 맞춤 */
   transform: translateY(-50%); /* 점을 정확히 중앙에 맞추기 위한 조정 */
 }
+
+.create-profile-section {
+  padding: 12px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.create-profile-button {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.create-profile-button:hover {
+  background-color: #0056b3;
+}

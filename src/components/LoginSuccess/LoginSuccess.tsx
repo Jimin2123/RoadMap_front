@@ -58,10 +58,22 @@ const LoginSuccess: React.FC = () => {
               </button>
             </div>
           </div>
+
+          {!member?.profile && (
+            <div className="create-profile-section">
+              <p>아직 프로필이 없어요. </p>
+              <p>지금 바로 프로필을 만들어보세요!</p>
+              <Link to="/create-profile" className="create-profile-button">
+                프로필 생성하러 가기
+              </Link>
+            </div>
+          )}
+
           {/* 스킬셋 자격증 입력 안되어있으면 입력하러가기 등 링크 추가 */}
-          <p className="skills-label">보유중인 스킬셋</p>
-          <div className="skill-tags-wrapper">
-            {member && member.profile && member.profile.skills && (
+
+          {member && member.profile && member.profile.skills && (
+            <div className="skill-tags-wrapper">
+              <p className="skills-label">보유중인 스킬셋</p>
               <div className="skill-tags">
                 {member?.profile.skills.map((skill, index) => (
                   <span className="tag" key={index}>
@@ -69,11 +81,11 @@ const LoginSuccess: React.FC = () => {
                   </span>
                 ))}
               </div>
-            )}
-          </div>
+            </div>
+          )}
 
-          <div className="certificate-slider-wrapper">
-            {member && member.profile && member.profile.certificates && (
+          {member && member.profile && member.profile.certificates && (
+            <div className="certificate-slider-wrapper">
               <div className="certificate-slider">
                 {member?.profile.certificates.map((cert, index) => (
                   <div className="certificate-card" key={index}>
@@ -83,8 +95,8 @@ const LoginSuccess: React.FC = () => {
                   </div>
                 ))}
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
 
