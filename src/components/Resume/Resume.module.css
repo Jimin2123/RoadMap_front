@@ -1,5 +1,5 @@
 .resumeContainer {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
 }
@@ -31,53 +31,4 @@
   .cardRow {
     flex-direction: column;
   }
-}
-
-.skillInputBox {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  border: 1px solid #ccc;
-  padding: 8px;
-  border-radius: 6px;
-}
-
-.skillInputBox input {
-  border: none;
-  flex: 1;
-  min-width: 120px;
-  outline: none;
-}
-
-.skillTag {
-  background: #f1f5f9;
-  padding: 4px 8px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.skillTag button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.suggestionBox {
-  list-style: none;
-  margin-top: 4px;
-  padding: 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #fff;
-}
-
-.suggestionBox li {
-  padding: 8px;
-  cursor: pointer;
-}
-
-.suggestionBox li:hover {
-  background: #eee;
 }
