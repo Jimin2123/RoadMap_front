@@ -3,20 +3,24 @@
   margin: 40px auto;
   padding: 0 20px;
 }
+
 .cardRow {
   display: flex;
   gap: 20px;
   margin-bottom: 24px;
 }
+
 .fullWidth {
   width: 100%;
 }
+
 .submitArea {
   text-align: center;
   margin-top: 30px;
 }
+
 .submitArea button {
-  background-color: #f08c00;
+  background-color: #007bff; /* Primary 색상 */
   color: white;
   padding: 12px 24px;
   border: none;
@@ -24,9 +28,11 @@
   font-size: 16px;
   cursor: pointer;
 }
+
 .submitArea button:hover {
-  background-color: #d97706;
+  background-color: #0056b3; /* Primary hover 색상 */
 }
+
 @media (max-width: 768px) {
   .cardRow {
     flex-direction: column;
