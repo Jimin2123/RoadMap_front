@@ -63,7 +63,7 @@ const LoginSuccess: React.FC = () => {
             <div className="create-profile-section">
               <p>아직 프로필이 없어요. </p>
               <p>지금 바로 프로필을 만들어보세요!</p>
-              <Link to="/create-profile" className="create-profile-button">
+              <Link to="/resume" className="create-profile-button">
                 프로필 생성하러 가기
               </Link>
             </div>
