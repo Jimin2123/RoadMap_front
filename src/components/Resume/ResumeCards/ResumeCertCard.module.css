@@ -1,0 +1,82 @@
+.certList {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.certItem {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 12px;
+  position: relative;
+  background-color: #f9f9f9;
+}
+
+.certTitle {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.editButton {
+  background: none;
+  border: none;
+  color: #2563eb;
+  cursor: pointer;
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+}
+
+.addButton {
+  margin-top: 8px;
+  background-color: #e0e7ff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.addButton:hover {
+  background-color: #c7d2fe;
+}
+
+.btnPrimary {
+  background-color: #007bff; /* Primary blue */
+  color: white;
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btnPrimary:hover {
+  background-color: #0056b3;
+}
+
+.btnSecondary {
+  background-color: white;
+  color: #333;
+  padding: 6px 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btnSecondary:hover {
+  background-color: #f2f2f2;
+}
