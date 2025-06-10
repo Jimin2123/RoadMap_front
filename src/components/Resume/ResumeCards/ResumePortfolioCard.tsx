@@ -104,11 +104,11 @@ const ResumePortfolioCard: React.FC<ResumePortfolioCardProps> = ({ value = [], o
             value={formData.url}
             onChange={handleChange}
           />
-          <div className="flex gap-2 mt-2">
-            <button type="button" onClick={handleSave} className="bg-blue-500 text-white px-4 py-1 rounded">
+          <div className={styles.btnGroup}>
+            <button type="button" onClick={handleSave} className={styles.btnPrimary}>
               완료
             </button>
-            <button type="button" onClick={() => setMode('list')} className="border px-4 py-1 rounded">
+            <button type="button" onClick={() => setMode('list')} className={styles.btnSecondary}>
               취소
             </button>
           </div>

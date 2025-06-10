@@ -103,11 +103,11 @@ const ResumeCertCard: React.FC<Props> = ({ onChange }) => {
           />
           <label>취득 연도</label>
           <input type="text" name="year" value={formData.year} onChange={handleChange} placeholder="2023" />
-          <div className="flex gap-2 mt-2">
-            <button onClick={handleSave} className="bg-blue-500 text-white px-4 py-1 rounded">
+          <div className={styles.btnGroup}>
+            <button type="button" onClick={handleSave} className={styles.btnPrimary}>
               완료
             </button>
-            <button onClick={() => setMode('list')} className="border px-4 py-1 rounded">
+            <button type="button" onClick={() => setMode('list')} className={styles.btnSecondary}>
               취소
             </button>
           </div>

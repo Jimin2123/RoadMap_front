@@ -52,3 +52,31 @@
 .addButton:hover {
   background-color: #c7d2fe;
 }
+
+.btnPrimary {
+  background-color: #007bff; /* Primary blue */
+  color: white;
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btnPrimary:hover {
+  background-color: #0056b3;
+}
+
+.btnSecondary {
+  background-color: white;
+  color: #333;
+  padding: 6px 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btnSecondary:hover {
+  background-color: #f2f2f2;
+}
