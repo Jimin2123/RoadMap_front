@@ -1,28 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './LoginSuccess.css';
 import { MdSettings, MdLogout } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../store/hooks';
-import { getMember } from '../../hooks/userUser';
-import { MemberResponse } from '../../types/interfaces/response/MemberResponse';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { logoutThunk } from '../../hooks/useAuth';
+import { RootState } from '../../types/store';
 
 const LoginSuccess: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [member, setMember] = useState<MemberResponse | null>(null);
-
-  useEffect(() => {
-    const fetchMember = async () => {
-      try {
-        const response = await dispatch(getMember()).unwrap();
-        setMember(response);
-      } catch (error) {
-        console.error('회원 정보를 불러오는 중 오류 발생:', error);
-      }
-    };
-
-    fetchMember();
-  }, [dispatch]);
+  const { member } = useAppSelector((state: RootState) => state.user);
 
   const handleLogout = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,7 +29,6 @@ const LoginSuccess: React.FC = () => {
           <img src="/avatar.jpg" alt="Profile" className="avatar" />
         </div>
 
-        {/* 오른쪽: 이름, 태그, 자격증 */}
         <div className="profile-info-section">
           <div className="profile-header">
             <h2 className="username">{member?.name}</h2>
