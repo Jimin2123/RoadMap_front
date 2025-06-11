@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AuthState } from '../../types/interfaces/AuthState';
 import { clearAccessToken, setAccessToken } from '../../utils/tokenManager';
-import { initializeAuth, login, logoutThunk, refreshAccessToken } from '../../hooks/useAuth';
+import { initializeAuth, login, logoutThunk } from '../../hooks/useAuth';
 
 const initialState: AuthState = {
   isAuthenticated: false,
   accessToken: null,
-  status: { login: 'idle', refresh: 'idle', initialize: 'idle' },
+  status: { login: 'idle', initialize: 'idle' },
   error: null,
 };
 
@@ -17,7 +17,7 @@ const authSlice = createSlice({
     logout: (state: AuthState) => {
       state.isAuthenticated = false;
       state.accessToken = null;
-      state.status = { login: 'idle', refresh: 'idle', initialize: 'idle' };
+      state.status = { login: 'idle', initialize: 'idle' };
       state.error = null;
       clearAccessToken(); // 메모리에서 Access Token 제거
     },
@@ -27,7 +27,6 @@ const authSlice = createSlice({
     builder
       .addCase(login.pending, (state) => {
         state.status.login = 'pending';
-        state.isAuthenticated = false;
         state.error = null;
       })
       .addCase(login.fulfilled, (state, action) => {
@@ -38,24 +37,6 @@ const authSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.status.login = 'rejected';
-        state.isAuthenticated = false;
-        state.error = action.payload as string;
-      });
-
-    // AccessToken 갱신
-    builder
-      .addCase(refreshAccessToken.pending, (state) => {
-        state.status.refresh = 'pending';
-        state.error = null;
-      })
-      .addCase(refreshAccessToken.fulfilled, (state, action) => {
-        state.status.refresh = 'fulfilled';
-        state.isAuthenticated = true;
-        state.accessToken = action.payload;
-        if (action.payload) setAccessToken(action.payload);
-      })
-      .addCase(refreshAccessToken.rejected, (state, action) => {
-        state.status.refresh = 'rejected';
         state.isAuthenticated = false;
         state.error = action.payload as string;
       });
