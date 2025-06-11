@@ -75,8 +75,8 @@ const LoginSuccess: React.FC = () => {
                 {member?.profile.certificates.map((cert, index) => (
                   <div className="certificate-card" key={index}>
                     <div className="certificate-icon">🎓</div>
-                    <h4>{cert.jmfldnm}</h4>
-                    <p>{cert.qualgbnm}</p>
+                    <h4>{cert.name}</h4>
+                    <p>{cert.agency}</p>
                   </div>
                 ))}
               </div>

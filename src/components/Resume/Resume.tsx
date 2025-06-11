@@ -22,7 +22,9 @@ import ResumeActivityCard from './ResumeCards/ResumeActivityCard';
 import ResumeProjectCard from './ResumeCards/ResumeProjectCard';
 import ResumePortfolioCard from './ResumeCards/ResumePortfolioCard';
 import styles from './Resume.module.css';
-import { createResumeService } from '../../services/resumeService';
+import { useAppDispatch } from '../../store/hooks';
+import { createResumeThunk } from '../../hooks/useResume';
+import { useSubmissionAlert } from '../../hooks/useSubmissionAlert';
 
 /**
  * "카드" 컴포넌트에서 사용할 form 전체 Shape
@@ -54,13 +56,22 @@ const Resume: React.FC = () => {
   const [form, setForm] = useState<ResumeFormState>(emptyForm);
   const [initialized, setInitialized] = useState(false);
 
+  const { status, error } = useSelector((state: RootState) => state.resume);
+  const dispatch = useAppDispatch();
+
+  useSubmissionAlert({
+    status,
+    target: 'create',
+    error,
+    successMessage: '이력서가 성공적으로 제출되었습니다.',
+    errorMessage: '이력서 제출에 실패했습니다.',
+  });
+
   useEffect(() => {
     if (!member) return;
 
     const profile = member.profile;
     const resume = profile?.resume;
-
-    console.log('intro:', resume.introduction); // 여기에 값이 있어야 함
 
     const nextForm: ResumeFormState = {
       basicInfo: {
@@ -111,12 +122,11 @@ const Resume: React.FC = () => {
 
   const handleSubmit = async () => {
     const profileRequest = buildProfileRequest();
+
     try {
-      await createResumeService(profileRequest);
+      await dispatch(createResumeThunk(profileRequest)).unwrap();
     } catch (err) {
       console.error('이력서 제출 실패:', err);
-      alert('이력서 제출에 실패했습니다. 나중에 다시 시도해주세요.');
-      return;
     }
   };
 
