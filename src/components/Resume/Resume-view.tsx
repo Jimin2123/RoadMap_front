@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Resume.css'; // Adjust path if your CSS is in a different location
+import './Resume.css';
 
 const Resume: React.FC = () => {
   const [form] = useState({
@@ -49,7 +49,6 @@ const Resume: React.FC = () => {
       <div className="resume-wrapper" style={{ position: 'relative' }}>
         <div className="resume-box">
           <div className="top-right-menu">
-            {/* You'll need to replace '/edit-menu.svg' with an actual SVG or icon for the "more" menu */}
             <img src="/edit-menu.svg" alt="더보기" className="more-icon" />
           </div>
 
@@ -61,7 +60,6 @@ const Resume: React.FC = () => {
               <p className="contact">{form.education}</p>
             </div>
             <div className="avatar-box">
-              {/* You'll need to replace '/avatar.jpg' with an actual image for the avatar */}
               <img src="/avatar.jpg" alt="프로필" className="avatar" />
               <button className="edit-btn">수정하기</button>
             </div>
