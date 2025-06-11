@@ -1,21 +1,32 @@
 .resume-page {
   padding: 40px;
-  background-color: #f7f7f7;
+  background-color: #ffffff;
   font-family: 'Noto Sans KR', sans-serif;
 }
 
 .page-title {
   font-size: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 10px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .resume-box {
   background-color: #fff;
   border-radius: 20px;
   padding: 40px;
+  padding-top: 20px;
   max-width: 800px;
   margin: 0 auto;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+.title-box {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .header {
@@ -23,6 +34,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
+  box-shadow: none;
 }
 
 .name {
@@ -77,11 +89,14 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: 8px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .more-icon {
   width: 24px;
-  height: 24px;
+  height: 29px;
   cursor: pointer;
   opacity: 0.85;
   transition: opacity 0.2s ease;
@@ -89,4 +104,41 @@
 
 .more-icon:hover {
   opacity: 1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.bookmark-nav {
+  position: fixed;
+  top: 160px;
+  right: 32px;
+  background: transparent;
+  z-index: 10;
+}
+
+.bookmark-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bookmark-nav li {
+  margin: 8px 0;
+}
+
+.bookmark-nav a {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background-color: #eee;
+  color: #333;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.bookmark-nav a:hover {
+  background-color: #ccc;
 }
