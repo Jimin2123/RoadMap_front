@@ -67,7 +67,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, onLoginSuccess }) => {
       <div className="login-links">
         <a href="#">아이디 찾기</a>
         <span>|</span>
-        <a href="#">비밀번호 찾기</a>
+        <Link to="/find-password">비밀번호 찾기</Link>
         <span>|</span>
         <Link to="/signup">회원가입</Link>
       </div>
