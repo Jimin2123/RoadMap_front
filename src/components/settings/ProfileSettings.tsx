@@ -1,41 +1,60 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ProfileSetting.css';
 import AddressSearch, { DaumPostcodeData } from '../Features/AddressSearch';
 import ClearAddressIcon from '../SettingIcons/ClearAddressIcon';
+import { useAppSelector } from '../../store/hooks';
+import { RootState } from '../../types/store';
 
 const ProfileSettings: React.FC = () => {
-  const [previewUrl, setPreviewUrl] = useState<string>(''); // 프로필 이미지
-  const [nickname, setNickname] = useState<string>(''); // 닉네임
-  const [email, setEmail] = useState<string>(''); // 이메일
-  const [address, setAddress] = useState<string>(''); // 주소
-  const [detailAddress, setDetailAddress] = useState<string>(''); // 상세주소
+  const { member, status } = useAppSelector((state: RootState) => state.user);
+
+  const [form, setForm] = useState({
+    previewUrl: '',
+    phoneNumber: '',
+    name: '',
+    email: '',
+    address: '',
+    detailAddress: '',
+  });
+
+  useEffect(() => {
+    if (status.getMember === 'fulfilled' && member) {
+      setForm({
+        previewUrl: '', // replace with member.profileImageUrl if available
+        phoneNumber: member.phoneNumber || '',
+        name: member.name || '',
+        email: member.email || '',
+        address: member.address?.address || '',
+        detailAddress: member.address?.addressDetail || '',
+      });
+    }
+  }, [status.getMember, member]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPreviewUrl(reader.result as string);
+        setForm((prev) => ({ ...prev, previewUrl: reader.result as string }));
       };
       reader.readAsDataURL(file);
     }
   };
 
   const handleAddressSelect = (selectedAddress: DaumPostcodeData) => {
-    setAddress(selectedAddress.address); // or use the appropriate property for the address string
+    setForm((prev) => ({ ...prev, address: selectedAddress.address }));
   };
 
   const handleClearAddress = () => {
-    setAddress('');
+    setForm((prev) => ({ ...prev, address: '' }));
+  };
+
+  const handleChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm((prev) => ({ ...prev, [field]: e.target.value }));
   };
 
   const handleSave = () => {
-    console.log('프로필 정보 저장:', {
-      nickname,
-      email,
-      address,
-      detailAddress,
-    });
+    console.log('프로필 정보 저장:', form);
   };
 
   return (
@@ -45,7 +64,7 @@ const ProfileSettings: React.FC = () => {
       <div className="profile-sections">
         <div className="left-section">
           <div className="profile-image-wrapper">
-            <img src={previewUrl || '/defaultProfileImage.svg'} alt="프로필 미리보기" className="profile-image" />
+            <img src={form.previewUrl || '/defaultProfileImage.svg'} alt="프로필 미리보기" className="profile-image" />
           </div>
           <label htmlFor="profileImageInput" className="change-image-btn">
             이미지 변경
@@ -61,25 +80,29 @@ const ProfileSettings: React.FC = () => {
 
         <div className="right-section">
           <div className="form-group">
-            <label>닉네임</label>
-            <input
-              type="text"
-              value={nickname}
-              placeholder="닉네임 입력"
-              onChange={(e) => setNickname(e.target.value)}
-            />
+            <label>이름</label>
+            <input type="text" value={form.name} onChange={handleChange('name')} placeholder="닉네임 입력" disabled />
           </div>
 
           <div className="form-group">
             <label>이메일</label>
-            <input type="email" value={email} placeholder="이메일 입력" onChange={(e) => setEmail(e.target.value)} />
+            <input
+              type="email"
+              value={form.email}
+              onChange={handleChange('email')}
+              placeholder="이메일 입력"
+              disabled
+            />
           </div>
+
           <div className="form-group">
             <label>전화번호</label>
             <input
               type="tel"
+              value={form.phoneNumber}
+              onChange={handleChange('phoneNumber')}
               placeholder="전화번호 입력 (예: 010-1234-5678)"
-              onChange={(e) => console.log('전화번호:', e.target.value)}
+              pattern="^01[0-9]-\d{4}-\d{4}$"
             />
           </div>
 
@@ -88,12 +111,12 @@ const ProfileSettings: React.FC = () => {
             <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
               <input
                 type="text"
-                value={address}
-                placeholder="도로명 주소를 입력하세요"
+                value={form.address}
                 readOnly
+                placeholder="도로명 주소를 입력하세요"
                 style={{ flex: 1, paddingRight: '60px' }}
               />
-              {address && (
+              {form.address && (
                 <button
                   type="button"
                   onClick={handleClearAddress}
@@ -120,9 +143,9 @@ const ProfileSettings: React.FC = () => {
             <label>상세 주소</label>
             <input
               type="text"
-              value={detailAddress}
+              value={form.detailAddress}
+              onChange={handleChange('detailAddress')}
               placeholder="상세 주소 (예: 아파트, 동·호수 등)"
-              onChange={(e) => setDetailAddress(e.target.value)}
             />
           </div>
 
