@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import JobCard from './JobCard';
 import './JobPostingSection.css';
 import { getJobsListService } from '../../services/taskService';
 import { Jobs, SaraminJobListResponse } from '../../types/interfaces/response/SaraminJobListResponse';
+import { educationLevelMap } from '../../utils/educationLevelMap';
+import { convertKeysToCamelCase } from '../../utils/caseConvert';
 
 const itemsPerPage = 20;
 const visiblePageCount = 10;
@@ -10,18 +12,15 @@ const visiblePageCount = 10;
 const JobPostingSection: React.FC = () => {
   const [jobsData, setJobsData] = useState<Jobs | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const paginationRef = useRef<HTMLDivElement>(null);
 
   const fetchJobsList = async (page: number) => {
     try {
       const start = (page - 1) * itemsPerPage + 1;
       const response: SaraminJobListResponse = await getJobsListService(start);
-      setJobsData(response.jobs);
-      setCurrentPage(page);
+      const convertedJobs = convertKeysToCamelCase(response.jobs);
 
-      setTimeout(() => {
-        paginationRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 0);
+      setJobsData(convertedJobs as Jobs);
+      setCurrentPage(page);
     } catch (error) {
       console.error('채용 공고를 불러오는 데 실패했습니다:', error);
     }
@@ -48,25 +47,27 @@ const JobPostingSection: React.FC = () => {
 
       <div className="job-card-container">
         {jobList.length === 0 && <div>공고 없음</div>}
-
-        {jobList.map((job) => (
-          <JobCard
-            key={job.id}
-            jobTitle={job.position?.title || ''}
-            company={job.company?.detail?.name || ''}
-            location={job.position?.location?.name || ''}
-            experience={job.position?.experienceLevel?.name || ''}
-            education={job.position?.requiredEducationLevel?.name || ''}
-          />
-        ))}
-
+        {jobList.map((job) => {
+          console.log(job.position);
+          return (
+            <JobCard
+              key={job.id}
+              companyLogoUrl={job.company?.detail?.href || ''}
+              jobTitle={job.position?.title || ''}
+              company={job.company?.detail?.name || ''}
+              location={job.position?.location?.name || ''}
+              experience={job.position?.experienceLevel?.name || ''}
+              education={educationLevelMap[job.position?.requiredEducationLevel?.name] || ''}
+            />
+          );
+        })}
         {jobList.length > 0 &&
           Array.from({ length: (3 - (jobList.length % 3)) % 3 }).map((_, i) => (
             <div key={`dummy-${i}`} className="job-card dummy" />
           ))}
       </div>
 
-      <div className="pagination" ref={paginationRef}>
+      <div className="pagination">
         <button className="page-btn" onClick={() => fetchJobsList(currentPage - 1)} disabled={currentPage === 1}>
           ◀
         </button>

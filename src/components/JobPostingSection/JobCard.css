@@ -1,6 +1,7 @@
 .job-card {
   width: 250px;
   padding: 16px;
+  height: 200px;
   border: 1px solid #ddd;
   border-radius: 10px;
   background-color: white;
@@ -24,6 +25,17 @@
   z-index: 1;
   color: #ccc;
   transition: transform 0.2s ease;
+  margin-left: auto; /* 오른쪽 정렬 */
+}
+
+.job-card-image {
+  width: 200px;
+  height: 50px; /* 고정 높이 */
+  border-radius: 8px;
+  background-size: cover; /* 이미지를 채움 */
+  background-position: center; /* 중앙 정렬 */
+  background-repeat: no-repeat;
+  margin-bottom: 12px;
 }
 
 .favorite-button:hover {
@@ -33,21 +45,37 @@
 .job-info {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px; /* 섹션 사이 간격 적당히 */
+  height: 150px; /* 이미지(50px) + 마진(12px) 제외한 남은 공간 예시 */
+  justify-content: space-between; /* 섹션 사이를 균등하게 띄움 */
 }
 
-.job-title {
+.job-info > div {
+  height: 40px; /* 각 섹션 고정 높이 */
+}
+
+.job-title-section .job-title {
   font-size: 16px;
   font-weight: bold;
   color: #333;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 최대 2줄 */
+  line-clamp: 2; /* 표준 속성 추가 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 }
 
-.job-company {
+.job-company-section .job-company {
   font-size: 14px;
   color: #666;
 }
 
-.job-details {
+.job-details-section {
   font-size: 13px;
   color: #999;
+  line-height: 24px;
+  white-space: nowrap;
 }
