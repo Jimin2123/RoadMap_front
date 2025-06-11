@@ -13,7 +13,7 @@ const AppRoutes = () => {
       <Route path="/login" element={<LoginPage />} /> {/* 로그인 경로 추가 */}
       <Route path="/settings" element={<SettingsPage />} /> {/* 설정 페이지 경로 추가 */}
       <Route path="/signup" element={<SignUpForm />} /> {/* 회원가입페이지 */}
-      <Route path="/resume" element={<ResumePage />} /> {/* 이력서 페이지 경로 */}
+      <Route path="/resume-view" element={<ResumePage />} /> {/* 이력서 페이지 경로 */}
       <Route path="/training" element={<TariningCoursePage />} /> {/* 직업 훈련 페이지 */}
       <Route path="*" element={<MainPage />} /> {/* 잘못된 경로는 메인 페이지로 리다이렉트 */}
       {/* <Route path="/other" element={<OtherComponent />} /> */}
