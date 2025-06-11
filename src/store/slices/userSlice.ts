@@ -40,6 +40,7 @@ const userSlice = createSlice({
       })
       .addCase(getMember.fulfilled, (state, action) => {
         state.status.getMember = 'fulfilled';
+        console.log('getMember fulfilled:', JSON.stringify(action.payload));
         state.member = action.payload; // 사용자 정보 저장
       })
       .addCase(getMember.rejected, (state, action) => {

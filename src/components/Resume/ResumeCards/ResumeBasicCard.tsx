@@ -1,35 +1,21 @@
-import { useState, ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import Card from '../ResumeCard';
 import '../../settings/ProfileSetting.css';
-
-export interface BasicCardData {
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  job: string;
-}
+import { BasicCardData } from '../../../types/interfaces/ResumeData';
 
 interface ResumeBasicCardProps {
-  value?: BasicCardData;
+  value: BasicCardData;
   onChange: (data: BasicCardData) => void;
 }
 
-const ResumeBasicCard: React.FC<ResumeBasicCardProps> = ({ value }) => {
-  const [previewUrl] = useState<string>('');
-  const [formData, setFormData] = useState<BasicCardData>(
-    value ?? {
-      name: '',
-      email: '',
-      phone: '',
-      address: '',
-      job: '',
-    }
-  );
-
+const ResumeBasicCard: React.FC<ResumeBasicCardProps> = ({ value, onChange }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const { name, value: newValue } = e.target;
+
+    // 변경된 값만 업데이트
+    if (value[name as keyof BasicCardData] !== newValue) {
+      onChange({ ...value, [name]: newValue });
+    }
   };
 
   return (
@@ -38,68 +24,45 @@ const ResumeBasicCard: React.FC<ResumeBasicCardProps> = ({ value }) => {
         <div className="profile-sections">
           <div className="left-section">
             <div className="profile-image-wrapper">
-              <img src={previewUrl || '/defaultProfileImage.svg'} alt="프로필 미리보기" className="profile-image" />
+              <img src="/defaultProfileImage.svg" alt="프로필 미리보기" className="profile-image" />
             </div>
           </div>
 
           <div className="right-section">
             <div className="form-group">
               <label>이름</label>
-              <input
-                name="name"
-                type="text"
-                placeholder="홍길동"
-                value={formData.name}
-                onChange={handleChange}
-                disabled
-              />
+              <input name="name" type="text" placeholder="홍길동" value={value.name} readOnly disabled />
             </div>
 
             <div className="form-group">
               <label>이메일</label>
-              <input
-                name="email"
-                type="email"
-                placeholder="email@example.com"
-                value={formData.email}
-                onChange={handleChange}
-                disabled
-              />
+              <input name="email" type="email" placeholder="email@example.com" value={value.email} readOnly disabled />
             </div>
 
             <div className="form-group">
               <label>연락처</label>
               <input
-                name="phone"
+                name="phoneNumber"
                 type="tel"
                 placeholder="010-1234-5678"
-                value={formData.phone}
-                onChange={handleChange}
+                value={value.phoneNumber}
+                readOnly
                 disabled
               />
             </div>
 
             <div className="form-group">
               <label>주소</label>
-              <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
-                <input
-                  type="text"
-                  value={formData.address}
-                  placeholder="도로명 주소를 입력하세요"
-                  readOnly
-                  style={{ flex: 1, paddingRight: '60px' }}
-                  disabled
-                />
-              </div>
+              <input name="address" type="text" placeholder="도로명 주소" value={value.address} readOnly disabled />
             </div>
 
             <div className="form-group">
               <label>직업</label>
               <input
-                name="job"
+                name="currentJob"
                 type="text"
                 placeholder="예: 학생 / 개발자"
-                value={formData.job}
+                value={value.currentJob}
                 onChange={handleChange}
               />
             </div>

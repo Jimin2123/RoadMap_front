@@ -1,12 +1,6 @@
 import { ChangeEvent } from 'react';
 import Card from '../ResumeCard';
-
-export interface EduCardData {
-  school: string;
-  major: string;
-  period: string;
-  status: string;
-}
+import { EduCardData } from '../../../types/interfaces/ResumeData';
 
 interface ResumeEduCardProps {
   value: EduCardData;
@@ -14,7 +8,7 @@ interface ResumeEduCardProps {
 }
 
 const ResumeEduCard: React.FC<ResumeEduCardProps> = ({ value, onChange }) => {
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value: newValue } = e.target;
     onChange({ ...value, [name]: newValue });
   };
@@ -28,7 +22,12 @@ const ResumeEduCard: React.FC<ResumeEduCardProps> = ({ value, onChange }) => {
       <label>재학 기간</label>
       <input name="period" type="text" placeholder="2020.03 ~ 2024.02" value={value.period} onChange={handleChange} />
       <label>상태</label>
-      <input name="status" type="text" placeholder="재학 / 졸업" value={value.status} onChange={handleChange} />
+      <select name="status" value={value.status} onChange={handleChange}>
+        <option value="">선택</option>
+        <option value="재학">재학</option>
+        <option value="졸업">졸업</option>
+        <option value="휴학">휴학</option>
+      </select>
     </Card>
   );
 };
