@@ -5,7 +5,7 @@ import SettingsPage from '../pages/SettingsPage';
 import SignUpForm from '../components/SignUp/SignUpForm';
 import TariningCoursePage from '../pages/TrainingCoursePage';
 import ResumePage from '../pages/ResumePage';
-import ProtectedRoute from './ProtectedRoute';
+//import ProtectedRoute from './ProtectedRoute';
 
 const AppRoutes = () => {
   return (
@@ -15,9 +15,9 @@ const AppRoutes = () => {
       <Route
         path="/settings"
         element={
-          <ProtectedRoute>
-            <SettingsPage />
-          </ProtectedRoute>
+          // <ProtectedRoute>
+          <SettingsPage />
+          // </ProtectedRoute>
         }
       />
       {/* 설정 페이지 경로 추가 */}
@@ -25,9 +25,9 @@ const AppRoutes = () => {
       <Route
         path="/resume"
         element={
-          <ProtectedRoute>
-            <ResumePage />
-          </ProtectedRoute>
+          // <ProtectedRoute>
+          <ResumePage />
+          // </ProtectedRoute>
         }
       />
       {/* 이력서 페이지 경로 */}

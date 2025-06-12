@@ -45,7 +45,4 @@
 
 main {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto; /* 세로 스크롤 가능 */
 }
