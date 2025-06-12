@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Resume.css';
 
 const Resume: React.FC = () => {
+  const navigate = useNavigate();
+
   const [form] = useState({
     name: '김진영',
     email: 'jjy7349@naver.com',
@@ -42,6 +45,24 @@ const Resume: React.FC = () => {
     activities: [{ name: '구디캠프 프론트엔드 해커톤', role: '참가자', date: '2023.05' }],
   });
 
+  useEffect(() => {
+    const onPopState = () => {
+      navigate('/', { replace: true });
+    };
+    window.addEventListener('popstate', onPopState);
+    return () => {
+      window.removeEventListener('popstate', onPopState);
+    };
+  }, [navigate]);
+
+  const handleBookmarkClick = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+      window.history.replaceState(null, '', `#${id}`);
+    }
+  };
+
   return (
     <div className="resume-page">
       <h1 className="page-title">나의 이력서</h1>
@@ -51,8 +72,7 @@ const Resume: React.FC = () => {
           <div className="top-right-menu">
             <img src="/edit-menu.svg" alt="더보기" className="more-icon" />
           </div>
-
-          <div className="header">
+          <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between' }}>
             <div>
               <h2 className="name">{form.name}</h2>
               <p className="contact">전화번호: {form.phone}</p>
@@ -117,22 +137,22 @@ const Resume: React.FC = () => {
         <nav className="bookmark-nav">
           <ul>
             <li>
-              <a href="#introduction">자기소개</a>
+              <button onClick={() => handleBookmarkClick('introduction')}>자기소개</button>
             </li>
             <li>
-              <a href="#experience">경력</a>
+              <button onClick={() => handleBookmarkClick('experience')}>경력</button>
             </li>
             <li>
-              <a href="#skills">기술 스택</a>
+              <button onClick={() => handleBookmarkClick('skills')}>기술 스택</button>
             </li>
             <li>
-              <a href="#certificates">자격증</a>
+              <button onClick={() => handleBookmarkClick('certificates')}>자격증</button>
             </li>
             <li>
-              <a href="#educations">교육</a>
+              <button onClick={() => handleBookmarkClick('educations')}>교육</button>
             </li>
             <li>
-              <a href="#activities">대외 활동</a>
+              <button onClick={() => handleBookmarkClick('activities')}>대외 활동</button>
             </li>
           </ul>
         </nav>
