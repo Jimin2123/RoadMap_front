@@ -5,7 +5,7 @@ import SettingsPage from '../pages/SettingsPage';
 import SignUpForm from '../components/SignUp/SignUpForm';
 import TariningCoursePage from '../pages/TrainingCoursePage';
 import ResumePage from '../pages/ResumePage';
-import ProtectedRoute from './protectedRoute';
+import ProtectedRoute from './ProtectedRoute';
 
 const AppRoutes = () => {
   return (
