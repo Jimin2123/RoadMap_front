@@ -44,11 +44,11 @@ const MainPage: React.FC = () => {
             imageUrl="/icons/service1.svg"
             serviceName="나의 이력서 관리"
             serviceDescription="자신의 포트폴리오를 작성하거나 수정할 수 있습니다."
-            link="/resume-view"
+            link="/resume"
           />
           <ServiceCard
             imageUrl="/icons/service2.svg"
-            serviceName="나의 취직 정보"
+            serviceName="맞춤 채용 정보"
             serviceDescription="현재 진행중인 채용정보를 확인할 수 있습니다."
             link="#"
           />
@@ -60,7 +60,7 @@ const MainPage: React.FC = () => {
           />
           <ServiceCard
             imageUrl="/icons/service4.svg"
-            serviceName="나의 청년 지원정책"
+            serviceName="맞춤 청년 지원정책"
             serviceDescription="현재 진행중인 청년 지원정책 리스트를 볼 수 있습니다."
             link="/training"
           />

@@ -4,7 +4,7 @@ import { refreshTokenService } from '../services/authService';
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_BASE_URL ?? '/api',
-  timeout: 100000,
+  timeout: 60_000, // 1분
   withCredentials: true,
 });
 

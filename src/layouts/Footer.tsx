@@ -36,10 +36,6 @@ const Footer: React.FC = () => {
         <span>
           <Link to="">문의하기</Link>
         </span>
-        <span>|</span>
-        <span>
-          <Link to="">문의하기</Link>
-        </span>
       </div>
 
       {/* 세 번째 줄 */}
