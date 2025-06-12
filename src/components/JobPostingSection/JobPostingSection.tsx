@@ -18,9 +18,9 @@ const JobPostingSection: React.FC = () => {
       const start = (page - 1) * itemsPerPage + 1;
       const response: SaraminJobListResponse = await getJobsListService(start);
       const convertedJobs = convertKeysToCamelCase(response.jobs);
-
       setJobsData(convertedJobs as Jobs);
       setCurrentPage(page);
+      console.log('채용 공고를 성공적으로 불러왔습니다:', convertedJobs);
     } catch (error) {
       console.error('채용 공고를 불러오는 데 실패했습니다:', error);
     }
@@ -52,7 +52,7 @@ const JobPostingSection: React.FC = () => {
           return (
             <JobCard
               key={job.id}
-              companyLogoUrl={job.company?.detail?.href || ''}
+              companyLogoUrl={job.company?.detail?.logoUrl || ''}
               jobTitle={job.position?.title || ''}
               company={job.company?.detail?.name || ''}
               location={job.position?.location?.name || ''}

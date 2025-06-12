@@ -31,6 +31,7 @@ export interface Company {
 export interface CompanyDetail {
   href: string;
   name: string;
+  logoUrl: string;
 }
 
 export interface Position {
