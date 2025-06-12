@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Resume.css';
+import './ResumeView.css';
 
-const Resume: React.FC = () => {
+const ResumeView: React.FC = () => {
   const navigate = useNavigate();
 
   const [form] = useState({
@@ -161,4 +161,4 @@ const Resume: React.FC = () => {
   );
 };
 
-export default Resume;
+export default ResumeView;
