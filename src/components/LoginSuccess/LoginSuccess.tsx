@@ -26,7 +26,7 @@ const LoginSuccess: React.FC = () => {
       <div className="login-top-section">
         {/* 왼쪽: 프로필 */}
         <div className="profile-image-section">
-          <img src="/avatar.jpg" alt="Profile" className="avatar" draggable="false" />
+          <img src="/avatar.jpg" alt="Profile" className="main-avatar" draggable="false" />
         </div>
 
         <div className="profile-info-section">
