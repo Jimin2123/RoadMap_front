@@ -10,9 +10,18 @@ interface JobCardProps {
   experience: string;
   education: string;
   companyLogoUrl: string;
+  url: string;
 }
 
-const JobCard: React.FC<JobCardProps> = ({ jobTitle, company, location, experience, education, companyLogoUrl }) => {
+const JobCard: React.FC<JobCardProps> = ({
+  jobTitle,
+  company,
+  location,
+  experience,
+  education,
+  companyLogoUrl,
+  url,
+}) => {
   const [isFavorited, setIsFavorited] = useState(false);
 
   const toggleFavorite = () => {
@@ -23,25 +32,27 @@ const JobCard: React.FC<JobCardProps> = ({ jobTitle, company, location, experien
   const filteredLocation = filterWholeAreas(location);
 
   return (
-    <div className="job-card">
-      <div className="job-card-top">
-        <div className="job-card-image" style={{ backgroundImage: `url(${companyLogoUrl})` }} />
-        <button className="favorite-button" onClick={toggleFavorite}>
-          {isFavorited ? <FaStar color="#ffd700" /> : <FaRegStar color="#ccc" />}
-        </button>
+    <a href={url} target="_blank" rel="noopener noreferrer">
+      <div className="job-card">
+        <div className="job-card-top">
+          <div className="job-card-image" style={{ backgroundImage: `url(${companyLogoUrl})` }} />
+          <button className="favorite-button" onClick={toggleFavorite}>
+            {isFavorited ? <FaStar color="#ffd700" /> : <FaRegStar color="#ccc" />}
+          </button>
+        </div>
+        <div className="job-info">
+          <div className="job-title-section">
+            <h3 className="job-title">{jobTitle}</h3>
+          </div>
+          <div className="job-company-section">
+            <p className="job-company">{company}</p>
+          </div>
+          <div className="job-details-section">
+            <span>{filteredLocation || location}</span> | <span>{experience}</span> | <span>{education}</span>
+          </div>
+        </div>
       </div>
-      <div className="job-info">
-        <div className="job-title-section">
-          <h3 className="job-title">{jobTitle}</h3>
-        </div>
-        <div className="job-company-section">
-          <p className="job-company">{company}</p>
-        </div>
-        <div className="job-details-section">
-          <span>{filteredLocation || location}</span> | <span>{experience}</span> | <span>{education}</span>
-        </div>
-      </div>
-    </div>
+    </a>
   );
 };
 

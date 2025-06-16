@@ -20,7 +20,6 @@ const JobPostingSection: React.FC = () => {
       const convertedJobs = convertKeysToCamelCase(response.jobs);
       setJobsData(convertedJobs as Jobs);
       setCurrentPage(page);
-      console.log('채용 공고를 성공적으로 불러왔습니다:');
     } catch (error) {
       console.error('채용 공고를 불러오는 데 실패했습니다:', error);
     }
@@ -57,6 +56,7 @@ const JobPostingSection: React.FC = () => {
               location={job.position?.location?.name || ''}
               experience={job.position?.experienceLevel?.name || ''}
               education={educationLevelMap[job.position?.requiredEducationLevel?.name] || ''}
+              url={job.url || ''}
             />
           );
         })}

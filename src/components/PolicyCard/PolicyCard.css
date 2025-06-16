@@ -1,0 +1,127 @@
+.policy-card {
+  width: 200px; /* 카드 너비 */
+  height: 300px; /* 카드 높이 */
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #1565c0;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  padding: 20px;
+}
+
+.policy-card:hover {
+  transform: translateY(-5px);
+}
+
+.tag-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.lclsfNm,
+.mclsfNm {
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  border: blue 1px solid;
+  border-radius: 6px;
+  padding: 2px;
+  text-align: center;
+  font-size: 12px;
+}
+
+/* 정책명 */
+.title-container .plcyNm {
+  width: 100%;
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  line-height: 1.4;
+  white-space: nowrap; /* 줄 바꿈 없이 한 줄로 */
+  overflow: hidden; /* 넘치는 텍스트 숨기기 */
+  text-overflow: ellipsis;
+}
+
+/* 설명 */
+.description-container {
+  margin-top: 8px;
+  min-height: 63px;
+}
+
+.plcyExplnCn {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 최대 3줄 표시 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 4.5em; /* 1.5(line-height) × 3줄 */
+}
+
+/* 신청 기간 */
+.aplydate-container {
+  margin-top: 20px;
+}
+
+.aplyYmd {
+  font-size: 12px;
+  color: #888;
+}
+
+/* 링크 버튼 */
+.linkbutton-container {
+  margin-top: 12px;
+}
+
+.link-button {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  padding: 6px 12px;
+  background-color: lightgray;
+  color: #1565c0;
+  border: #1565c0 1px solid;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  box-sizing: border-box;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease;
+}
+
+.link-button:hover {
+  background-color: #0d47a1;
+}
+
+.divider {
+  height: 1px;
+  background-color: #ddd;
+  margin: 16px 0;
+}
+
+/* 키워드 태그 (하단) */
+.footer-tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.plcyKywdNm-container {
+  background-color: #fce4ec;
+  color: #ad1457;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  display: inline-block;
+  font-weight: 500;
+}
