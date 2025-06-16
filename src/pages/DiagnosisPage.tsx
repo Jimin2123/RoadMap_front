@@ -14,6 +14,9 @@ const DiagnosisPage = () => {
       <Header />
 
       <div className={styles.page}>
+        <div className={styles.titleBox}>
+          <h1>나의역량 진단</h1>
+        </div>
         <section className={styles.rowSection}>
           <div className={styles.halfBox}>
             <JobFitCard />
@@ -24,6 +27,8 @@ const DiagnosisPage = () => {
         </section>
 
         <section className={styles.section}>
+          <div className={styles.line}></div>
+
           <div className={styles.grid}>
             <div className={styles.cardBox}>
               <SkillDiagnosis />
