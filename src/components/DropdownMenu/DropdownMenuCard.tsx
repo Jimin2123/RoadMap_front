@@ -3,6 +3,7 @@ import React from 'react';
 import './DropdownMenuCard.css';
 import { FaHome, FaBullhorn, FaBriefcase, FaQuestionCircle, FaSignInAlt, FaCog } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../store/hooks';
 
 interface Props {
   isOpen: boolean;
@@ -18,19 +19,23 @@ const menuItems = [
 ];
 
 const DropdownMenuCard: React.FC<Props> = ({ isOpen }) => {
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
+
   return (
     <div className={`dropdown-card-menu ${isOpen ? 'open' : ''}`}>
-      {menuItems.map((item, index) => (
-        <Link to={item.path} key={index} className="card-link">
-          <div className="card">
-            <div className="card-icon">{item.icon}</div>
-            <div className="card-content">
-              <div className="card-title">{item.label}</div>
-              <div className="card-description">{item.description}</div>
+      {menuItems
+        .filter((item) => !(item.path === '/login' && isAuthenticated)) // 로그인 상태일 때 '로그인' 항목 제거
+        .map((item, index) => (
+          <Link to={item.path} key={index} className="card-link">
+            <div className="card">
+              <div className="card-icon">{item.icon}</div>
+              <div className="card-content">
+                <div className="card-title">{item.label}</div>
+                <div className="card-description">{item.description}</div>
+              </div>
             </div>
-          </div>
-        </Link>
-      ))}
+          </Link>
+        ))}
     </div>
   );
 };

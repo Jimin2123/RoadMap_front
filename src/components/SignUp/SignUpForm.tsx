@@ -4,9 +4,17 @@ import AddressSearch from '../Features/AddressSearch';
 import ClearAddressIcon from '../SettingIcons/ClearAddressIcon';
 import type { DaumPostcodeData } from '../Features/AddressSearch'; // 경로 맞게 import!
 import axios from 'axios';
+import { useAppDispatch } from '../../store/hooks';
+import { signUp } from '../../hooks/userUser';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../../hooks/useAuth';
+import { MemberRequest } from '../../types/interfaces/request/MemberRequest';
 
 const SignUpForm: React.FC = () => {
-  const [form, setForm] = useState({
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState<MemberRequest>({
     loginRequest: {
       email: '',
       password: '',
@@ -19,7 +27,7 @@ const SignUpForm: React.FC = () => {
       addressDetail: '',
       addressJibun: '',
       regionCity: '',
-      zoncode: '',
+      zonecode: '',
     },
   });
 
@@ -90,7 +98,7 @@ const SignUpForm: React.FC = () => {
         address: data.address,
         addressJibun: data.jibunAddress,
         regionCity: data.sigungu,
-        zoncode: data.zonecode,
+        zonecode: data.zonecode,
       },
     }));
   };
@@ -165,30 +173,10 @@ const SignUpForm: React.FC = () => {
 
     if (Object.keys(newErrors).length === 0) {
       try {
-        const response = await axios.post('/api/v1/member', form, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        console.log('회원가입 성공 응답:', response.data);
-        alert('회원가입 성공!');
-        setForm({
-          loginRequest: {
-            email: '',
-            password: '',
-          },
-          name: '',
-          birthDate: '',
-          phoneNumber: '',
-          addressRequest: {
-            address: '',
-            addressDetail: '',
-            addressJibun: '',
-            regionCity: '',
-            zoncode: '',
-          },
-        });
-        setErrors({});
+        await dispatch(signUp(form)).unwrap();
+        await dispatch(login(form.loginRequest)).unwrap();
+
+        navigate('/');
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
           // axios 에러인 경우
@@ -261,7 +249,7 @@ const SignUpForm: React.FC = () => {
           />
           <input type="hidden" name="addressRequest.addressJibun" value={form.addressRequest.addressJibun} readOnly />
           <input type="hidden" name="addressRequest.regionCity" value={form.addressRequest.regionCity} readOnly />
-          <input type="hidden" name="addressRequest.zoncode" value={form.addressRequest.zoncode} readOnly />
+          <input type="hidden" name="addressRequest.zonecode" value={form.addressRequest.zonecode} readOnly />
           {form.addressRequest.address && (
             <button
               type="button"

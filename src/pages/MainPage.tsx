@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from '../layouts/Header';
 import Footer from '../layouts/Footer';
 import EventBanner from '../components/EventBanner/EventBanner';
@@ -7,14 +7,20 @@ import ServiceCard from '../components/ServiceCard/ServiceCard';
 import LoginSuccess from '../components/LoginSuccess/LoginSuccess';
 import JobPostingSection from '../components/JobPostingSection/JobPostingSection';
 import '../styles/MainPage.css';
+import { useAppSelector } from '../store/hooks';
 
 const MainPage: React.FC = () => {
-  const [isLoginSuccess, setIsLoginSuccess] = useState(false);
+  const { isAuthenticated, status } = useAppSelector((state) => state.auth);
 
   // 로그인 성공 시 호출될 콜백 함수
-  const handleLoginSuccess = () => {
-    setIsLoginSuccess(true);
+  const handleLoginSuccess = (): boolean => {
+    if (status.login === 'fulfilled') {
+      return true;
+    } else {
+      return false;
+    }
   };
+
   return (
     <div className="layout">
       <Header />
@@ -24,7 +30,7 @@ const MainPage: React.FC = () => {
           <EventBanner />
         </div>
         <div className="login-form-section">
-          {isLoginSuccess ? (
+          {isAuthenticated ? (
             <LoginSuccess />
           ) : (
             <LoginForm className="login-form-main-page" onLoginSuccess={handleLoginSuccess} />
@@ -42,7 +48,7 @@ const MainPage: React.FC = () => {
           />
           <ServiceCard
             imageUrl="/icons/service2.svg"
-            serviceName="나의 취직 정보"
+            serviceName="맞춤 채용 정보"
             serviceDescription="현재 진행중인 채용정보를 확인할 수 있습니다."
             link="#"
           />
@@ -54,7 +60,7 @@ const MainPage: React.FC = () => {
           />
           <ServiceCard
             imageUrl="/icons/service4.svg"
-            serviceName="나의 청년 지원정책"
+            serviceName="맞춤 청년 지원정책"
             serviceDescription="현재 진행중인 청년 지원정책 리스트를 볼 수 있습니다."
             link="/training"
           />

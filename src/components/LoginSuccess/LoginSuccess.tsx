@@ -1,44 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './LoginSuccess.css';
-import axios from 'axios';
 import { MdSettings, MdLogout } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-
-interface ProfileResponse {
-  educationLevel: string;
-  desiredJob: string;
-  major: string;
-  skills?: string[];
-  certificates?: string[];
-}
-interface MemberResponse {
-  id: number;
-  name: string;
-  phoneNumber: string;
-  profileResponse: ProfileResponse;
-}
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { logoutThunk } from '../../hooks/useAuth';
+import { RootState } from '../../types/store';
 
 const LoginSuccess: React.FC = () => {
-  const [member, setMember] = useState<MemberResponse | null>(null);
+  const dispatch = useAppDispatch();
+  const { member } = useAppSelector((state: RootState) => state.user);
 
-  useEffect(() => {
-    const fetchMember = async () => {
-      try {
-        const memberId = localStorage.getItem('memberId'); // localStorage에서 꺼내기
-        if (!memberId) {
-          console.error('회원 ID가 없습니다. 로그인 후 다시 시도해 주세요.');
-          return;
-        }
-        const response = await axios.get<MemberResponse>(`/api/v1/member/${memberId}`);
-        console.log('회원 정보:', response.data);
-        setMember(response.data);
-      } catch (error) {
-        console.error('회원 정보를 불러오는 중 오류 발생:', error);
-      }
-    };
+  const handleLogout = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-    fetchMember();
-  }, []);
+    try {
+      await dispatch(logoutThunk()).unwrap();
+    } catch (error) {
+      console.error('로그아웃 중 오류 발생:', error);
+    }
+  };
 
   return (
     <div className="login-form-container">
@@ -46,10 +26,9 @@ const LoginSuccess: React.FC = () => {
       <div className="login-top-section">
         {/* 왼쪽: 프로필 */}
         <div className="profile-image-section">
-          <img src="/avatar.jpg" alt="Profile" className="avatar" />
+          <img src="/avatar.jpg" alt="Profile" className="avatar" draggable="false" />
         </div>
 
-        {/* 오른쪽: 이름, 태그, 자격증 */}
         <div className="profile-info-section">
           <div className="profile-header">
             <h2 className="username">{member?.name}</h2>
@@ -59,38 +38,50 @@ const LoginSuccess: React.FC = () => {
                   <MdSettings size={20} color="#333" />
                 </Link>
               </button>
-              <button>
+              <button onClick={handleLogout}>
                 <MdLogout size={20} color="#333" />
               </button>
             </div>
           </div>
+
+          {!member?.profile && (
+            <div className="create-profile-section">
+              <p>아직 프로필이 없어요. </p>
+              <p>지금 바로 프로필을 만들어보세요!</p>
+              <Link to="/resume" className="create-profile-button">
+                프로필 생성하러 가기
+              </Link>
+            </div>
+          )}
+
           {/* 스킬셋 자격증 입력 안되어있으면 입력하러가기 등 링크 추가 */}
-          <p className="skills-label">보유중인 스킬셋</p>
-          <div className="skill-tags-wrapper">
-            {member && member.profileResponse && member.profileResponse.skills && (
+
+          {member && member.profile && member.profile.skills && (
+            <div className="skill-tags-wrapper">
+              <p className="skills-label">보유중인 스킬셋</p>
               <div className="skill-tags">
-                {member?.profileResponse.skills.map((skill, index) => (
+                {member?.profile.skills.map((skill, index) => (
                   <span className="tag" key={index}>
-                    {skill}
+                    {skill.name}
                   </span>
                 ))}
               </div>
-            )}
-          </div>
+            </div>
+          )}
 
-          <div className="certificate-slider-wrapper">
-            {member && member.profileResponse && member.profileResponse.certificates && (
+          {member && member.profile && member.profile.certificates && (
+            <div className="certificate-slider-wrapper">
               <div className="certificate-slider">
-                {member?.profileResponse.certificates.map((cert, index) => (
+                {member?.profile.certificates.map((cert, index) => (
                   <div className="certificate-card" key={index}>
                     <div className="certificate-icon">🎓</div>
-                    <h4>{cert}</h4>
-                    <p>국가 공인</p>
+                    <h4>{cert.name}</h4>
+                    <p>{cert.agency}</p>
                   </div>
                 ))}
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
 

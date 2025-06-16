@@ -13,7 +13,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ imageUrl, serviceName, servic
   return (
     <div className="service-card">
       <Link to={link} className="service-card-link">
-        <img src={imageUrl} alt={serviceName} className="service-card-image" />
+        <img src={imageUrl} alt={serviceName} className="service-card-image" draggable="false" />
         <div className="service-card-content">
           <h3 className="service-card-title">{serviceName}</h3>
           <p className="service-card-description">{serviceDescription}</p>

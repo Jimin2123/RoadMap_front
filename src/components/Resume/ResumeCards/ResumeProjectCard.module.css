@@ -1,0 +1,168 @@
+.projectItemList {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.projectItem {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 12px;
+  position: relative;
+  background-color: #f9f9f9;
+}
+
+.projectTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.editButton {
+  background: none;
+  border: none;
+  color: #2563eb;
+  cursor: pointer;
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+}
+
+.editButton:hover,
+.deleteButton:hover {
+  text-decoration: underline;
+}
+
+.addButton {
+  margin-top: 8px;
+  background-color: #e0e7ff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.addButton:hover {
+  background-color: #c7d2fe;
+}
+
+.btnPrimary {
+  background-color: #007bff; /* Primary blue */
+  color: white;
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btnPrimary:hover {
+  background-color: #0056b3;
+}
+
+.btnSecondary {
+  background-color: white;
+  color: #333;
+  padding: 6px 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btnSecondary:hover {
+  background-color: #f2f2f2;
+}
+
+.skillInputBox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #f9fafb;
+}
+
+.skillInputBox input {
+  border: none;
+  flex: 1;
+  min-width: 150px;
+  padding: 4px;
+  font-size: 14px;
+  background: transparent;
+  outline: none;
+}
+
+.input {
+  border: none;
+  flex: 1;
+  min-width: 150px;
+  padding: 6px;
+  font-size: 14px;
+  background: transparent;
+  outline: none;
+}
+
+.skillTag {
+  background-color: #e0e7ff;
+  color: #1e3a8a;
+  padding: 5px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.skillTag button {
+  background: transparent;
+  border: none;
+  font-weight: bold;
+  font-size: 14px;
+  color: #1e3a8a;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.skillTag button:hover {
+  color: #ef4444;
+}
+
+.suggestionBox {
+  list-style: none;
+  margin-top: 6px;
+  padding: 0;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  max-height: 160px;
+  overflow-y: auto;
+  font-size: 14px;
+  z-index: 10;
+}
+
+.suggestionBox li {
+  padding: 8px;
+  cursor: pointer;
+}
+.suggestionBox li:hover,
+.suggestionBox .highlight {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}

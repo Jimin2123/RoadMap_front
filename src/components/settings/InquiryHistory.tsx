@@ -1,4 +1,4 @@
-import { Inquiry } from '../../types/Inquiry';
+import { Inquiry } from '../../types/interfaces/Inquiry';
 import './InquiryHistory.css';
 
 interface Props {
@@ -11,7 +11,9 @@ const InquiryHistory = ({ list, onBack }: Props) => {
     <div className="inquiry-history">
       <div className="header">
         <h2>문의 내역</h2>
-        <button onClick={onBack} className="back-button">← 문의 작성</button>
+        <button onClick={onBack} className="back-button">
+          ← 문의 작성
+        </button>
       </div>
       {list.length === 0 ? (
         <p>문의 내역이 없습니다.</p>
