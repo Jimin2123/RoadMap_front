@@ -217,6 +217,13 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   text-align: center;
+  height: 100px;
+}
+
+.create-profile-section p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
 }
 
 .create-profile-button {
