@@ -27,8 +27,6 @@ const DiagnosisPage = () => {
         </section>
 
         <section className={styles.section}>
-          <div className={styles.line}></div>
-
           <div className={styles.grid}>
             <div className={styles.cardBox}>
               <SkillDiagnosis />

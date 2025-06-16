@@ -41,8 +41,8 @@ p {
 }
 
 .rank1 {
-  background-color: #e0e7ff;
-  color: #1d4ed8;
+  background-color: #ffadad;
+  color: #ff2525;
 }
 
 .rank2 {
@@ -53,4 +53,10 @@ p {
 .rank3 {
   background-color: #f1f5f9;
   color: #475569;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  justify-content: none;
 }
