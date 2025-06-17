@@ -97,12 +97,19 @@
   background: #fff;
   border: 1px solid #ccc;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .category-menu button:hover {
   background-color: #e0e0e0;
 }
 
+.category-menu button.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+}
 .category-box {
   background-color: #f9f9f9;
   padding: 1rem;

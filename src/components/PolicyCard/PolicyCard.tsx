@@ -1,17 +1,9 @@
 import React from 'react';
 import './PolicyCard.css'; // 스타일 파일을 임포트
+import { YouthPolicyItemResponse } from '../../types/interfaces/response/YouthPolicyItemResponse';
+import { openExternalUrl } from '../../utils/openExternalUrl';
 
-export interface PolicyCardProps {
-  lclsfNm: string; // 정책 대분류명
-  mclsfNm: string; // 정책 중분류명
-  plcyNm: string; // 정책명
-  plcyExplnCn: string; // 정책 설명
-  aplyYmd: string; // 신청 기간
-  plcyKywdNm: string; // 정책 키워드명
-  aplyUrlAddr: string; // 신청 URL 주소
-}
-
-const PolictCard: React.FC<PolicyCardProps> = ({
+const PolictCard: React.FC<YouthPolicyItemResponse> = ({
   lclsfNm,
   mclsfNm,
   plcyNm,
@@ -20,19 +12,19 @@ const PolictCard: React.FC<PolicyCardProps> = ({
   plcyKywdNm,
   aplyUrlAddr,
 }) => {
-  const normalizeUrl = (url: string): string => {
-    if (!/^https?:\/\//i.test(url)) {
-      return 'https://' + url;
-    }
-    return url;
-  };
+  // const normalizeUrl = (url: string): string => {
+  //   if (!/^https?:\/\//i.test(url)) {
+  //     return 'https://' + url;
+  //   }
+  //   return url;
+  // };
 
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!aplyUrlAddr?.trim()) {
-      e.preventDefault();
-      alert('유효한 링크가 없습니다.');
-    }
-  };
+  // const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  //   if (!aplyUrlAddr?.trim()) {
+  //     e.preventDefault();
+  //     alert('유효한 링크가 없습니다.');
+  //   }
+  // };
   return (
     <div className="policy-card">
       <div className="tag-container">
@@ -62,11 +54,12 @@ const PolictCard: React.FC<PolicyCardProps> = ({
       <div className="linkbutton-container">
         <div className="linkbutton">
           <a
-            href={normalizeUrl(aplyUrlAddr)}
+            href={'#'}
             className="link-button"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={handleLinkClick}
+            onClick={(e) => {
+              e.preventDefault();
+              openExternalUrl(aplyUrlAddr, `${plcyNm}은/는 신청 가능한 링크가 없습니다.`);
+            }}
           >
             자세히 보기
           </a>

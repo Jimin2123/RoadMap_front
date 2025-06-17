@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import PolicyCard, { PolicyCardProps } from '../components/PolicyCard/PolicyCard';
+import PolicyCard from '../components/PolicyCard/PolicyCard';
 import '../styles/PolicyPage.css';
 import Header from '../layouts/Header';
 import Footer from '../layouts/Footer';
+import { YouthPolicyItemResponse } from '../types/interfaces/response/YouthPolicyItemResponse';
 
 type Category = {
   id: string;
@@ -12,7 +13,7 @@ type Category = {
 };
 
 const PolicyPage: React.FC = () => {
-  const [policyList, setPolicyList] = useState<PolicyCardProps[]>([]);
+  const [policyList, setPolicyList] = useState<YouthPolicyItemResponse[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>('policyIndex'); // 초기 카테고리 설정
 
   const categories: Category[] = [
@@ -52,7 +53,7 @@ const PolicyPage: React.FC = () => {
   const currentItems = filteredPolicies.slice(indexOfFirstItem, indexOfLastItem);
   useEffect(() => {
     axios
-      .get<PolicyCardProps[]>('http://localhost:8080/api/v1/policy')
+      .get<YouthPolicyItemResponse[]>('http://localhost:8080/api/v1/policy')
       .then((res) => {
         setPolicyList(res.data);
         setLoading(false);
@@ -89,7 +90,12 @@ const PolicyPage: React.FC = () => {
           <ul className="category-menu">
             {categories.map((cat) => (
               <li key={cat.id}>
-                <button onClick={() => setSelectedCategory(cat.id)}>{cat.name}</button>
+                <button
+                  className={selectedCategory === cat.id ? 'active' : ''}
+                  onClick={() => setSelectedCategory(cat.id)}
+                >
+                  {cat.name}
+                </button>
               </li>
             ))}
           </ul>
