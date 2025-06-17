@@ -1,6 +1,6 @@
 import React from 'react';
 import './PolicyCard.css'; // 스타일 파일을 임포트
-import { YouthPolicyItemResponse } from '../../types/interfaces/response/YouthPolicyItemResponse';
+import { YouthPolicyItemResponse } from '../../types/interfaces/response/YouthPolicyResponse';
 import { openExternalUrl } from '../../utils/openExternalUrl';
 
 const PolictCard: React.FC<YouthPolicyItemResponse> = ({

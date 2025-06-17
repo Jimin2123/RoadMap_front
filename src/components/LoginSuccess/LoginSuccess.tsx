@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import './LoginSuccess.css';
 import { MdSettings, MdLogout } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { logoutThunk } from '../../hooks/useAuth';
 import { RootState } from '../../types/store';
-import { PolicyItemResponseForInfo } from '../../types/interfaces/response/YouthPolicyItemResponse';
+import { YouthPolicyItemResponse } from '../../types/interfaces/response/YouthPolicyResponse';
 import { openExternalUrl } from '../../utils/openExternalUrl';
+import { getPolicyListServiceForMember } from '../../services/policyService';
 
 const LoginSuccess: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +21,7 @@ const LoginSuccess: React.FC = () => {
       console.error('로그아웃 중 오류 발생:', error);
     }
   };
-  const [policies, setPolicies] = useState<PolicyItemResponseForInfo[]>([]);
+  const [policies, setPolicies] = useState<YouthPolicyItemResponse[]>([]);
   const [loadingPolicies, setLoadingPolicies] = useState(true);
 
   useEffect(() => {
@@ -29,9 +29,8 @@ const LoginSuccess: React.FC = () => {
 
     const fetchPolicies = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/v1/policy/${member.id}`);
-        setPolicies(response.data);
-        console.log('정책 불러오기 성공:', response.data);
+        const response = await getPolicyListServiceForMember();
+        setPolicies(response.result.youthPolicyList);
       } catch (error) {
         console.error('정책 불러오기 실패:', error);
       } finally {

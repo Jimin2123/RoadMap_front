@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import PolicyCard from '../components/PolicyCard/PolicyCard';
 import '../styles/PolicyPage.css';
 import Header from '../layouts/Header';
 import Footer from '../layouts/Footer';
-import { YouthPolicyItemResponse } from '../types/interfaces/response/YouthPolicyItemResponse';
+import { YouthPolicyListResponse } from '../types/interfaces/response/YouthPolicyResponse';
+import { getPolicyListService } from '../services/policyService';
 
 type Category = {
   id: string;
@@ -13,8 +13,8 @@ type Category = {
 };
 
 const PolicyPage: React.FC = () => {
-  const [policyList, setPolicyList] = useState<YouthPolicyItemResponse[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>('policyIndex'); // 초기 카테고리 설정
+  const [policyList, setPolicyList] = useState<YouthPolicyListResponse>();
+  const [selectedCategory, setSelectedCategory] = useState<string | null>('policyIndex');
 
   const categories: Category[] = [
     { id: 'policyIndex', name: '청년정책 개요', content: '청년정책 개요' },
@@ -22,59 +22,37 @@ const PolicyPage: React.FC = () => {
   ];
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [inputValue, setInputValue] = useState(''); // 입력 중 상태
-  const [searchKeyword, setSearchKeyword] = useState(''); // 실제 검색어
 
   // 페이징 상태
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12; // 페이지당 아이템 수
 
-  // 검색어 기반 필터링
-  const filteredPolicies =
-    searchKeyword.trim() === ''
-      ? policyList
-      : policyList.filter((policy) => policy.plcyNm.toLowerCase().includes(searchKeyword.toLowerCase()));
+  const totalPages = policyList ? Math.ceil(policyList.result.pagging.totCount / itemsPerPage) : 0;
+  const currentItems = policyList?.result.youthPolicyList || [];
+  // 현재 페이지 기준으로 10개씩 페이지 번호 보이도록 설정
+  const maxPageButtons = 10;
+  const startPage = Math.floor((currentPage - 1) / maxPageButtons) * maxPageButtons + 1;
+  const endPage = Math.min(startPage + maxPageButtons - 1, totalPages);
 
-  // 검색 버튼 클릭 또는 엔터 키 눌렀을 때 검색어 갱신
-  const handleSearch = () => {
-    setSearchKeyword(inputValue);
-    setCurrentPage(1); // 검색 시 1페이지로 초기화
-  };
-  // 엔터 키로도 검색되게 처리
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleSearch();
-    }
-  };
-  // 페이징 계산은 필터된 리스트 기준으로// 페이징은 필터된 결과 기준으로
-  const totalPages = Math.ceil(filteredPolicies.length / itemsPerPage);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredPolicies.slice(indexOfFirstItem, indexOfLastItem);
   useEffect(() => {
-    axios
-      .get<YouthPolicyItemResponse[]>('http://localhost:8080/api/v1/policy')
-      .then((res) => {
-        setPolicyList(res.data);
+    const init = async () => {
+      const response = await getPolicyListService(currentPage);
+
+      if (response.result) {
+        setPolicyList(response);
         setLoading(false);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
+      } else {
         setError('정책 정보를 불러오는 데 실패했습니다.');
         setLoading(false);
-      });
-  }, []);
-
-  // // 페이징 계산
-  // const totalPages = Math.ceil(policyList.length / itemsPerPage);
-  // const indexOfLastItem = currentPage * itemsPerPage;
-  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // const currentItems = policyList.slice(indexOfFirstItem, indexOfLastItem);
+      }
+    };
+    init();
+  }, [currentPage]);
 
   const goToPage = (page: number) => {
     if (page < 1 || page > totalPages) return;
     setCurrentPage(page);
+    console.log(`현재 페이지: ${page}`);
   };
 
   return (
@@ -106,39 +84,15 @@ const PolicyPage: React.FC = () => {
               <div className="page-title">
                 <h1>청년정책 통합검색</h1>
               </div>
-              <div className="search-bar">
-                <input
-                  type="text"
-                  placeholder="정책명을 입력하세요..."
-                  className="search-input"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                />
-                <button className="search-button" onClick={handleSearch}>
-                  검색
-                </button>
-              </div>
 
               <section className="policy-list">
                 {loading && <p>불러오는 중...</p>}
                 {error && <p>{error}</p>}
 
-                {filteredPolicies.length === 0 ? (
-                  <p className="no-results-message">검색 결과가 없습니다.</p>
+                {currentItems.length > 0 ? (
+                  currentItems.map((policy) => <PolicyCard key={policy.plcyNo} {...policy} />)
                 ) : (
-                  currentItems.map((policy, index) => (
-                    <PolicyCard
-                      key={index}
-                      lclsfNm={policy.lclsfNm}
-                      mclsfNm={policy.mclsfNm}
-                      plcyNm={policy.plcyNm}
-                      plcyExplnCn={policy.plcyExplnCn}
-                      aplyYmd={policy.aplyYmd}
-                      plcyKywdNm={policy.plcyKywdNm}
-                      aplyUrlAddr={policy.aplyUrlAddr}
-                    />
-                  ))
+                  <p className="no-results-message">정책 정보가 없습니다.</p>
                 )}
               </section>
 
@@ -146,8 +100,8 @@ const PolicyPage: React.FC = () => {
                 <button className="page-btn" onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1}>
                   ◀
                 </button>
-                {Array.from({ length: totalPages }, (_, i) => {
-                  const page = i + 1;
+                {Array.from({ length: endPage - startPage + 1 }, (_, i) => {
+                  const page = startPage + i;
                   return (
                     <button
                       key={page}
