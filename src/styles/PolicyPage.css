@@ -8,17 +8,21 @@
   margin-top: 20px;
 }
 .main-content {
+  width: 100%;
+  display: flex;
   flex-direction: column;
+  min-width: 766px;
 }
 .page-title {
   display: flex;
   font-size: 20px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .search-bar {
-  display: inline-block;
+  flex-shrink: 0; /* 줄어들지 않게 고정 */
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   gap: 12px;
@@ -62,35 +66,52 @@
 
 /* 왼쪽 사이드바 */
 .sidebar {
-  flex: 0 0 150px; /* 고정 너비 */
-  padding: 15px;
-  border-radius: 8px;
+  width: 240px;
+  padding-top: 1rem;
+  padding-right: 1rem;
+  flex-shrink: 0; /* 줄어들지 않게 고정 */
+  border-right: 1px solid #ddd;
 }
 
-.sidebar h2 {
-  margin-bottom: 10px;
-  font-size: 18px;
+.sidebar-header {
+  background-color: #0056b3;
+  border-radius: 10px;
+  color: white;
+  padding: 0.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
-.sidebar ul {
+.category-menu {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
 }
 
-.sidebar li {
-  padding: 8px 6px;
+.category-menu li {
+  margin-bottom: 0.5rem;
+}
+
+.category-menu button {
+  width: 100%;
+  padding: 0.5rem;
+  background: #fff;
+  border: 1px solid #ccc;
   cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
 }
 
-.sidebar li:hover {
-  background-color: #ddd;
+.category-menu button:hover {
+  background-color: #e0e0e0;
+}
+
+.category-box {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border: 1px solid #ddd;
 }
 
 /* 오른쪽 컨텐츠 영역 */
 .policy-list {
-  flex: 1;
+  flex-grow: 1; /* 남은 공간을 모두 차지 */
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3개의 같은 너비 칸 */
   gap: 20px; /* 카드 사이 간격 */
@@ -140,4 +161,39 @@
   color: white;
   border-color: #0056b3;
   cursor: default;
+}
+
+.overview-header {
+  background-color: #f0f0f0;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.field-card {
+  padding: 16px;
+}
+
+.field-card li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 6px;
+}
+
+.field-card h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.field-card p {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+}
+
+.overview-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
 }

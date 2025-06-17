@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaMapMarkedAlt, FaBell, FaBars, FaCog } from 'react-icons/fa';
+import { FaBell, FaBars, FaCog } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import DropdownMenuCard from '../components/DropdownMenu/DropdownMenuCard';
@@ -19,7 +19,7 @@ const Header: React.FC = () => {
           <FaBars size={20} />
         </button>
         <Link to={'/'}>
-          <FaMapMarkedAlt size={20} />
+          <img src="/icons/map.svg" />
         </Link>
         <Link to="/" className="title">
           길라<span className="logo-job">JOB</span>
