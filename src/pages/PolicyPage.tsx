@@ -32,6 +32,7 @@ const PolicyPage: React.FC = () => {
       .then((res) => {
         setPolicyList(res.data);
         setLoading(false);
+        console.log(res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -98,6 +99,7 @@ const PolicyPage: React.FC = () => {
                 plcyExplnCn={policy.plcyExplnCn}
                 aplyYmd={policy.aplyYmd}
                 plcyKywdNm={policy.plcyKywdNm}
+                aplyUrlAddr={policy.aplyUrlAddr}
               />
             ))}
           </section>

@@ -8,9 +8,31 @@ export interface PolicyCardProps {
   plcyExplnCn: string; // 정책 설명
   aplyYmd: string; // 신청 기간
   plcyKywdNm: string; // 정책 키워드명
+  aplyUrlAddr: string; // 신청 URL 주소
 }
 
-const PolictCard: React.FC<PolicyCardProps> = ({ lclsfNm, mclsfNm, plcyNm, plcyExplnCn, aplyYmd, plcyKywdNm }) => {
+const PolictCard: React.FC<PolicyCardProps> = ({
+  lclsfNm,
+  mclsfNm,
+  plcyNm,
+  plcyExplnCn,
+  aplyYmd,
+  plcyKywdNm,
+  aplyUrlAddr,
+}) => {
+  const normalizeUrl = (url: string): string => {
+    if (!/^https?:\/\//i.test(url)) {
+      return 'https://' + url;
+    }
+    return url;
+  };
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!aplyUrlAddr?.trim()) {
+      e.preventDefault();
+      alert('유효한 링크가 없습니다.');
+    }
+  };
   return (
     <div className="policy-card">
       <div className="tag-container">
@@ -39,7 +61,13 @@ const PolictCard: React.FC<PolicyCardProps> = ({ lclsfNm, mclsfNm, plcyNm, plcyE
       </div>
       <div className="linkbutton-container">
         <div className="linkbutton">
-          <a href="#" className="link-button">
+          <a
+            href={normalizeUrl(aplyUrlAddr)}
+            className="link-button"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleLinkClick}
+          >
             자세히 보기
           </a>
         </div>
