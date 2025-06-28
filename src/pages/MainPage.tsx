@@ -56,13 +56,13 @@ const MainPage: React.FC = () => {
             imageUrl="/icons/service3.svg"
             serviceName="나의 역량 진단"
             serviceDescription="사용자의 희망 직무와 비교해 부족한 역량을 보완할 수 있는 방법을 제공합니다."
-            link="#"
+            link="/diagnosis"
           />
           <ServiceCard
             imageUrl="/icons/service4.svg"
             serviceName="맞춤 청년 지원정책"
             serviceDescription="현재 진행중인 청년 지원정책 리스트를 볼 수 있습니다."
-            link="/training"
+            link="/policy"
           />
           <ServiceCard
             imageUrl="/icons/service5.svg"

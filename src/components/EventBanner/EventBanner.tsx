@@ -1,17 +1,35 @@
-// components/EventBanner.tsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './EventBanner.css';
 import banner from '../../assets/banner.jpg';
+import banner2 from '../../assets/banner2.jpg';
+import banner3 from '../../assets/banner3.jpg';
+
+const banners = [
+  { img: banner },
+  { img: banner2 },
+  { img: banner3 },
+];
 
 const EventBanner: React.FC = () => {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % banners.length);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="event-banner">
-      <img src={banner} className="event-banner-image" alt="Event Banner" />
-      {/* 텍스트 오버레이가 필요하다면 여기에 추가 */}
-      <div className="event-banner-text" hidden>
-        <h2>2025 봄맞이 취업 이벤트</h2>
-        <p>지금 참여하고 다양한 혜택을 받아보세요!</p>
-      </div>
+      {banners.map((b, index) => (
+        <div
+          key={index}
+          className={`event-banner-slide ${index === current ? 'active' : ''}`}
+        >
+          <img src={b.img} className="event-banner-image" alt={`배너 ${index + 1}`} />
+        </div>
+      ))}
     </div>
   );
 };

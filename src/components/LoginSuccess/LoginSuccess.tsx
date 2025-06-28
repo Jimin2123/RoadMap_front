@@ -1,15 +1,17 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import './LoginSuccess.css';
 import { MdSettings, MdLogout } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { logoutThunk } from '../../hooks/useAuth';
 import { RootState } from '../../types/store';
+import { YouthPolicyItemResponse } from '../../types/interfaces/response/YouthPolicyResponse';
+import { openExternalUrl } from '../../utils/openExternalUrl';
+import { getPolicyListServiceForMember } from '../../services/policyService';
 
 const LoginSuccess: React.FC = () => {
   const dispatch = useAppDispatch();
   const { member } = useAppSelector((state: RootState) => state.user);
-
   const handleLogout = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -19,6 +21,25 @@ const LoginSuccess: React.FC = () => {
       console.error('로그아웃 중 오류 발생:', error);
     }
   };
+  const [policies, setPolicies] = useState<YouthPolicyItemResponse[]>([]);
+  const [loadingPolicies, setLoadingPolicies] = useState(true);
+
+  useEffect(() => {
+    if (!member?.id) return;
+
+    const fetchPolicies = async () => {
+      try {
+        const response = await getPolicyListServiceForMember();
+        setPolicies(response.result.youthPolicyList);
+      } catch (error) {
+        console.error('정책 불러오기 실패:', error);
+      } finally {
+        setLoadingPolicies(false);
+      }
+    };
+
+    fetchPolicies();
+  }, [member?.id]);
 
   return (
     <div className="login-form-container">
@@ -26,7 +47,7 @@ const LoginSuccess: React.FC = () => {
       <div className="login-top-section">
         {/* 왼쪽: 프로필 */}
         <div className="profile-image-section">
-          <img src="/avatar.jpg" alt="Profile" className="avatar" draggable="false" />
+          <img src="/avatar.jpg" alt="Profile" className="main-avatar" draggable="false" />
         </div>
 
         <div className="profile-info-section">
@@ -88,20 +109,27 @@ const LoginSuccess: React.FC = () => {
       {/* 하단 영역 */}
       <div className="policy-box">
         <h3>청년 지원 정책 안내 리스트</h3>
-        <ul>
-          <li>
-            <a href="">청년 도약 프로젝트 안내</a>
-          </li>
-          <li>
-            <a href="">국가 기술 자격 지원 제도</a>
-          </li>
-          <li>
-            <a href="">구직활동 지원금 신청</a>
-          </li>
-          <li>
-            <a href="">청년 맞춤형 일자리 매칭</a>
-          </li>
-        </ul>
+        {loadingPolicies ? (
+          <p>로딩 중...</p>
+        ) : policies.length === 0 ? (
+          <p>정책이 없습니다.</p>
+        ) : (
+          <ul>
+            {policies.map((policy, index) => (
+              <li key={index}>
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openExternalUrl(policy.aplyUrlAddr, `${policy.plcyNm}은/는 신청 가능한 링크가 없습니다.`);
+                  }}
+                >
+                  {policy.plcyNm}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
