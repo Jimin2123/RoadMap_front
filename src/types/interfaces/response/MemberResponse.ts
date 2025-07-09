@@ -9,4 +9,5 @@ export interface MemberResponse {
   phoneNumber: string;
   profile: ProfileResponse;
   address: AddressResponse;
+  currentJob: string;
 }
