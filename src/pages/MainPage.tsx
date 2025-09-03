@@ -50,7 +50,7 @@ const MainPage: React.FC = () => {
             imageUrl="/icons/service2.svg"
             serviceName="맞춤 채용 정보"
             serviceDescription="현재 진행중인 채용정보를 확인할 수 있습니다."
-            link="matching"
+            link="/matching"
           />
           <ServiceCard
             imageUrl="/icons/service3.svg"
