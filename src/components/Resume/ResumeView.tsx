@@ -41,7 +41,7 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
               <h2 className="name">{name}</h2>
               <p className="contact">전화번호: {phoneNumber}</p>
               <p className="contact">이메일: {email}</p>
-              {education && <p className="contact">{`${education.school} ${major} | ${education.status}`}</p>}
+              {education && <p className="contact">{`${education.school} ${education.major} | ${education.status}`}</p>}
             </div>
             <div className="avatar-box">
               <img src="/avatar.jpg" alt="프로필" className="avatar" />
@@ -86,7 +86,7 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
               <ul>
                 {certificates.map((cert: CertCardData, index: number) => (
                   <li key={index}>
-                    {cert.name} ({cert.date}, {cert.issuer})
+                    {cert.name} ({cert.year}, {cert.agency})
                   </li>
                 ))}
               </ul>
@@ -110,7 +110,9 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
               <ul>
                 {activities.map((act: ActivityResponse, index: number) => (
                   <li key={index}>
-                    <div>{act.title} at {act.organization} ({act.period})</div>
+                    <div>
+                      {act.title} at {act.organization} ({act.period})
+                    </div>
                     <p>{act.description}</p>
                   </li>
                 ))}

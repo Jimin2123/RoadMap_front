@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '../layouts/Header';
 import Footer from '../layouts/Footer';
@@ -10,29 +9,32 @@ const rankedJobs = [
   {
     rank: 1,
     companyName: '한양이엔지',
-    reason: '사용자의 React 및 TypeScript 숙련도와 일치하며, 반도체 장비 산업에 대한 관심사와 부합합니다. 희망 연봉 범위 내에 있습니다.',
+    reason:
+      '사용자의 React 및 TypeScript 숙련도와 일치하며, 반도체 장비 산업에 대한 관심사와 부합합니다. 희망 연봉 범위 내에 있습니다.',
   },
   {
     rank: 2,
     companyName: '네이버웹툰',
-    reason: 'JavaScript 및 웹 프론트엔드 개발 경험을 중요하게 생각하는 포지션입니다. 대규모 트래픽 서비스 경험을 쌓을 수 있습니다.',
+    reason:
+      'JavaScript 및 웹 프론트엔드 개발 경험을 중요하게 생각하는 포지션입니다. 대규모 트래픽 서비스 경험을 쌓을 수 있습니다.',
   },
   {
     rank: 3,
     companyName: '토스',
-    reason: '핀테크 산업에 대한 높은 이해도와 빠른 학습 능력을 요구하는 포지션입니다. 사용자의 성장 가능성과 부합합니다.',
+    reason:
+      '핀테크 산업에 대한 높은 이해도와 빠른 학습 능력을 요구하는 포지션입니다. 사용자의 성장 가능성과 부합합니다.',
   },
 ];
 
 const MatchingPage: React.FC = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleMoreClick = () => {
-        // In a real application, this would navigate to a page with all job listings
-        // For now, we can navigate to a placeholder or the main job board page
-        navigate('/jobs'); // Assuming '/jobs' is the route for all job postings
-        console.log('더 많은 채용 정보 보기');
-    };
+  const handleMoreClick = () => {
+    // In a real application, this would navigate to a page with all job listings
+    // For now, we can navigate to a placeholder or the main job board page
+    navigate('/jobs'); // Assuming '/jobs' is the route for all job postings
+    console.log('더 많은 채용 정보 보기');
+  };
 
   return (
     <div className={styles.pageLayout}>
@@ -59,9 +61,9 @@ const MatchingPage: React.FC = () => {
         </section>
 
         <div className={styles.moreButtonContainer}>
-            <button className={styles.moreButton} onClick={handleMoreClick}>
-                더 많은 채용정보 보기
-            </button>
+          <button className={styles.moreButton} onClick={handleMoreClick}>
+            더 많은 채용정보 보기
+          </button>
         </div>
       </main>
       <Footer />

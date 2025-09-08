@@ -169,10 +169,10 @@ const Resume: React.FC<ResumeProps> = ({ member, onSubmissionSuccess }) => {
       {/* 프로젝트 & 포트폴리오 */}
       <div className={styles.cardRow}>
         <ResumeProjectCard value={form.projects} onChange={(val) => setForm((prev) => ({ ...prev, projects: val }))} />
-        <ResumePortfolioCard
+        {/* <ResumePortfolioCard
           value={form.portfolios}
           onChange={(val) => setForm((prev) => ({ ...prev, portfolios: val }))}
-        />
+        /> */}
       </div>
 
       {/* 제출 버튼 */}
