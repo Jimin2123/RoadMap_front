@@ -25,6 +25,9 @@ import styles from './Resume.module.css';
 import { useAppDispatch } from '../../store/hooks';
 import { createResumeThunk } from '../../hooks/useResume';
 import { useSubmissionAlert } from '../../hooks/useSubmissionAlert';
+import { MemberResponse } from '../../types/interfaces/response/MemberResponse';
+import { getMember } from '../../hooks/userUser';
+import { resetCreateStatus } from '../../store/slices/resumeSlice';
 
 /**
  * "카드" 컴포넌트에서 사용할 form 전체 Shape
@@ -40,6 +43,11 @@ interface ResumeFormState {
   portfolios: PortfolioCardData[];
 }
 
+interface ResumeProps {
+  member: MemberResponse | null;
+  onSubmissionSuccess: () => void;
+}
+
 const emptyForm: ResumeFormState = {
   basicInfo: { name: '', email: '', phoneNumber: '', currentJob: '', address: '' },
   intro: { content: '' },
@@ -51,8 +59,7 @@ const emptyForm: ResumeFormState = {
   portfolios: [],
 };
 
-const Resume: React.FC = () => {
-  const member = useSelector((state: RootState) => state.user.member);
+const Resume: React.FC<ResumeProps> = ({ member, onSubmissionSuccess }) => {
   const [form, setForm] = useState<ResumeFormState>(emptyForm);
   const [initialized, setInitialized] = useState(false);
 
@@ -68,6 +75,13 @@ const Resume: React.FC = () => {
   });
 
   useEffect(() => {
+    // 컴포넌트가 언마운트될 때 상태를 초기화합니다.
+    return () => {
+      dispatch(resetCreateStatus());
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
     if (!member) return;
 
     const profile = member.profile;
@@ -81,14 +95,14 @@ const Resume: React.FC = () => {
         currentJob: '',
         address: member.address?.address ?? '',
       },
-      intro: { content: member.profile?.resume?.introduction ?? '' },
+      intro: { content: profile?.resume?.introduction ?? '' },
       certs:
-        member.profile?.certificates?.map((cert) => ({
+        profile?.certificates?.map((cert) => ({
           name: cert.name,
           agency: cert.agency,
           year: cert.year,
         })) ?? [],
-      skills: profile?.skills.map((skill) => skill.name) || [],
+      skills: profile?.skills?.map((skill) => skill.name) || [],
       education: resume?.education || { school: '', major: '', period: '', status: '' },
       activities: resume?.activities || [],
       projects: resume?.projects || [],
@@ -125,6 +139,8 @@ const Resume: React.FC = () => {
 
     try {
       await dispatch(createResumeThunk(profileRequest)).unwrap();
+      await dispatch(getMember()).unwrap();
+      onSubmissionSuccess();
     } catch (err) {
       console.error('이력서 제출 실패:', err);
     }

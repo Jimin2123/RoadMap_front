@@ -12,6 +12,7 @@ export interface ProfileResponse {
   desiredCapabilities: NcsOccupation[]; // 희망직무 NCS
   userCapabilities: NcsOccupation[]; // 사용자의 NCS
   resume: ResumeResponse; // 이력서 정보
+  currentJob: string;
 }
 
 interface DesiredJob {

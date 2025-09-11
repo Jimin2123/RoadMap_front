@@ -12,7 +12,12 @@ const initialState: ResumeState = {
 const resumeSlice = createSlice({
   name: 'resume',
   initialState,
-  reducers: {},
+  reducers: {
+    resetCreateStatus: (state) => {
+      state.status.create = 'idle';
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createResumeThunk.pending, (state) => {
@@ -29,5 +34,7 @@ const resumeSlice = createSlice({
       });
   },
 });
+
+export const { resetCreateStatus } = resumeSlice.actions;
 
 export default resumeSlice.reducer;

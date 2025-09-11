@@ -1,0 +1,115 @@
+
+.pageLayout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.mainContent {
+  flex-grow: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.rankedSection {
+  margin-bottom: 3rem;
+}
+
+.rankedCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.rankCard {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  border-left: 5px solid;
+  transition: transform 0.2s ease-in-out;
+}
+
+.rankCard:hover {
+    transform: translateY(-5px);
+}
+
+.rankCard.rank1 { border-color: #ffd700; } /* Gold */
+.rankCard.rank2 { border-color: #c0c0c0; } /* Silver */
+.rankCard.rank3 { border-color: #cd7f32; } /* Bronze */
+
+
+.rankHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.rankLabel {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.rank1 .rankLabel { color: #e6ac00; }
+.rank2 .rankLabel { color: #a0a0a0; }
+.rank3 .rankLabel { color: #b87333; }
+
+.companyName {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.reasonSection {
+  margin-top: 1rem;
+}
+
+.reasonTitle {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.reasonText {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+.moreButtonContainer {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.moreButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.moreButton:hover {
+  background-color: #0056b3;
+}
