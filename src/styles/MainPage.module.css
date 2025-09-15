@@ -1,0 +1,66 @@
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-large);
+  margin-top: var(--spacing-small);
+  height: 420px;
+}
+
+.event-banner-section {
+  flex: 2;
+  overflow-y: auto;
+}
+
+.login-form-section {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.service-card-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-xl);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-deep);
+  height: auto;
+  min-height: 300px;
+  box-sizing: border-box;
+  padding: var(--spacing-large);
+}
+
+.job-posting-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--spacing-large);
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-large);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-deep);
+  box-sizing: border-box;
+}
+
+main {
+  flex: 1;
+}
+
+@media (max-width: 1024px) {
+  .top-section {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .event-banner-section,
+  .login-form-section {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .service-card-section {
+    gap: var(--spacing-large);
+  }
+}

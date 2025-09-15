@@ -1,6 +1,47 @@
 /* global.css */
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
 
+:root {
+  /* Colors */
+  --primary-color: #007bff;
+  --primary-color-dark: #0056b3;
+  --text-color: #333;
+  --text-color-light: #666;
+  --text-color-lighter: #999;
+  --white-color: #fff;
+  --border-color: #ddd;
+  --border-color-light: #ccc;
+  --background-color-light-gray: #f0f0f0;
+  --star-color: #ffd700;
+  --icon-color: #ccc;
+  --dropdown-bg-color: #333;
+  --dropdown-border-color: #444;
+  --dropdown-hover-bg-color: #555;
+
+  /* Shadows */
+  --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.05);
+  --shadow-deep: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  /* Font Sizes */
+  --font-size-root: 16px;
+  --font-size-small: 14px;
+  --font-size-base: 16px;
+  --font-size-large: 20px;
+  --font-size-xl: 30px;
+
+  /* Spacing */
+  --spacing-small: 10px;
+  --spacing-medium: 12px;
+  --spacing-large: 20px;
+  --spacing-xl: 40px;
+
+  /* Borders */
+  --border-radius-small: 6px;
+  --border-radius-medium: 8px;
+  --border-radius-large: 12px;
+}
+
 html,
 body {
   min-height: 100%;
@@ -9,24 +50,27 @@ body {
   margin-left: 100px;
   margin-right: 100px;
   padding: 0;
-  font-family:
-    'Pretendard Variable',
-    Pretendard,
-    -apple-system,
-    BlinkMacSystemFont,
-    system-ui,
-    Roboto,
-    'Helvetica Neue',
-    'Segoe UI',
-    'Apple SD Gothic Neo',
-    'Noto Sans KR',
-    'Malgun Gothic',
-    'Apple Color Emoji',
-    'Segoe UI Emoji',
-    'Segoe UI Symbol',
-    sans-serif;
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue',
+    'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', sans-serif;
   box-sizing: border-box;
-  font-size: 13px;
+  font-size: var(--font-size-root);
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    margin-left: var(--spacing-large);
+    margin-right: var(--spacing-large);
+  }
+}
+
+@media (max-width: 480px) {
+  html,
+  body {
+    margin-left: var(--spacing-medium);
+    margin-right: var(--spacing-medium);
+  }
 }
 /* Link 스타일 */
 a {
