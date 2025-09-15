@@ -183,7 +183,7 @@ const SignUpForm: React.FC = () => {
           alert('회원가입 실패: ' + (error.response?.data?.message || '알 수 없는 오류'));
         } else {
           // axios 에러가 아닌 경우 (네트워크 등)
-          alert('서버와 통신 중 오류가 발생했습니다.');
+          alert(error);
         }
         console.error(error);
       }

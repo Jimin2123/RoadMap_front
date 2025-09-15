@@ -37,6 +37,12 @@ axiosInstance.interceptors.response.use(
     const { response, config } = error;
     const original = config as InternalAxiosRequestConfig & { _retry?: boolean };
 
+    // 로그인 엔드포인트에 대한 401 응답은 토큰 재발급 로직을 건너뜁니다.
+    // 로그인 실패는 토큰 만료가 아닌 자격 증명 오류이므로 즉시 오류를 반환합니다.
+    if (response?.status === 401 && config?.url === '/api/v1/auth/login') {
+      return Promise.reject(error); // 원래 오류를 그대로 반환하여 프론트엔드로 전파
+    }
+
     if (response?.status === 401 && !original._retry) {
       original._retry = true;
 

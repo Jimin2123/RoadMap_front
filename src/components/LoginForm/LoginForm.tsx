@@ -20,15 +20,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, onLoginSuccess }) => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
     setLoading(true);
     try {
       await dispatch(login({ email, password })).unwrap();
-
       navigate('/');
       if (onLoginSuccess) onLoginSuccess();
     } catch (error) {
       console.error('로그인 실패:', error);
+      alert(error);
     } finally {
       setLoading(false);
     }
