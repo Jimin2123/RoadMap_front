@@ -10,11 +10,11 @@ const UserProfileCard = ({ name, skills }: UserProfileCardProps) => {
   const chartOption = {
     radar: {
       indicator: [
-        { name: '프론트엔드', max: 100 },
-        { name: '백엔드', max: 100 },
-        { name: '데이터베이스', max: 100 },
-        { name: 'UI/UX', max: 100 },
-        { name: '커뮤니케이션', max: 100 },
+        { name: '소통능력', max: 100 },
+        { name: '문제해결', max: 100 },
+        { name: '전문성', max: 100 },
+        { name: '경험', max: 100 },
+        { name: '수리능력', max: 100 },
       ],
       radius: 60, // 차트 크기 조절
     },
@@ -28,19 +28,23 @@ const UserProfileCard = ({ name, skills }: UserProfileCardProps) => {
             name: '나의 역량',
           },
         ],
-        areaStyle: { // 차트 내부 색상
-          color: 'rgba(79, 70, 229, 0.4)'
+        areaStyle: {
+          // 차트 내부 색상
+          color: 'rgba(79, 70, 229, 0.4)',
         },
-        lineStyle: { // 차트 라인 색상
-          color: 'rgba(79, 70, 229, 1)'
+        lineStyle: {
+          // 차트 라인 색상
+          color: 'rgba(79, 70, 229, 1)',
         },
-        itemStyle: { // 꼭짓점 색상
-          color: 'rgba(79, 70, 229, 1)'
-        }
+        itemStyle: {
+          // 꼭짓점 색상
+          color: 'rgba(79, 70, 229, 1)',
+        },
       },
     ],
-    tooltip: { // 마우스 호버 시 툴팁 표시
-      trigger: 'item'
+    tooltip: {
+      // 마우스 호버 시 툴팁 표시
+      trigger: 'item',
     },
     // 차트의 여백을 조절
     grid: {
@@ -54,7 +58,7 @@ const UserProfileCard = ({ name, skills }: UserProfileCardProps) => {
   return (
     <div className={styles.profileCard}>
       <h2>{name}님을 위한 맞춤 채용 정보</h2>
-      
+
       {/* ECharts 레이더 차트 */}
       <div className={styles.chartContainer}>
         <ReactECharts option={chartOption} style={{ height: '250px' }} />
@@ -62,7 +66,7 @@ const UserProfileCard = ({ name, skills }: UserProfileCardProps) => {
 
       <div className={styles.skillTags}>
         <p>보유 기술</p>
-        {skills.map(skill => (
+        {skills.map((skill) => (
           <span key={skill} className={styles.tag}>
             #{skill}
           </span>
