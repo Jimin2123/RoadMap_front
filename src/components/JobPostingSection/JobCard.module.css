@@ -74,7 +74,7 @@
 }
 
 .job-details-section {
-  font-size: 13px; /* Consider var(--font-size-small) */
+  font-size: var(--font-size-small);
   color: var(--text-color-lighter);
   line-height: 24px;
   white-space: nowrap;
