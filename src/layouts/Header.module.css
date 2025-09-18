@@ -43,7 +43,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  display: none; /* Hidden by default */
+  display: block; /* Hidden by default */
 }
 
 .login-button {
@@ -55,6 +55,7 @@
   cursor: pointer;
   font-size: var(--font-size-base);
   transition: background-color 0.3s;
+  display: block; /*tlqkf 무조건 보이게*/
 }
 
 .login-button:hover {

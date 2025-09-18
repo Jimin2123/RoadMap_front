@@ -37,7 +37,8 @@ const MatchingPage: React.FC = () => {
   };
 
   return (
-    <div className={styles.pageLayout}>
+    <div className="layout">
+      {/* 임시 통일 할려고 */}
       <Header />
       <main className={styles.mainContent}>
         <h1 className={styles.title}>맞춤 채용 정보</h1>

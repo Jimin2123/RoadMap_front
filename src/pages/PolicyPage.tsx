@@ -56,7 +56,7 @@ const PolicyPage: React.FC = () => {
   };
 
   return (
-    <div className="policy-page">
+    <div className="layout">
       <Header />
       <div className="content-wrapper">
         {/* 왼쪽 사이드바: 카테고리 메뉴 */}
