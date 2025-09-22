@@ -55,7 +55,7 @@
   cursor: pointer;
   font-size: var(--font-size-base);
   transition: background-color 0.3s;
-  display: block; /*tlqkf 무조건 보이게*/
+  display: block; /* Always visible */
 }
 
 .login-button:hover {

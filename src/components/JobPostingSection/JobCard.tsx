@@ -37,7 +37,7 @@ const JobCard: React.FC<JobCardProps> = ({
         <div className={styles['job-card-top']}>
           <div className={styles['job-card-image']} style={{ backgroundImage: `url(${companyLogoUrl})` }} />
           <button className={styles['favorite-button']} onClick={toggleFavorite}>
-            {isFavorited ? <FaStar color="var(--star-color)" /> : <FaRegStar color="var(--icon-color)" />}
+            {isFavorited ? <FaStar className={styles['star-icon']} /> : <FaRegStar className={styles['icon']} />}
           </button>
         </div>
         <div className={styles['job-info']}>
