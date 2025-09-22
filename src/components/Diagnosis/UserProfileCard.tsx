@@ -16,7 +16,7 @@ const UserProfileCard = ({ name, skills }: UserProfileCardProps) => {
         { name: '경험', max: 100 },
         { name: '수리능력', max: 100 },
       ],
-      radius: 60, // 차트 크기 조절
+      radius: 120, // 차트 크기 조절
     },
     series: [
       {
@@ -61,7 +61,7 @@ const UserProfileCard = ({ name, skills }: UserProfileCardProps) => {
 
       {/* ECharts 레이더 차트 */}
       <div className={styles.chartContainer}>
-        <ReactECharts option={chartOption} style={{ height: '250px' }} />
+        <ReactECharts option={chartOption} style={{ height: '300px' }} />
       </div>
 
       <div className={styles.skillTags}>
@@ -71,6 +71,14 @@ const UserProfileCard = ({ name, skills }: UserProfileCardProps) => {
             #{skill}
           </span>
         ))}
+      </div>
+
+      <div className={styles.aiAnalysisSection}>
+        <h3>AI 분석 결과</h3>
+        <p>
+          AI 분석 결과에 대한 요약 내용이 여기에 표시됩니다. 사용자의 역량과 추천 직무에 대한 심층적인 분석을
+          제공합니다.
+        </p>
       </div>
     </div>
   );

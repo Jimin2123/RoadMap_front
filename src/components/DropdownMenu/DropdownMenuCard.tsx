@@ -16,9 +16,7 @@ const menuItems = [
   { icon: <FaBriefcase />, label: '채용정보', description: '채용공고를 확인해보세요', path: '/jobs' },
   { icon: <FaQuestionCircle />, label: '고객센터', description: '문의사항을 해결해드립니다', path: '/support' },
   { icon: <FaCog />, label: '설정', description: '환경 및 계정 설정을 관리하세요', path: '/settings' }, // ✅ 설정 추가
-
 ];
-
 
 const DropdownMenuCard: React.FC<Props> = ({ isOpen }) => {
   const { isAuthenticated } = useAppSelector((state) => state.auth);

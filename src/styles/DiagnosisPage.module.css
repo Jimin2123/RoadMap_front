@@ -8,22 +8,34 @@
   margin: 0 auto;
   display: flex;
   gap: 24px;
+  margin-bottom: 24px;
 }
 
 .leftAside {
-  width: 300px;
+  width: 700px;
   flex-shrink: 0;
 }
 
 .rightSection {
   flex-grow: 1;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  padding-right: 10px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
-.profileCard, .filterCard, .jobCard {
+.rightSection::-webkit-scrollbar {
+  display: none;
+}
+
+.profileCard,
+.filterCard,
+.jobCard {
   background-color: #ffffff;
   border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.05);
 }
 
 .profileCard {
@@ -64,6 +76,41 @@
 .jobList {
   display: grid;
   gap: 20px;
+  max-height: 270px;
+}
+
+.bottomSection {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  max-width: 1200px;
+  margin: 0 auto; /* Adjust margin-top to keep 40px, and center */
+}
+
+.bottomTitle {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.bottomJobList {
+  display: flex;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  padding-bottom: 10px; /* Space for scrollbar */
+  gap: 20px; /* Space between cards */
+  scroll-behavior: smooth; /* Smooth scrolling */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.bottomJobCard {
+  width: 300px; /* Fixed width for uniform size */
+  flex-shrink: 0; /* Prevent cards from shrinking */
+}
+
+.bottomJobList::-webkit-scrollbar {
+  display: none;
 }
 
 .jobCard {

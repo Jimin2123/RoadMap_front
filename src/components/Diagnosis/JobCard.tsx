@@ -1,24 +1,25 @@
 import styles from './JobCard.module.css';
 
 interface Job {
-    id: number;
-    company: string;
-    title: string;
-    skills: string[];
-    deadline: string;
+  id: number;
+  company: string;
+  title: string;
+  skills: string[];
+  deadline: string;
 }
 
 interface JobCardProps {
   job: Job;
+  className?: string;
 }
 
-const JobCard = ({ job }: JobCardProps) => {
+const JobCard = ({ job, className }: JobCardProps) => {
   return (
-    <div className={styles.jobCard}>
+    <div className={`${styles.jobCard} ${className || ''}`}>
       <h4>{job.company}</h4>
       <p>{job.title}</p>
       <div className={styles.skillTags}>
-        {job.skills.map(skill => (
+        {job.skills.map((skill) => (
           <span key={skill} className={styles.tag}>
             {skill}
           </span>

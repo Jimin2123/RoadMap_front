@@ -3,17 +3,16 @@
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  margin-bottom: 24px;
 }
 
 .profileCard h2 {
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 8px; /* 차트와의 간격을 위해 조정 */
 }
 
 .chartContainer {
-  margin: 16px 0;
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 
 .skillTags p {
@@ -33,4 +32,22 @@
   font-weight: 500;
   margin-right: 8px;
   margin-bottom: 8px;
+}
+
+.aiAnalysisSection {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.aiAnalysisSection h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.aiAnalysisSection p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
 }
