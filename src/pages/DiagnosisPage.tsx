@@ -1,8 +1,10 @@
+import React, { useRef } from 'react';
 import Header from '../layouts/Header';
 import Footer from '../layouts/Footer';
 import styles from '../styles/DiagnosisPage.module.css';
 import UserProfileCard from '../components/Diagnosis/UserProfileCard';
 import JobCard from '../components/Diagnosis/JobCard';
+import BottomJobCard from '../components/Diagnosis/BottomJobCard';
 
 // 임시 더미 데이터
 const user = {
@@ -84,6 +86,20 @@ const recommendedJobs = [
 ];
 
 const DiagnosisPage = () => {
+  const jobListRef = useRef<HTMLDivElement>(null);
+
+  const handlePrev = () => {
+    if (jobListRef.current) {
+      jobListRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+    }
+  };
+
+  const handleNext = () => {
+    if (jobListRef.current) {
+      jobListRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="layout">
       <Header />
@@ -100,17 +116,25 @@ const DiagnosisPage = () => {
             <section className={styles.rightSection}>
               <div className={styles.jobList}>
                 {recommendedJobs.map((job) => (
-                  <JobCard key={job.id} job={job} />
+                  <JobCard key={job.id} job={job} className={styles.rightSectionJobCard} />
                 ))}
               </div>
             </section>
           </div>
           <section className={styles.bottomSection}>
             <h2 className={styles.bottomTitle}>더 많은 채용 정보</h2>
-            <div className={styles.bottomJobList}>
-              {recommendedJobs.map((job) => (
-                <JobCard key={job.id} job={job} />
-              ))}
+            <div className={styles.bottomJobListContainer}>
+              <button className={styles.prevButton} onClick={handlePrev}>
+                &lt;
+              </button>
+              <div className={styles.bottomJobList} ref={jobListRef}>
+                {recommendedJobs.map((job) => (
+                  <BottomJobCard key={job.id} job={job} />
+                ))}
+              </div>
+              <button className={styles.nextButton} onClick={handleNext}>
+                &gt;
+              </button>
             </div>
           </section>
         </div>

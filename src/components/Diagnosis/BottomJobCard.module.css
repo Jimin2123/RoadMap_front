@@ -1,26 +1,19 @@
-.jobCard {
+.bottomJobCard {
   background-color: #ffffff;
   border-radius: 16px;
-  padding: 20px;
+  padding: 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  min-width: 400px;
+  width: 300px;
+  flex-shrink: 0;
 }
 
-.rightJobCard {
-  background-color: #ffffff;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  min-width: 300px;
-}
-
-.jobCard h4 {
+.bottomJobCard h4 {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 8px;
 }
 
-.jobCard p {
+.bottomJobCard p {
   font-size: 14px;
   color: #333;
   margin-bottom: 12px;

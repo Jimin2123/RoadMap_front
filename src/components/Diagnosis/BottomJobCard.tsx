@@ -1,4 +1,4 @@
-import styles from './JobCard.module.css';
+import styles from './BottomJobCard.module.css';
 
 interface Job {
   id: number;
@@ -8,14 +8,13 @@ interface Job {
   deadline: string;
 }
 
-interface JobCardProps {
+interface BottomJobCardProps {
   job: Job;
-  className?: string;
 }
 
-const JobCard = ({ job, className }: JobCardProps) => {
+const BottomJobCard = ({ job }: BottomJobCardProps) => {
   return (
-    <div className={`${styles.rightJobCard} ${className || ''}`}>
+    <div className={styles.bottomJobCard}>
       <h4>{job.company}</h4>
       <p>{job.title}</p>
       <div className={styles.skillTags}>
@@ -30,4 +29,4 @@ const JobCard = ({ job, className }: JobCardProps) => {
   );
 };
 
-export default JobCard;
+export default BottomJobCard;
