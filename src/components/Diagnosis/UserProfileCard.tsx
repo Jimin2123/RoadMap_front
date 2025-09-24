@@ -1,67 +1,25 @@
-import ReactECharts from 'echarts-for-react';
+import NcsRadar from './NcsRadar';
 import styles from './UserProfileCard.module.css';
+
+interface NcsData {
+  indicators: { name: string; max: number }[];
+  series: { name: string; value: number[] }[];
+}
 
 interface UserProfileCardProps {
   name: string;
   skills: string[];
+  ncsData: NcsData;
 }
 
-const UserProfileCard = ({ name, skills }: UserProfileCardProps) => {
-  const chartOption = {
-    radar: {
-      indicator: [
-        { name: '소통능력', max: 100 },
-        { name: '문제해결', max: 100 },
-        { name: '전문성', max: 100 },
-        { name: '경험', max: 100 },
-        { name: '수리능력', max: 100 },
-      ],
-      radius: 120, // 차트 크기 조절
-    },
-    series: [
-      {
-        name: '역량',
-        type: 'radar',
-        data: [
-          {
-            value: [85, 60, 70, 80, 90],
-            name: '나의 역량',
-          },
-        ],
-        areaStyle: {
-          // 차트 내부 색상
-          color: 'rgba(79, 70, 229, 0.4)',
-        },
-        lineStyle: {
-          // 차트 라인 색상
-          color: 'rgba(79, 70, 229, 1)',
-        },
-        itemStyle: {
-          // 꼭짓점 색상
-          color: 'rgba(79, 70, 229, 1)',
-        },
-      },
-    ],
-    tooltip: {
-      // 마우스 호버 시 툴팁 표시
-      trigger: 'item',
-    },
-    // 차트의 여백을 조절
-    grid: {
-      top: '10%',
-      bottom: '10%',
-      left: '10%',
-      right: '10%',
-    },
-  };
-
+const UserProfileCard = ({ name, skills, ncsData }: UserProfileCardProps) => {
   return (
     <div className={styles.profileCard}>
       <h2>{name}님을 위한 맞춤 채용 정보</h2>
 
       {/* ECharts 레이더 차트 */}
       <div className={styles.chartContainer}>
-        <ReactECharts option={chartOption} style={{ height: '300px' }} />
+        <NcsRadar data={ncsData} />
       </div>
 
       <div className={styles.skillTags}>

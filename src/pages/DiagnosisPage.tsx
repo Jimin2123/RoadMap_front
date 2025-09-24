@@ -12,6 +12,28 @@ const user = {
   skills: ['React', 'TypeScript', 'JavaScript', 'CSS', 'HTML'],
 };
 
+// Dummy data for the NCS Radar Chart
+const ncsCompetencyData = {
+  indicators: [
+    { name: '의사소통', max: 100 },
+    { name: '문제해결', max: 100 },
+    { name: '자원관리', max: 100 },
+    { name: '기술능력', max: 100 },
+    { name: '대인관계', max: 100 },
+    { name: '조직이해', max: 100 },
+  ],
+  series: [
+    {
+      name: '나의 NCS 역량',
+      value: [90, 75, 60, 85, 70, 80],
+    },
+    {
+      name: '평균 NCS 역량',
+      value: [70, 80, 75, 80, 75, 70],
+    },
+  ],
+};
+
 const recommendedJobs = [
   {
     id: 1,
@@ -109,8 +131,7 @@ const DiagnosisPage = () => {
             <div>div영역 추가</div>
             {/* 왼쪽 섹션 */}
             <aside className={styles.leftAside}>
-              <UserProfileCard name={user.name} skills={user.skills} />
-              {/* <FilterPanel /> */}
+              <UserProfileCard name={user.name} skills={user.skills} ncsData={ncsCompetencyData} />
             </aside>
             {/* 오른쪽 섹션 */}
             <section className={styles.rightSection}>
