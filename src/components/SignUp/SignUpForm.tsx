@@ -90,6 +90,32 @@ const SignUpForm: React.FC = () => {
     }));
   };
 
+  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawValue = e.target.value.replace(/\D/g, ''); // 숫자만 추출
+    const len = rawValue.length;
+    let formattedValue = '';
+
+    // 길이에 따라 동적으로 하이픈 추가
+    if (len < 4) {
+      // ex: 010
+      formattedValue = rawValue;
+    } else if (len < 7) {
+      // ex: 010-123
+      formattedValue = `${rawValue.slice(0, 3)}-${rawValue.slice(3)}`;
+    } else if (len < 11) {
+      // ex: 011-123-4567 (10자리 형식)
+      formattedValue = `${rawValue.slice(0, 3)}-${rawValue.slice(3, 6)}-${rawValue.slice(6)}`;
+    } else {
+      // ex: 010-1234-5678 (11자리 형식)
+      formattedValue = `${rawValue.slice(0, 3)}-${rawValue.slice(3, 7)}-${rawValue.slice(7, 11)}`;
+    }
+
+    setForm((prev) => ({
+      ...prev,
+      phoneNumber: formattedValue,
+    }));
+  };
+
   const handleAddressSelect = (data: DaumPostcodeData) => {
     setForm((prev) => ({
       ...prev,
@@ -139,7 +165,10 @@ const SignUpForm: React.FC = () => {
     } else if (!/^[\w.-]+@[\w.-]+\.\w+$/.test(form.loginRequest.email)) {
       newErrors.email = '유효한 이메일 형식이 아닙니다';
     }
-    if (!/^\d{10,11}$/.test(form.phoneNumber)) newErrors.phoneNumber = '휴대폰 번호는 숫자만 10~11자리 입력하세요';
+    if (!/^\d{3}-\d{3,4}-\d{4}$/.test(form.phoneNumber)) {
+      // ✅ 수정된 코드
+      newErrors.phoneNumber = '휴대폰 번호 형식이 올바르지 않습니다';
+    }
     if (!form.addressRequest.address) newErrors.address = '주소를 입력하세요';
 
     return newErrors;
@@ -158,7 +187,8 @@ const SignUpForm: React.FC = () => {
         if (!value.trim()) return '아이디(이메일)를 입력하세요';
         return /^[\w.-]+@[\w.-]+\.\w+$/.test(value) ? '' : '유효한 이메일 형식이 아닙니다';
       case 'phoneNumber':
-        return /^\d{10,11}$/.test(value) ? '' : '숫자만 10~11자리 입력';
+        return /^\d{3}-\d{3,4}-\d{4}$/.test(value) ? '' : '올바른 전화번호 형식이 아닙니다'; // ✅ 수정된 코드
+
       case 'addressRequest.address':
         return value ? '' : '주소는 필수입니다';
       default:
@@ -175,7 +205,7 @@ const SignUpForm: React.FC = () => {
       try {
         await dispatch(signUp(form)).unwrap();
         await dispatch(login(form.loginRequest)).unwrap();
-
+        alert('회원가입 및 로그인 성공!');
         navigate('/');
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
@@ -287,7 +317,8 @@ const SignUpForm: React.FC = () => {
             name="phoneNumber"
             placeholder="휴대폰 번호"
             value={form.phoneNumber}
-            onChange={handleChange}
+            onChange={handlePhoneNumberChange} // ✅ 새로운 핸들러로 교체
+            maxLength={13} // '010-1234-5678'의 길이는 13
             className={inputClass('phoneNumber')}
           />
         </div>
