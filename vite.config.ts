@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => {
         mode === 'development' // 개발 모드에서만 프록시 적용
           ? {
               '/api': {
-                target: env.VITE_APP_API_URL, // 환경 변수에서 API URL 설정
+                target: env.VITE_BACKEND_BASE_URL, // 환경 변수에서 API URL 설정
                 changeOrigin: true, // 도메인이 다른 서버로 프록시 설정
                 rewrite: (path) => path.replace(/^\/api/, ''), // API 경로에서 '/api' 제거
               },
