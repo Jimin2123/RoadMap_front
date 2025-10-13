@@ -1,57 +1,165 @@
-.page {
-  max-width: 1100px;
-  margin: 0 auto;
+.main {
   padding: 40px 20px;
+  background-color: #f7f8fa;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-.cardBox {
-  background-color: #ffffff;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-.rowSection {
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
   gap: 24px;
-  margin-bottom: 48px;
+  margin-bottom: 24px;
 }
 
-.halfBox {
-  flex: 1;
+.leftAside {
+  width: 60%;
+  flex-shrink: 0;
+}
 
+.rightSection {
+  flex-grow: 1;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 20px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.rightSection::-webkit-scrollbar {
+  display: none;
+}
+
+.profileCard,
+.filterCard {
   background-color: #ffffff;
-
   border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.452);
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.05);
 }
-.cardBox {
-  background-color: #ffffff;
-  margin-top: 24px;
-  display: flex;
-  border-radius: 100px;
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.489);
-  justify-content: center;
-  border-radius: 8px;
-  align-items: center;
+
+.profileCard {
+  margin-bottom: 24px;
 }
-.cardBox h2 {
+
+.profileCard h2 {
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 10px;
-  color: #222;
+  margin-bottom: 16px;
 }
-.line {
-  width: 100%;
-  height: 1px;
-  background-color: #e0e0e0;
-  margin: 20px 0;
+
+.skillTags p {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.tag {
+  display: inline-block;
+  background-color: #eef2ff;
+  color: #4f46e5;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.filterCard h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.jobList {
+  display: grid;
+  gap: 20px;
+  max-height: 270px;
+}
+
+.bottomSection {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  max-width: 1200px;
+  margin: 0 auto; /* Adjust margin-top to keep 40px, and center */
+}
+
+.bottomTitle {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.bottomJobListContainer {
+  display: flex;
+  align-items: center;
+}
+
+.bottomJobList {
+  display: flex;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  padding-bottom: 10px; /* Space for scrollbar */
+  gap: 20px; /* Space between cards */
+  scroll-behavior: smooth; /* Smooth scrolling */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  flex-grow: 1;
+}
+
+.prevButton,
+.nextButton {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 500px;
+  width: 100px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.prevButton:hover,
+.nextButton:hover {
+  background: #f0f0f0;
+  transform: scale(1.1);
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+  .main {
+    padding: 20px 10px;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .leftAside {
+    width: 100%;
+  }
+
+  .rightSection {
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .bottomTitle {
+    font-size: 20px;
+  }
+
+  .prevButton,
+  .nextButton {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
 }

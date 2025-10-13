@@ -1,0 +1,23 @@
+.nav {
+  display: flex;
+  gap: var(--spacing-xl);
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  padding: var(--spacing-small) 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.3s, border-bottom-color 0.3s;
+}
+
+.nav a:hover {
+  color: var(--primary-color);
+}
+
+.nav a.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}

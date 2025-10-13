@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './JobCard.css';
+import styles from './JobCard.module.css';
 import { FaStar, FaRegStar } from 'react-icons/fa';
 import { filterWholeAreas } from '../../utils/locationUtils';
 
@@ -33,21 +33,21 @@ const JobCard: React.FC<JobCardProps> = ({
 
   return (
     <a href={url} target="_blank" rel="noopener noreferrer">
-      <div className="job-card">
-        <div className="job-card-top">
-          <div className="job-card-image" style={{ backgroundImage: `url(${companyLogoUrl})` }} />
-          <button className="favorite-button" onClick={toggleFavorite}>
-            {isFavorited ? <FaStar color="#ffd700" /> : <FaRegStar color="#ccc" />}
+      <div className={styles['job-card']}>
+        <div className={styles['job-card-top']}>
+          <div className={styles['job-card-image']} style={{ backgroundImage: `url(${companyLogoUrl})` }} />
+          <button className={styles['favorite-button']} onClick={toggleFavorite}>
+            {isFavorited ? <FaStar className={styles['star-icon']} /> : <FaRegStar className={styles['icon']} />}
           </button>
         </div>
-        <div className="job-info">
-          <div className="job-title-section">
-            <h3 className="job-title">{jobTitle}</h3>
+        <div className={styles['job-info']}>
+          <div className={styles['job-title-section']}>
+            <h3 className={styles['job-title']}>{jobTitle}</h3>
           </div>
-          <div className="job-company-section">
-            <p className="job-company">{company}</p>
+          <div className={styles['job-company-section']}>
+            <p className={styles['job-company']}>{company}</p>
           </div>
-          <div className="job-details-section">
+          <div className={styles['job-details-section']}>
             <span>{filteredLocation || location}</span> | <span>{experience}</span> | <span>{education}</span>
           </div>
         </div>

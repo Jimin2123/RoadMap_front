@@ -1,0 +1,78 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-small) var(--spacing-large);
+  background-color: var(--white-color);
+  box-shadow: var(--shadow-light);
+  position: relative;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-medium);
+}
+
+.header-center {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-medium);
+}
+
+.title {
+  font-size: var(--font-size-large);
+  font-weight: bold;
+}
+
+.logo-job {
+  color: var(--primary-color);
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: block; /* Hidden by default */
+}
+
+.login-button {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+  padding: var(--spacing-small) var(--spacing-large);
+  border-radius: var(--border-radius-small);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  transition: background-color 0.3s;
+  display: block; /* Always visible */
+}
+
+.login-button:hover {
+  background-color: var(--primary-color-dark);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .header-center {
+    display: none;
+  }
+
+  .menu-button {
+    display: block;
+  }
+
+  .login-button {
+    display: none;
+  }
+}

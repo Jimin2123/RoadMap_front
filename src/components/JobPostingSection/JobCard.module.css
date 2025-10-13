@@ -1,12 +1,12 @@
 .job-card {
   width: 250px;
-  padding: 16px;
+  padding: var(--font-size-base);
   height: 200px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--spacing-small);
+  background-color: var(--white-color);
   position: relative;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-medium);
   transition: transform 0.2s ease;
 }
 
@@ -16,14 +16,14 @@
 
 .favorite-button {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: var(--spacing-small);
+  right: var(--spacing-small);
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 20px;
+  font-size: var(--font-size-large);
   z-index: 1;
-  color: #ccc;
+  color: var(--icon-color);
   transition: transform 0.2s ease;
   margin-left: auto; /* 오른쪽 정렬 */
 }
@@ -31,11 +31,11 @@
 .job-card-image {
   width: 200px;
   height: 50px; /* 고정 높이 */
-  border-radius: 8px;
+  border-radius: var(--border-radius-medium);
   background-size: cover; /* 이미지를 채움 */
   background-position: center; /* 중앙 정렬 */
   background-repeat: no-repeat;
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-medium);
 }
 
 .favorite-button:hover {
@@ -55,9 +55,9 @@
 }
 
 .job-title-section .job-title {
-  font-size: 16px;
+  font-size: var(--font-size-base);
   font-weight: bold;
-  color: #333;
+  color: var(--text-color);
 
   display: -webkit-box;
   -webkit-line-clamp: 2; /* 최대 2줄 */
@@ -69,13 +69,13 @@
 }
 
 .job-company-section .job-company {
-  font-size: 14px;
-  color: #666;
+  font-size: var(--font-size-small);
+  color: var(--text-color-light);
 }
 
 .job-details-section {
-  font-size: 13px;
-  color: #999;
+  font-size: var(--font-size-small);
+  color: var(--text-color-lighter);
   line-height: 24px;
   white-space: nowrap;
 }

@@ -1,11 +1,8 @@
-.policy-page {
-  font-family: Arial, sans-serif;
-}
-
 .content-wrapper {
   display: flex;
   gap: 20px;
   margin-top: 20px;
+  flex: 1; /* Fill available vertical space */
 }
 .main-content {
   width: 100%;

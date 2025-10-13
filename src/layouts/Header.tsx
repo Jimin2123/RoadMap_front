@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { FaBell, FaBars, FaCog } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import './Header.css';
+import { Link, useNavigate } from 'react-router-dom';
+import styles from './Header.module.css';
 import DropdownMenuCard from '../components/DropdownMenu/DropdownMenuCard';
-import { useNavigate } from 'react-router-dom'; // 페이지 이동용
 import { useAppSelector } from '../store/hooks';
 import { RootState } from '../types/store';
 
@@ -13,24 +12,36 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <header className="header">
-      <div className="header-left">
-        <button className="menu-button" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+    <header className={styles.header}>
+      <div className={styles['header-left']}>
+        <button className={styles['menu-button']} onClick={() => setIsMenuOpen(!isMenuOpen)}>
           <FaBars size={20} />
         </button>
         <Link to={'/'}>
-          <img src="/icons/map.svg" />
+          <img src="/icons/map.svg" alt="Logo" />
         </Link>
-        <Link to="/" className="title">
-          길라<span className="logo-job">JOB</span>
+        <Link to="/" className={styles.title}>
+          길라<span className={styles['logo-job']}>JOB</span>
         </Link>
       </div>
-      {isAuthenticated && (
-        <div className="header-right">
-          <FaBell size={20} className="icon" />
-          <FaCog size={20} className="icon" onClick={() => navigate('/settings')} style={{ cursor: 'pointer' }} />
-        </div>
-      )}
+
+      <div className={styles['header-right']}>
+        {isAuthenticated ? (
+          <>
+            <FaBell size={20} className={styles.icon} />
+            <FaCog
+              size={20}
+              className={styles.icon}
+              onClick={() => navigate('/settings')}
+              style={{ cursor: 'pointer' }}
+            />
+          </>
+        ) : (
+          <button className={styles['login-button']} onClick={() => navigate('/login')}>
+            로그인
+          </button>
+        )}
+      </div>
 
       <DropdownMenuCard isOpen={isMenuOpen} />
     </header>

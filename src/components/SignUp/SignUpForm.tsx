@@ -40,7 +40,16 @@ const SignUpForm: React.FC = () => {
     if (name === 'birthDate') {
       newValue = value.replace(/[^0-9]/g, '').slice(0, 8);
     } else if (name === 'phoneNumber') {
-      newValue = value.replace(/[^0-9]/g, '').slice(0, 11);
+      // 숫자만 추출
+      const numbers = value.replace(/[^0-9]/g, '').slice(0, 11);
+      // 010-1234-5678 형식으로 포맷팅
+      if (numbers.length <= 3) {
+        newValue = numbers;
+      } else if (numbers.length <= 7) {
+        newValue = `${numbers.slice(0, 3)}-${numbers.slice(3)}`;
+      } else {
+        newValue = `${numbers.slice(0, 3)}-${numbers.slice(3, 7)}-${numbers.slice(7)}`;
+      }
     } else {
       newValue = value;
     }
@@ -139,7 +148,9 @@ const SignUpForm: React.FC = () => {
     } else if (!/^[\w.-]+@[\w.-]+\.\w+$/.test(form.loginRequest.email)) {
       newErrors.email = '유효한 이메일 형식이 아닙니다';
     }
-    if (!/^\d{10,11}$/.test(form.phoneNumber)) newErrors.phoneNumber = '휴대폰 번호는 숫자만 10~11자리 입력하세요';
+    // 하이픈 제거 후 검증
+    const phoneDigits = form.phoneNumber.replace(/[^0-9]/g, '');
+    if (!/^\d{10,11}$/.test(phoneDigits)) newErrors.phoneNumber = '휴대폰 번호는 10~11자리여야 합니다';
     if (!form.addressRequest.address) newErrors.address = '주소를 입력하세요';
 
     return newErrors;
@@ -157,8 +168,10 @@ const SignUpForm: React.FC = () => {
       case 'loginRequest.email':
         if (!value.trim()) return '아이디(이메일)를 입력하세요';
         return /^[\w.-]+@[\w.-]+\.\w+$/.test(value) ? '' : '유효한 이메일 형식이 아닙니다';
-      case 'phoneNumber':
-        return /^\d{10,11}$/.test(value) ? '' : '숫자만 10~11자리 입력';
+      case 'phoneNumber': {
+        const phoneDigits = value.replace(/[^0-9]/g, '');
+        return /^\d{10,11}$/.test(phoneDigits) ? '' : '휴대폰 번호는 10~11자리여야 합니다';
+      }
       case 'addressRequest.address':
         return value ? '' : '주소는 필수입니다';
       default:
@@ -173,7 +186,12 @@ const SignUpForm: React.FC = () => {
 
     if (Object.keys(newErrors).length === 0) {
       try {
-        await dispatch(signUp(form)).unwrap();
+        // 서버 전송 전 전화번호 하이픈 제거
+        const submitData = {
+          ...form,
+        };
+
+        await dispatch(signUp(submitData)).unwrap();
         await dispatch(login(form.loginRequest)).unwrap();
 
         navigate('/');
