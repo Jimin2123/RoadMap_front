@@ -1,4 +1,17 @@
-import { ActivityCardData, EduCardData, IntroCardData, PortfolioCardData, ProjectCardData } from '../ResumeData';
+import {
+  ActivityCardData,
+  CareerCardData,
+  DesiredJobCardData,
+  EduCardData,
+  IntroCardData,
+  PortfolioCardData,
+  ProjectCardData,
+} from '../ResumeData';
+
+export interface SkillRequest {
+  name: string;
+  proficiency: 'BEGINNER' | 'MIDDLE' | 'ADVANCED';
+}
 
 export interface ResumeRequest {
   activities: ActivityCardData[];
@@ -6,4 +19,6 @@ export interface ResumeRequest {
   introduction: IntroCardData;
   portfolios: PortfolioCardData[];
   projects: ProjectCardData[];
+  careers: CareerCardData[];
+  desiredCompany: DesiredJobCardData;
 }

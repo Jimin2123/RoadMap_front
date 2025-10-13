@@ -1,9 +1,12 @@
 import React, { useState, useRef, useCallback, useEffect, ChangeEvent, KeyboardEvent } from 'react';
 import debounce from 'lodash.debounce';
 import axiosInstance from '../../../utils/axiosInstance';
-import styles from './ResumeProjectCard.module.css';
+import styles from '../ResumeCard.module.css';
 import Card from '../ResumeCard';
 import { ProjectCardData } from '../../../types/interfaces/ResumeData';
+import { FaPencilAlt, FaCode } from 'react-icons/fa';
+
+const emptyAchievement = '';
 
 interface ResumeProjectCardProps {
   value: ProjectCardData[];
@@ -20,8 +23,11 @@ const ResumeProjectCard: React.FC<ResumeProjectCardProps> = ({ value, onChange }
   const [formData, setFormData] = useState<ProjectCardData>({
     name: '',
     period: '',
-    techStack: [],
     description: '',
+    role: '',
+    techStack: [],
+    achievements: [],
+    url: '',
   });
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [inputValue, setInputValue] = useState('');
@@ -121,7 +127,15 @@ const ResumeProjectCard: React.FC<ResumeProjectCardProps> = ({ value, onChange }
   };
 
   const handleAddClick = () => {
-    setFormData({ name: '', period: '', techStack: [], description: '' });
+    setFormData({
+      name: '',
+      period: '',
+      description: '',
+      role: '',
+      techStack: [],
+      achievements: [],
+      url: '',
+    });
     setEditIndex(null);
     setMode('form');
   };
@@ -141,6 +155,20 @@ const ResumeProjectCard: React.FC<ResumeProjectCardProps> = ({ value, onChange }
     setMode('list');
   };
 
+  const handleAchievementChange = (projIndex: number, achIndex: number, value: string) => {
+    const newAchievements = [...(formData.achievements || [])];
+    newAchievements[achIndex] = value;
+    setFormData((prev) => ({ ...prev, achievements: newAchievements }));
+  };
+
+  const handleAddAchievement = (projIndex: number) => {
+    setFormData((prev) => ({ ...prev, achievements: [...(prev.achievements || []), emptyAchievement] }));
+  };
+
+  const handleRemoveAchievement = (projIndex: number, achIndex: number) => {
+    setFormData((prev) => ({ ...prev, achievements: (prev.achievements || []).filter((_, i) => i !== achIndex) }));
+  };
+
   const handleDelete = (index: number) => {
     onChange(value.filter((_, i) => i !== index));
   };
@@ -150,22 +178,28 @@ const ResumeProjectCard: React.FC<ResumeProjectCardProps> = ({ value, onChange }
       {value.length === 0 ? (
         <p>등록된 프로젝트가 없습니다.</p>
       ) : (
-        <div className={styles.projectItemList}>
+        <div>
           {value.map((p, i) => (
-            <div key={i} className={styles.projectItem}>
-              <p className={styles.projectTitle}>
+            <div key={i} className={styles.item}>
+              <p>
                 <strong>{p.name}</strong>
               </p>
               <p>{p.period}</p>
               <p>{p.techStack.join(', ')}</p>
+              <p>역할: {p.role}</p>
+              {p.url && <p>URL: <a href={p.url} target="_blank" rel="noopener noreferrer">{p.url}</a></p>}
+              {p.achievements && p.achievements.length > 0 && (
+                <div>
+                  <strong>주요 성과:</strong>
+                  <ul>{p.achievements.map((ach, idx) => <li key={idx}>{ach}</li>)}</ul>
+                </div>
+              )}
               <p>{p.description}</p>
               <div className={styles.actions}>
-                <button onClick={() => handleEdit(i)} className={styles.editButton}>
-                  수정
+                <button type="button" onClick={() => handleEdit(i)} className={styles.btnSecondary}>
+                  <FaPencilAlt />
                 </button>
-                <button onClick={() => handleDelete(i)} className={styles.deleteButton}>
-                  삭제
-                </button>
+                <button type="button" onClick={() => handleDelete(i)} className={styles.removeButton}>×</button>
               </div>
             </div>
           ))}
@@ -193,7 +227,17 @@ const ResumeProjectCard: React.FC<ResumeProjectCardProps> = ({ value, onChange }
         value={formData.period}
         onChange={handleChange}
       />
-      <label>기술 스택</label>
+      <label>역할</label>
+      <input name="role" type="text" placeholder="백엔드 개발" value={formData.role} onChange={handleChange} />
+      <label>설명</label>
+      <textarea
+        name="description"
+        rows={3}
+        placeholder="기능 및 역할 등 간단히 작성"
+        value={formData.description}
+        onChange={handleChange}
+      />
+      <label style={{ marginTop: '16px' }}>기술 스택</label>
       <div className={styles.skillInputBox}>
         {formData.techStack.map((skill) => (
           <span key={skill} className={styles.skillTag}>
@@ -226,17 +270,37 @@ const ResumeProjectCard: React.FC<ResumeProjectCardProps> = ({ value, onChange }
               onClick={() => handleAddSkill(s.name)}
               className={highlightIndex === idx ? styles.highlight : ''}
             >
-              {s.name}
+              <FaCode className={styles.suggestionIcon} />
+              <span>{s.name}</span>
             </li>
           ))}
         </ul>
       )}
-      <label>설명</label>
-      <textarea
-        name="description"
-        rows={3}
-        placeholder="기능 및 역할 등 간단히 작성"
-        value={formData.description}
+      <label style={{ marginTop: '16px' }}>주요 성과</label>
+      {(formData.achievements || []).map((ach, achIndex) => (
+        <div key={achIndex} className={styles.achievementItem}>
+          <input
+            type="text"
+            placeholder="로그인 API 응답 시간 50% 단축"
+            value={ach}
+            onChange={(e) => handleAchievementChange(editIndex!, achIndex, e.target.value)}
+            className={styles.input}
+          />
+          <button type="button" onClick={() => handleRemoveAchievement(editIndex!, achIndex)} className={styles.removeButton}>
+            ×
+          </button>
+        </div>
+      ))}
+      <button type="button" onClick={() => handleAddAchievement(editIndex!)} className={styles.addButton}>
+        성과 추가
+      </button>
+
+      <label style={{ marginTop: '16px' }}>URL</label>
+      <input
+        name="url"
+        type="url"
+        placeholder="https://github.com/your-repo"
+        value={formData.url}
         onChange={handleChange}
       />
       <div className={styles.btnGroup}>

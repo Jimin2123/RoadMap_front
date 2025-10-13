@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../types/store';
 import { ProfileRequest } from '../types/interfaces/request/ProfileRequest';
+import { IntroCardData } from '../types/interfaces/ResumeData';
 import { EducationLevelType } from '../types/enums/EducationLevelType';
 import styles from '../styles/JobMatchPage.module.css';
 
@@ -27,7 +28,7 @@ const JobMatchPage: React.FC = () => {
     const profileRequest: ProfileRequest = {
       desiredJobCodes: [82, 84],
       educationLevel: (profile?.educationLevel as EducationLevelType) ?? EducationLevelType.ASSOCIATE_OR_ABOVE,
-      skills: profile?.skills.map((skill) => skill.name) || [],
+      skills: profile?.skills || [],
       certificates:
         profile?.certificates?.map((cert) => ({
           name: cert.name,
@@ -43,12 +44,11 @@ const JobMatchPage: React.FC = () => {
           period: '',
           status: '',
         },
-        introduction:
-          typeof resume?.introduction === 'object' && resume?.introduction !== null
-            ? resume.introduction
-            : { content: '' },
         portfolios: resume?.portfolios || [],
         projects: resume?.projects || [],
+        careers: resume?.careers ?? [],
+        desiredCompany: resume?.desiredCompany ?? { desiredCompany1: '', desiredCompany2: '', desiredRegion: '', salaryType: '연봉', desiredSalary: 0, careerPlan: '' },
+        introduction: (resume?.introduction as IntroCardData) ?? { growthProcess: '', strengths: '', schoolLife: '', motivation: '' },
       },
     };
 
