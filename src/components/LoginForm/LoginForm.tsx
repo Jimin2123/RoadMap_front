@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import styles from './LoginForm.module.css';
 import { useAppDispatch } from '../../store/hooks';
 import { login } from '../../hooks/useAuth';
+import { getMember } from '../../hooks/userUser';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 interface LoginFormProps {
   className?: string;
@@ -24,12 +26,20 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, onLoginSuccess }) => {
     setLoading(true);
     try {
       await dispatch(login({ email, password })).unwrap();
+      // 로그인 성공 후, 페이지 이동 전에 사용자 정보를 가져옵니다.
+      await dispatch(getMember()).unwrap();
 
       navigate('/');
       if (onLoginSuccess) onLoginSuccess();
     } catch (error) {
-      console.error('로그인 실패:', error);
+      // 로그인 실패 시 SweetAlert2를 사용하여 사용자에게 알림
+      await Swal.fire({
+        icon: 'error',
+        title: '로그인 실패',
+        text: error as string,
+      });
     } finally {
+      // 성공/실패 여부와 관계없이 로딩 상태를 해제
       setLoading(false);
     }
   };

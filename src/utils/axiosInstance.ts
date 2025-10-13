@@ -37,7 +37,7 @@ axiosInstance.interceptors.response.use(
     const { response, config } = error;
     const original = config as InternalAxiosRequestConfig & { _retry?: boolean };
 
-    if (response?.status === 401 && !original._retry) {
+    if (error.response?.status === 401 && !original._retry && !original.url?.includes('/auth/login')) {
       original._retry = true;
 
       // 이미 refresh 중이면 대기
