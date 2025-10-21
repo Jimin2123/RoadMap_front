@@ -18,9 +18,7 @@ const Header: React.FC = () => {
         <button className="menu-button" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           <FaBars size={20} />
         </button>
-        <Link to={'/'}>
-          <img src="/icons/map.svg" />
-        </Link>
+        <Link to={'/'}>{/* <img src="/icons/map.svg" /> */}</Link>
         <Link to="/" className="title">
           길라<span className="logo-job">JOB</span>
         </Link>
