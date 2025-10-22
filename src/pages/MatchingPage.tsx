@@ -200,7 +200,11 @@ const MatchingPage: React.FC = () => {
     }
   };
 
-  const startPage = Math.max(1, Math.min(currentPage - Math.floor(VISIBLE_PAGE_COUNT / 2), totalPages - VISIBLE_PAGE_COUNT + 1));
+  // Break down pagination calculation for clarity
+  const halfVisibleCount = Math.floor(VISIBLE_PAGE_COUNT / 2);
+  const centeredStart = currentPage - halfVisibleCount;
+  const adjustedStart = Math.min(centeredStart, totalPages - VISIBLE_PAGE_COUNT + 1);
+  const startPage = Math.max(1, adjustedStart);
   const endPage = Math.min(startPage + VISIBLE_PAGE_COUNT - 1, totalPages);
 
   const handleMoreClick = () => {
