@@ -66,21 +66,3 @@ export interface DesiredJobCardData {
   careerPlan: string;
 }
 
-export interface CareerCardData {
-  companyName: string;
-  department: string;
-  period: {
-    startDate: string;
-    endDate: string;
-  };
-  description: string;
-}
-
-export interface DesiredJobCardData {
-  desiredCompany1: string;
-  desiredCompany2: string;
-  desiredRegion: string;
-  salaryType: '연봉' | '월급';
-  desiredSalary: number;
-  careerPlan: string;
-}
