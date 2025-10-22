@@ -200,7 +200,7 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
             <div className="avatar-box">
               {' '}
               <FaUser className="avatar-placeholder" />
-              <img src="/avatar.jpg" alt="프로필" className="avatar" />
+              {/* <img src="/avatar.jpg" alt="프로필" className="avatar" /> */}
             </div>
             <div>
               <h2 className="name">{name}</h2>
