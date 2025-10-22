@@ -1,0 +1,53 @@
+.profileCard {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.profileCard h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.chartContainer {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.skillTags p {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.tag {
+  display: inline-block;
+  background-color: #eef2ff;
+  color: #4f46e5;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.aiAnalysisSection {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.aiAnalysisSection h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.aiAnalysisSection p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}

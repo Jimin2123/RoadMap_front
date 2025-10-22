@@ -5,7 +5,8 @@ import { AxiosError } from 'axios';
 
 export const login = createAsyncThunk('auth/login', async (credentials: LoginRequestDTO, thunkAPI) => {
   try {
-    return await loginService(credentials);
+    const accessToken = await loginService(credentials);
+    return accessToken;
   } catch (err) {
     const error = err as AxiosError<{ message: string }>;
     if (error.response && error.response.data) {

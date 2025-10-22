@@ -6,7 +6,7 @@ import LoginForm from '../components/LoginForm/LoginForm';
 import ServiceCard from '../components/ServiceCard/ServiceCard';
 import LoginSuccess from '../components/LoginSuccess/LoginSuccess';
 import JobPostingSection from '../components/JobPostingSection/JobPostingSection';
-import '../styles/MainPage.css';
+import styles from '../styles/MainPage.module.css';
 import { useAppSelector } from '../store/hooks';
 
 const MainPage: React.FC = () => {
@@ -25,11 +25,11 @@ const MainPage: React.FC = () => {
     <div className="layout">
       <Header />
 
-      <div className="top-section">
-        <div className="event-banner-section">
+      <div className={styles['top-section']}>
+        <div className={styles['event-banner-section']}>
           <EventBanner />
         </div>
-        <div className="login-form-section">
+        <div className={styles['login-form-section']}>
           {isAuthenticated ? (
             <LoginSuccess />
           ) : (
@@ -39,7 +39,7 @@ const MainPage: React.FC = () => {
       </div>
 
       <main>
-        <div className="service-card-section">
+        <div className={styles['service-card-section']}>
           <ServiceCard
             imageUrl="/icons/service1.svg"
             serviceName="나의 이력서 관리"
@@ -71,7 +71,7 @@ const MainPage: React.FC = () => {
             link="#"
           />
         </div>
-        <div className="job-posting-section">
+        <div className={styles['job-posting-section']}>
           <JobPostingSection />
         </div>
       </main>

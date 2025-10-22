@@ -8,6 +8,7 @@ import {
   FaRegBookmark,
 } from 'react-icons/fa';
 import axios from 'axios';
+import React from 'react';
 import Header from '../layouts/Header';
 import Footer from '../layouts/Footer';
 import styles from '../styles/MatchingPage.module.css';
@@ -202,8 +203,16 @@ const MatchingPage: React.FC = () => {
   const startPage = Math.max(1, Math.min(currentPage - Math.floor(VISIBLE_PAGE_COUNT / 2), totalPages - VISIBLE_PAGE_COUNT + 1));
   const endPage = Math.min(startPage + VISIBLE_PAGE_COUNT - 1, totalPages);
 
+  const handleMoreClick = () => {
+    // In a real application, this would navigate to a page with all job listings
+    // For now, we can navigate to a placeholder or the main job board page
+    navigate('/jobs'); // Assuming '/jobs' is the route for all job postings
+    console.log('더 많은 채용 정보 보기');
+  };
+
   return (
-    <div className={styles.pageLayout}>
+    <div className="layout">
+      {/* 임시 통일 할려고 */}
       <Header />
       <main className={styles.mainContent}>
         <div className={styles.introSection}>
