@@ -22,7 +22,7 @@ const ResumeProjectCard: React.FC<ResumeProjectCardProps> = ({ value, onChange }
   const [mode, setMode] = useState<'list' | 'form'>('list');
   const [formData, setFormData] = useState<ProjectCardData>({
     name: '',
-    period: '',
+    period: { startDate: '', endDate: '' },
     description: '',
     role: '',
     techStack: [],
@@ -126,10 +126,18 @@ const ResumeProjectCard: React.FC<ResumeProjectCardProps> = ({ value, onChange }
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handlePeriodChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      period: { ...prev.period, [name]: value },
+    }));
+  };
+
   const handleAddClick = () => {
     setFormData({
       name: '',
-      period: '',
+      period: { startDate: '', endDate: '' },
       description: '',
       role: '',
       techStack: [],
@@ -184,14 +192,25 @@ const ResumeProjectCard: React.FC<ResumeProjectCardProps> = ({ value, onChange }
               <p>
                 <strong>{p.name}</strong>
               </p>
-              <p>{p.period}</p>
+              <p>{`${p.period.startDate} ~ ${p.period.endDate}`}</p>
               <p>{p.techStack.join(', ')}</p>
               <p>역할: {p.role}</p>
-              {p.url && <p>URL: <a href={p.url} target="_blank" rel="noopener noreferrer">{p.url}</a></p>}
+              {p.url && (
+                <p>
+                  URL:{' '}
+                  <a href={p.url} target="_blank" rel="noopener noreferrer">
+                    {p.url}
+                  </a>
+                </p>
+              )}
               {p.achievements && p.achievements.length > 0 && (
                 <div>
                   <strong>주요 성과:</strong>
-                  <ul>{p.achievements.map((ach, idx) => <li key={idx}>{ach}</li>)}</ul>
+                  <ul>
+                    {p.achievements.map((ach, idx) => (
+                      <li key={idx}>{ach}</li>
+                    ))}
+                  </ul>
                 </div>
               )}
               <p>{p.description}</p>
@@ -199,7 +218,9 @@ const ResumeProjectCard: React.FC<ResumeProjectCardProps> = ({ value, onChange }
                 <button type="button" onClick={() => handleEdit(i)} className={styles.btnSecondary}>
                   <FaPencilAlt />
                 </button>
-                <button type="button" onClick={() => handleDelete(i)} className={styles.removeButton}>×</button>
+                <button type="button" onClick={() => handleDelete(i)} className={styles.removeButton}>
+                  ×
+                </button>
               </div>
             </div>
           ))}
@@ -220,13 +241,11 @@ const ResumeProjectCard: React.FC<ResumeProjectCardProps> = ({ value, onChange }
         onChange={handleChange}
       />
       <label>참여 기간</label>
-      <input
-        name="period"
-        type="text"
-        placeholder="2023.03 ~ 2023.05"
-        value={formData.period}
-        onChange={handleChange}
-      />
+      <div className={styles.period}>
+        <input name="startDate" type="date" value={formData.period.startDate} onChange={handlePeriodChange} />
+        <span>~</span>
+        <input name="endDate" type="date" value={formData.period.endDate} onChange={handlePeriodChange} />
+      </div>
       <label>역할</label>
       <input name="role" type="text" placeholder="백엔드 개발" value={formData.role} onChange={handleChange} />
       <label>설명</label>
@@ -286,7 +305,11 @@ const ResumeProjectCard: React.FC<ResumeProjectCardProps> = ({ value, onChange }
             onChange={(e) => handleAchievementChange(editIndex!, achIndex, e.target.value)}
             className={styles.input}
           />
-          <button type="button" onClick={() => handleRemoveAchievement(editIndex!, achIndex)} className={styles.removeButton}>
+          <button
+            type="button"
+            onClick={() => handleRemoveAchievement(editIndex!, achIndex)}
+            className={styles.removeButton}
+          >
             ×
           </button>
         </div>

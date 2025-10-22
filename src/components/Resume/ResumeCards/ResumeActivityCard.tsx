@@ -14,7 +14,7 @@ const ResumeActivityCard: React.FC<ResumeActivityCardProps> = ({ value = [], onC
   const [formData, setFormData] = useState<ActivityCardData>({
     title: '',
     organization: '',
-    period: '',
+    period: { startDate: '', endDate: '' },
     description: '',
   });
   const [editIndex, setEditIndex] = useState<number | null>(null);
@@ -25,9 +25,17 @@ const ResumeActivityCard: React.FC<ResumeActivityCardProps> = ({ value = [], onC
   };
 
   const handleAddClick = () => {
-    setFormData({ title: '', organization: '', period: '', description: '' });
+    setFormData({ title: '', organization: '', period: { startDate: '', endDate: '' }, description: '' });
     setEditIndex(null);
     setMode('form');
+  };
+
+  const handlePeriodChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      period: { ...prev.period, [name]: value },
+    }));
   };
 
   const handleEdit = (index: number) => {
@@ -62,15 +70,19 @@ const ResumeActivityCard: React.FC<ResumeActivityCardProps> = ({ value = [], onC
         <div>
           {value.map((a, i) => (
             <div key={i} className={styles.item}>
-              <p><strong>{a.title}</strong></p>
+              <p>
+                <strong>{a.title}</strong>
+              </p>
               <p>{a.organization}</p>
-              <p>{a.period}</p>
+              <p>{`${a.period.startDate} ~ ${a.period.endDate}`}</p>
               <p>{a.description}</p>
               <div className={styles.actions}>
                 <button type="button" onClick={() => handleEdit(i)} className={styles.btnSecondary}>
                   <FaPencilAlt />
                 </button>
-                <button type="button" onClick={() => handleDelete(i)} className={styles.removeButton}>×</button>
+                <button type="button" onClick={() => handleDelete(i)} className={styles.removeButton}>
+                  ×
+                </button>
               </div>
             </div>
           ))}
@@ -93,13 +105,11 @@ const ResumeActivityCard: React.FC<ResumeActivityCardProps> = ({ value = [], onC
         onChange={handleChange}
       />
       <label>활동 기간</label>
-      <input
-        name="period"
-        type="text"
-        placeholder="2022.01 ~ 2022.06"
-        value={formData.period}
-        onChange={handleChange}
-      />
+      <div className={styles.period}>
+        <input name="startDate" type="date" value={formData.period.startDate} onChange={handlePeriodChange} />
+        <span>~</span>
+        <input name="endDate" type="date" value={formData.period.endDate} onChange={handlePeriodChange} />
+      </div>
       <label>활동 상세 설명</label>
       <textarea
         name="description"

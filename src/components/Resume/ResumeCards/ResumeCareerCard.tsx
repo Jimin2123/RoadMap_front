@@ -25,7 +25,11 @@ const ResumeCareerCard: React.FC<ResumeCareerCardProps> = ({ value, onChange }) 
     onChange(value.filter((_, i) => i !== index));
   };
 
-  const handleChange = (index: number, field: keyof CareerCardData, fieldValue: string | { startDate: string } | { endDate: string }) => {
+  const handleChange = (
+    index: number,
+    field: keyof CareerCardData,
+    fieldValue: string | { startDate: string } | { endDate: string }
+  ) => {
     const newValues = [...value];
     if (field === 'period') {
       newValues[index].period = { ...newValues[index].period, ...(fieldValue as object) };
@@ -77,7 +81,9 @@ const ResumeCareerCard: React.FC<ResumeCareerCardProps> = ({ value, onChange }) 
           </button>
         </div>
       ))}
-      <button onClick={handleAdd} className={styles.addButton}>경력 추가</button>
+      <button onClick={handleAdd} className={styles.addButton}>
+        경력 추가
+      </button>
     </Card>
   );
 };

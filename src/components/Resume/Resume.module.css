@@ -1,10 +1,8 @@
 .resumeContainer {
   width: 100%;
-  max-width: 1000px;
-  margin: 40px auto;
+  margin: 0px auto;
   padding: 20px;
   font-family: 'Pretendard', sans-serif;
-  background-color: #f8f9fa;
 }
 
 .tabMenu {
@@ -102,8 +100,12 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 768px) {

@@ -1,6 +1,7 @@
 import { ChangeEvent } from 'react';
 import Card from '../ResumeCard';
 import { EduCardData } from '../../../types/interfaces/ResumeData';
+import styles from '../ResumeCard.module.css';
 
 interface ResumeEduCardProps {
   value: EduCardData;
@@ -20,7 +21,13 @@ const ResumeEduCard: React.FC<ResumeEduCardProps> = ({ value, onChange }) => {
       <label>전공</label>
       <input name="major" type="text" placeholder="컴퓨터공학과" value={value.major} onChange={handleChange} />
       <label>재학 기간</label>
-      <input name="period" type="text" placeholder="2020.03 ~ 2024.02" value={value.period} onChange={handleChange} />
+      <div className={styles.period}>
+        <input name="startDate" type="date" value={value.period.startDate} onChange={handleChange} />
+        <span>~</span>
+        <input name="endDate" type="date" value={value.period.endDate} onChange={handleChange} />
+      </div>
+      <label>학점 (GPA)</label>
+      <input name="gpa" type="number" step="0.01" placeholder="4.3" value={value.gpa} onChange={handleChange} />
       <label>상태</label>
       <select name="status" value={value.status} onChange={handleChange}>
         <option value="">선택</option>

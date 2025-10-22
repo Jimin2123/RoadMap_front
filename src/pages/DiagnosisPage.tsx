@@ -128,7 +128,7 @@ const DiagnosisPage = () => {
       <main className={styles.main}>
         <div>
           <div className={styles.container}>
-            <div>div영역 추가</div>
+            {/* <div>div영역 추가</div> */}
             {/* 왼쪽 섹션 */}
             <aside className={styles.leftAside}>
               <UserProfileCard name={user.name} skills={user.skills} ncsData={ncsCompetencyData} />

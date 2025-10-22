@@ -1,7 +1,12 @@
+import { SalaryType } from '../enums/SalaryType';
+
 export interface ActivityCardData {
   title: string;
   organization: string;
-  period: string;
+  period: {
+    startDate: string;
+    endDate: string;
+  };
   description: string;
 }
 
@@ -14,7 +19,11 @@ export interface CertCardData {
 export interface EduCardData {
   school: string;
   major: string;
-  period: string;
+  gpa: number;
+  period: {
+    startDate: string;
+    endDate: string;
+  };
   status: string;
 }
 
@@ -31,7 +40,10 @@ export interface PortfolioCardData {
 }
 export interface ProjectCardData {
   name: string;
-  period: string;
+  period: {
+    startDate: string;
+    endDate: string;
+  };
   description: string;
   role: string;
   techStack: string[];
@@ -61,26 +73,7 @@ export interface DesiredJobCardData {
   desiredCompany1: string;
   desiredCompany2: string;
   desiredRegion: string;
-  salaryType: '연봉' | '월급';
-  desiredSalary: number;
-  careerPlan: string;
-}
-
-export interface CareerCardData {
-  companyName: string;
-  department: string;
-  period: {
-    startDate: string;
-    endDate: string;
-  };
-  description: string;
-}
-
-export interface DesiredJobCardData {
-  desiredCompany1: string;
-  desiredCompany2: string;
-  desiredRegion: string;
-  salaryType: '연봉' | '월급';
+  salaryType: SalaryType;
   desiredSalary: number;
   careerPlan: string;
 }

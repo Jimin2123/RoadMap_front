@@ -64,12 +64,12 @@ const MainPage: React.FC = () => {
             serviceDescription="현재 진행중인 청년 지원정책 리스트를 볼 수 있습니다."
             link="/policy"
           />
-          <ServiceCard
+          {/* <ServiceCard
             imageUrl="/icons/service5.svg"
             serviceName="나의 관심기업 리스트"
             serviceDescription="사용자가 등록해둔 관심 기업 리스트를 보여줍니다."
             link="#"
-          />
+          /> */}
         </div>
         <div className={styles['job-posting-section']}>
           <JobPostingSection />
