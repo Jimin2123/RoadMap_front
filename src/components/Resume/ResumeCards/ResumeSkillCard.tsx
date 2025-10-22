@@ -4,10 +4,16 @@ import debounce from 'lodash.debounce';
 import axiosInstance from '../../../utils/axiosInstance';
 import styles from './ResumeSkillCard.module.css';
 import Card from '../ResumeCard';
+import { FaStar, FaCode } from 'react-icons/fa';
+
+export interface SkillData {
+  name: string;
+  proficiency: 'BEGINNER' | 'MIDDLE' | 'ADVANCED';
+}
 
 interface ResumeSkillCardProps {
-  value: string[];
-  onChange: (skills: string[]) => void;
+  value: SkillData[];
+  onChange: (skills: SkillData[]) => void;
 }
 
 interface SkillAutoCompleteResponse {
@@ -20,6 +26,7 @@ const ResumeSkillCard: React.FC<ResumeSkillCardProps> = ({ value, onChange }) =>
   const [suggestions, setSuggestions] = useState<SkillAutoCompleteResponse[]>([]);
   const [highlightIndex, setHighlightIndex] = useState(-1);
   const [isComposing, setIsComposing] = useState(false);
+  const [hoverRating, setHoverRating] = useState(0);
   const abortCtrl = useRef<AbortController | null>(null);
   const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
 
@@ -73,8 +80,8 @@ const ResumeSkillCard: React.FC<ResumeSkillCardProps> = ({ value, onChange }) =>
   // skill 추가
   const handleAddSkill = (skillName: string) => {
     const trimmed = skillName.trim();
-    if (trimmed && !value.includes(trimmed)) {
-      onChange([...value, trimmed]);
+    if (trimmed && !value.find((v) => v.name === trimmed)) {
+      onChange([...value, { name: trimmed, proficiency: 'MIDDLE' }]);
     }
     setInputValue('');
     setSuggestions([]);
@@ -82,8 +89,15 @@ const ResumeSkillCard: React.FC<ResumeSkillCardProps> = ({ value, onChange }) =>
   };
 
   // skill 제거
-  const handleRemoveSkill = (skill: string) => {
-    onChange(value.filter((s) => s !== skill));
+  const handleRemoveSkill = (skillName: string) => {
+    onChange(value.filter((s) => s.name !== skillName));
+  };
+
+  // 숙련도 변경
+  const handleProficiencyChange = (skillName: string, proficiency: SkillData['proficiency']) => {
+    onChange(
+      value.map((skill) => (skill.name === skillName ? { ...skill, proficiency } : skill))
+    );
   };
 
   // 키보드 이벤트 처리
@@ -110,7 +124,19 @@ const ResumeSkillCard: React.FC<ResumeSkillCardProps> = ({ value, onChange }) =>
     }
 
     if (e.key === 'Backspace' && inputValue === '' && value.length > 0) {
-      handleRemoveSkill(value[value.length - 1]);
+      handleRemoveSkill(value[value.length - 1].name);
+    }
+  };
+
+  const proficiencyLevels: SkillData['proficiency'][] = ['BEGINNER', 'MIDDLE', 'ADVANCED'];
+  const getProficiencyValue = (level: SkillData['proficiency']) => {
+    return proficiencyLevels.indexOf(level) + 1;
+  };
+
+  const handleStarClick = (skillName: string, rating: number) => {
+    const newProficiency = proficiencyLevels[rating - 1];
+    if (newProficiency) {
+      handleProficiencyChange(skillName, newProficiency);
     }
   };
 
@@ -119,11 +145,24 @@ const ResumeSkillCard: React.FC<ResumeSkillCardProps> = ({ value, onChange }) =>
       <label>보유 기술</label>
       <div className={styles.skillInputBox}>
         {value.map((skill) => (
-          <span key={skill} className={styles.skillTag}>
-            {skill}
-            <button type="button" onClick={() => handleRemoveSkill(skill)}>
-              ×
-            </button>
+          <span key={skill.name} className={styles.skillTag}>
+            {skill.name}
+            <div className={styles.starRating} onMouseLeave={() => setHoverRating(0)}>
+              {[1, 2, 3].map((star) => {
+                const ratingValue = getProficiencyValue(skill.proficiency);
+                const isFilled = star <= (hoverRating || ratingValue);
+                return (
+                  <FaStar
+                    key={star}
+                    className={styles.star}
+                    color={isFilled ? '#ffc107' : '#e4e5e9'}
+                    onClick={() => handleStarClick(skill.name, star)}
+                    onMouseEnter={() => setHoverRating(star)}
+                  />
+                );
+              })}
+            </div>
+            <button type="button" onClick={() => handleRemoveSkill(skill.name)}>×</button>
           </span>
         ))}
         <input
@@ -150,7 +189,8 @@ const ResumeSkillCard: React.FC<ResumeSkillCardProps> = ({ value, onChange }) =>
               onClick={() => handleAddSkill(s.name)}
               className={highlightIndex === idx ? styles.highlight : ''}
             >
-              {s.name}
+              <FaCode className={styles.suggestionIcon} />
+              <span>{s.name}</span>
             </li>
           ))}
         </ul>

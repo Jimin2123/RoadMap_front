@@ -1,6 +1,59 @@
 .resumeContainer {
   width: 100%;
-  margin-top: 10px;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Pretendard', sans-serif;
+  background-color: #f8f9fa;
+}
+
+.tabMenu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  position: relative;
+  z-index: 1;
+  padding: 0 20px;
+  border-bottom: 1px solid #dee2e6;
+  background-color: #fff;
+  border-radius: 12px 12px 0 0;
+}
+
+.tabButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: 500;
+  color: #495057;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease-in-out;
+  margin-bottom: -1px;
+}
+
+.tabButton:hover {
+  color: #007bff;
+  background-color: #f8f9fa;
+}
+
+.tabButton.active {
+  color: #007bff;
+  border-bottom-color: #007bff;
+  font-weight: 600;
+}
+
+.tabContent {
+  background-color: #fff;
+  border-radius: 0 0 12px 12px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #fff;
 }
 
 .cardRow {
@@ -15,7 +68,7 @@
 
 .submitArea {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 .submitArea button {
@@ -24,12 +77,33 @@
   padding: 12px 24px;
   border: none;
   border-radius: 6px;
+  font-weight: 600;
   font-size: 16px;
   cursor: pointer;
 }
 
-.submitArea button:hover {
+.submitArea button:hover:not(:disabled) {
   background-color: #0056b3; /* Primary hover 색상 */
+}
+
+.submitArea button:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 3px solid #fff;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 @media (max-width: 768px) {

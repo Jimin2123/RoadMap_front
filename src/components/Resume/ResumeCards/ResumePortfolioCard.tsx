@@ -1,7 +1,8 @@
 import { useState, ChangeEvent } from 'react';
 import Card from '../ResumeCard';
-import styles from './ResumePortfolioCard.module.css';
+import styles from '../ResumeCard.module.css';
 import { PortfolioCardData } from '../../../types/interfaces/ResumeData';
+import { FaPencilAlt } from 'react-icons/fa';
 
 interface ResumePortfolioCardProps {
   value?: PortfolioCardData[];
@@ -48,20 +49,16 @@ const ResumePortfolioCard: React.FC<ResumePortfolioCardProps> = ({ value = [], o
       {value.length === 0 ? (
         <p>등록된 포트폴리오가 없습니다.</p>
       ) : (
-        <div className={styles.portfolioList}>
+        <div>
           {value.map((p, i) => (
-            <div key={i} className={styles.portfolioItem}>
-              <p className={styles.portfolioTitle}>
-                <strong>{p.title}</strong>
-              </p>
+            <div key={i} className={styles.item}>
+              <p><strong>{p.title}</strong></p>
               <p>{p.url}</p>
               <div className={styles.actions}>
-                <button onClick={() => handleEdit(i)} className={styles.editButton}>
-                  수정
+                <button type="button" onClick={() => handleEdit(i)} className={styles.btnSecondary}>
+                  <FaPencilAlt />
                 </button>
-                <button onClick={() => handleDelete(i)} className={styles.deleteButton}>
-                  삭제
-                </button>
+                <button type="button" onClick={() => handleDelete(i)} className={styles.removeButton}>×</button>
               </div>
             </div>
           ))}

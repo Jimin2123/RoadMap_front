@@ -1,58 +1,70 @@
 .resume-page {
-  padding: 40px;
-  background-color: #ffffff;
-  font-family: 'Noto Sans KR', sans-serif;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
+    'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    sans-serif;
+  background-color: #f8f9fa;
 }
 
 .page-title {
-  font-size: 24px;
-  margin-bottom: 10px;
-  max-width: 25cm;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #212529;
+}
+
+.resume-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
 }
 
 .resume-box {
-  background-color: #fff;
-  border-radius: 20px;
-  padding: 40px;
-  padding-top: 20px;
-  width: 800px;
-  min-width: 800px;
-  max-width: 800px;
-  flex-shrink: 0;
-  margin: 0 auto;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.224);
+  width: 100%;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
 }
 
-.title-box {
-  background-color: #fff;
-  border-radius: 20px;
-  padding: 40px;
-  max-width: 200px;
-  margin: 0 auto;
-}
-
-.header {
+.resume-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
-  box-shadow: none;
+  border-bottom: 1px solid #f1f3f5;
+  padding: 30px;
+  background-color: #fdfdff;
+}
+
+.resume-header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .name {
   font-size: 28px;
   font-weight: bold;
+  margin: 0 0 8px;
 }
 
 .contact {
   margin: 4px 0;
   color: #555;
+  font-size: 15px;
 }
 
 .avatar-box {
   text-align: center;
+  position: relative;
 }
 
 .avatar {
@@ -60,89 +72,138 @@
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  background-color: #eee;
+  border: 3px solid #f1f3f5;
 }
 
 .edit-btn {
-  margin-top: 8px;
-  font-size: 13px;
-  background-color: #eee;
+  background-color: #343a40;
+  color: white;
   border: none;
+  padding: 10px 20px;
   border-radius: 8px;
-  padding: 4px 10px;
   cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
 }
 
-.section {
-  margin-top: 32px;
-  padding-left: 20px;
-  padding-right: 20px;
+.edit-btn:hover {
+  background-color: #495057;
 }
 
-.section h3 {
-  font-size: 20px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 6px;
-  margin-bottom: 12px;
+.tab-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  position: relative;
+  z-index: 1;
+  padding: 0 20px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.tab-button {
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: #495057;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease-in-out;
+  margin-bottom: -1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab-button:hover {
+  color: #007bff;
+  background-color: #f8f9fa;
+}
+
+.tab-button.active {
+  color: #007bff;
+  font-weight: 600;
+  border-bottom-color: #007bff;
+}
+
+.tab-content {
+  padding: 40px;
+  min-height: 300px;
+}
+
+.content-section {
+  padding-left: 0;
+  list-style-type: none;
+  margin: 0;
+}
+
+.content-section li {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f1f3f5;
+}
+
+.content-section li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .paragraph {
   white-space: pre-wrap;
-  line-height: 1.6;
-  color: #333;
+  line-height: 1.7;
+  color: #343a40;
 }
-.top-right-menu {
+.avatar-placeholder {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  color: #ccc;
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 8px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.more-icon {
-  width: 24px;
-  height: 29px;
-  cursor: pointer;
-  opacity: 0.85;
-  transition: opacity 0.2s ease;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-.resume-wrapper {
-  display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 16px;
-  position: relative;
-  max-width: 1100px;
-  margin: 0 auto;
 }
 
-.bookmark-nav {
-  position: fixed;
-  top: 160px;
-  left: 50%;
-  transform: translateX(480px);
-  background: #ffffff;
-  padding: 18px 16px;
-  border-radius: 20px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  z-index: 100;
-  min-width: 160px;
-  border: 1px solid #eee;
+.skill-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
-.bookmark-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.skill-tag {
+  display: flex;
+  align-items: center;
+  background-color: #f1f3f5;
+  border-radius: 16px;
+  padding: 4px 6px 4px 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #495057;
 }
 
-.bookmark-nav li {
-  margin-bottom: 12px;
+.skill-name {
+  margin-right: 8px;
+}
+
+.skill-proficiency {
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+}
+
+.skill-proficiency.beginner {
+  background-color: #a0aec0; /* Gray */
+}
+.skill-proficiency.middle {
+  background-color: #4299e1; /* Blue */
+}
+.skill-proficiency.advanced {
+  background-color: #48bb78; /* Green */
 }
 
 .bookmark-nav button {

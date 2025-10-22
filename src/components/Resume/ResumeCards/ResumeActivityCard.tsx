@@ -1,7 +1,8 @@
 import { useState, ChangeEvent } from 'react';
 import Card from '../ResumeCard';
-import styles from './ResumeActivityCard.module.css';
+import styles from '../ResumeCard.module.css';
 import { ActivityCardData } from '../../../types/interfaces/ResumeData';
+import { FaPencilAlt } from 'react-icons/fa';
 
 interface ResumeActivityCardProps {
   value?: ActivityCardData[];
@@ -58,22 +59,18 @@ const ResumeActivityCard: React.FC<ResumeActivityCardProps> = ({ value = [], onC
       {value.length === 0 ? (
         <p>등록된 대외활동이 없습니다.</p>
       ) : (
-        <div className={styles.activityItemList}>
+        <div>
           {value.map((a, i) => (
-            <div key={i} className={styles.activityItem}>
-              <p className={styles.activityTitle}>
-                <strong>{a.title}</strong>
-              </p>
+            <div key={i} className={styles.item}>
+              <p><strong>{a.title}</strong></p>
               <p>{a.organization}</p>
               <p>{a.period}</p>
               <p>{a.description}</p>
               <div className={styles.actions}>
-                <button onClick={() => handleEdit(i)} className={styles.editButton}>
-                  수정
+                <button type="button" onClick={() => handleEdit(i)} className={styles.btnSecondary}>
+                  <FaPencilAlt />
                 </button>
-                <button onClick={() => handleDelete(i)} className={styles.deleteButton}>
-                  삭제
-                </button>
+                <button type="button" onClick={() => handleDelete(i)} className={styles.removeButton}>×</button>
               </div>
             </div>
           ))}

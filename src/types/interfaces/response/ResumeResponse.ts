@@ -1,9 +1,15 @@
+import { CareerResponse } from './CareerResponse';
+import { DesiredCompanyResponse } from './MemberResponse';
+import { IntroCardData } from '../ResumeData';
+
 export interface ResumeResponse {
-  introduction: string; // 자기소개
+  introduction: IntroCardData; // 자기소개
   education: EducationResponse; // 학력 정보
   activities: ActivityResponse[]; // 활동 정보
   portfolios: PortfolioResponse[]; // 포트폴리오 정보
   projects: ProjectResponse[]; // 프로젝트 정보
+  careers: CareerResponse[];
+  desiredCompany: DesiredCompanyResponse;
 }
 
 export interface ActivityResponse {
@@ -16,8 +22,11 @@ export interface ActivityResponse {
 export interface ProjectResponse {
   name: string;
   period: string;
-  techStack: string[];
   description: string;
+  role: string;
+  techStack: string[];
+  achievements: string[];
+  url: string;
 }
 
 export interface PortfolioResponse {

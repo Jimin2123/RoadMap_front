@@ -32,4 +32,5 @@ export interface Certificate {
 interface Skills {
   id: number;
   name: string;
+  proficiency: 'BEGINNER' | 'MIDDLE' | 'ADVANCED';
 }

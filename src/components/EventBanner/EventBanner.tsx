@@ -12,7 +12,7 @@ const EventBanner: React.FC = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % banners.length);
-    }, 1000); //배너 넘어가는 속도 1000 -> 3000속도가 좋음
+    }, 3000); //배너 넘어가는 속도 1000 -> 3000속도가 좋음
     return () => clearInterval(timer);
   }, []);
 

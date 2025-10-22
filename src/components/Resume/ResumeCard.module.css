@@ -1,60 +1,285 @@
 .card {
   background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
   padding: 24px;
-  margin-bottom: 24px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   flex: 1;
 }
 .card h2 {
-  font-size: 18px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 6px;
+  font-size: 1.25rem; /* 20px */
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f3f4f6;
 }
 .card label {
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   font-weight: 500;
-}
-.card input {
-  width: 95%;
+  font-size: 0.9rem; /* 14.4px */
+  color: #4b5563;
 }
 
 .card input,
-.card textarea {
-  padding: 10px 12px;
+.card textarea,
+.card select {
+  width: 100%;
+  padding: 10px 14px;
   margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem; /* 15.2px */
+  background-color: #f9fafb;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  box-sizing: border-box;
+  font-family: inherit;
 }
 
-.btn-primary {
-  background-color: #007bff; /* Primary blue */
-  color: white;
-  padding: 6px 16px;
+.card textarea {
+  resize: vertical; /* 세로로만 크기 조절 가능 */
+  min-height: 100px;
+}
+
+.card input:focus,
+.card textarea:focus,
+.card select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+  background-color: #fff;
+}
+
+.item {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  background-color: #f9fafb;
+  position: relative;
+}
+
+.removeButton {
+  background: #f3f4f6;
+  color: #6b7280;
   border: none;
-  border-radius: 6px;
-  font-size: 14px;
+  border-radius: 50%;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
-.btn-primary:hover {
+.removeButton:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  transform: scale(1.1);
+}
+
+.addButton {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  background-color: #f0f7ff;
+  color: #005a9e;
+  border: 1px dashed #bde0ff;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.addButton:hover {
+  background-color: #e0f0ff;
+  border-color: #90cfff;
+}
+
+.btnPrimary {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btnPrimary:hover {
   background-color: #0056b3;
 }
 
-.btn-secondary {
+.btnSecondary {
   background-color: white;
-  color: #333;
-  padding: 6px 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
+  color: #343a40;
+  padding: 10px 20px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
-.btn-secondary:hover {
-  background-color: #f2f2f2;
+.btnSecondary:hover {
+  background-color: #f9fafb;
+  border-color: #adb5bd;
+}
+
+.btnGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  gap: 16px;
+}
+
+.salaryContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.salaryContainer select {
+  width: auto;
+  flex-shrink: 0;
+}
+
+.salaryContainer input {
+  flex: 1;
+  margin-bottom: 0; /* remove double margin */
+}
+.salaryContainer span {
+  white-space: nowrap;
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+.actions {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.actions button {
+  /* Reset some properties for buttons inside actions */
+  padding: 6px;
+  width: 28px;
+  height: 28px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.period {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.period input {
+  margin-bottom: 16px;
+}
+
+.skillInputBox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  margin-bottom: 16px;
+}
+
+.skillInputBox input {
+  border: none;
+  flex: 1;
+  min-width: 150px;
+  padding: 4px;
+  font-size: 0.95rem;
+  background: transparent;
+  outline: none;
+  margin-bottom: 0;
+}
+
+.skillTag {
+  background-color: #e0e7ff;
+  color: #3730a3;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.skillTag button {
+  background: transparent;
+  border: none;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #4f46e5;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.skillTag button:hover {
+  color: #dc2626;
+}
+
+.achievementItem {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.achievementItem input {
+  flex-grow: 1;
+}
+.achievementItem .removeButton {
+  position: static;
+  transform: none;
+}
+
+.suggestionBox {
+  list-style: none;
+  margin-top: -10px;
+  margin-bottom: 16px;
+  padding: 0;
+  border: 1px solid #d1d5db;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  background: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.suggestionBox li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+}
+
+.suggestionIcon {
+  color: #9ca3af;
+}
+.suggestionBox li:hover .suggestionIcon,
+.suggestionBox .highlight .suggestionIcon {
+  color: #4f46e5;
 }

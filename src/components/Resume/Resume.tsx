@@ -5,12 +5,14 @@ import {
   BasicCardData,
   CertCardData,
   EduCardData,
+  DesiredJobCardData,
   IntroCardData,
   PortfolioCardData,
   ProjectCardData,
+  CareerCardData,
 } from '../../types/interfaces/ResumeData';
 import { RootState } from '../../types/store';
-import { ResumeRequest } from '../../types/interfaces/request/ResumeRequest';
+import { ResumeRequest, SkillRequest } from '../../types/interfaces/request/ResumeRequest';
 import { ProfileRequest } from '../../types/interfaces/request/ProfileRequest';
 import { EducationLevelType } from '../../types/enums/EducationLevelType';
 import ResumeBasicCard from './ResumeCards/ResumeBasicCard';
@@ -21,13 +23,17 @@ import ResumeEduCard from './ResumeCards/ResumeEduCard';
 import ResumeActivityCard from './ResumeCards/ResumeActivityCard';
 import ResumeProjectCard from './ResumeCards/ResumeProjectCard';
 import ResumePortfolioCard from './ResumeCards/ResumePortfolioCard';
+import ResumeCareerCard from './ResumeCards/ResumeCareerCard';
+import ResumeDesiredJobCard from './ResumeCards/ResumeDesiredJobCard';
 import styles from './Resume.module.css';
 import { useAppDispatch } from '../../store/hooks';
 import { createResumeThunk } from '../../hooks/useResume';
 import { useSubmissionAlert } from '../../hooks/useSubmissionAlert';
 import { MemberResponse } from '../../types/interfaces/response/MemberResponse';
+import { SkillData } from './ResumeCards/ResumeSkillCard';
 import { getMember } from '../../hooks/userUser';
 import { resetCreateStatus } from '../../store/slices/resumeSlice';
+import { FaUser, FaFileAlt, FaBriefcase, FaProjectDiagram, FaUsers, FaGraduationCap } from 'react-icons/fa';
 
 /**
  * "카드" 컴포넌트에서 사용할 form 전체 Shape
@@ -36,7 +42,9 @@ interface ResumeFormState {
   basicInfo: BasicCardData;
   intro: IntroCardData;
   certs: CertCardData[];
-  skills: string[];
+  skills: SkillData[];
+  careers: CareerCardData[];
+  desiredJob: DesiredJobCardData;
   education: EduCardData;
   activities: ActivityCardData[];
   projects: ProjectCardData[];
@@ -50,8 +58,22 @@ interface ResumeProps {
 
 const emptyForm: ResumeFormState = {
   basicInfo: { name: '', email: '', phoneNumber: '', currentJob: '', address: '' },
-  intro: { content: '' },
+  intro: {
+    growthProcess: '',
+    strengths: '',
+    schoolLife: '',
+    motivation: '',
+  },
   certs: [],
+  careers: [],
+  desiredJob: {
+    desiredCompany1: '',
+    desiredCompany2: '',
+    desiredRegion: '',
+    salaryType: '연봉',
+    desiredSalary: 0,
+    careerPlan: '',
+  },
   skills: [],
   education: { school: '', major: '', period: '', status: '' },
   activities: [],
@@ -62,6 +84,7 @@ const emptyForm: ResumeFormState = {
 const Resume: React.FC<ResumeProps> = ({ member, onSubmissionSuccess }) => {
   const [form, setForm] = useState<ResumeFormState>(emptyForm);
   const [initialized, setInitialized] = useState(false);
+  const [activeTab, setActiveTab] = useState('basic');
 
   const { status, error } = useSelector((state: RootState) => state.resume);
   const dispatch = useAppDispatch();
@@ -95,14 +118,21 @@ const Resume: React.FC<ResumeProps> = ({ member, onSubmissionSuccess }) => {
         currentJob: '',
         address: member.address?.address ?? '',
       },
-      intro: { content: profile?.resume?.introduction ?? '' },
+      intro: {
+        growthProcess: (profile?.resume?.introduction as any)?.growthProcess || '',
+        strengths: (profile?.resume?.introduction as any)?.strengths || '',
+        schoolLife: (profile?.resume?.introduction as any)?.schoolLife || '',
+        motivation: (profile?.resume?.introduction as any)?.motivation || '',
+      },
       certs:
         profile?.certificates?.map((cert) => ({
           name: cert.name,
           agency: cert.agency,
           year: cert.year,
         })) ?? [],
-      skills: profile?.skills?.map((skill) => skill.name) || [],
+      skills: profile?.skills || [],
+      careers: resume?.careers || [],
+      desiredJob: resume?.desiredCompany || emptyForm.desiredJob,
       education: resume?.education || { school: '', major: '', period: '', status: '' },
       activities: resume?.activities || [],
       projects: resume?.projects || [],
@@ -122,6 +152,8 @@ const Resume: React.FC<ResumeProps> = ({ member, onSubmissionSuccess }) => {
       introduction: form.intro,
       portfolios: form.portfolios,
       projects: form.projects,
+      careers: form.careers,
+      desiredCompany: form.desiredJob,
     };
 
     return {
@@ -138,47 +170,115 @@ const Resume: React.FC<ResumeProps> = ({ member, onSubmissionSuccess }) => {
     const profileRequest = buildProfileRequest();
 
     try {
+      // 1. 이력서 생성/수정 API를 호출합니다.
       await dispatch(createResumeThunk(profileRequest)).unwrap();
+      // 2. 성공 시, 최신 멤버 정보를 다시 불러옵니다.
       await dispatch(getMember()).unwrap();
+      // 3. 부모 컴포넌트에 성공을 알리고 페이지 전환을 트리거합니다.
       onSubmissionSuccess();
     } catch (err) {
       console.error('이력서 제출 실패:', err);
     }
   };
 
+  const TABS = [
+    { id: 'basic', label: '기본정보', icon: <FaUser /> },
+    { id: 'intro', label: '자기소개서', icon: <FaFileAlt /> },
+    { id: 'career', label: '경력/희망직무', icon: <FaBriefcase /> },
+    { id: 'project', label: '프로젝트', icon: <FaProjectDiagram /> },
+    { id: 'activity', label: '외부활동', icon: <FaUsers /> },
+    { id: 'education', label: '학력/자격/스킬', icon: <FaGraduationCap /> },
+  ];
+
+  const renderActiveTabContent = () => {
+    switch (activeTab) {
+      case 'basic':
+        return (
+          <>
+            <ResumeBasicCard
+              value={form.basicInfo}
+              onChange={(val: BasicCardData) => setForm((prev) => ({ ...prev, basicInfo: val }))}
+            />
+            <ResumePortfolioCard
+              value={form.portfolios}
+              onChange={(val) => setForm((prev) => ({ ...prev, portfolios: val }))}
+            />
+          </>
+        );
+      case 'intro':
+        return (
+          <ResumeIntroCard
+            value={form.intro}
+            onChange={(val: IntroCardData) => setForm((prev) => ({ ...prev, intro: val }))}
+          />
+        );
+      case 'career':
+        return (
+          <>
+            <ResumeDesiredJobCard
+              value={form.desiredJob}
+              onChange={(val: DesiredJobCardData) => setForm((prev) => ({ ...prev, desiredJob: val }))}
+            />
+            <ResumeCareerCard
+              value={form.careers}
+              onChange={(val: CareerCardData[]) => setForm((prev) => ({ ...prev, careers: val }))}
+            />
+          </>
+        );
+      case 'project':
+        return (
+          <ResumeProjectCard
+            value={form.projects}
+            onChange={(val: ProjectCardData[]) => setForm((prev) => ({ ...prev, projects: val }))}
+          />
+        );
+      case 'activity':
+        return (
+          <ResumeActivityCard
+            value={form.activities}
+            onChange={(val: ActivityCardData[]) => setForm((prev) => ({ ...prev, activities: val }))}
+          />
+        );
+      case 'education': {
+        return (
+          <>
+            <ResumeEduCard
+              value={form.education}
+              onChange={(val: EduCardData) => setForm((prev) => ({ ...prev, education: val }))}
+            />
+            <ResumeCertCard value={form.certs} onChange={(val) => setForm((prev) => ({ ...prev, certs: val }))} />
+            <ResumeSkillCard
+              value={form.skills}
+              onChange={(val: SkillData[]) => setForm((prev) => ({ ...prev, skills: val }))}
+            />
+          </>
+        );
+      }
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className={styles.resumeContainer}>
-      <ResumeBasicCard value={form.basicInfo} onChange={(val) => setForm((prev) => ({ ...prev, basicInfo: val }))} />
-      <ResumeIntroCard value={form.intro} onChange={(val) => setForm((prev) => ({ ...prev, intro: val }))} />
-
-      {/* 자격증 & 스킬 */}
-      <div className={styles.cardRow}>
-        <ResumeCertCard value={form.certs} onChange={(val) => setForm((prev) => ({ ...prev, certs: val }))} />
-        <ResumeSkillCard value={form.skills} onChange={(val) => setForm((prev) => ({ ...prev, skills: val }))} />
+      <div className={styles.tabMenu}>
+        {TABS.map((tab) => (
+          <button
+            key={tab.id}
+            className={`${styles.tabButton} ${activeTab === tab.id ? styles.active : ''}`}
+            onClick={() => setActiveTab(tab.id)}
+          >
+            {tab.icon}
+            <span>{tab.label}</span>
+          </button>
+        ))}
       </div>
 
-      {/* 학력 & 활동 */}
-      <div className={styles.cardRow}>
-        <ResumeEduCard value={form.education} onChange={(val) => setForm((prev) => ({ ...prev, education: val }))} />
-        <ResumeActivityCard
-          value={form.activities}
-          onChange={(val) => setForm((prev) => ({ ...prev, activities: val }))}
-        />
-      </div>
+      <div className={styles.tabContent}>{renderActiveTabContent()}</div>
 
-      {/* 프로젝트 & 포트폴리오 */}
-      <div className={styles.cardRow}>
-        <ResumeProjectCard value={form.projects} onChange={(val) => setForm((prev) => ({ ...prev, projects: val }))} />
-        {/* <ResumePortfolioCard
-          value={form.portfolios}
-          onChange={(val) => setForm((prev) => ({ ...prev, portfolios: val }))}
-        /> */}
-      </div>
-
-      {/* 제출 버튼 */}
       <div className={styles.submitArea}>
-        <button type="button" onClick={handleSubmit}>
-          이력서 제출
+        <button type="button" onClick={handleSubmit} disabled={status.create === 'pending'}>
+          {status.create === 'pending' ? <div className={styles.spinner}></div> : '이력서 제출'}
         </button>
       </div>
     </div>

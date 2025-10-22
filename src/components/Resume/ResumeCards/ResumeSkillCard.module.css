@@ -78,6 +78,19 @@
   font-weight: bold;
 }
 
+.starRating {
+  display: flex;
+  gap: 2px;
+  margin: 0 4px;
+}
+
+.star {
+  cursor: pointer;
+  transition: color 0.2s;
+  font-size: 16px;
+}
+
+
 .btnPrimary {
   background-color: #6366f1;
   color: #ffffff;

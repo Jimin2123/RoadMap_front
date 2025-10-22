@@ -1,9 +1,10 @@
 import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
 import Card from '../ResumeCard';
-import styles from './ResumeCertCard.module.css';
+import styles from '../ResumeCard.module.css';
 import { CertCardData } from '../../../types/interfaces/ResumeData';
 import debounce from 'lodash.debounce';
 import axiosInstance from '../../../utils/axiosInstance';
+import { FaPencilAlt } from 'react-icons/fa';
 
 interface Props {
   value?: CertCardData[];
@@ -135,19 +136,17 @@ const ResumeCertCard: React.FC<Props> = ({ value = [], onChange }) => {
       {value.length === 0 ? (
         <p>등록된 자격증이 없습니다.</p>
       ) : (
-        <div className={styles.certList}>
+        <div>
           {value.map((cert, index) => (
-            <div key={index} className={styles.certItem}>
-              <strong>{cert.name}</strong>
+            <div key={index} className={styles.item}>
+              <p><strong>{cert.name}</strong></p>
               <p>{cert.agency}</p>
               <p>{cert.year}</p>
               <div className={styles.actions}>
-                <button className={styles.editButton} onClick={() => switchToForm(index)}>
-                  수정
+                <button type="button" className={styles.btnSecondary} onClick={() => switchToForm(index)}>
+                  <FaPencilAlt />
                 </button>
-                <button className={styles.deleteButton} onClick={() => handleDelete(index)}>
-                  삭제
-                </button>
+                <button type="button" className={styles.removeButton} onClick={() => handleDelete(index)}>×</button>
               </div>
             </div>
           ))}
@@ -171,7 +170,7 @@ const ResumeCertCard: React.FC<Props> = ({ value = [], onChange }) => {
           autoComplete="off"
         />
         {suggestions.length > 0 && (
-          <ul className={styles.suggestionList}>
+          <ul className={styles.suggestionBox}>
             {suggestions.map((s, i) => (
               <li
                 key={i}
@@ -195,8 +194,12 @@ const ResumeCertCard: React.FC<Props> = ({ value = [], onChange }) => {
       <input name="year" value={formData.year} onChange={handleChange} placeholder="2023" />
 
       <div className={styles.btnGroup}>
-        <button onClick={handleSave}>완료</button>
-        <button onClick={() => setMode('list')}>취소</button>
+        <button type="button" onClick={handleSave} className={styles.btnPrimary}>
+          완료
+        </button>
+        <button type="button" onClick={() => setMode('list')} className={styles.btnSecondary}>
+          취소
+        </button>
       </div>
     </Card>
   );
