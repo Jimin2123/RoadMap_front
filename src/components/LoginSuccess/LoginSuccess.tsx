@@ -4,7 +4,7 @@ import { MdSettings, MdLogout } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { logoutThunk } from '../../hooks/useAuth';
-import { RootState } from '../../types/store';
+import { RootState } from '../../state/store';
 import { YouthPolicyItemResponse } from '../../types/interfaces/response/YouthPolicyResponse';
 import { openExternalUrl } from '../../utils/openExternalUrl';
 import { getPolicyListServiceForMember } from '../../services/policyService';

@@ -3,7 +3,7 @@ import './ProfileSetting.css';
 import AddressSearch, { DaumPostcodeData } from '../Features/AddressSearch';
 import ClearAddressIcon from '../SettingIcons/ClearAddressIcon';
 import { useAppSelector } from '../../store/hooks';
-import { RootState } from '../../types/store';
+import { RootState } from '../../state/store';
 
 const ProfileSettings: React.FC = () => {
   const { member, status } = useAppSelector((state: RootState) => state.user);

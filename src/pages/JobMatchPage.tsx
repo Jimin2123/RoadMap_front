@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../types/store';
+import { RootState } from '../state/store';
 import { ProfileRequest } from '../types/interfaces/request/ProfileRequest';
 import { IntroCardData } from '../types/interfaces/ResumeData';
 import { EducationLevelType } from '../types/enums/EducationLevelType';
@@ -47,8 +47,20 @@ const JobMatchPage: React.FC = () => {
         portfolios: resume?.portfolios || [],
         projects: resume?.projects || [],
         careers: resume?.careers ?? [],
-        desiredCompany: resume?.desiredCompany ?? { desiredCompany1: '', desiredCompany2: '', desiredRegion: '', salaryType: '연봉', desiredSalary: 0, careerPlan: '' },
-        introduction: (resume?.introduction as IntroCardData) ?? { growthProcess: '', strengths: '', schoolLife: '', motivation: '' },
+        desiredCompany: resume?.desiredCompany ?? {
+          desiredCompany1: '',
+          desiredCompany2: '',
+          desiredRegion: '',
+          salaryType: '연봉',
+          desiredSalary: 0,
+          careerPlan: '',
+        },
+        introduction: (resume?.introduction as IntroCardData) ?? {
+          growthProcess: '',
+          strengths: '',
+          schoolLife: '',
+          motivation: '',
+        },
       },
     };
 

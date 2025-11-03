@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './AccountSettings.css';
 import { useAppSelector } from '../../store/hooks';
-import { RootState } from '../../types/store';
+import { RootState } from '../../state/store';
 
 const AccountSettings: React.FC = () => {
   const member = useAppSelector((state: RootState) => state.user.member);

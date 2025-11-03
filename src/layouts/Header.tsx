@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
 import DropdownMenuCard from '../components/DropdownMenu/DropdownMenuCard';
 import { useAppSelector } from '../store/hooks';
-import { RootState } from '../types/store';
+import { RootState } from '../state/store';
 
 const Header: React.FC = () => {
   const { isAuthenticated } = useAppSelector((state: RootState) => state.auth);

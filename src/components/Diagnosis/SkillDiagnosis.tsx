@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../../types/store';
+import { RootState } from '../../state/store';
 
 const SkillDiagnosis = () => {
   const skills = useSelector((state: RootState) => state.user.member?.profile?.skills ?? []);

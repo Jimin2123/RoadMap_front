@@ -1,5 +1,5 @@
 import { useAppSelector } from '../store/hooks';
-import { RootState } from '../types/store';
+import { RootState } from '../state/store';
 import { useNavigate } from 'react-router-dom';
 import { JSX, useEffect } from 'react';
 import Swal from 'sweetalert2';

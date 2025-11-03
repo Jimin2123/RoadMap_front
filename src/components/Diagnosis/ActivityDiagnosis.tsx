@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../../types/store';
+import { RootState } from '../../state/store';
 
 const ActivityDiagnosis = () => {
   const activities = useSelector((state: RootState) => state.user.member?.profile?.resume?.activities ?? []);
