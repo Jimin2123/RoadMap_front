@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { UserState } from '../../types/interfaces/UserState';
+import { UserState } from '../../state/UserState';
 import { getMember, signUp } from '../../hooks/userUser';
 
 const initialState: UserState = {

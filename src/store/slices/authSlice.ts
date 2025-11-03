@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { AuthState } from '../../types/interfaces/AuthState';
+import { AuthState } from '../../state/AuthState';
 import { clearAccessToken, setAccessToken } from '../../utils/tokenManager';
 import { initializeAuth, login, logoutThunk } from '../../hooks/useAuth';
 
