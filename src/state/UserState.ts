@@ -1,4 +1,4 @@
-import { MemberResponse } from './response/MemberResponse';
+import { MemberResponse } from '../types/interfaces/member/response/MemberResponse';
 
 export interface UserState {
   member: MemberResponse | null;
