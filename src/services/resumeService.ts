@@ -1,5 +1,5 @@
-import { ProfileRequest } from '../types/interfaces/request/ProfileRequest';
-import { MemberResponse } from '../types/interfaces/response/MemberResponse';
+import { ProfileRequest } from '../types/interfaces/member/request/ProfileRequest';
+import { MemberResponse } from '../types/interfaces/member/response/MemberResponse';
 import axiosInstance from '../utils/axiosInstance';
 
 export const createResumeService = async (profileRequest: ProfileRequest): Promise<MemberResponse> => {

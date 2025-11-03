@@ -1,5 +1,5 @@
-import { MemberRequest } from '../types/interfaces/request/MemberRequest';
-import { MemberResponse } from '../types/interfaces/response/MemberResponse';
+import { MemberRequest } from '../types/interfaces/member/request/MemberRequest';
+import { MemberResponse } from '../types/interfaces/member/response/MemberResponse';
 import axiosInstance from '../utils/axiosInstance';
 
 export const getMemberService = async (): Promise<MemberResponse | null> => {
