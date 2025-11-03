@@ -1,15 +1,15 @@
-import { LoginRequestDTO } from '../types/interfaces/request/LoginRequest';
-import { LoginResponseDTO } from '../types/interfaces/response/LoginResponse';
+import { LoginRequest } from '../types/interfaces/auth/request/LoginRequest';
+import { LoginResponse } from '../types/interfaces/auth/response/LoginResponse';
 import axiosInstance from '../utils/axiosInstance';
 
-export const loginService = async (credentials: LoginRequestDTO): Promise<string | null> => {
-  const response = await axiosInstance.post<LoginResponseDTO>('/api/v1/auth/login', credentials);
+export const loginService = async (credentials: LoginRequest): Promise<string | null> => {
+  const response = await axiosInstance.post<LoginResponse>('/api/v1/auth/login', credentials);
   const { accessToken } = response.data;
   return accessToken;
 };
 
 export const refreshTokenService = async (): Promise<string | null> => {
-  const response = await axiosInstance.post<LoginResponseDTO>('/api/v1/auth/refreshToken');
+  const response = await axiosInstance.post<LoginResponse>('/api/v1/auth/refreshToken');
   const { accessToken } = response.data;
   return accessToken;
 };

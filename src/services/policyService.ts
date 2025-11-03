@@ -1,4 +1,4 @@
-import { YouthPolicyListResponse } from '../types/interfaces/response/YouthPolicyResponse';
+import { YouthPolicyListResponse } from '../types/interfaces/apis/youthPolicy/YouthPolicyListResponse';
 import axiosInstance from '../utils/axiosInstance';
 
 export const getPolicyListServiceForMember = async (): Promise<YouthPolicyListResponse> => {

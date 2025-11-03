@@ -4,7 +4,7 @@ import Header from '../layouts/Header';
 import Resume from '../components/Resume/Resume';
 import Footer from '../layouts/Footer';
 import { useAppSelector } from '../store/hooks';
-import { RootState } from '../types/store';
+import { RootState } from '../state/store';
 import ResumeView from '../components/Resume/ResumeView';
 
 const ResumePage: React.FC = () => {

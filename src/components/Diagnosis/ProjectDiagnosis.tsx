@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../../types/store';
+import { RootState } from '../../state/store';
 
 const ProjectDiagnosis = () => {
   const projects = useSelector((state: RootState) => state.user.member?.profile?.resume?.projects ?? []);

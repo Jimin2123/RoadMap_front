@@ -1,4 +1,4 @@
-import { SaraminJobListResponse } from '../types/interfaces/response/SaraminJobListResponse';
+import { SaraminJobListResponse } from '../types/interfaces/apis/saramin/response/SaraminJobListResponse';
 import axiosInstance from '../utils/axiosInstance';
 
 export const getJobsListService = async (page: number): Promise<SaraminJobListResponse> => {

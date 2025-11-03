@@ -1,13 +1,7 @@
 import React from 'react';
 
 const SettingIcon: React.FC = () => (
-  <svg
-    width="25"
-    height="25"
-    viewBox="0 0 25 25"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clipPath="url(#clip0_193_117)">
       <path
         d="M12.5 15.6248C14.2259 15.6248 15.625 14.2257 15.625 12.4998C15.625 10.7739 14.2259 9.37484 12.5 9.37484C10.7741 9.37484 9.375 10.7739 9.375 12.4998C9.375 14.2257 10.7741 15.6248 12.5 15.6248Z"

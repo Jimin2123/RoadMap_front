@@ -11,7 +11,7 @@ import {
   ProjectCardData,
   CareerCardData,
 } from '../../types/interfaces/ResumeData';
-import { RootState } from '../../types/store';
+import { RootState } from '../../state/store';
 import { ResumeRequest, SkillRequest } from '../../types/interfaces/request/ResumeRequest';
 import { ProfileRequest } from '../../types/interfaces/request/ProfileRequest';
 import { EducationLevelType } from '../../types/enums/EducationLevelType';

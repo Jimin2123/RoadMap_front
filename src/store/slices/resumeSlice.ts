@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createResumeThunk } from '../../hooks/useResume';
-import { ResumeState } from '../../types/interfaces/ResumeState';
+import { ResumeState } from '../../state/ResumeState';
 
 const initialState: ResumeState = {
   status: {
