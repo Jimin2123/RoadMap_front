@@ -11,7 +11,20 @@ interface ResumeEduCardProps {
 const ResumeEduCard: React.FC<ResumeEduCardProps> = ({ value, onChange }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value: newValue } = e.target;
-    onChange({ ...value, [name]: newValue });
+
+    if (name === 'startDate' || name === 'endDate') {
+      onChange({
+        ...value,
+        period: {
+          ...value.period,
+          [name]: newValue,
+        },
+      });
+    } else if (name === 'gpa') {
+      onChange({ ...value, gpa: parseFloat(newValue) || 0 });
+    } else {
+      onChange({ ...value, [name]: newValue });
+    }
   };
 
   return (

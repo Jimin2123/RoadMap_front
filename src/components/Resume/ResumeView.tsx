@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './ResumeView.css';
-import { MemberResponse, DesiredCompanyResponse } from '../../types/interfaces/response/MemberResponse';
-import { ActivityResponse, ProjectResponse } from '../../types/interfaces/response/ResumeResponse';
+import { MemberResponse } from '../../types/interfaces/member/response/MemberResponse';
+import { ActivityResponse, ProjectResponse } from '../../types/interfaces/resume/response/ResumeResponse';
+import { CareerResponse } from '../../types/interfaces/resume/response/CareerResponse';
 import { CertCardData } from '../../types/interfaces/ResumeData';
-import { CareerResponse } from '../../types/interfaces/response/CareerResponse';
 import {
   FaUser,
   FaFileAlt,
@@ -28,10 +28,32 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
   const { resume, skills, certificates, major } = profile;
   const { introduction, education, activities, projects, careers, desiredCompany } = resume;
 
-  const proficiencyMap = {
-    BEGINNER: '초급',
-    MIDDLE: '중급',
-    ADVANCED: '고급',
+  // SkillProficiency enum 값을 한글로 매핑
+  const getProficiencyText = (proficiency: string): string => {
+    const profMap: Record<string, string> = {
+      BEGINNER: '초급',
+      INTERMEDIATE: '중급',
+      MIDDLE: '중급',
+      ADVANCED: '고급',
+      EXPERT: '전문가',
+      초급: '초급',
+      중급: '중급',
+      고급: '고급',
+      전문가: '전문가',
+    };
+    return profMap[proficiency] || proficiency;
+  };
+
+  // Period 포맷팅 함수
+  const formatPeriod = (period: { startDate: Date; endDate: Date } | null | undefined): string => {
+    if (!period || !period.startDate || !period.endDate) return '';
+
+    const formatDate = (date: Date): string => {
+      const d = new Date(date);
+      return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}`;
+    };
+
+    return `${formatDate(period.startDate)} ~ ${formatDate(period.endDate)}`;
   };
 
   const TABS = [
@@ -76,10 +98,8 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
                 <strong>희망 지역:</strong> {desiredCompany.desiredRegion}
               </p>
               <p>
-                <strong>희망 연봉:</strong> {desiredCompany.salaryType} {desiredCompany.desiredSalary}만원
-              </p>
-              <p>
-                <strong>커리어 플랜:</strong> {desiredCompany.careerPlan}
+                <strong>희망 급여:</strong> {desiredCompany.salaryType === 'monthly' ? '월급' : '시급'}{' '}
+                {desiredCompany.desiredSalary}만원
               </p>
             </div>
           )
@@ -91,9 +111,9 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
             <ul className="content-section">
               {careers.map((career: CareerResponse, index: number) => (
                 <li key={index}>
-                  <strong>{career.companyName}</strong> ({career.period})
+                  <strong>{career.company}</strong> ({formatPeriod(career.period)})
                   <br />
-                  <small>{career.department}</small>
+                  <small>{career.title}</small>
                   <p>{career.description}</p>
                 </li>
               ))}
@@ -107,7 +127,9 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
             <ul className="content-section">
               {projects.map((proj: ProjectResponse, index: number) => (
                 <li key={index}>
-                  <strong>{proj.name}</strong> ({proj.period})<small>Role: {proj.role}</small>
+                  <strong>{proj.name}</strong> ({formatPeriod(proj.period)})
+                  <br />
+                  <small>Role: {proj.role}</small>
                   <br />
                   <small>Tech: {proj.techStack.join(', ')}</small>
                   <p>{proj.description}</p>
@@ -138,7 +160,7 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
               {activities.map((act: ActivityResponse, index: number) => (
                 <li key={index}>
                   <div>
-                    {act.title} at {act.organization} ({act.period})
+                    {act.title} at {act.organization} ({formatPeriod(act.period)})
                   </div>
                   <p>{act.description}</p>
                 </li>
@@ -164,7 +186,7 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
           education && (
             <ul className="content-section">
               <li>
-                {education.school} – {major} ({education.period}, {education.status})
+                {education.school} – {major} ({formatPeriod(education.period)}, {education.status})
               </li>
             </ul>
           )
@@ -177,8 +199,8 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
               {skills.map((skill) => (
                 <div key={skill.id} className="skill-tag">
                   <span className="skill-name">{skill.name}</span>
-                  <span className={`skill-proficiency ${skill.proficiency.toLowerCase()}`}>
-                    {proficiencyMap[skill.proficiency]}
+                  <span className={`skill-proficiency ${String(skill.proficiency).toLowerCase()}`}>
+                    {getProficiencyText(String(skill.proficiency))}
                   </span>
                 </div>
               ))}

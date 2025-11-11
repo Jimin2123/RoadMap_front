@@ -95,9 +95,7 @@ const ResumeSkillCard: React.FC<ResumeSkillCardProps> = ({ value, onChange }) =>
 
   // 숙련도 변경
   const handleProficiencyChange = (skillName: string, proficiency: SkillData['proficiency']) => {
-    onChange(
-      value.map((skill) => (skill.name === skillName ? { ...skill, proficiency } : skill))
-    );
+    onChange(value.map((skill) => (skill.name === skillName ? { ...skill, proficiency } : skill)));
   };
 
   // 키보드 이벤트 처리
@@ -162,7 +160,9 @@ const ResumeSkillCard: React.FC<ResumeSkillCardProps> = ({ value, onChange }) =>
                 );
               })}
             </div>
-            <button type="button" onClick={() => handleRemoveSkill(skill.name)}>×</button>
+            <button type="button" onClick={() => handleRemoveSkill(skill.name)}>
+              ×
+            </button>
           </span>
         ))}
         <input

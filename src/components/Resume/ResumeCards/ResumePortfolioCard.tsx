@@ -52,13 +52,17 @@ const ResumePortfolioCard: React.FC<ResumePortfolioCardProps> = ({ value = [], o
         <div>
           {value.map((p, i) => (
             <div key={i} className={styles.item}>
-              <p><strong>{p.title}</strong></p>
+              <p>
+                <strong>{p.title}</strong>
+              </p>
               <p>{p.url}</p>
               <div className={styles.actions}>
                 <button type="button" onClick={() => handleEdit(i)} className={styles.btnSecondary}>
                   <FaPencilAlt />
                 </button>
-                <button type="button" onClick={() => handleDelete(i)} className={styles.removeButton}>×</button>
+                <button type="button" onClick={() => handleDelete(i)} className={styles.removeButton}>
+                  ×
+                </button>
               </div>
             </div>
           ))}

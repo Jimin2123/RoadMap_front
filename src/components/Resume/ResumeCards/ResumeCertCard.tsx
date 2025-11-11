@@ -139,14 +139,18 @@ const ResumeCertCard: React.FC<Props> = ({ value = [], onChange }) => {
         <div>
           {value.map((cert, index) => (
             <div key={index} className={styles.item}>
-              <p><strong>{cert.name}</strong></p>
+              <p>
+                <strong>{cert.name}</strong>
+              </p>
               <p>{cert.agency}</p>
               <p>{cert.year}</p>
               <div className={styles.actions}>
                 <button type="button" className={styles.btnSecondary} onClick={() => switchToForm(index)}>
                   <FaPencilAlt />
                 </button>
-                <button type="button" className={styles.removeButton} onClick={() => handleDelete(index)}>×</button>
+                <button type="button" className={styles.removeButton} onClick={() => handleDelete(index)}>
+                  ×
+                </button>
               </div>
             </div>
           ))}

@@ -6,6 +6,8 @@ import { CertificateDTO } from '../../common/CertificateDTO';
 import { CareerResponse } from './CareerResponse';
 import { ProjectResponse } from './ProjectResponse';
 
+export { ActivityResponse, ProjectResponse };
+
 export interface ResumeResponse {
   introduction: IntroductionResponse;
   education: EducationResponse;

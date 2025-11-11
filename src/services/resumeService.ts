@@ -1,8 +1,18 @@
-import { ProfileRequest } from '../types/interfaces/member/request/ProfileRequest';
-import { MemberResponse } from '../types/interfaces/member/response/MemberResponse';
+import { ResumeRequest } from '../types/interfaces/resume/request/ResumeRequest';
+import { ResumeResponse } from '../types/interfaces/resume/response/ResumeResponse';
 import axiosInstance from '../utils/axiosInstance';
 
-export const createResumeService = async (profileRequest: ProfileRequest): Promise<MemberResponse> => {
-  const response = await axiosInstance.post<MemberResponse>('/api/v1/resume', profileRequest);
+export const createResumeService = async (resumeRequest: ResumeRequest): Promise<ResumeResponse> => {
+  const response = await axiosInstance.post<ResumeResponse>('/api/v1/resume', resumeRequest);
+  return response.data;
+};
+
+export const updateResumeService = async (resumeRequest: ResumeRequest): Promise<ResumeResponse> => {
+  const response = await axiosInstance.put<ResumeResponse>('/api/v1/resume', resumeRequest);
+  return response.data;
+};
+
+export const getResumeService = async (): Promise<ResumeResponse> => {
+  const response = await axiosInstance.get<ResumeResponse>('/api/v1/resume');
   return response.data;
 };

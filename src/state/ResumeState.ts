@@ -1,6 +1,11 @@
+import { ResumeResponse } from '../types/interfaces/resume/response/ResumeResponse';
+
 export interface ResumeState {
+  resume: ResumeResponse | null;
   status: {
-    create: 'idle' | 'pending' | 'fulfilled' | 'rejected'; // 로그인
+    create: 'idle' | 'pending' | 'fulfilled' | 'rejected';
+    update: 'idle' | 'pending' | 'fulfilled' | 'rejected';
+    get: 'idle' | 'pending' | 'fulfilled' | 'rejected';
   };
-  error: string | null; // 인증 오류 메시지
+  error: string | null;
 }

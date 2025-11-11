@@ -13,8 +13,8 @@ const ResumeCareerCard: React.FC<ResumeCareerCardProps> = ({ value, onChange }) 
     onChange([
       ...value,
       {
-        companyName: '',
-        department: '',
+        title: '',
+        company: '',
         period: { startDate: '', endDate: '' },
         description: '',
       },
@@ -32,9 +32,12 @@ const ResumeCareerCard: React.FC<ResumeCareerCardProps> = ({ value, onChange }) 
   ) => {
     const newValues = [...value];
     if (field === 'period') {
-      newValues[index].period = { ...newValues[index].period, ...(fieldValue as object) };
+      newValues[index].period = {
+        ...newValues[index].period,
+        ...(fieldValue as { startDate?: string; endDate?: string }),
+      };
     } else {
-      (newValues[index] as any)[field] = fieldValue;
+      newValues[index][field] = fieldValue as string;
     }
     onChange(newValues);
   };
@@ -46,15 +49,15 @@ const ResumeCareerCard: React.FC<ResumeCareerCardProps> = ({ value, onChange }) 
           <input
             type="text"
             placeholder="회사명"
-            value={career.companyName}
-            onChange={(e) => handleChange(index, 'companyName', e.target.value)}
+            value={career.company}
+            onChange={(e) => handleChange(index, 'company', e.target.value)}
             className={styles.input}
           />
           <input
             type="text"
-            placeholder="부서명/직책"
-            value={career.department}
-            onChange={(e) => handleChange(index, 'department', e.target.value)}
+            placeholder="직무명"
+            value={career.title}
+            onChange={(e) => handleChange(index, 'title', e.target.value)}
             className={styles.input}
           />
           <div className={styles.period}>
@@ -71,7 +74,7 @@ const ResumeCareerCard: React.FC<ResumeCareerCardProps> = ({ value, onChange }) 
             />
           </div>
           <textarea
-            placeholder="주요 업무 및 성과"
+            placeholder="직무 내용 및 주요 업무"
             value={career.description}
             onChange={(e) => handleChange(index, 'description', e.target.value)}
             className={styles.textarea}

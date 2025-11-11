@@ -2,7 +2,6 @@ import React from 'react';
 import Card from '../ResumeCard';
 import { DesiredJobCardData } from '../../../types/interfaces/ResumeData';
 import styles from '../ResumeCard.module.css';
-import { SalaryType } from '../../../types/enums/SalaryType';
 
 interface ResumeDesiredJobCardProps {
   value: DesiredJobCardData;
@@ -41,15 +40,15 @@ const ResumeDesiredJobCard: React.FC<ResumeDesiredJobCardProps> = ({ value, onCh
         <div className={styles.salaryContainer} style={{ gridColumn: 'span 2' }}>
           <select
             value={value.salaryType}
-            onChange={(e) => handleChange('salaryType', e.target.value)}
+            onChange={(e) => handleChange('salaryType', e.target.value as 'monthly' | 'hourly')}
             className={styles.select}
           >
-            <option value={SalaryType.ANNUAL}>연봉</option>
-            <option value={SalaryType.MONTHLY}>월급</option>
+            <option value="monthly">월급</option>
+            <option value="hourly">시급</option>
           </select>
           <input
             type="number"
-            placeholder="희망 연봉 (만원)"
+            placeholder="희망 급여 (만원)"
             value={value.desiredSalary}
             onChange={(e) => handleChange('desiredSalary', parseInt(e.target.value, 10) || 0)}
             className={styles.input}
@@ -57,13 +56,6 @@ const ResumeDesiredJobCard: React.FC<ResumeDesiredJobCardProps> = ({ value, onCh
           <span>만원</span>
         </div>
       </div>
-      <textarea
-        placeholder="커리어 플랜 및 포부"
-        value={value.careerPlan}
-        onChange={(e) => handleChange('careerPlan', e.target.value)}
-        className={styles.textarea}
-        style={{ marginTop: '10px', minHeight: '100px' }}
-      />
     </Card>
   );
 };
