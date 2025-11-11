@@ -40,10 +40,6 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
       MIDDLE: '중급',
       ADVANCED: '고급',
       EXPERT: '전문가',
-      초급: '초급',
-      중급: '중급',
-      고급: '고급',
-      전문가: '전문가',
     };
     return profMap[proficiency] || proficiency;
   };
@@ -97,17 +93,34 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
         );
       case 'desiredCompany':
         return desiredCompany ? (
-          <div className="content-section">
-            <p>
-              <strong>희망 기업:</strong> {desiredCompany.desiredCompany1}, {desiredCompany.desiredCompany2}
-            </p>
-            <p>
-              <strong>희망 지역:</strong> {desiredCompany.desiredRegion}
-            </p>
-            <p>
-              <strong>희망 급여:</strong> {desiredCompany.salaryType === 'monthly' ? '월급' : '시급'}{' '}
-              {desiredCompany.desiredSalary}만원
-            </p>
+          <div className="desired-company-grid">
+            <div className="info-card company-card">
+              <div className="info-card-icon">🏢</div>
+              <div className="info-card-content">
+                <h4>희망 기업</h4>
+                <p className="primary-text">{desiredCompany.desiredCompany1}</p>
+                {desiredCompany.desiredCompany2 && <p className="secondary-text">{desiredCompany.desiredCompany2}</p>}
+              </div>
+            </div>
+
+            <div className="info-card location-card">
+              <div className="info-card-icon">📍</div>
+              <div className="info-card-content">
+                <h4>희망 근무 지역</h4>
+                <p className="primary-text">{desiredCompany.desiredRegion}</p>
+              </div>
+            </div>
+
+            <div className="info-card salary-card">
+              <div className="info-card-icon">💰</div>
+              <div className="info-card-content">
+                <h4>희망 급여</h4>
+                <p className="primary-text">
+                  {desiredCompany.salaryType === 'monthly' ? '월급' : '시급'}{' '}
+                  <span className="salary-amount">{desiredCompany.desiredSalary.toLocaleString()}</span>만원
+                </p>
+              </div>
+            </div>
           </div>
         ) : (
           <div className="empty-state">
@@ -250,7 +263,7 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
 
   return (
     <div className="resume-page">
-      <h1 className="page-title">나의 이력서</h1>
+      <h1 className="page-title"></h1>
 
       <div className="resume-container">
         <div className="resume-header">

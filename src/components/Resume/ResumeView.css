@@ -365,6 +365,96 @@
   margin-left: 8px;
 }
 
+/* 희망 직장 정보 그리드 */
+.desired-company-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  padding: 8px 0;
+}
+
+.info-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.info-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-color: #dee2e6;
+}
+
+.info-card:hover::before {
+  opacity: 1;
+}
+
+.company-card::before {
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+}
+
+.location-card::before {
+  background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+}
+
+.salary-card::before {
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.info-card-icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+  display: inline-block;
+  filter: grayscale(20%);
+}
+
+.info-card-content h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6c757d;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-card-content .primary-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: #212529;
+  margin: 0 0 4px 0;
+  line-height: 1.4;
+}
+
+.info-card-content .secondary-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #495057;
+  margin: 8px 0 0 0;
+}
+
+.salary-amount {
+  color: #007bff;
+  font-weight: 700;
+  font-size: 24px;
+}
+
 /* Empty State 스타일 */
 .empty-state {
   text-align: center;
@@ -432,6 +522,27 @@
   .skill-tag {
     font-size: 13px;
     padding: 5px 7px 5px 12px;
+  }
+
+  .desired-company-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .info-card {
+    padding: 24px;
+  }
+
+  .info-card-icon {
+    font-size: 32px;
+  }
+
+  .info-card-content .primary-text {
+    font-size: 18px;
+  }
+
+  .salary-amount {
+    font-size: 20px;
   }
 }
 
