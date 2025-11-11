@@ -82,9 +82,13 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
         return (
           <div className="content-section">
             <h4>성장 과정</h4>
-            <p className="paragraph">{introduction?.growthProcess}</p>
+            <p className="paragraph">{introduction?.growthProcess || '작성된 내용이 없습니다.'}</p>
             <h4>강점</h4>
-            <p className="paragraph">{introduction?.strengths}</p>
+            <p className="paragraph">{introduction?.strengths || '작성된 내용이 없습니다.'}</p>
+            <h4>학교 생활 및 교내 활동</h4>
+            <p className="paragraph">{introduction?.schoolLife || '작성된 내용이 없습니다.'}</p>
+            <h4>지원 동기</h4>
+            <p className="paragraph">{introduction?.motivation || '작성된 내용이 없습니다.'}</p>
           </div>
         );
       case 'desiredCompany':
@@ -111,9 +115,10 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
             <ul className="content-section">
               {careers.map((career: CareerResponse, index: number) => (
                 <li key={index}>
-                  <strong>{career.company}</strong> ({formatPeriod(career.period)})
-                  <br />
-                  <small>{career.title}</small>
+                  <strong>{career.company}</strong>
+                  <small>
+                    {career.title} • {formatPeriod(career.period)}
+                  </small>
                   <p>{career.description}</p>
                 </li>
               ))}
@@ -127,25 +132,26 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
             <ul className="content-section">
               {projects.map((proj: ProjectResponse, index: number) => (
                 <li key={index}>
-                  <strong>{proj.name}</strong> ({formatPeriod(proj.period)})
-                  <br />
-                  <small>Role: {proj.role}</small>
-                  <br />
-                  <small>Tech: {proj.techStack.join(', ')}</small>
+                  <strong>{proj.name}</strong>
+                  <small>
+                    {proj.role} • {formatPeriod(proj.period)}
+                  </small>
+                  <small style={{ color: '#007bff', fontWeight: 500 }}>기술 스택: {proj.techStack.join(', ')}</small>
                   <p>{proj.description}</p>
                   {proj.url && (
-                    <p>
-                      <a href={proj.url} target="_blank" rel="noopener noreferrer">
-                        프로젝트 링크
-                      </a>
-                    </p>
+                    <a href={proj.url} target="_blank" rel="noopener noreferrer">
+                      🔗 프로젝트 링크
+                    </a>
                   )}
                   {proj.achievements && proj.achievements.length > 0 && (
-                    <ul>
-                      {proj.achievements.map((ach, i) => (
-                        <li key={i}>{ach}</li>
-                      ))}
-                    </ul>
+                    <>
+                      <div style={{ marginTop: '16px', fontWeight: 600, color: '#495057' }}>주요 성과</div>
+                      <ul>
+                        {proj.achievements.map((ach, i) => (
+                          <li key={i}>{ach}</li>
+                        ))}
+                      </ul>
+                    </>
                   )}
                 </li>
               ))}
@@ -159,9 +165,10 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
             <ul className="content-section">
               {activities.map((act: ActivityResponse, index: number) => (
                 <li key={index}>
-                  <div>
-                    {act.title} at {act.organization} ({formatPeriod(act.period)})
-                  </div>
+                  <strong>{act.title}</strong>
+                  <small>
+                    {act.organization} • {formatPeriod(act.period)}
+                  </small>
                   <p>{act.description}</p>
                 </li>
               ))}
@@ -172,10 +179,13 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
         return (
           certificates &&
           certificates.length > 0 && (
-            <ul className="content-section">
+            <ul className="content-section certificate-list">
               {certificates.map((cert: CertCardData, index: number) => (
                 <li key={index}>
-                  {cert.name} ({cert.year}, {cert.agency})
+                  <strong>{cert.name}</strong>
+                  <small>
+                    {cert.agency} • {cert.year}년 취득
+                  </small>
                 </li>
               ))}
             </ul>
@@ -186,7 +196,13 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
           education && (
             <ul className="content-section">
               <li>
-                {education.school} – {major} ({formatPeriod(education.period)}, {education.status})
+                <strong>{education.school}</strong>
+                <small>
+                  {major} • {formatPeriod(education.period)}
+                </small>
+                <p>
+                  학점: {education.gpa} • 상태: {education.status}
+                </p>
               </li>
             </ul>
           )

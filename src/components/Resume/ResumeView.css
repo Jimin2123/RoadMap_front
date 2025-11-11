@@ -145,25 +145,118 @@
   padding-left: 0;
   list-style-type: none;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .content-section li {
-  margin-bottom: 15px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 24px;
   line-height: 1.6;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #f1f3f5;
+  border: 1px solid #e9ecef;
+  transition: all 0.2s ease;
+  position: relative;
 }
 
-.content-section li:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-  margin-bottom: 0;
+.content-section li:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: #dee2e6;
+  transform: translateY(-2px);
+}
+
+.content-section li strong {
+  color: #212529;
+  font-size: 18px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.content-section li small {
+  color: #6c757d;
+  font-size: 14px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.content-section li p {
+  color: #495057;
+  line-height: 1.7;
+  margin: 12px 0 0 0;
+  white-space: pre-wrap;
+}
+
+.content-section li div {
+  font-weight: 500;
+  color: #212529;
+  margin-bottom: 8px;
+}
+
+/* Nested ul styling for achievements */
+.content-section li ul {
+  margin: 16px 0 0 0;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.content-section li ul li {
+  background-color: transparent;
+  border: none;
+  padding: 4px 0;
+  margin-bottom: 8px;
+  border-radius: 0;
+  box-shadow: none;
+  transform: none;
+}
+
+.content-section li ul li:hover {
+  transform: none;
+  box-shadow: none;
 }
 
 .paragraph {
   white-space: pre-wrap;
-  line-height: 1.7;
+  line-height: 1.8;
   color: #343a40;
+  font-size: 15px;
+}
+
+/* 자기소개서 섹션 스타일 */
+.content-section h4 {
+  color: #007bff;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 24px 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.content-section h4:first-child {
+  margin-top: 0;
+}
+
+/* 희망 직장 정보 스타일 */
+.content-section > div {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #e9ecef;
+}
+
+.content-section > div p {
+  margin: 12px 0;
+  color: #495057;
+  line-height: 1.7;
+}
+
+.content-section > div p strong {
+  color: #007bff;
+  font-weight: 600;
+  display: inline;
+  font-size: 15px;
+  margin-right: 8px;
 }
 .avatar-placeholder {
   width: 100px;
@@ -180,17 +273,25 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  padding: 8px 0;
 }
 
 .skill-tag {
   display: flex;
   align-items: center;
-  background-color: #f1f3f5;
-  border-radius: 16px;
-  padding: 4px 6px 4px 12px;
-  font-size: 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  padding: 6px 8px 6px 14px;
+  font-size: 14px;
   font-weight: 500;
-  color: #495057;
+  color: white;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  transition: all 0.2s ease;
+}
+
+.skill-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
 .skill-name {
@@ -198,40 +299,129 @@
 }
 
 .skill-proficiency {
-  font-size: 12px;
-  padding: 3px 8px;
+  font-size: 11px;
+  padding: 3px 10px;
   border-radius: 12px;
-  color: white;
+  background-color: rgba(255, 255, 255, 0.25);
   font-weight: 600;
+  backdrop-filter: blur(10px);
 }
 
-.skill-proficiency.beginner {
-  background-color: #a0aec0; /* Gray */
-}
-.skill-proficiency.middle {
-  background-color: #4299e1; /* Blue */
-}
-.skill-proficiency.advanced {
-  background-color: #48bb78; /* Green */
+/* 프로필 태그별 색상 (옵션) */
+.skill-tag.beginner-skill {
+  background: linear-gradient(135deg, #a0aec0 0%, #718096 100%);
+  box-shadow: 0 2px 8px rgba(160, 174, 192, 0.3);
 }
 
-.bookmark-nav button {
-  width: 100%;
-  padding: 10px 14px;
-  border: none;
-  border-radius: 12px;
-  background-color: #f4f6fa;
-  color: #333;
-  font-size: 15px;
+.skill-tag.intermediate-skill {
+  background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+  box-shadow: 0 2px 8px rgba(66, 153, 225, 0.3);
+}
+
+.skill-tag.advanced-skill {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  box-shadow: 0 2px 8px rgba(72, 187, 120, 0.3);
+}
+
+/* 자격증 리스트 스타일 */
+.content-section.certificate-list li {
+  background-color: #fff;
+  border-left: 4px solid #007bff;
+  padding: 16px 20px;
+}
+
+.content-section.certificate-list li:hover {
+  border-left-color: #0056b3;
+}
+
+/* 링크 스타일 */
+.content-section a {
+  color: #007bff;
+  text-decoration: none;
   font-weight: 500;
-  text-align: left;
-  cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  padding: 4px 8px;
+  border-radius: 6px;
 }
 
-.bookmark-nav button:hover {
-  background-color: #007bff;
-  color: white;
+.content-section a:hover {
+  background-color: #e7f3ff;
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Period 스타일 */
+.content-section .period-badge {
+  display: inline-block;
+  background-color: #e9ecef;
+  color: #495057;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .resume-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .resume-header-left {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .tab-menu {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tab-button {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .tab-content {
+    padding: 24px 16px;
+  }
+
+  .content-section li {
+    padding: 20px;
+  }
+
+  .name {
+    font-size: 24px;
+  }
+
+  .skill-container {
+    gap: 8px;
+  }
+
+  .skill-tag {
+    font-size: 13px;
+    padding: 5px 7px 5px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 24px;
+  }
+
+  .content-section li strong {
+    font-size: 16px;
+  }
+
+  .tab-content {
+    padding: 20px 12px;
+  }
 }
