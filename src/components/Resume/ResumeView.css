@@ -365,6 +365,29 @@
   margin-left: 8px;
 }
 
+/* Empty State 스타일 */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 16px;
+  border: 2px dashed #dee2e6;
+}
+
+.empty-state p {
+  font-size: 18px;
+  font-weight: 600;
+  color: #6c757d;
+  margin: 0 0 12px 0;
+}
+
+.empty-state small {
+  font-size: 14px;
+  color: #868e96;
+  display: block;
+  margin-top: 8px;
+}
+
 /* 반응형 디자인 */
 @media (max-width: 768px) {
   .resume-header {
