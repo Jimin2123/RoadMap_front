@@ -8,7 +8,7 @@ import { FaStar, FaCode } from 'react-icons/fa';
 
 export interface SkillData {
   name: string;
-  proficiency: 'BEGINNER' | 'MIDDLE' | 'ADVANCED';
+  proficiency: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED';
 }
 
 interface ResumeSkillCardProps {
@@ -81,7 +81,7 @@ const ResumeSkillCard: React.FC<ResumeSkillCardProps> = ({ value, onChange }) =>
   const handleAddSkill = (skillName: string) => {
     const trimmed = skillName.trim();
     if (trimmed && !value.find((v) => v.name === trimmed)) {
-      onChange([...value, { name: trimmed, proficiency: 'MIDDLE' }]);
+      onChange([...value, { name: trimmed, proficiency: 'INTERMEDIATE' }]);
     }
     setInputValue('');
     setSuggestions([]);
@@ -95,9 +95,7 @@ const ResumeSkillCard: React.FC<ResumeSkillCardProps> = ({ value, onChange }) =>
 
   // 숙련도 변경
   const handleProficiencyChange = (skillName: string, proficiency: SkillData['proficiency']) => {
-    onChange(
-      value.map((skill) => (skill.name === skillName ? { ...skill, proficiency } : skill))
-    );
+    onChange(value.map((skill) => (skill.name === skillName ? { ...skill, proficiency } : skill)));
   };
 
   // 키보드 이벤트 처리
@@ -128,7 +126,7 @@ const ResumeSkillCard: React.FC<ResumeSkillCardProps> = ({ value, onChange }) =>
     }
   };
 
-  const proficiencyLevels: SkillData['proficiency'][] = ['BEGINNER', 'MIDDLE', 'ADVANCED'];
+  const proficiencyLevels: SkillData['proficiency'][] = ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'];
   const getProficiencyValue = (level: SkillData['proficiency']) => {
     return proficiencyLevels.indexOf(level) + 1;
   };
@@ -162,7 +160,9 @@ const ResumeSkillCard: React.FC<ResumeSkillCardProps> = ({ value, onChange }) =>
                 );
               })}
             </div>
-            <button type="button" onClick={() => handleRemoveSkill(skill.name)}>×</button>
+            <button type="button" onClick={() => handleRemoveSkill(skill.name)}>
+              ×
+            </button>
           </span>
         ))}
         <input

@@ -163,17 +163,17 @@ const ResumeProjectCard: React.FC<ResumeProjectCardProps> = ({ value, onChange }
     setMode('list');
   };
 
-  const handleAchievementChange = (projIndex: number, achIndex: number, value: string) => {
+  const handleAchievementChange = (achIndex: number, value: string) => {
     const newAchievements = [...(formData.achievements || [])];
     newAchievements[achIndex] = value;
     setFormData((prev) => ({ ...prev, achievements: newAchievements }));
   };
 
-  const handleAddAchievement = (projIndex: number) => {
+  const handleAddAchievement = () => {
     setFormData((prev) => ({ ...prev, achievements: [...(prev.achievements || []), emptyAchievement] }));
   };
 
-  const handleRemoveAchievement = (projIndex: number, achIndex: number) => {
+  const handleRemoveAchievement = (achIndex: number) => {
     setFormData((prev) => ({ ...prev, achievements: (prev.achievements || []).filter((_, i) => i !== achIndex) }));
   };
 
@@ -302,19 +302,15 @@ const ResumeProjectCard: React.FC<ResumeProjectCardProps> = ({ value, onChange }
             type="text"
             placeholder="로그인 API 응답 시간 50% 단축"
             value={ach}
-            onChange={(e) => handleAchievementChange(editIndex!, achIndex, e.target.value)}
+            onChange={(e) => handleAchievementChange(achIndex, e.target.value)}
             className={styles.input}
           />
-          <button
-            type="button"
-            onClick={() => handleRemoveAchievement(editIndex!, achIndex)}
-            className={styles.removeButton}
-          >
+          <button type="button" onClick={() => handleRemoveAchievement(achIndex)} className={styles.removeButton}>
             ×
           </button>
         </div>
       ))}
-      <button type="button" onClick={() => handleAddAchievement(editIndex!)} className={styles.addButton}>
+      <button type="button" onClick={handleAddAchievement} className={styles.addButton}>
         성과 추가
       </button>
 

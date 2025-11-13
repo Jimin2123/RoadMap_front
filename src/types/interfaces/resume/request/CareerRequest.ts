@@ -1,8 +1,8 @@
 import { PeriodRequest } from '../common/PeriodRequest';
 
 export interface CareerRequest {
-  title: string; // 직무명
-  company: string; // 회사명
+  companyName: string; // 회사명
   period: PeriodRequest; // 근무 기간
-  description: string; // 직무 내용
+  department: string; // 근무부서/직책
+  description: string; // 업무 내용
 }

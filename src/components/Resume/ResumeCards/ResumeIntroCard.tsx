@@ -34,6 +34,15 @@ const ResumeIntroCard: React.FC<ResumeIntroCardProps> = ({ value, onChange }) =>
         onChange={handleChange}
         className={styles.textarea}
       />
+      <label>학교 생활 및 교내 활동</label>
+      <textarea
+        name="schoolLife"
+        rows={6}
+        placeholder="학교 생활 및 교내 활동을 작성해 주세요."
+        value={value?.schoolLife ?? ''}
+        onChange={handleChange}
+        className={styles.textarea}
+      />
       <label>지원 동기</label>
       <textarea
         name="motivation"

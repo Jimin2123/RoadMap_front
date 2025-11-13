@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './ResumeView.css';
-import { MemberResponse, DesiredCompanyResponse } from '../../types/interfaces/response/MemberResponse';
-import { ActivityResponse, ProjectResponse } from '../../types/interfaces/response/ResumeResponse';
+import { MemberResponse } from '../../types/interfaces/member/response/MemberResponse';
+import { ProjectResponse } from '../../types/interfaces/resume/response/ProjectResponse';
+import { ActivityResponse } from '../../types/interfaces/resume/response/ActivityResponse';
+import { CareerResponse } from '../../types/interfaces/resume/response/CareerResponse';
 import { CertCardData } from '../../types/interfaces/ResumeData';
-import { CareerResponse } from '../../types/interfaces/response/CareerResponse';
 import {
   FaUser,
   FaFileAlt,
@@ -25,13 +26,33 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
   const [activeTab, setActiveTab] = useState('introduction');
 
   const { profile, name, phoneNumber, email } = member;
-  const { resume, skills, certificates, major } = profile;
-  const { introduction, education, activities, projects, careers, desiredCompany } = resume;
+  const { resume, skills, major } = profile;
 
-  const proficiencyMap = {
-    BEGINNER: '초급',
-    MIDDLE: '중급',
-    ADVANCED: '고급',
+  const { introduction, education, activities, projects, careers, desiredCompany } = resume || {};
+  // certificates는 resume 또는 profile에 있을 수 있음
+  const certificates = resume?.certificates || profile?.certificates || [];
+
+  // SkillProficiency enum 값을 한글로 매핑
+  const getProficiencyText = (proficiency: string): string => {
+    const profMap: Record<string, string> = {
+      BEGINNER: '초급',
+      INTERMEDIATE: '중급',
+      ADVANCED: '고급',
+      EXPERT: '전문가',
+    };
+    return profMap[proficiency] || proficiency;
+  };
+
+  // Period 포맷팅 함수
+  const formatPeriod = (period: { startDate: Date; endDate: Date } | null | undefined): string => {
+    if (!period || !period.startDate || !period.endDate) return '';
+
+    const formatDate = (date: Date): string => {
+      const d = new Date(date);
+      return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}`;
+    };
+
+    return `${formatDate(period.startDate)} ~ ${formatDate(period.endDate)}`;
   };
 
   const TABS = [
@@ -60,130 +81,179 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
         return (
           <div className="content-section">
             <h4>성장 과정</h4>
-            <p className="paragraph">{introduction?.growthProcess}</p>
+            <p className="paragraph">{introduction?.growthProcess || '작성된 내용이 없습니다.'}</p>
             <h4>강점</h4>
-            <p className="paragraph">{introduction?.strengths}</p>
+            <p className="paragraph">{introduction?.strengths || '작성된 내용이 없습니다.'}</p>
+            <h4>학교 생활 및 교내 활동</h4>
+            <p className="paragraph">{introduction?.schoolLife || '작성된 내용이 없습니다.'}</p>
+            <h4>지원 동기</h4>
+            <p className="paragraph">{introduction?.motivation || '작성된 내용이 없습니다.'}</p>
           </div>
         );
       case 'desiredCompany':
-        return (
-          desiredCompany && (
-            <div className="content-section">
-              <p>
-                <strong>희망 기업:</strong> {desiredCompany.desiredCompany1}, {desiredCompany.desiredCompany2}
-              </p>
-              <p>
-                <strong>희망 지역:</strong> {desiredCompany.desiredRegion}
-              </p>
-              <p>
-                <strong>희망 연봉:</strong> {desiredCompany.salaryType} {desiredCompany.desiredSalary}만원
-              </p>
-              <p>
-                <strong>커리어 플랜:</strong> {desiredCompany.careerPlan}
-              </p>
+        return desiredCompany ? (
+          <div className="desired-company-grid">
+            <div className="info-card company-card">
+              <div className="info-card-icon">🏢</div>
+              <div className="info-card-content">
+                <h4>희망 기업</h4>
+                <p className="primary-text">{desiredCompany.desiredCompany1}</p>
+                {desiredCompany.desiredCompany2 && <p className="secondary-text">{desiredCompany.desiredCompany2}</p>}
+              </div>
             </div>
-          )
+
+            <div className="info-card location-card">
+              <div className="info-card-icon">📍</div>
+              <div className="info-card-content">
+                <h4>희망 근무 지역</h4>
+                <p className="primary-text">{desiredCompany.desiredRegion}</p>
+              </div>
+            </div>
+
+            <div className="info-card salary-card">
+              <div className="info-card-icon">💰</div>
+              <div className="info-card-content">
+                <h4>희망 급여</h4>
+                <p className="primary-text">
+                  {desiredCompany.salaryType === 'monthly' ? '월급' : '시급'}{' '}
+                  <span className="salary-amount">{desiredCompany.desiredSalary.toLocaleString()}</span>만원
+                </p>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="empty-state">
+            <p>등록된 희망 직장 정보가 없습니다.</p>
+            <small>이력서 수정에서 희망 직장 정보를 추가해보세요.</small>
+          </div>
         );
       case 'careers':
-        return (
-          careers &&
-          careers.length > 0 && (
-            <ul className="content-section">
-              {careers.map((career: CareerResponse, index: number) => (
-                <li key={index}>
-                  <strong>{career.companyName}</strong> ({career.period})
-                  <br />
-                  <small>{career.department}</small>
-                  <p>{career.description}</p>
-                </li>
-              ))}
-            </ul>
-          )
+        return careers && careers.length > 0 ? (
+          <ul className="content-section">
+            {careers.map((career: CareerResponse, index: number) => (
+              <li key={index}>
+                <strong>{career.companyName}</strong>
+                <small>
+                  {career.department} • {formatPeriod(career.period)}
+                </small>
+                <p>{career.description}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="empty-state">
+            <p>등록된 경력사항이 없습니다.</p>
+            <small>이력서 수정에서 경력사항을 추가해보세요.</small>
+          </div>
         );
       case 'projects':
-        return (
-          projects &&
-          projects.length > 0 && (
-            <ul className="content-section">
-              {projects.map((proj: ProjectResponse, index: number) => (
-                <li key={index}>
-                  <strong>{proj.name}</strong> ({proj.period})<small>Role: {proj.role}</small>
-                  <br />
-                  <small>Tech: {proj.techStack.join(', ')}</small>
-                  <p>{proj.description}</p>
-                  {proj.url && (
-                    <p>
-                      <a href={proj.url} target="_blank" rel="noopener noreferrer">
-                        프로젝트 링크
-                      </a>
-                    </p>
-                  )}
-                  {proj.achievements && proj.achievements.length > 0 && (
+        return projects && projects.length > 0 ? (
+          <ul className="content-section">
+            {projects.map((proj: ProjectResponse, index: number) => (
+              <li key={index}>
+                <strong>{proj.name}</strong>
+                <small>
+                  {proj.role} • {formatPeriod(proj.period)}
+                </small>
+                <small style={{ color: '#007bff', fontWeight: 500 }}>기술 스택: {proj.techStack.join(', ')}</small>
+                <p>{proj.description}</p>
+                {proj.url && (
+                  <a href={proj.url} target="_blank" rel="noopener noreferrer">
+                    🔗 프로젝트 링크
+                  </a>
+                )}
+                {proj.achievements && proj.achievements.length > 0 && (
+                  <>
+                    <div style={{ marginTop: '16px', fontWeight: 600, color: '#495057' }}>주요 성과</div>
                     <ul>
-                      {proj.achievements.map((ach, i) => (
+                      {proj.achievements.map((ach: string, i: number) => (
                         <li key={i}>{ach}</li>
                       ))}
                     </ul>
-                  )}
-                </li>
-              ))}
-            </ul>
-          )
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="empty-state">
+            <p>등록된 프로젝트가 없습니다.</p>
+            <small>이력서 수정에서 프로젝트를 추가해보세요.</small>
+          </div>
         );
       case 'activities':
-        return (
-          activities &&
-          activities.length > 0 && (
-            <ul className="content-section">
-              {activities.map((act: ActivityResponse, index: number) => (
-                <li key={index}>
-                  <div>
-                    {act.title} at {act.organization} ({act.period})
-                  </div>
-                  <p>{act.description}</p>
-                </li>
-              ))}
-            </ul>
-          )
+        return activities && activities.length > 0 ? (
+          <ul className="content-section">
+            {activities.map((act: ActivityResponse, index: number) => (
+              <li key={index}>
+                <strong>{act.title}</strong>
+                <small>
+                  {act.organization} • {formatPeriod(act.period)}
+                </small>
+                <p>{act.description}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="empty-state">
+            <p>등록된 외부활동이 없습니다.</p>
+            <small>이력서 수정에서 외부활동을 추가해보세요.</small>
+          </div>
         );
       case 'certificates':
-        return (
-          certificates &&
-          certificates.length > 0 && (
-            <ul className="content-section">
-              {certificates.map((cert: CertCardData, index: number) => (
-                <li key={index}>
-                  {cert.name} ({cert.year}, {cert.agency})
-                </li>
-              ))}
-            </ul>
-          )
+        return certificates && certificates.length > 0 ? (
+          <ul className="content-section certificate-list">
+            {certificates.map((cert: CertCardData, index: number) => (
+              <li key={index}>
+                <strong>{cert.name}</strong>
+                <small>
+                  {cert.agency} • {cert.year}년 취득
+                </small>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="empty-state">
+            <p>등록된 자격증이 없습니다.</p>
+            <small>이력서 수정에서 자격증을 추가해보세요.</small>
+          </div>
         );
       case 'education':
-        return (
-          education && (
-            <ul className="content-section">
-              <li>
-                {education.school} – {major} ({education.period}, {education.status})
-              </li>
-            </ul>
-          )
+        return education ? (
+          <ul className="content-section">
+            <li>
+              <strong>{education.school}</strong>
+              <small>
+                {major} • {formatPeriod(education.period)}
+              </small>
+              <p>
+                학점: {education.gpa} • 상태: {education.status}
+              </p>
+            </li>
+          </ul>
+        ) : (
+          <div className="empty-state">
+            <p>등록된 학력 정보가 없습니다.</p>
+            <small>이력서 수정에서 학력 정보를 추가해보세요.</small>
+          </div>
         );
       case 'skills':
-        return (
-          skills &&
-          skills.length > 0 && (
-            <div className="skill-container">
-              {skills.map((skill) => (
-                <div key={skill.id} className="skill-tag">
-                  <span className="skill-name">{skill.name}</span>
-                  <span className={`skill-proficiency ${skill.proficiency.toLowerCase()}`}>
-                    {proficiencyMap[skill.proficiency]}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )
+        return skills && skills.length > 0 ? (
+          <div className="skill-container">
+            {skills.map((skill) => (
+              <div key={skill.id} className="skill-tag">
+                <span className="skill-name">{skill.name}</span>
+                <span className={`skill-proficiency ${String(skill.proficiency).toLowerCase()}`}>
+                  {getProficiencyText(String(skill.proficiency))}
+                </span>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="empty-state">
+            <p>등록된 기술 스택이 없습니다.</p>
+            <small>이력서 수정에서 보유 기술을 추가해보세요.</small>
+          </div>
         );
       default:
         return <p>내용이 없습니다.</p>;
@@ -192,7 +262,7 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
 
   return (
     <div className="resume-page">
-      <h1 className="page-title">나의 이력서</h1>
+      <h1 className="page-title"></h1>
 
       <div className="resume-container">
         <div className="resume-header">

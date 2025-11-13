@@ -1,11 +1,8 @@
-import { SalaryType } from '../../../enums/SalaryType';
-
 export interface DesiredCompanyResponse {
   id: number;
   desiredCompany1: string;
   desiredCompany2: string;
   desiredRegion: string;
-  salaryType: SalaryType;
+  salaryType: 'monthly' | 'hourly';
   desiredSalary: number;
-  careerPlan: string;
 }
