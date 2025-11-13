@@ -28,21 +28,7 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
   const { profile, name, phoneNumber, email } = member;
   const { resume, skills, major } = profile;
 
-  // 디버깅: 전체 데이터 구조 확인
-  console.log('=== ResumeView 전체 데이터 ===');
-  console.log('member:', member);
-  console.log('profile:', profile);
-  console.log('resume:', resume);
-  console.log('resume의 모든 키:', resume ? Object.keys(resume) : 'resume is null');
-
   const { introduction, education, activities, projects, careers, desiredCompany } = resume || {};
-
-  // 디버깅: 경력 데이터 확인
-  console.log('=== ResumeView 경력 데이터 ===');
-  console.log('careers:', careers);
-  console.log('careers 타입:', typeof careers);
-  console.log('careers 길이:', careers?.length);
-
   // certificates는 resume 또는 profile에 있을 수 있음
   const certificates = resume?.certificates || profile?.certificates || [];
 
