@@ -52,9 +52,9 @@ export interface ProjectCardData {
 }
 
 export interface CareerCardData {
-  title: string;
-  company: string;
+  companyName: string;
   period: PeriodData;
+  department: string;
   description: string;
 }
 

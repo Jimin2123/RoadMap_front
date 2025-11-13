@@ -163,12 +163,12 @@ const Resume: React.FC<ResumeProps> = ({ member, onSubmissionSuccess }) => {
         }) || [],
       careers:
         resume?.careers?.map((career: CareerResponse) => ({
-          title: career.title,
-          company: career.company,
+          companyName: career.companyName,
           period: {
             startDate: career.period?.startDate ? new Date(career.period.startDate).toISOString().split('T')[0] : '',
             endDate: career.period?.endDate ? new Date(career.period.endDate).toISOString().split('T')[0] : '',
           },
+          department: career.department,
           description: career.description,
         })) || [],
       desiredJob: resume?.desiredCompany
@@ -256,9 +256,9 @@ const Resume: React.FC<ResumeProps> = ({ member, onSubmissionSuccess }) => {
     }));
 
     const careers: CareerRequest[] = form.careers.map((career) => ({
-      title: career.title,
-      company: career.company,
+      companyName: career.companyName,
       period: convertPeriodToDate(career.period),
+      department: career.department,
       description: career.description,
     }));
 
@@ -315,6 +315,11 @@ const Resume: React.FC<ResumeProps> = ({ member, onSubmissionSuccess }) => {
 
   const handleSubmit = async () => {
     const profileRequest = buildProfileRequest();
+
+    // 디버깅: 전송되는 데이터 확인
+    console.log('=== 이력서 제출 데이터 ===');
+    console.log('ProfileRequest:', JSON.stringify(profileRequest, null, 2));
+    console.log('Careers 데이터:', JSON.stringify(form.careers, null, 2));
 
     try {
       // 1. 이력서 생성/수정 API를 호출합니다.

@@ -1,8 +1,8 @@
 import { PeriodResponse } from './PeriodResponse';
 
 export interface CareerResponse {
-  title: string; // 직무명
-  company: string; // 회사명
+  companyName: string; // 회사명
   period: PeriodResponse;
-  description: string; // 직무 내용
+  department: string; // 근무부서/직책
+  description: string; // 업무 내용
 }
