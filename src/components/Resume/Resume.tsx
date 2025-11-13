@@ -18,6 +18,10 @@ import { ProjectRequest } from '../../types/interfaces/resume/request/ProjectReq
 import { CareerRequest } from '../../types/interfaces/resume/request/CareerRequest';
 import { EducationRequest } from '../../types/interfaces/resume/request/EducationRequest';
 import { PeriodRequest } from '../../types/interfaces/resume/common/PeriodRequest';
+import { ProfileRequest } from '../../types/interfaces/member/request/ProfileRequest';
+import { SkillRequest } from '../../types/interfaces/member/request/SkillRequest';
+import { EducationLevelType } from '../../types/enums/EducationLevelType';
+import { SkillProficiency } from '../../types/enums/SkillProficiency';
 import ResumeBasicCard from './ResumeCards/ResumeBasicCard';
 import ResumeIntroCard from './ResumeCards/ResumeIntroCard';
 import ResumeCertCard from './ResumeCards/ResumeCertCard';
@@ -30,7 +34,7 @@ import ResumeCareerCard from './ResumeCards/ResumeCareerCard';
 import ResumeDesiredJobCard from './ResumeCards/ResumeDesiredJobCard';
 import styles from './Resume.module.css';
 import { useAppDispatch } from '../../store/hooks';
-import { createResumeThunk } from '../../hooks/useResume';
+import { createResumeThunk, updateResumeThunk } from '../../hooks/useResume';
 import { useSubmissionAlert } from '../../hooks/useSubmissionAlert';
 import { MemberResponse } from '../../types/interfaces/member/response/MemberResponse';
 import { ProfileSkillDTO } from '../../types/interfaces/member/response/ProfileSkillDTO';
@@ -39,7 +43,7 @@ import { ActivityResponse } from '../../types/interfaces/resume/response/Activit
 import { ProjectResponse } from '../../types/interfaces/resume/response/ProjectResponse';
 import { SkillData } from './ResumeCards/ResumeSkillCard';
 import { getMember } from '../../hooks/userUser';
-import { resetCreateStatus } from '../../store/slices/resumeSlice';
+import { resetCreateStatus, resetUpdateStatus } from '../../store/slices/resumeSlice';
 import { FaUser, FaFileAlt, FaBriefcase, FaProjectDiagram, FaUsers, FaGraduationCap } from 'react-icons/fa';
 
 /**
@@ -95,9 +99,12 @@ const Resume: React.FC<ResumeProps> = ({ member, onSubmissionSuccess }) => {
   const { status, error } = useSelector((state: RootState) => state.resume);
   const dispatch = useAppDispatch();
 
+  // 이력서 존재 여부에 따라 create/update 결정
+  const hasResume = !!member?.profile?.resume;
+
   useSubmissionAlert({
     status,
-    target: 'create',
+    target: hasResume ? 'update' : 'create',
     error,
     successMessage: '이력서가 성공적으로 제출되었습니다.',
     errorMessage: '이력서 제출에 실패했습니다.',
@@ -106,9 +113,13 @@ const Resume: React.FC<ResumeProps> = ({ member, onSubmissionSuccess }) => {
   useEffect(() => {
     // 컴포넌트가 언마운트될 때 상태를 초기화합니다.
     return () => {
-      dispatch(resetCreateStatus());
+      if (hasResume) {
+        dispatch(resetUpdateStatus());
+      } else {
+        dispatch(resetCreateStatus());
+      }
     };
-  }, [dispatch]);
+  }, [dispatch, hasResume]);
 
   useEffect(() => {
     if (!member || initialized) return;
@@ -139,9 +150,10 @@ const Resume: React.FC<ResumeProps> = ({ member, onSubmissionSuccess }) => {
       skills:
         profile?.skills?.map((skill: ProfileSkillDTO) => {
           // Map SkillProficiency to SkillData proficiency
-          let proficiency: 'BEGINNER' | 'MIDDLE' | 'ADVANCED' = 'MIDDLE';
+          let proficiency: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED' = 'INTERMEDIATE';
           const skillProf = String(skill.proficiency);
           if (skillProf === '초급') proficiency = 'BEGINNER';
+          else if (skillProf === '중급') proficiency = 'INTERMEDIATE';
           else if (skillProf === '고급' || skillProf === '전문가') proficiency = 'ADVANCED';
 
           return {
@@ -263,18 +275,56 @@ const Resume: React.FC<ResumeProps> = ({ member, onSubmissionSuccess }) => {
       activities,
       projects,
       careers,
-      education: [education],
+      education,
       desiredCompany: form.desiredJob,
       certificates: form.certs,
     };
   };
 
-  const handleSubmit = async () => {
+  const buildProfileRequest = (): ProfileRequest => {
+    if (!form) throw new Error('폼 정보가 없습니다');
+
+    // Convert skills to SkillRequest format
+    const skillRequests: SkillRequest[] = form.skills.map((skill) => ({
+      name: skill.name,
+      proficiency: skill.proficiency as SkillProficiency,
+    }));
+
+    // Get education level from member profile or use default
+    const educationLevel = member?.profile?.educationLevel
+      ? (EducationLevelType[member.profile.educationLevel as keyof typeof EducationLevelType] ??
+        EducationLevelType.NO_REQUIREMENT)
+      : EducationLevelType.NO_REQUIREMENT;
+
+    // Get desired job codes from member profile or use empty array
+    const desiredJobCodes: number[] =
+      member?.profile?.desiredCapabilities?.map((cap) => Number(cap.code)).filter((c): c is number => !isNaN(c)) ?? [];
+
+    // Build resume request
     const resumeRequest = buildResumeRequest();
+
+    return {
+      desiredJobCodes,
+      currentJob: form.basicInfo.currentJob || '',
+      educationLevel,
+      profileImageUrl: member?.profile?.profileImageUrl,
+      skills: skillRequests,
+      resume: resumeRequest,
+    };
+  };
+
+  const handleSubmit = async () => {
+    const profileRequest = buildProfileRequest();
 
     try {
       // 1. 이력서 생성/수정 API를 호출합니다.
-      await dispatch(createResumeThunk(resumeRequest)).unwrap();
+      // 이력서가 이미 있으면 update, 없으면 create
+      const hasResume = !!member?.profile?.resume;
+      if (hasResume) {
+        await dispatch(updateResumeThunk(profileRequest)).unwrap();
+      } else {
+        await dispatch(createResumeThunk(profileRequest)).unwrap();
+      }
       // 2. 성공 시, 최신 멤버 정보를 다시 불러옵니다.
       await dispatch(getMember()).unwrap();
       // 3. 부모 컴포넌트에 성공을 알리고 페이지 전환을 트리거합니다.

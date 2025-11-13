@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ResumeRequest } from '../types/interfaces/resume/request/ResumeRequest';
+import { ProfileRequest } from '../types/interfaces/member/request/ProfileRequest';
 import { createResumeService, updateResumeService, getResumeService } from '../services/resumeService';
 import { AxiosError } from 'axios';
 
-export const createResumeThunk = createAsyncThunk('resume/create', async (resumeRequest: ResumeRequest, thunkAPI) => {
+export const createResumeThunk = createAsyncThunk('resume/create', async (profileRequest: ProfileRequest, thunkAPI) => {
   try {
-    return await createResumeService(resumeRequest);
+    return await createResumeService(profileRequest);
   } catch (err) {
     const error = err as AxiosError<{ message: string }>;
 
@@ -16,9 +16,9 @@ export const createResumeThunk = createAsyncThunk('resume/create', async (resume
   }
 });
 
-export const updateResumeThunk = createAsyncThunk('resume/update', async (resumeRequest: ResumeRequest, thunkAPI) => {
+export const updateResumeThunk = createAsyncThunk('resume/update', async (profileRequest: ProfileRequest, thunkAPI) => {
   try {
-    return await updateResumeService(resumeRequest);
+    return await updateResumeService(profileRequest);
   } catch (err) {
     const error = err as AxiosError<{ message: string }>;
 

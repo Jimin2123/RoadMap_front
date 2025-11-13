@@ -11,7 +11,7 @@ export interface ResumeRequest {
   activities: ActivityRequest[];
   projects: ProjectRequest[];
   careers: CareerRequest[];
-  education: EducationRequest[];
+  education: EducationRequest;
   desiredCompany: DesiredCompanyRequest;
   certificates: CertificateDTO[];
 }

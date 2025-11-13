@@ -1,3 +1,6 @@
+import { SkillProficiency } from '../../../enums/SkillProficiency';
+
 export interface SkillRequest {
-  skills: string[]; // 보유 스킬 목록
+  name: string;
+  proficiency: SkillProficiency;
 }

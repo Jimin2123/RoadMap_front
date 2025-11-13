@@ -37,7 +37,6 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
     const profMap: Record<string, string> = {
       BEGINNER: '초급',
       INTERMEDIATE: '중급',
-      MIDDLE: '중급',
       ADVANCED: '고급',
       EXPERT: '전문가',
     };

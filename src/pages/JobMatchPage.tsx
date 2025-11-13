@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
-import { ProfileRequest } from '../types/interfaces/request/ProfileRequest';
+import { ProfileRequest } from '../types/interfaces/member/request/ProfileRequest';
 import { IntroCardData } from '../types/interfaces/ResumeData';
 import { EducationLevelType } from '../types/enums/EducationLevelType';
+import { SkillProficiency } from '../types/enums/SkillProficiency';
 import styles from '../styles/JobMatchPage.module.css';
 
 interface JobPosting {
@@ -27,33 +28,39 @@ const JobMatchPage: React.FC = () => {
 
     const profileRequest: ProfileRequest = {
       desiredJobCodes: [82, 84],
-      educationLevel: (profile?.educationLevel as EducationLevelType) ?? EducationLevelType.ASSOCIATE_OR_ABOVE,
-      skills: profile?.skills || [],
-      certificates:
-        profile?.certificates?.map((cert) => ({
-          name: cert.name,
-          agency: cert.agency,
-          year: cert.year,
-        })) ?? [],
-      currentJob: profile?.currentJob ?? member.currentJob ?? '',
+      educationLevel:
+        EducationLevelType[profile?.educationLevel as keyof typeof EducationLevelType] ??
+        EducationLevelType.ASSOCIATE_OR_ABOVE,
+      skills:
+        profile?.skills?.map((skill) => ({
+          name: skill.name,
+          proficiency:
+            skill.proficiency === '초급'
+              ? SkillProficiency.BEGINNER
+              : skill.proficiency === '중급'
+                ? SkillProficiency.INTERMEDIATE
+                : skill.proficiency === '고급'
+                  ? SkillProficiency.ADVANCED
+                  : SkillProficiency.EXPERT,
+        })) || [],
+      currentJob: profile?.currentJob ?? '',
       resume: {
         activities: resume?.activities || [],
         education: resume?.education || {
           school: '',
           major: '',
-          period: '',
+          gpa: 0,
+          period: { startDate: new Date(), endDate: new Date() },
           status: '',
         },
-        portfolios: resume?.portfolios || [],
         projects: resume?.projects || [],
         careers: resume?.careers ?? [],
         desiredCompany: resume?.desiredCompany ?? {
           desiredCompany1: '',
           desiredCompany2: '',
           desiredRegion: '',
-          salaryType: '연봉',
+          salaryType: 'monthly',
           desiredSalary: 0,
-          careerPlan: '',
         },
         introduction: (resume?.introduction as IntroCardData) ?? {
           growthProcess: '',
@@ -61,6 +68,7 @@ const JobMatchPage: React.FC = () => {
           schoolLife: '',
           motivation: '',
         },
+        certificates: profile?.certificates || [],
       },
     };
 
