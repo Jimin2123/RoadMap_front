@@ -1,5 +1,7 @@
 // Card component data types - matches the new interface structure
 
+import { SalaryType } from '../enums/SalaryType';
+
 export interface BasicCardData {
   name: string;
   email: string;
@@ -62,7 +64,7 @@ export interface DesiredJobCardData {
   desiredCompany1: string;
   desiredCompany2: string;
   desiredRegion: string;
-  salaryType: 'monthly' | 'hourly';
+  salaryType: SalaryType;
   desiredSalary: number;
 }
 

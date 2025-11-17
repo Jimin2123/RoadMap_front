@@ -6,6 +6,7 @@ import { IntroCardData } from '../types/interfaces/ResumeData';
 import { EducationLevelType } from '../types/enums/EducationLevelType';
 import { SkillProficiency } from '../types/enums/SkillProficiency';
 import styles from '../styles/JobMatchPage.module.css';
+import { SalaryType } from '../types/enums/SalaryType';
 
 interface JobPosting {
   id: string;
@@ -59,7 +60,7 @@ const JobMatchPage: React.FC = () => {
           desiredCompany1: '',
           desiredCompany2: '',
           desiredRegion: '',
-          salaryType: 'monthly',
+          salaryType: SalaryType.MONTHLY,
           desiredSalary: 0,
         },
         introduction: (resume?.introduction as IntroCardData) ?? {
