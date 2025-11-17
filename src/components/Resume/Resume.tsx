@@ -45,6 +45,7 @@ import { SkillData } from './ResumeCards/ResumeSkillCard';
 import { getMember } from '../../hooks/userUser';
 import { resetCreateStatus, resetUpdateStatus } from '../../store/slices/resumeSlice';
 import { FaUser, FaFileAlt, FaBriefcase, FaProjectDiagram, FaUsers, FaGraduationCap } from 'react-icons/fa';
+import { SalaryType } from '../../types/enums/SalaryType';
 
 /**
  * "카드" 컴포넌트에서 사용할 form 전체 Shape
@@ -81,7 +82,7 @@ const emptyForm: ResumeFormState = {
     desiredCompany1: '',
     desiredCompany2: '',
     desiredRegion: '',
-    salaryType: 'monthly',
+    salaryType: SalaryType.MONTHLY,
     desiredSalary: 0,
   },
   skills: [],

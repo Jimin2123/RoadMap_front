@@ -16,6 +16,7 @@ import {
   FaCertificate,
   FaBook,
 } from 'react-icons/fa';
+import { SalaryType } from '../../types/enums/SalaryType';
 interface ResumeViewProps {
   member: MemberResponse;
 }
@@ -115,7 +116,11 @@ const ResumeView: React.FC<ResumeViewProps> = ({ member }) => {
               <div className="info-card-content">
                 <h4>희망 급여</h4>
                 <p className="primary-text">
-                  {desiredCompany.salaryType === 'monthly' ? '월급' : '시급'}{' '}
+                  {desiredCompany.salaryType === SalaryType.ANNUAL
+                    ? '연봉'
+                    : desiredCompany.salaryType === SalaryType.MONTHLY
+                      ? '월급'
+                      : '시급'}{' '}
                   <span className="salary-amount">{desiredCompany.desiredSalary.toLocaleString()}</span>만원
                 </p>
               </div>
