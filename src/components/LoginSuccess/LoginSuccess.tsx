@@ -12,6 +12,7 @@ import { getPolicyListServiceForMember } from '../../services/policyService';
 const LoginSuccess: React.FC = () => {
   const dispatch = useAppDispatch();
   const { member } = useAppSelector((state: RootState) => state.user);
+
   const handleLogout = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -90,10 +91,10 @@ const LoginSuccess: React.FC = () => {
             </div>
           )}
 
-          {member && member.profile && member.profile.certificates && (
+          {member && member.profile && member.profile.resume.certificates && (
             <div className="certificate-slider-wrapper">
               <div className="certificate-slider">
-                {member?.profile.certificates.map((cert, index) => (
+                {member?.profile.resume.certificates.map((cert, index) => (
                   <div className="certificate-card" key={index}>
                     <div className="certificate-icon">🎓</div>
                     <h4>{cert.name}</h4>

@@ -5,6 +5,7 @@
   gap: var(--spacing-large);
   margin-top: var(--spacing-small);
   height: 420px;
+  margin-bottom: var(--spacing-large);
 }
 
 .event-banner-section {
@@ -22,7 +23,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-large);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-large);
   box-shadow: var(--shadow-deep);
