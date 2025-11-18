@@ -60,7 +60,7 @@ const MainPage: React.FC = () => {
           />
           <ServiceCard
             imageUrl="/icons/service4.svg"
-            serviceName="맞춤 청년 지원정책"
+            serviceName=" 청년 지원정책"
             serviceDescription="현재 진행중인 청년 지원정책 리스트를 볼 수 있습니다."
             link="/policy"
           />
