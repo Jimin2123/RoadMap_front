@@ -34,7 +34,7 @@
   --spacing-small: 10px;
   --spacing-medium: 12px;
   --spacing-large: 20px;
-  --spacing-xl: 40px;
+  --spacing-xl: 35px;
 
   /* Borders */
   --border-radius-small: 6px;
@@ -47,9 +47,22 @@ body {
   min-height: 100%;
   margin: 0 5%; /* Use percentage for responsive margins */
   padding: 0;
-  font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue',
-    'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', sans-serif;
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
   box-sizing: border-box;
   font-size: var(--font-size-root);
 }

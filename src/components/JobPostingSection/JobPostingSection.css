@@ -10,8 +10,8 @@
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
+  gap: var(--spacing-xl);
+  justify-content: center;
   /* min-height: 990px; */
 }
 

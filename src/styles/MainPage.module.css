@@ -23,7 +23,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--spacing-large);
+  gap: var(--spacing-xl);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-large);
   box-shadow: var(--shadow-deep);
