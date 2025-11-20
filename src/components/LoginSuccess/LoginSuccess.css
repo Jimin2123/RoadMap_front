@@ -115,82 +115,53 @@
   color: #94b9f3;
 }
 
-/* 슬라이더 전체 wrapper */
-.certificate-slider-wrapper {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
 /* 슬라이더 내부 스크롤 영역 */
 .certificate-slider {
   display: flex;
   gap: 12px;
-  padding-right: 20px; /* fade 영역 확보 */
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding-top: 10px;
-  padding-bottom: 6px;
+  margin-top: 10px;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE & Edge */
 }
-
-.certificate-slider::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+.certificate-container {
+  font-size: 10px;
+  color: #000000;
+  display: flex;
+  white-space: nowrap;
+  text-align: center;
+  font-weight: bold;
 }
-
-/* 우측 fade */
-.certificate-slider-wrapper::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 30px;
-  height: 100%;
-  background: linear-gradient(to left, white, rgba(255, 255, 255, 0));
-  pointer-events: none;
-}
-
-.certificate-slider::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+.certificate-subcontainer {
+  font-size: 9px;
+  color: #666666;
+  padding: auto;
 }
 
 .certificate-card {
-  min-width: 80px;
+  max-width: 120px;
+  max-height: 20px;
   flex-shrink: 0;
   background-color: #f1f1f1;
   padding: 6px;
+  min-height: fit-content;
   border-radius: 8px;
   text-align: center;
   font-size: 11px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.certificate-card h4 {
-  font-size: 13px;
-  margin: 4px 0 2px;
-  word-break: keep-all;
-}
-
-.certificate-card p {
-  font-size: 13px;
-  color: #666;
-  margin: 0;
-}
-
-.certificate-icon {
-  font-size: 20px;
-  margin-bottom: 4px;
-}
-
 /* 하단 정책 리스트 */
 .policy-box {
   padding: 14px;
-  margin: 20px 0;
-  background-color: #fafafa;
+  /* margin: 10px 0; */
+  background-color: #ffffff;
   border-radius: 12px;
   border: 1px solid #e0e0e0;
-  min-height: 130px;
+  max-height: 140px;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
 }
 
 .policy-box h3 {

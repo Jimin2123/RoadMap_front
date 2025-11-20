@@ -92,13 +92,12 @@ const LoginSuccess: React.FC = () => {
           )}
 
           {member && member.profile && member.profile.resume.certificates && (
-            <div className="certificate-slider-wrapper">
+            <div className="cerrificate-box">
               <div className="certificate-slider">
                 {member?.profile.resume.certificates.map((cert, index) => (
                   <div className="certificate-card" key={index}>
-                    <div className="certificate-icon">🎓</div>
-                    <h4>{cert.name}</h4>
-                    <p>{cert.agency}</p>
+                    <div className="certificate-container">{cert.name}</div>
+                    <div className="certificate-subcontainer">{cert.agency}</div>
                   </div>
                 ))}
               </div>
@@ -116,7 +115,7 @@ const LoginSuccess: React.FC = () => {
           <p>정책이 없습니다.</p>
         ) : (
           <ul>
-            {policies.map((policy, index) => (
+            {policies.slice().map((policy, index) => (
               <li key={index}>
                 <a
                   href="#"
