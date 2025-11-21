@@ -34,6 +34,12 @@
   margin-bottom: 8px;
 }
 
+.noSkills {
+  color: #999;
+  font-size: 14px;
+  font-style: italic;
+}
+
 .aiAnalysisSection {
   margin-top: 20px;
   padding-top: 20px;
