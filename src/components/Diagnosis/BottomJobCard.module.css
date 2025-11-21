@@ -3,34 +3,87 @@
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  width: 300px;
+  width: 320px;
   flex-shrink: 0;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.bottomJobCard h4 {
+.bottomJobCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h4 {
   font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.bottomJobCard p {
-  font-size: 14px;
+  font-weight: 700;
   color: #333;
-  margin-bottom: 12px;
+  margin: 0;
 }
 
-.skillTags {
-  margin-bottom: 16px;
-}
-
-.tag {
-  display: inline-block;
-  background-color: #eef2ff;
-  color: #4f46e5;
+.matchScore {
+  background-color: #4f46e5;
+  color: white;
   padding: 4px 12px;
-  border-radius: 16px;
-  font-size: 12px;
-  font-weight: 500;
-  margin-right: 8px;
-  margin-bottom: 8px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+  margin: 0;
+}
+
+.info {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.location,
+.experience {
+  font-size: 13px;
+  color: #666;
+  padding: 4px 10px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.recommendationReason {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+.salary {
+  font-size: 14px;
+  font-weight: 600;
+  color: #4f46e5;
+}
+
+.deadline {
+  font-size: 13px;
+  color: #888;
 }

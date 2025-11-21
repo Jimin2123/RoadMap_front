@@ -30,6 +30,23 @@
   display: none;
 }
 
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.certificationList {
+  display: grid;
+  gap: 16px;
+}
+
+.certificationCardItem {
+  width: 100%;
+  max-width: 100%;
+}
+
 .profileCard,
 .filterCard {
   background-color: #ffffff;
