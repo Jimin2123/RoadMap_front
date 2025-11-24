@@ -63,8 +63,13 @@ body {
     'Segoe UI Emoji',
     'Segoe UI Symbol',
     sans-serif;
-  box-sizing: border-box;
   font-size: var(--font-size-root);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 @media (max-width: 768px) {

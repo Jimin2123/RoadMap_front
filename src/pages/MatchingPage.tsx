@@ -176,7 +176,6 @@ const MatchingPage: React.FC = () => {
 
   return (
     <div className="layout">
-      {/* 임시 통일 할려고 */}
       <Header />
       <main className={styles.mainContent}>
         <div className={styles.introSection}>
