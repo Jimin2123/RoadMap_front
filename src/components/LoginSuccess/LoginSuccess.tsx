@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { logoutThunk } from '../../hooks/useAuth';
 import { RootState } from '../../state/store';
-import { YouthPolicyItemResponse } from '../../types/interfaces/response/YouthPolicyResponse';
+import { YouthPolicyItemResponse } from '../../types/interfaces/apis/youthPolicy/YouthPolicyItemResponse';
 import { openExternalUrl } from '../../utils/openExternalUrl';
 import { getPolicyListServiceForMember } from '../../services/policyService';
+
 
 const LoginSuccess: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -41,14 +42,31 @@ const LoginSuccess: React.FC = () => {
 
     fetchPolicies();
   }, [member?.id]);
+const certificates = member?.profile?.resume?.certificates ?? [];
+const rawProfileUrl = member?.profile?.profileImageUrl || '';
 
+let profileImageUrl = '';
+
+if (rawProfileUrl) {
+  if (rawProfileUrl.startsWith('http')) {
+    profileImageUrl = rawProfileUrl.replace('/images/', '/api/v1/images/');
+  } else if (rawProfileUrl.startsWith('/images/')) {
+    profileImageUrl = `http://localhost:8080${rawProfileUrl.replace('/images/', '/api/v1/images/')}`;
+  } else if (rawProfileUrl.startsWith('images/')) {
+    profileImageUrl = `http://localhost:8080/api/v1/images/${rawProfileUrl.replace('images/', '')}`;
+  } else {
+    profileImageUrl = `http://localhost:8080/api/v1/images/${rawProfileUrl}`;
+  }
+}
+console.log('rawProfileUrl:', rawProfileUrl);
+console.log('profileImageUrl:', profileImageUrl);
   return (
     <div className="login-form-container">
       {/* 상단 영역 */}
       <div className="login-top-section">
         {/* 왼쪽: 프로필 */}
         <div className="profile-image-section">
-          <img src="/defaultProfileImage.svg" alt="Profile" className="main-avatar" draggable="false" />
+          <img src={member?.profile?.profileImageUrl || '/defaultProfileImage.svg'} alt="Profile" className="main-avatar" draggable="false" />
         </div>
 
         <div className="profile-info-section">
@@ -91,10 +109,10 @@ const LoginSuccess: React.FC = () => {
             </div>
           )}
 
-          {member && member.profile && member.profile.resume.certificates && (
+          {certificates && (
             <div className="cerrificate-box">
               <div className="certificate-slider">
-                {member?.profile.resume.certificates.map((cert, index) => (
+                {certificates.map((cert, index) => (
                   <div className="certificate-card" key={index}>
                     <div className="certificate-container">{cert.name}</div>
                     <div className="certificate-subcontainer">{cert.agency}</div>
