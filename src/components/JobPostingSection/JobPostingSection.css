@@ -10,8 +10,9 @@
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: var(--spacing-xl);
   justify-content: center;
+  /* min-height: 990px; */
 }
 
 .job-card.dummy {

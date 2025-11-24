@@ -8,7 +8,7 @@ export interface YouthPolicyListResponse {
 
 export interface ResultResponse {
   pagging: PaggingResponse; // 페이징 정보
-  items: YouthPolicyItemResponse[]; // 청년 정책 아이템 목록
+  youthPolicyList: YouthPolicyItemResponse[]; // 청년 정책 아이템 목록
 }
 
 interface PaggingResponse {

@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: var(--spacing-large);
-  margin-top: var(--spacing-small);
+  margin-top: var(--spacing-large);
   height: 420px;
   margin-bottom: var(--spacing-large);
 }
@@ -23,7 +23,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--spacing-large);
+  gap: var(--spacing-xl);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-large);
   box-shadow: var(--shadow-deep);
