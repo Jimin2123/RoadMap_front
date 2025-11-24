@@ -8,11 +8,13 @@
 
 .mainContent {
   flex-grow: 1;
-  padding: 50px 24px;
-  max-width: 1280px;
-  margin: 0 auto;
+  margin-top: var(--spacing-large);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-deep);
+  padding: 50px 20px;
   width: 100%;
-  background-color: #f8f9fa; /* Moved from pageLayout */
+  box-sizing: border-box; /* Ensure padding doesn't overflow width */
 }
 
 /* 소개 섹션 */

@@ -48,7 +48,7 @@ const PolicyPage: React.FC = () => {
     <div className="layout">
       <Header />
       <div className="content-wrapper">
-        <div className="maincontent">
+        <div className="main-content">
           <div className="page-title">
             <h1>청년정책 통합검색</h1>
           </div>
