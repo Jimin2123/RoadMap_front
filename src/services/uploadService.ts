@@ -28,6 +28,7 @@ export const uploadImageService = async (file: File): Promise<string> => {
     url = url.replace('/images/', '/api/v1/images/');
   }
 
+
   // 혹시 상대 경로로 "/images/xxx.png"만 올 경우
   if (!url.startsWith('http') && url.startsWith('/images/')) {
     url = url.replace('/images/', '/api/v1/images/');

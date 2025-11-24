@@ -57,6 +57,7 @@ if (rawProfileUrl) {
   } else {
     profileImageUrl = `http://localhost:8080/api/v1/images/${rawProfileUrl}`;
   }
+
 }
 console.log('rawProfileUrl:', rawProfileUrl);
 console.log('profileImageUrl:', profileImageUrl);
@@ -71,7 +72,7 @@ console.log('profileImageUrl:', profileImageUrl);
 
         <div className="profile-info-section">
           <div className="profile-header">
-            <h2 className="username">{member?.name}</h2>
+            <h2 className="username">{member?.name}<span style={{color: '#333', fontWeight: 'normal', marginLeft: '3px' }}>님</span></h2> 
             <div className="icon-buttons">
               <button>
                 <Link to="/settings">
@@ -79,7 +80,7 @@ console.log('profileImageUrl:', profileImageUrl);
                 </Link>
               </button>
               <button onClick={handleLogout}>
-                <MdLogout size={20} color="#333" />
+                <MdLogout size={20} color="#333" /> 
               </button>
             </div>
           </div>
@@ -108,12 +109,19 @@ console.log('profileImageUrl:', profileImageUrl);
               </div>
             </div>
           )}
-
-          {certificates && (
+<div>
+         
+          </div>
+        </div>
+      </div>
+ {certificates && (
             <div className="cerrificate-box">
               <div className="certificate-slider">
                 {certificates.map((cert, index) => (
                   <div className="certificate-card" key={index}>
+                    <div className="certificate-icons" >
+                      <img src="../../src/assets/react.svg"/>
+                    </div>
                     <div className="certificate-container">{cert.name}</div>
                     <div className="certificate-subcontainer">{cert.agency}</div>
                   </div>
@@ -121,9 +129,6 @@ console.log('profileImageUrl:', profileImageUrl);
               </div>
             </div>
           )}
-        </div>
-      </div>
-
       {/* 하단 영역 */}
       <div className="policy-box">
         <h3>청년 지원 정책 안내 리스트</h3>
@@ -133,7 +138,7 @@ console.log('profileImageUrl:', profileImageUrl);
           <p>정책이 없습니다.</p>
         ) : (
           <ul>
-            {policies.slice().map((policy, index) => (
+            {policies.slice(0, ).map((policy, index) => (
               <li key={index}>
                 <a
                   href="#"

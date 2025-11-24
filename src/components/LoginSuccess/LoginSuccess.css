@@ -8,12 +8,13 @@
   box-sizing: border-box;
   margin: 0 auto; /* 중앙 정렬 */
   height: 400px;
+  
 }
 
 .login-top-section {
   display: flex;
   width: 100%;
-  height: 200px; /* 고정 높이 */
+  height: 110px; /* 고정 높이 */
   box-sizing: border-box;
   overflow: hidden;
   margin-bottom: 10px;
@@ -24,8 +25,10 @@
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-width: 140px; /* 최소 너비 설정 */
+  /* align-items: center; */
+  margin-top: 20px;
+  margin-left: 3px;
+  min-width: 110px; /* 최소 너비 설정 */
 }
 
 .profile-info-section {
@@ -38,18 +41,26 @@
 
 /* 프로필 이미지 */
 .main-avatar {
-  width: 100%;
-  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 100px;
+  box-shadow: 0.5px 5px 5px rgba(0, 0, 0, 0.4);
 }
 
 /* 이름 + 아이콘들 */
 .profile-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  max-width: 155px;
+  width: 100%;
+  
+  max-height: 45px;
+  padding-top: 10px;  
+  
 }
 .username {
   overflow: hidden;
@@ -59,9 +70,13 @@
 .icon-buttons {
   display: flex;
   align-items: center;
+
+  margin-top: 6px;
+ 
 }
 .icon-buttons button {
   margin-left: 8px;
+  
   font-size: 18px;
   cursor: pointer;
   background: none;
@@ -114,7 +129,13 @@
   font-size: 11px;
   color: #94b9f3;
 }
-
+.cerrificate-box {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 0px;
+  margin-right: 10px;
+  
+}
 /* 슬라이더 내부 스크롤 영역 */
 .certificate-slider {
   display: flex;
@@ -141,15 +162,22 @@
 
 .certificate-card {
   max-width: 120px;
-  max-height: 20px;
-  flex-shrink: 0;
-  background-color: #f1f1f1;
+  max-height: 50px;
+  border: 1px solid #e0e0e0;
   padding: 6px;
-  min-height: fit-content;
-  border-radius: 8px;
+  min-height: 70px;
+  border-radius: 8px ;
   text-align: center;
   font-size: 11px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+}
+.certificate-icons{
+  display: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  margin-bottom: 10px;
+
 }
 
 /* 하단 정책 리스트 */
