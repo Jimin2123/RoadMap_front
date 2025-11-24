@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { logoutThunk } from '../../hooks/useAuth';
 import { RootState } from '../../state/store';
-import { YouthPolicyItemResponse } from '../../types/interfaces/response/YouthPolicyResponse';
+import { YouthPolicyItemResponse } from '../../types/interfaces/apis/youthPolicy/YouthPolicyItemResponse';
 import { openExternalUrl } from '../../utils/openExternalUrl';
 import { getPolicyListServiceForMember } from '../../services/policyService';
+
 
 const LoginSuccess: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -41,19 +42,37 @@ const LoginSuccess: React.FC = () => {
 
     fetchPolicies();
   }, [member?.id]);
+const certificates = member?.profile?.resume?.certificates ?? [];
+const rawProfileUrl = member?.profile?.profileImageUrl || '';
 
+let profileImageUrl = '';
+
+if (rawProfileUrl) {
+  if (rawProfileUrl.startsWith('http')) {
+    profileImageUrl = rawProfileUrl.replace('/images/', '/api/v1/images/');
+  } else if (rawProfileUrl.startsWith('/images/')) {
+    profileImageUrl = `http://localhost:8080${rawProfileUrl.replace('/images/', '/api/v1/images/')}`;
+  } else if (rawProfileUrl.startsWith('images/')) {
+    profileImageUrl = `http://localhost:8080/api/v1/images/${rawProfileUrl.replace('images/', '')}`;
+  } else {
+    profileImageUrl = `http://localhost:8080/api/v1/images/${rawProfileUrl}`;
+  }
+
+}
+console.log('rawProfileUrl:', rawProfileUrl);
+console.log('profileImageUrl:', profileImageUrl);
   return (
     <div className="login-form-container">
       {/* 상단 영역 */}
       <div className="login-top-section">
         {/* 왼쪽: 프로필 */}
         <div className="profile-image-section">
-          <img src="/defaultProfileImage.svg" alt="Profile" className="main-avatar" draggable="false" />
+          <img src={member?.profile?.profileImageUrl || '/defaultProfileImage.svg'} alt="Profile" className="main-avatar" draggable="false" />
         </div>
 
         <div className="profile-info-section">
           <div className="profile-header">
-            <h2 className="username">{member?.name}</h2>
+            <h2 className="username">{member?.name}<span style={{color: '#333', fontWeight: 'normal', marginLeft: '3px' }}>님</span></h2> 
             <div className="icon-buttons">
               <button>
                 <Link to="/settings">
@@ -61,7 +80,7 @@ const LoginSuccess: React.FC = () => {
                 </Link>
               </button>
               <button onClick={handleLogout}>
-                <MdLogout size={20} color="#333" />
+                <MdLogout size={20} color="#333" /> 
               </button>
             </div>
           </div>
@@ -90,23 +109,26 @@ const LoginSuccess: React.FC = () => {
               </div>
             </div>
           )}
-
-          {member && member.profile && member.profile.resume.certificates && (
-            <div className="certificate-slider-wrapper">
+<div>
+         
+          </div>
+        </div>
+      </div>
+ {certificates && (
+            <div className="cerrificate-box">
               <div className="certificate-slider">
-                {member?.profile.resume.certificates.map((cert, index) => (
+                {certificates.map((cert, index) => (
                   <div className="certificate-card" key={index}>
-                    <div className="certificate-icon">🎓</div>
-                    <h4>{cert.name}</h4>
-                    <p>{cert.agency}</p>
+                    <div className="certificate-icons" >
+                      <img src="../../src/assets/react.svg"/>
+                    </div>
+                    <div className="certificate-container">{cert.name}</div>
+                    <div className="certificate-subcontainer">{cert.agency}</div>
                   </div>
                 ))}
               </div>
             </div>
           )}
-        </div>
-      </div>
-
       {/* 하단 영역 */}
       <div className="policy-box">
         <h3>청년 지원 정책 안내 리스트</h3>
@@ -116,7 +138,7 @@ const LoginSuccess: React.FC = () => {
           <p>정책이 없습니다.</p>
         ) : (
           <ul>
-            {policies.map((policy, index) => (
+            {policies.slice(0, ).map((policy, index) => (
               <li key={index}>
                 <a
                   href="#"

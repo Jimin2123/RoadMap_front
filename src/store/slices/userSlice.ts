@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { UserState } from '../../state/UserState';
-import { getMember, signUp } from '../../hooks/userUser';
+import { getMember, signUp, updateProfile } from '../../hooks/userUser';
 
 const initialState: UserState = {
   member: null,
@@ -46,6 +46,25 @@ const userSlice = createSlice({
         state.status.getMember = 'rejected';
         state.member = null; // 사용자 정보 초기화
         state.error = action.payload as string;
+      })
+
+      // 사용자 정보 수정 처리
+      .addCase(updateProfile.pending, (state) => {
+        state.status.getMember = 'pending';
+        state.error = null;
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        state.status.getMember = 'fulfilled';
+        // 프로필 업데이트 성공 후 member.profile 부분만 업데이트
+        if (state.member) {
+          state.member.profile = action.payload;
+        }
+        alert('프로필이 저장되었습니다.');
+      })
+      .addCase(updateProfile.rejected, (state, action) => {
+        state.status.getMember = 'rejected';
+        state.error = action.payload as string;
+        alert('저장에 실패했습니다.');
       });
   },
 });
