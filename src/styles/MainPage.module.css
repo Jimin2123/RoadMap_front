@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: var(--spacing-large);
-  margin-top: var(--spacing-small);
+  margin-top: var(--spacing-large);
   height: 420px;
   margin-bottom: var(--spacing-large);
 }
