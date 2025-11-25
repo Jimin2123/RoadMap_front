@@ -8,6 +8,22 @@ import { RootState } from '../../state/store';
 import { YouthPolicyItemResponse } from '../../types/interfaces/apis/youthPolicy/YouthPolicyItemResponse';
 import { openExternalUrl } from '../../utils/openExternalUrl';
 import { getPolicyListServiceForMember } from '../../services/policyService';
+import { SkillProficiency } from '../../types/enums/SkillProficiency'; // Add this import
+
+const getProficiencyInKorean = (proficiency: string): string => {
+  switch (proficiency) {
+    case 'BEGINNER':
+      return SkillProficiency.BEGINNER;
+    case 'INTERMEDIATE':
+      return SkillProficiency.INTERMEDIATE;
+    case 'ADVANCED':
+      return SkillProficiency.ADVANCED;
+    case 'EXPERT':
+      return SkillProficiency.EXPERT;
+    default:
+      return proficiency; // Fallback in case of unexpected value
+  }
+};
 
 const LoginSuccess: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -102,11 +118,15 @@ const LoginSuccess: React.FC = () => {
             <div className="skill-tags-wrapper">
               <p className="skills-label">보유중인 스킬셋</p>
               <div className="skill-tags">
-                {member?.profile.skills.map((skill, index) => (
-                  <span className="tag" key={index}>
-                    {skill.name}
-                  </span>
-                ))}
+                {member?.profile.skills.map((skill, index) => {
+                  const koreanProficiency = getProficiencyInKorean(skill.proficiency);
+                  return (
+                    <span className="tag" key={index}>
+                      <span className="tag-name">{skill.name}</span>
+                      <span className="tag-proficiency">({koreanProficiency})</span>
+                    </span>
+                  );
+                })}
               </div>
             </div>
           )}

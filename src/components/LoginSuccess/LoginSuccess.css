@@ -71,7 +71,6 @@
 }
 .icon-buttons button {
   margin-left: 8px;
-
   font-size: 18px;
   cursor: pointer;
   background: none;
@@ -80,7 +79,7 @@
 
 .skills-label {
   margin: 2px 0; /* 새로 추가 */
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
 }
 
@@ -92,17 +91,17 @@
 
 .skill-tags {
   display: flex;
-  gap: 4px;
-  overflow-x: auto;
-  white-space: nowrap;
-  margin: 2px 0;
-  padding-right: 20px; /* fade 영역 확보 */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  white-space: nowrap; /* Ensure items stay in a single line */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  gap: 8px;
+  margin: 10px 0;
+  padding-bottom: 10px; /* Space for scrollbar */
+  padding-right: 20px; /* Space for fade */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
-
 .skill-tags::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none; /* Hide scrollbar for Chrome, Safari */
 }
 
 /* Fade 효과 */
@@ -118,12 +117,33 @@
 }
 
 .tag {
+  display: inline-flex; /* Use flex to align items inside the tag */
+  align-items: baseline; /* Align text nicely */
+  background-color: #eaf2ff; /* A gentle, light blue */
+  border-radius: 16px; /* Pill shape */
+  padding: 6px 12px; /* More padding for a better look */
+  font-size: 13px; /* Slightly larger font */
+  font-weight: 500;
+  line-height: 1;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
   user-select: none; /* 텍스트 선택 방지 */
-  background-color: #e7edf7;
-  border-radius: 8px;
-  padding: 2px 6px;
-  font-size: 11px;
-  color: #94b9f3;
+}
+
+.tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.tag-name {
+  color: #3b5998; /* A classic, strong blue */
+  margin-right: 6px; /* Space between name and proficiency */
+}
+
+.tag-proficiency {
+  color: #6b84b4; /* A softer blue */
+  font-size: 12px; /* Slightly smaller font for proficiency */
+  font-weight: 400;
 }
 .cerrificate-box {
   margin-bottom: 15px;
