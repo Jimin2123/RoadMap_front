@@ -1,10 +1,9 @@
 .event-banner {
   position: relative;
   width: 100%;
-  max-width: 900px;
-  height: 400px;
-  margin: 0 auto;
+  height: 420px;
   overflow: hidden;
+  border-radius: 12px;
 }
 
 .event-banner-slide {
@@ -25,8 +24,7 @@
 .event-banner-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-
+  object-fit: cover;
 }
 .event-banner-text {
   position: absolute;
