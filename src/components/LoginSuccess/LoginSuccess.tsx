@@ -78,101 +78,157 @@ const LoginSuccess: React.FC = () => {
   return (
     <div className="login-form-container">
       {/* 상단 영역 */}
-      <div className="login-top-section">
-        {/* 왼쪽: 프로필 */}
-        <div className="profile-image-section">
-          <img src="/defaultProfileImage.svg" alt="Profile" className="main-avatar" draggable="false" />
+      {!member?.profile ? (
+        <div className="no-profile-header">
+          <h2 className="username">
+            {member?.name}
+            <span style={{ color: '#333', fontWeight: 'normal', marginLeft: '3px' }}>님</span>
+          </h2>
+          <div className="icon-buttons">
+            <button>
+              <Link to="/settings">
+                <MdSettings size={20} color="#333" />
+              </Link>
+            </button>
+            <button onClick={handleLogout}>
+              <MdLogout size={20} color="#333" />
+            </button>
+          </div>
         </div>
-
-        <div className="profile-info-section">
-          <div className="profile-header">
-            <h2 className="username">
-              {member?.name}
-              <span style={{ color: '#333', fontWeight: 'normal', marginLeft: '3px' }}>님</span>
-            </h2>
-            <div className="icon-buttons">
-              <button>
-                <Link to="/settings">
-                  <MdSettings size={20} color="#333" />
-                </Link>
-              </button>
-              <button onClick={handleLogout}>
-                <MdLogout size={20} color="#333" />
-              </button>
-            </div>
+      ) : (
+        <div className="login-top-section">
+          {/* 왼쪽: 프로필 */}
+          <div className="profile-image-section">
+            <img src="/defaultProfileImage.svg" alt="Profile" className="main-avatar" draggable="false" />
           </div>
 
-          {!member?.profile && (
-            <div className="create-profile-section">
-              <p>아직 프로필이 없어요. </p>
-              <p>지금 바로 프로필을 만들어보세요!</p>
-              <Link to="/resume" className="create-profile-button">
-                프로필 생성하러 가기
-              </Link>
-            </div>
-          )}
-
-          {/* 스킬셋 자격증 입력 안되어있으면 입력하러가기 등 링크 추가 */}
-
-          {member && member.profile && member.profile.skills && (
-            <div className="skill-tags-wrapper">
-              <p className="skills-label">보유중인 스킬셋</p>
-              <div className="skill-tags">
-                {member?.profile.skills.map((skill, index) => {
-                  const koreanProficiency = getProficiencyInKorean(skill.proficiency);
-                  return (
-                    <span className="tag" key={index}>
-                      <span className="tag-name">{skill.name}</span>
-                      <span className="tag-proficiency">({koreanProficiency})</span>
-                    </span>
-                  );
-                })}
+          <div className="profile-info-section">
+            <div className="profile-header">
+              <h2 className="username">
+                {member?.name}
+                <span style={{ color: '#333', fontWeight: 'normal', marginLeft: '3px' }}>님</span>
+              </h2>
+              <div className="icon-buttons">
+                <button>
+                  <Link to="/settings">
+                    <MdSettings size={20} color="#333" />
+                  </Link>
+                </button>
+                <button onClick={handleLogout}>
+                  <MdLogout size={20} color="#333" />
+                </button>
               </div>
             </div>
-          )}
-          <div></div>
-        </div>
-      </div>
-      {certificates && (
-        <div className="cerrificate-box">
-          <div className="certificate-slider">
-            {certificates.map((cert, index) => (
-              <div className="certificate-card" key={index}>
-                <div className="certificate-icons">
-                  <img src="../../src/assets/cert.png" />
+
+            {/* 스킬셋 자격증 입력 안되어있으면 입력하러가기 등 링크 추가 */}
+
+            {member && member.profile && member.profile.skills && (
+              <div className="skill-tags-wrapper">
+                <p className="skills-label">보유중인 스킬셋</p>
+                <div className="skill-tags">
+                  {member?.profile.skills.map((skill, index) => {
+                    const koreanProficiency = getProficiencyInKorean(skill.proficiency);
+                    return (
+                      <span className="tag" key={index}>
+                        <span className="tag-name">{skill.name}</span>
+                        <span className="tag-proficiency">({koreanProficiency})</span>
+                      </span>
+                    );
+                  })}
                 </div>
-                <div className="certificate-container">{cert.name}</div>
-                <div className="certificate-subcontainer">{cert.agency}</div>
               </div>
-            ))}
+            )}
+            <div></div>
           </div>
         </div>
       )}
+      {!member?.profile && (
+        <>
+          <div className="create-profile-box">
+            <p>아직 프로필이 없어요.</p>
+            <p>지금 바로 프로필을 만들어보세요!</p>
+            <Link to="/resume" className="create-profile-button">
+              프로필 생성하러 가기
+            </Link>
+          </div>
+          <div className="feature-preview-section">
+            <h3>프로필 생성 후 이용 가능한 기능</h3>
+            <div className="feature-cards">
+              <div className="feature-card">
+                <div className="feature-icon">📊</div>
+                <div className="feature-title">역량 진단</div>
+                <div className="feature-description">나의 스킬과 역량을 분석해요</div>
+              </div>
+              <div className="feature-card">
+                <div className="feature-icon">🎯</div>
+                <div className="feature-title">맞춤 매칭</div>
+                <div className="feature-description">AI가 추천하는 직무 매칭</div>
+              </div>
+              <div className="feature-card">
+                <div className="feature-icon">📚</div>
+                <div className="feature-title">교육 과정</div>
+                <div className="feature-description">맞춤형 교육과정 추천</div>
+              </div>
+              <div className="feature-card">
+                <div className="feature-icon">🏛️</div>
+                <div className="feature-title">청년 정책</div>
+                <div className="feature-description">지원 가능한 정책 안내</div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+      {member?.profile && (
+        <div className="cerrificate-box">
+          {certificates.length > 0 ? (
+            <div className="certificate-slider">
+              {certificates.map((cert, index) => (
+                <div className="certificate-card" key={index}>
+                  <div className="certificate-icons">
+                    <img src="../../src/assets/cert.png" />
+                  </div>
+                  <div className="certificate-container">{cert.name}</div>
+                  <div className="certificate-subcontainer">{cert.agency}</div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="empty-certificate-section">
+              <p>아직 등록된 자격증이 없어요.</p>
+              <Link to="/resume" className="add-certificate-button">
+                자격증 추가하러 가기
+              </Link>
+            </div>
+          )}
+        </div>
+      )}
       {/* 하단 영역 */}
-      <div className="policy-box">
-        <h3>청년 지원 정책 안내 리스트</h3>
-        {loadingPolicies ? (
-          <p>로딩 중...</p>
-        ) : policies.length === 0 ? (
-          <p>정책이 없습니다.</p>
-        ) : (
-          <ul>
-            {policies.slice(0).map((policy, index) => (
-              <li key={index}>
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    openExternalUrl(policy.aplyUrlAddr, `${policy.plcyNm}은/는 신청 가능한 링크가 없습니다.`);
-                  }}
-                >
-                  {policy.plcyNm}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      {member?.profile && (
+        <div className="policy-box">
+          <h3>청년 지원 정책 안내 리스트</h3>
+          {loadingPolicies ? (
+            <p>로딩 중...</p>
+          ) : policies.length === 0 ? (
+            <p>정책이 없습니다.</p>
+          ) : (
+            <ul>
+              {policies.slice(0).map((policy, index) => (
+                <li key={index}>
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      openExternalUrl(policy.aplyUrlAddr, `${policy.plcyNm}은/는 신청 가능한 링크가 없습니다.`);
+                    }}
+                  >
+                    {policy.plcyNm}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
     </div>
   );
 };
