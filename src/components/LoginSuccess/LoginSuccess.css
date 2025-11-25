@@ -219,9 +219,9 @@
 
 /* 자격증 없을 때 섹션 */
 .empty-certificate-section {
-  padding: 16px;
-  background-color: #f8f9fa;
-  border: 1px dashed #ced4da;
+  padding: 5px;
+  background-color: #fafbfc;
+  border: 1px dashed #e1e4e8;
   border-radius: 8px;
   text-align: center;
   display: flex;
@@ -233,18 +233,18 @@
 
 .empty-certificate-section p {
   margin: 0 0 8px 0;
-  font-size: 13px;
+  font-size: 14px;
   color: #6c757d;
 }
 
 .add-certificate-button {
   display: inline-block;
-  padding: 6px 14px;
+  padding: 7px 16px;
   background-color: #eaf2ff;
   color: #3b5998;
   text-decoration: none;
   border-radius: 6px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   transition: all 0.2s ease;
   border: 1px solid #d0e1ff;
