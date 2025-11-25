@@ -7,14 +7,13 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
   margin: 0 auto; /* 중앙 정렬 */
-  height: 400px;
-  
+  height: 420px;
 }
 
 .login-top-section {
   display: flex;
   width: 100%;
-  height: 110px; /* 고정 높이 */
+  height: 130px; /* 고정 높이 */
   box-sizing: border-box;
   overflow: hidden;
   margin-bottom: 10px;
@@ -22,17 +21,16 @@
 
 /* 1:2 비율 설정 */
 .profile-image-section {
-  flex: 1;
+  flex: 1.2;
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   margin-top: 20px;
   margin-left: 3px;
-  min-width: 110px; /* 최소 너비 설정 */
+  min-width: 120px; /* 최소 너비 설정 */
 }
 
 .profile-info-section {
-  flex: 2;
+  flex: 1.8;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -44,11 +42,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   overflow: hidden;
-  border-radius: 100px;
-  box-shadow: 0.5px 5px 5px rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  box-shadow: 0.5px 3px 5px rgba(165, 164, 164, 0.491);
 }
 
 /* 이름 + 아이콘들 */
@@ -57,10 +55,9 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  
+
   max-height: 45px;
-  padding-top: 10px;  
-  
+  padding-top: 10px;
 }
 .username {
   overflow: hidden;
@@ -70,13 +67,11 @@
 .icon-buttons {
   display: flex;
   align-items: center;
-
-  margin-top: 6px;
- 
+  margin-bottom: 10px;
 }
 .icon-buttons button {
   margin-left: 8px;
-  
+
   font-size: 18px;
   cursor: pointer;
   background: none;
@@ -134,7 +129,6 @@
   margin-bottom: 10px;
   margin-left: 0px;
   margin-right: 10px;
-  
 }
 /* 슬라이더 내부 스크롤 영역 */
 .certificate-slider {
@@ -147,79 +141,94 @@
   -ms-overflow-style: none; /* IE & Edge */
 }
 .certificate-container {
-  font-size: 10px;
+  font-size: 11px;
   color: #000000;
-  display: flex;
-  white-space: nowrap;
+  display: block;
   text-align: center;
   font-weight: bold;
 }
 .certificate-subcontainer {
-  font-size: 9px;
+  font-size: 10px;
   color: #666666;
   padding: auto;
 }
 
 .certificate-card {
-  max-width: 120px;
-  max-height: 50px;
+  width: 120px;
+  height: 70px;
   border: 1px solid #e0e0e0;
   padding: 6px;
-  min-height: 70px;
-  border-radius: 8px ;
+  border-radius: 8px;
   text-align: center;
   font-size: 11px;
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  word-break: break-all;
 }
-.certificate-icons{
-  display: center;
-  margin-left: auto;
-  margin-right: auto;
+.certificate-icons {
   margin-top: 5px;
   margin-bottom: 10px;
+}
 
+.certificate-icons img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain; /* To ensure the image is scaled correctly within the given dimensions */
 }
 
 /* 하단 정책 리스트 */
 .policy-box {
-  padding: 14px;
-
+  padding: 16px;
   background-color: #ffffff;
   border-radius: 12px;
-  border: 1px solid #e0e0e0;
-
   max-height: 140px;
   overflow-y: auto;
   scrollbar-width: none; /* Firefox */
 }
 
 .policy-box h3 {
-  margin: 0 0 8px;
-  font-size: 14px;
+  margin: 0 0 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e9ecef;
+  font-size: 16px;
+  font-weight: 700;
+  color: #343a40;
 }
 
 .policy-box ul {
   list-style: none;
-  padding-left: 10px;
+  padding: 0;
+  margin: 0;
 }
 
 .policy-box li {
   list-style: none;
-  position: relative;
-  margin: 8px 0;
-  font-size: 13px;
-  color: black; /* 텍스트 색상 */
-  padding-left: 20px; /* 텍스트와 점 사이 간격 조정 */
+  padding: 4px 0;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.policy-box li a {
+  text-decoration: none;
+  color: #495057;
+  width: 100%;
+  transition: color 0.2s ease;
+}
+
+.policy-box li a:hover {
+  color: #0056b3;
+  text-decoration: underline;
 }
 
 .policy-box li::before {
-  content: '\2022'; /* 원 모양 점 (유니코드 기호) */
-  font-size: 16px; /* 점 크기 */
-  color: #94b9f3; /* 점 색상 */
-  position: absolute;
-  left: 0; /* 점을 왼쪽에 배치 */
-  top: 50%; /* 점을 세로 가운데로 맞춤 */
-  transform: translateY(-50%); /* 점을 정확히 중앙에 맞추기 위한 조정 */
+  content: '\2713'; /* Checkmark character */
+  font-size: 16px;
+  color: #94b9f3;
+  margin-right: 10px;
 }
 
 .create-profile-section {
