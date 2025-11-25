@@ -13,9 +13,8 @@
 .login-top-section {
   display: flex;
   width: 100%;
-  height: 130px; /* 고정 높이 */
+  height: auto;
   box-sizing: border-box;
-  overflow: hidden;
   margin-bottom: 10px;
 }
 
@@ -46,7 +45,7 @@
   height: 120px;
   overflow: hidden;
   border-radius: 12px;
-  box-shadow: 0.5px 3px 5px rgba(165, 164, 164, 0.491);
+  border: 1px solid #e0e0e0;
 }
 
 /* 이름 + 아이콘들 */
@@ -184,8 +183,8 @@
   background-color: #ffffff;
   border-radius: 12px;
   max-height: 140px;
-  overflow-y: auto;
-  scrollbar-width: none; /* Firefox */
+  display: flex;
+  flex-direction: column;
 }
 
 .policy-box h3 {
@@ -195,12 +194,28 @@
   font-size: 16px;
   font-weight: 700;
   color: #343a40;
+  flex-shrink: 0;
 }
 
 .policy-box ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+}
+
+.policy-box ul::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.policy-box > p {
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.policy-box > p::-webkit-scrollbar {
+  display: none;
 }
 
 .policy-box li {
