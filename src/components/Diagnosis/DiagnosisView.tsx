@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
-import styles from '../../styles/DiagnosisPage.module.css';
+import styles from './DiagnosisPage.module.css';
 import UserProfileCard from './UserProfileCard';
 import CertificationCard from './CertificationCard';
 import BottomJobCard from './BottomJobCard';
@@ -77,14 +77,14 @@ const DiagnosisView = ({ result }: DiagnosisViewProps) => {
 
   return (
     <div>
-      <div className={styles.container}>
+      <section className={styles.main_container}>
         {/* 왼쪽 섹션 - 사용자 프로필 및 NCS 레이더 차트 */}
-        <aside className={styles.leftAside}>
+        <div className={styles.profileSummary}>
           <UserProfileCard name={userName} skills={userSkills} ncsData={ncsData} summary={result.summary} />
-        </aside>
+        </div>
         {/* 오른쪽 섹션 - 추천 자격증 목록 */}
-        <section className={styles.rightSection}>
-          <h3 className={styles.sectionTitle}>추천 자격증</h3>
+        <aside className={styles.certificationRecommendations}>
+          <h3 className={styles.sectionTitle}>추천 자격증 목록</h3>
           <div className={styles.certificationList}>
             {result.certificationRecommendations && result.certificationRecommendations.length > 0 ? (
               result.certificationRecommendations.map((cert, index) => (
@@ -94,8 +94,8 @@ const DiagnosisView = ({ result }: DiagnosisViewProps) => {
               <p className={styles.noData}>추천 자격증이 없습니다.</p>
             )}
           </div>
-        </section>
-      </div>
+        </aside>
+      </section>
       {/* 하단 섹션 - 추천 채용 공고 */}
       <section className={styles.bottomSection}>
         <h2 className={styles.bottomTitle}>추천 채용 정보</h2>

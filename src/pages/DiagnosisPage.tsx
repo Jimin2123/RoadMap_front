@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../layouts/Header';
 import Footer from '../layouts/Footer';
-import styles from '../styles/DiagnosisPage.module.css';
+import styles from '../components/Diagnosis/DiagnosisPage.module.css';
 import DiagnosisAlert from '../components/Diagnosis/DiagnosisAlert';
 import DiagnosisStart from '../components/Diagnosis/DiagnosisStart';
 import DiagnosisView from '../components/Diagnosis/DiagnosisView';

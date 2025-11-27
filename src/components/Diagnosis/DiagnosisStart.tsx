@@ -1,4 +1,4 @@
-import styles from '../../styles/DiagnosisPage.module.css';
+import styles from './DiagnosisPage.module.css';
 
 interface DiagnosisStartProps {
   onStart: () => void;
