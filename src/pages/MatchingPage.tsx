@@ -111,7 +111,7 @@ const MatchingPage: React.FC = () => {
       return [];
     }
   });
-  const [error, setError] = useState<string | null>(null);
+  const [error] = useState<string | null>(null);
   const [showBookmarkedOnly, setShowBookmarkedOnly] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 

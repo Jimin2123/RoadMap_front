@@ -91,9 +91,9 @@ const ProfileSettings: React.FC = () => {
   const handleSave = async () => {
     try {
       setIsUploading(true);
-      
+
       let profileImageUrl = member?.profile?.profileImageUrl || '';
-      
+
       // 새 이미지가 선택되었다면 먼저 업로드
       if (selectedFile) {
         profileImageUrl = await uploadImageService(selectedFile);
@@ -102,24 +102,28 @@ const ProfileSettings: React.FC = () => {
       // 프로필 업데이트 요청 - 기존 데이터 유지하면서 업데이트
       const profileRequest = {
         // 기존 프로필 데이터 유지
-        desiredJobCodes: member?.profile?.desiredJob?.map(job => job.id).filter((id): id is number => id != null) || [],
+        desiredJobCodes:
+          member?.profile?.desiredJob?.map((job) => job.id).filter((id): id is number => id != null) || [],
         currentJob: member?.profile?.currentJob || '',
         educationLevel: member?.profile?.educationLevel || '',
-        skills: member?.profile?.skills?.map(skill => ({
-          name: skill.name,
-          proficiency: skill.proficiency
-        })) || [],
-        
+        skills:
+          member?.profile?.skills?.map((skill) => ({
+            name: skill.name,
+            proficiency: skill.proficiency,
+          })) || [],
+
         // 업데이트할 데이터
         profileImageUrl,
         phoneNumber: form.phoneNumber,
-        address: form.address ? {
-          address: form.address,
-          addressDetail: form.detailAddress,
-          addressJibun: form.addressJibun,
-          regionCity: form.regionCity,
-          zonecode: form.zonecode,
-        } : undefined,
+        address: form.address
+          ? {
+              address: form.address,
+              addressDetail: form.detailAddress,
+              addressJibun: form.addressJibun,
+              regionCity: form.regionCity,
+              zonecode: form.zonecode,
+            }
+          : undefined,
       };
 
       console.log('프로필 업데이트 요청 데이터:', profileRequest);
@@ -139,7 +143,7 @@ const ProfileSettings: React.FC = () => {
       <div className="profile-sections">
         <div className="left-section">
           <div className="profile-image-wrapper">
-            <img src={ form.previewUrl|| '/defaultProfileImage.svg'} alt="프로필 미리보기" className="profile-image" />
+            <img src={form.previewUrl || '/defaultProfileImage.svg'} alt="프로필 미리보기" className="profile-image" />
           </div>
           <label htmlFor="profileImageInput" className="change-image-btn">
             이미지 변경

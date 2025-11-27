@@ -8,7 +8,7 @@ import { useAppDispatch } from '../../store/hooks';
 import { signUp } from '../../hooks/userUser';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../hooks/useAuth';
-import { MemberRequest } from '../../types/interfaces/request/MemberRequest';
+import { MemberRequest } from '../../types/interfaces/member/request/MemberRequest';
 
 const SignUpForm: React.FC = () => {
   const dispatch = useAppDispatch();

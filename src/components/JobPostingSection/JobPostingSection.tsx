@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import JobCard from './JobCard';
 import './JobPostingSection.css';
 import { getJobsListService } from '../../services/taskService';
-import { Jobs, SaraminJobListResponse } from '../../types/interfaces/response/SaraminJobListResponse';
+import { Jobs, SaraminJobListResponse } from '../../types/interfaces/apis/saramin/response/SaraminJobListResponse';
 import { educationLevelMap } from '../../utils/educationLevelMap';
 import { convertKeysToCamelCase } from '../../utils/caseConvert';
 

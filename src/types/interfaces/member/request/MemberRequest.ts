@@ -4,7 +4,7 @@ import { AddressRequest } from './AddressRequest';
 export interface MemberRequest {
   loginRequest: LoginRequest;
   name: string;
-  birthDate: Date;
+  birthDate: string;
   phoneNumber: string;
   addressRequest: AddressRequest;
 }

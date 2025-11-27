@@ -28,14 +28,17 @@ export const signUp = createAsyncThunk('user/signUp', async (credentials: Member
   }
 });
 
-export const updateProfile = createAsyncThunk('user/updateProfile', async (profileRequest: ProfileUpdateRequest, thunkAPI) => {
-  try {
-    return await updateProfileService(profileRequest);
-  } catch (err) {
-    const error = err as AxiosError<{ message: string }>;
-    if (error.response && error.response.data) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+export const updateProfile = createAsyncThunk(
+  'user/updateProfile',
+  async (profileRequest: ProfileUpdateRequest, thunkAPI) => {
+    try {
+      return await updateProfileService(profileRequest);
+    } catch (err) {
+      const error = err as AxiosError<{ message: string }>;
+      if (error.response && error.response.data) {
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      }
+      return thunkAPI.rejectWithValue('Failed to update profile information');
     }
-    return thunkAPI.rejectWithValue('Failed to update profile information');
   }
-});
+);

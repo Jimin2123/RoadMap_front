@@ -84,7 +84,7 @@ const LoginSuccess: React.FC = () => {
           {/* 왼쪽: 프로필 */}
           <div className="profile-image-section">
             <img
-              src={member.profile.profileImageUrl || '/defaultProfileImage.svg'}
+              src={member.profile.profileImageUrl ? member.profile.profileImageUrl : '/defaultProfileImage.svg'}
               alt="Profile"
               className="main-avatar"
               draggable="false"
