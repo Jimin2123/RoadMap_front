@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Header from '../layouts/Header';
 import Footer from '../layouts/Footer';
-import { Inquiry } from '../types/interfaces/Inquiry';
+import { Inquiry } from '../types/interfaces/common/Inquiry';
 import ProfileSettings from '../components/settings/ProfileSettings';
 import InquiryForm from '../components/settings/InquiryForm';
 import InquiryHistory from '../components/settings/InquiryHistory';

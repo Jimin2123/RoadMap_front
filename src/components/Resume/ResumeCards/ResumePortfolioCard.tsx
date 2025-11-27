@@ -11,16 +11,16 @@ interface ResumePortfolioCardProps {
 
 const ResumePortfolioCard: React.FC<ResumePortfolioCardProps> = ({ value = [], onChange = () => {} }) => {
   const [mode, setMode] = useState<'list' | 'form'>('list');
-  const [formData, setFormData] = useState<PortfolioCardData>({ title: '', url: '' });
+  const [formData, setFormData] = useState<PortfolioCardData>({ title: '', url: '', description: '' });
   const [editIndex, setEditIndex] = useState<number | null>(null);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleAddClick = () => {
-    setFormData({ title: '', url: '' });
+    setFormData({ title: '', url: '', description: '' });
     setEditIndex(null);
     setMode('form');
   };
@@ -56,6 +56,7 @@ const ResumePortfolioCard: React.FC<ResumePortfolioCardProps> = ({ value = [], o
                 <strong>{p.title}</strong>
               </p>
               <p>{p.url}</p>
+              <p>{p.description}</p>
               <div className={styles.actions}>
                 <button type="button" onClick={() => handleEdit(i)} className={styles.btnSecondary}>
                   <FaPencilAlt />
@@ -88,6 +89,13 @@ const ResumePortfolioCard: React.FC<ResumePortfolioCardProps> = ({ value = [], o
         type="url"
         placeholder="https://yourportfolio.com"
         value={formData.url}
+        onChange={handleChange}
+      />
+      <label>포트폴리오 설명</label>
+      <textarea
+        name="description"
+        placeholder="포트폴리오에 대한 간단한 설명을 입력해주세요."
+        value={formData.description}
         onChange={handleChange}
       />
       <div className={styles.btnGroup}>

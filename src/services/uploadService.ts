@@ -11,15 +11,11 @@ export const uploadImageService = async (file: File): Promise<string> => {
   const formData = new FormData();
   formData.append('file', file);
 
-  const response = await axiosInstance.post<ImageUploadResponse>(
-    '/api/v1/images/upload',
-    formData,
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    }
-  );
+  const response = await axiosInstance.post<ImageUploadResponse>('/api/v1/images/upload', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 
   let url = response.data.imageUrl;
 
@@ -27,7 +23,6 @@ export const uploadImageService = async (file: File): Promise<string> => {
   if (url.startsWith('http') && url.includes('/images/')) {
     url = url.replace('/images/', '/api/v1/images/');
   }
-
 
   // 혹시 상대 경로로 "/images/xxx.png"만 올 경우
   if (!url.startsWith('http') && url.startsWith('/images/')) {

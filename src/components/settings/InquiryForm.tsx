@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Inquiry } from '../../types/interfaces/Inquiry';
+import { Inquiry } from '../../types/interfaces/common/Inquiry';
 import './InquiryForm.css';
 
 interface Props {
