@@ -10,9 +10,10 @@ interface UserProfileCardProps {
   name: string;
   skills: string[];
   ncsData: NcsData;
+  summary?: string;
 }
 
-const UserProfileCard = ({ name, skills, ncsData }: UserProfileCardProps) => {
+const UserProfileCard = ({ name, skills, ncsData, summary }: UserProfileCardProps) => {
   return (
     <div className={styles.profileCard}>
       <h2>{name}님을 위한 맞춤 채용 정보</h2>
@@ -24,18 +25,22 @@ const UserProfileCard = ({ name, skills, ncsData }: UserProfileCardProps) => {
 
       <div className={styles.skillTags}>
         <p>보유 기술</p>
-        {skills.map((skill) => (
-          <span key={skill} className={styles.tag}>
-            #{skill}
-          </span>
-        ))}
+        {skills.length > 0 ? (
+          skills.map((skill) => (
+            <span key={skill} className={styles.tag}>
+              #{skill}
+            </span>
+          ))
+        ) : (
+          <span className={styles.noSkills}>보유 기술 정보가 없습니다</span>
+        )}
       </div>
 
       <div className={styles.aiAnalysisSection}>
         <h3>AI 분석 결과</h3>
         <p>
-          AI 분석 결과에 대한 요약 내용이 여기에 표시됩니다. 사용자의 역량과 추천 직무에 대한 심층적인 분석을
-          제공합니다.
+          {summary ||
+            'AI 분석 결과에 대한 요약 내용이 여기에 표시됩니다. 사용자의 역량과 추천 직무에 대한 심층적인 분석을 제공합니다.'}
         </p>
       </div>
     </div>
