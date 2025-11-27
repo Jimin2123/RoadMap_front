@@ -58,23 +58,7 @@ const LoginSuccess: React.FC = () => {
     fetchPolicies();
   }, [member?.id]);
   const certificates = member?.profile?.resume?.certificates ?? [];
-  const rawProfileUrl = member?.profile?.profileImageUrl || '';
 
-  let profileImageUrl = '';
-
-  if (rawProfileUrl) {
-    if (rawProfileUrl.startsWith('http')) {
-      profileImageUrl = rawProfileUrl.replace('/images/', '/api/v1/images/');
-    } else if (rawProfileUrl.startsWith('/images/')) {
-      profileImageUrl = `http://localhost:8080${rawProfileUrl.replace('/images/', '/api/v1/images/')}`;
-    } else if (rawProfileUrl.startsWith('images/')) {
-      profileImageUrl = `http://localhost:8080/api/v1/images/${rawProfileUrl.replace('images/', '')}`;
-    } else {
-      profileImageUrl = `http://localhost:8080/api/v1/images/${rawProfileUrl}`;
-    }
-  }
-  console.log('rawProfileUrl:', rawProfileUrl);
-  console.log('profileImageUrl:', profileImageUrl);
   return (
     <div className="login-form-container">
       {/* 상단 영역 */}
@@ -99,7 +83,12 @@ const LoginSuccess: React.FC = () => {
         <div className="login-top-section">
           {/* 왼쪽: 프로필 */}
           <div className="profile-image-section">
-            <img src="/defaultProfileImage.svg" alt="Profile" className="main-avatar" draggable="false" />
+            <img
+              src={member.profile.profileImageUrl || '/defaultProfileImage.svg'}
+              alt="Profile"
+              className="main-avatar"
+              draggable="false"
+            />
           </div>
 
           <div className="profile-info-section">

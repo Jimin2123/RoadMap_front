@@ -1,10 +1,8 @@
 .main {
-  padding: 40px 20px;
-  background-color: #f7f8fa;
+  margin-top: var(--spacing-large);
 }
 
 .main_container {
-  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   gap: 24px;
@@ -161,14 +159,10 @@
 }
 
 .bottomSection {
-  margin-top: 24px;
+  margin-top: var(--spacing-large);
   padding: 20px;
-  background-color: #f9f9f9;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .bottomTitle {
