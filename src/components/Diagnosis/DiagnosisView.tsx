@@ -100,9 +100,6 @@ const DiagnosisView = ({ result }: DiagnosisViewProps) => {
       <section className={styles.bottomSection}>
         <h2 className={styles.bottomTitle}>추천 채용 정보</h2>
         <div className={styles.bottomJobListContainer}>
-          <button className={styles.prevButton} onClick={handlePrev}>
-            &lt;
-          </button>
           <div className={styles.bottomJobList} ref={jobListRef}>
             {result.jobRecommendations && result.jobRecommendations.length > 0 ? (
               result.jobRecommendations.map((job) => <BottomJobCard key={job.jobId} job={job} />)
@@ -110,7 +107,12 @@ const DiagnosisView = ({ result }: DiagnosisViewProps) => {
               <p className={styles.noData}>추천 채용 정보가 없습니다.</p>
             )}
           </div>
-          <button className={styles.nextButton} onClick={handleNext}>
+        </div>
+        <div className={styles.bottomButtonContainer}>
+          <button className={styles.arrowButton} onClick={handlePrev}>
+            &lt;
+          </button>
+          <button className={styles.arrowButton} onClick={handleNext}>
             &gt;
           </button>
         </div>
