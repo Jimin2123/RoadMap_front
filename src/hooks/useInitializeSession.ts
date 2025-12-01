@@ -3,14 +3,16 @@ import { useAppDispatch } from '../store/hooks';
 import { initializeAuth } from './useAuth';
 import { getMember } from './userUser';
 import { getAccessToken } from '../utils/tokenManager';
+import { setInitializeRejected } from '../store/slices/authSlice';
 
 const useInitializeSession = () => {
   const dispatch = useAppDispatch();
   const initialized = useRef(false);
 
   useEffect(() => {
-    // 세션 스토리지에 토큰이 없으면 아예 시도하지 않음
+    // 세션 스토리지에 토큰이 없으면 초기화를 rejected 상태로 설정
     if (!getAccessToken()) {
+      dispatch(setInitializeRejected());
       return;
     }
 

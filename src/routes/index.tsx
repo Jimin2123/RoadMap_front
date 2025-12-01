@@ -8,7 +8,7 @@ import ResumePage from '../pages/ResumePage';
 import PolicyPage from '../pages/PolicyPage';
 import DiagnosisPage from '../pages/DiagnosisPage';
 import MatchingPage from '../pages/MatchingPage';
-//import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute from './ProtectedRoute';
 
 const AppRoutes = () => {
   return (
@@ -18,23 +18,28 @@ const AppRoutes = () => {
       <Route
         path="/settings"
         element={
-          // <ProtectedRoute>
-          <SettingsPage />
-          // </ProtectedRoute>
+          <ProtectedRoute>
+            <SettingsPage />
+          </ProtectedRoute>
         }
       />
-      {/* 설정 페이지 경로 추가 */}
-      <Route path="/signup" element={<SignUpForm />} /> {/* 회원가입페이지 */}
+      <Route path="/signup" element={<SignUpForm />} />
       <Route
         path="/resume"
         element={
-          // <ProtectedRoute>
-          <ResumePage />
-          // </ProtectedRoute>
+          <ProtectedRoute>
+            <ResumePage />
+          </ProtectedRoute>
         }
       />
-      {/* 이력서 페이지 경로 */}
-      <Route path="/diagnosis" element={<DiagnosisPage />} /> {/* 역량 진단 페이지 */}
+      <Route
+        path="/diagnosis"
+        element={
+          <ProtectedRoute>
+            <DiagnosisPage />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/matching" element={<MatchingPage />} />
       <Route path="/training" element={<TariningCoursePage />} /> {/* 직업 훈련 페이지 */}
       <Route path="/policy" element={<PolicyPage />} /> {/* 정책 페이지 */}
