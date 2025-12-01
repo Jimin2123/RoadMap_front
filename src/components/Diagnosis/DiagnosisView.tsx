@@ -12,12 +12,6 @@ interface DiagnosisViewProps {
   result: DiagnosisResultResponse;
 }
 
-/**
- * Component that displays the diagnosis results including:
- * - User profile with NCS radar chart
- * - Recommended certifications
- * - Recommended job postings
- */
 const DiagnosisView = ({ result }: DiagnosisViewProps) => {
   const jobListRef = useRef<HTMLDivElement>(null);
   const member = useSelector((state: RootState) => state.user.member);

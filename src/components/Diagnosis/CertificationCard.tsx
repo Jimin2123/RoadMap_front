@@ -23,7 +23,11 @@ const CertificationCard = ({ certification, className }: CertificationCardProps)
       <div className={styles.header}>
         <h4>{certification.certificationName}</h4>
         <button className={styles['favorite-button']} onClick={toggleFavorite}>
-          {isFavorited ? <FaStar className={styles['star-icon']} /> : <FaRegStar className={styles['icon']} />}
+          {isFavorited ? (
+            <FaStar className={styles['star-icon']} style={{ color: '#ffb618ff' }} />
+          ) : (
+            <FaRegStar className={styles['icon']} />
+          )}
         </button>
         {certification.isOwned && <span className={styles.ownedBadge}>보유</span>}
       </div>
