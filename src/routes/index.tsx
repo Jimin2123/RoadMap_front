@@ -40,7 +40,14 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
-      <Route path="/matching" element={<MatchingPage />} />
+      <Route
+        path="/matching"
+        element={
+          <ProtectedRoute>
+            <MatchingPage />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/training" element={<TariningCoursePage />} /> {/* 직업 훈련 페이지 */}
       <Route path="/policy" element={<PolicyPage />} /> {/* 정책 페이지 */}
       <Route path="*" element={<MainPage />} /> {/* 잘못된 경로는 메인 페이지로 리다이렉트 */}
