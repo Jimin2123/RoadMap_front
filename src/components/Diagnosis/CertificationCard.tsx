@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import styles from './CertificationCard.module.css';
 import { CertificationRecommendationResponse } from '../../types/interfaces/diagnosis/response/CertificationRecommendationResponse';
+import { FaStar, FaRegStar } from 'react-icons/fa';
 
 interface CertificationCardProps {
   certification: CertificationRecommendationResponse;
@@ -7,13 +9,26 @@ interface CertificationCardProps {
 }
 
 const CertificationCard = ({ certification, className }: CertificationCardProps) => {
+  const [isFavorited, setIsFavorited] = useState(false);
   const difficultyStars = '★'.repeat(certification.difficultyLevel) + '☆'.repeat(5 - certification.difficultyLevel);
   const priorityLabel = ['최우선', '높음', '보통', '낮음', '참고'][certification.priority - 1] || '보통';
+
+  const toggleFavorite = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click if necessary
+    setIsFavorited((prev) => !prev);
+  };
 
   return (
     <div className={`${styles.certificationCard} ${className || ''} ${certification.isOwned ? styles.owned : ''}`}>
       <div className={styles.header}>
         <h4>{certification.certificationName}</h4>
+        <button className={styles['favorite-button']} onClick={toggleFavorite}>
+          {isFavorited ? (
+            <FaStar className={styles['star-icon']} style={{ color: '#ffb618ff' }} />
+          ) : (
+            <FaRegStar className={styles['icon']} />
+          )}
+        </button>
         {certification.isOwned && <span className={styles.ownedBadge}>보유</span>}
       </div>
       <p className={styles.organization}>{certification.issuingOrganization}</p>

@@ -89,9 +89,30 @@ const MatchingPage: React.FC = () => {
     }
   };
 
-  const handleBookmarkClick = (e: React.MouseEvent, jobId: string) => {
+  const handleBookmarkClick = (e: React.MouseEvent, job: JobRecommendationResponse) => {
     e.stopPropagation(); // 카드 클릭 이벤트가 부모로 전파되는 것을 방지합니다.
-    setBookmarks((prev) => (prev.includes(jobId) ? prev.filter((id) => id !== jobId) : [...prev, jobId]));
+    const jobId = job.jobId;
+
+    setBookmarks((prev) => {
+      const newBookmarks = prev.includes(jobId) ? prev.filter((id) => id !== jobId) : [...prev, jobId];
+      return newBookmarks;
+    });
+
+    // 상세 정보 저장 로직 추가
+    try {
+      const savedDetails = localStorage.getItem('bookmarked_jobs_details');
+      let details: JobRecommendationResponse[] = savedDetails ? JSON.parse(savedDetails) : [];
+
+      if (details.some((item) => item.jobId === jobId)) {
+        details = details.filter((item) => item.jobId !== jobId);
+      } else {
+        details.push(job);
+      }
+      localStorage.setItem('bookmarked_jobs_details', JSON.stringify(details));
+    } catch (error) {
+      console.error('Failed to update bookmarked job details', error);
+    }
+
     console.log(`채용 공고 ${jobId} 북마크 상태 변경`);
   };
 
@@ -158,7 +179,7 @@ const MatchingPage: React.FC = () => {
                   <h2 className={styles.companyName}>{job.companyName}</h2>
                   <button
                     className={styles.bookmarkButton}
-                    onClick={(e) => handleBookmarkClick(e, job.jobId)}
+                    onClick={(e) => handleBookmarkClick(e, job)}
                     aria-label="북마크"
                   >
                     {bookmarks.includes(job.jobId) ? <FaBookmark /> : <FaRegBookmark />}

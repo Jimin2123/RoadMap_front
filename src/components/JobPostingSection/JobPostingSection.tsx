@@ -58,6 +58,7 @@ const JobPostingSection: React.FC = () => {
           return (
             <JobCard
               key={job.id}
+              jobId={job.id} // Added jobId
               companyLogoUrl={job.company?.detail?.logoUrl || ''}
               jobTitle={job.position?.title || ''}
               company={job.company?.detail?.name || ''}

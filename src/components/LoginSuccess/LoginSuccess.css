@@ -183,6 +183,8 @@
   color: #000000;
   display: block;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-weight: bold;
 }
 .certificate-subcontainer {

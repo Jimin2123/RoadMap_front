@@ -1,7 +1,7 @@
 // components/DropdownMenuCard.tsx
 import React from 'react';
 import './DropdownMenuCard.css';
-import { FaHome, FaBullhorn, FaBriefcase, FaQuestionCircle, FaSignInAlt, FaCog } from 'react-icons/fa';
+import { FaHome, FaBullhorn, FaBriefcase, FaQuestionCircle, FaSignInAlt, FaCog, FaBookmark } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../store/hooks';
 
@@ -14,6 +14,7 @@ const menuItems = [
   { icon: <FaSignInAlt />, label: '로그인', description: '계정에 로그인하세요', path: '/login' }, // 로그인 항목
   { icon: <FaBullhorn />, label: '공지사항', description: '새로운 소식을 확인하세요', path: '/notices' },
   { icon: <FaBriefcase />, label: '채용정보', description: '채용공고를 확인해보세요', path: '/jobs' },
+  { icon: <FaBookmark />, label: '관심 기업', description: '내가 찜한 기업 모아보기', path: '/interested-companies' }, // 관심 기업 추가
   { icon: <FaQuestionCircle />, label: '고객센터', description: '문의사항을 해결해드립니다', path: '/support' },
   { icon: <FaCog />, label: '설정', description: '환경 및 계정 설정을 관리하세요', path: '/settings' }, // ✅ 설정 추가
 ];

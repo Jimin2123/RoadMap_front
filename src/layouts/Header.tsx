@@ -27,15 +27,7 @@ const Header: React.FC = () => {
 
       <div className={styles['header-right']}>
         {isAuthenticated ? (
-          <>
-            <FaBell size={20} className={styles.icon} />
-            <FaCog
-              size={20}
-              className={styles.icon}
-              onClick={() => navigate('/settings')}
-              style={{ cursor: 'pointer' }}
-            />
-          </>
+          <></>
         ) : (
           <button className={styles['login-button']} onClick={() => navigate('/login')}>
             로그인
