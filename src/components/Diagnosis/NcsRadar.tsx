@@ -41,7 +41,7 @@ const NcsRadar = ({ data }: NcsRadarProps) => {
   return (
     <div className={styles.card}>
       <div className={styles.chartWrapper}>
-        <ReactECharts option={option} style={{ height: 350 }} />
+        <ReactECharts option={option} style={{ height: 380 }} />
       </div>
     </div>
   );
