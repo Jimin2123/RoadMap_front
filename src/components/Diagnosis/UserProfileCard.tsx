@@ -16,7 +16,7 @@ interface UserProfileCardProps {
 const UserProfileCard = ({ name, skills, ncsData, summary }: UserProfileCardProps) => {
   return (
     <div className={styles.profileCard}>
-      <h2>{name}님을 위한 맞춤 채용 정보</h2>
+      <h2>{name}님의 역량 분석</h2>
 
       {/* ECharts 레이더 차트 */}
       <div className={styles.chartContainer}>

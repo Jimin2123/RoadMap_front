@@ -187,12 +187,16 @@
   scrollbar-width: none; /* Firefox */
   flex-grow: 1;
 }
+.bottomButtonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
 
-.prevButton,
-.nextButton {
-  background: #fff;
+.arrowButton {
+  background: #ffffff;
   border: 1px solid #ddd;
-  border-radius: 500px;
+  border-radius: 10px;
   width: 100px;
   height: 35px;
   display: flex;
