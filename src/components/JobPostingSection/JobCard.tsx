@@ -24,7 +24,9 @@ const JobCard: React.FC<JobCardProps> = ({
 }) => {
   const [isFavorited, setIsFavorited] = useState(false);
 
-  const toggleFavorite = () => {
+  const toggleFavorite = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     setIsFavorited((prev) => !prev);
   };
 
