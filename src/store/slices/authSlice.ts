@@ -17,9 +17,13 @@ const authSlice = createSlice({
     logout: (state: AuthState) => {
       state.isAuthenticated = false;
       state.accessToken = null;
-      state.status = { login: 'idle', initialize: 'idle' };
+      state.status = { login: 'idle', initialize: 'rejected' };
       state.error = null;
       clearAccessToken(); // 메모리에서 Access Token 제거
+    },
+    setInitializeRejected: (state: AuthState) => {
+      state.status.initialize = 'rejected';
+      state.isAuthenticated = false;
     },
   },
   extraReducers: (builder) => {
@@ -76,5 +80,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, setInitializeRejected } = authSlice.actions;
 export default authSlice.reducer;
