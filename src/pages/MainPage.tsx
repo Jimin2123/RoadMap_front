@@ -68,7 +68,7 @@ const MainPage: React.FC = () => {
             imageUrl="/icons/service5.svg"
             serviceName="나의 관심기업 리스트"
             serviceDescription="사용자가 등록해둔 관심 기업 리스트를 보여줍니다."
-            link="#"
+            link="/interested-companies"
           />
         </div>
         <div className={styles['job-posting-section']}>
