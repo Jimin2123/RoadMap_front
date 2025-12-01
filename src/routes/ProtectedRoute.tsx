@@ -9,8 +9,12 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // 초기화가 진행 중이 아니고, 인증되지 않은 경우 로그인 페이지로 이동
-    if (status.initialize !== 'pending' && !isAuthenticated) {
+    // 초기화가 완전히 완료된 후(fulfilled 또는 rejected)에만 인증 체크
+    // idle 상태는 아직 초기화가 시작되지 않았거나 로그아웃 직후 상태이므로 제외
+    const isInitializationComplete = status.initialize === 'fulfilled' || status.initialize === 'rejected';
+
+    // 초기화가 완료되고, 인증되지 않은 경우에만 로그인 페이지로 이동
+    if (isInitializationComplete && !isAuthenticated) {
       Swal.fire({
         title: '로그인이 필요합니다',
         text: '로그인 하시겠습니까?',

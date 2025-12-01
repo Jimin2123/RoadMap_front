@@ -17,7 +17,7 @@ const authSlice = createSlice({
     logout: (state: AuthState) => {
       state.isAuthenticated = false;
       state.accessToken = null;
-      state.status = { login: 'idle', initialize: 'idle' };
+      state.status = { login: 'idle', initialize: 'rejected' };
       state.error = null;
       clearAccessToken(); // 메모리에서 Access Token 제거
     },
