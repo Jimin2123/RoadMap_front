@@ -55,7 +55,7 @@ const MainPage: React.FC = () => {
           <ServiceCard
             imageUrl="/icons/service3.svg"
             serviceName="나의 역량 진단"
-            serviceDescription="사용자의 희망 직무와 비교해 부족한 역량을 보완할 수 있는 방법을 제공합니다."
+            serviceDescription="부족한 역량을 보완할 수 있는 방법을 제공합니다."
             link="/diagnosis"
           />
           <ServiceCard

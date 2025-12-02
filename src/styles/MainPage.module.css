@@ -20,17 +20,17 @@
 
 .service-card-section {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--spacing-xl);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-large);
   box-shadow: var(--shadow-deep);
   height: auto;
   min-height: 300px;
   box-sizing: border-box;
-  padding: var(--spacing-large);
+  padding-bottom: 40px;
+  padding-top: 40px;
 }
 
 .job-posting-section {
